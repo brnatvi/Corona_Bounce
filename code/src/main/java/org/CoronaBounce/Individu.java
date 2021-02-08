@@ -1,5 +1,9 @@
 package org.CoronaBounce;
 
+import javafx.event.ActionEvent;
+
+import java.util.Timer;
+
 public class Individu {
     public int PositionX;
     public int PositionY;
@@ -12,9 +16,12 @@ public class Individu {
         this.Vitesse_deplacement=Vitesse;
         this.etat_sante=etat_sante;
     }
-    public void Deplacer(int PosX,int PosY,int Vitesse){}
+    public void Deplacer(int PosX,int PosY,int Vitesse){
+
+    }
     public void Recover(int duree_guerison){
         etat_sante="Recovered";
+
     }
     public void Contaminate(int duree_contamination){
         etat_sante="Sick";
