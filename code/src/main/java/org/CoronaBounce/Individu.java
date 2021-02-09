@@ -1,9 +1,11 @@
 package org.CoronaBounce;
 
+import java.util.Random;
+
 public class Individu {
     public int PositionX;
     public int PositionY;
-    public int Vitesse_deplacement;
+    public double Vitesse_deplacement;
     public String etat_sante;//je propose de mettre une enumération{ Sick,Recovered,Healthy}
     public Individu(int PosX,int PosY,int Vitesse,String etat_sante){
         this.PositionX=PosX;
@@ -11,7 +13,13 @@ public class Individu {
         this.Vitesse_deplacement=Vitesse;
         this.etat_sante=etat_sante;
     }
-    public void Deplacer(int PosX,int PosY,int Vitesse){
+    public void Deplacer(){
+        Random r=new Random();
+        int m=r.nextInt(5);
+        int m1=r.nextInt(10);//bound=10 car notre fenetre de population est rectangulaire
+        this.Vitesse_deplacement=Math.sqrt( (m*m)+(m1*m1));
+        this.PositionX=this.getPositionX()+m1;
+        this.PositionY=this.getPositionY()+m;
 
     }
     public void Recover(long duree_guerison){
@@ -45,7 +53,7 @@ public class Individu {
     public int getPositionY() {
         return PositionY;
     }
-    public int getVitesse_deplacement() {
+    public double getVitesse_deplacement() {
         return Vitesse_deplacement;
     }
     public String getEtat_sante(){

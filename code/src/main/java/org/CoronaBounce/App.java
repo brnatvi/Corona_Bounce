@@ -35,6 +35,8 @@ public class App extends Application {
         launch();
         Population p=new Population();
         p.afficher_pop();
+        p.afficher_deplacement();
+
     }
 
 }

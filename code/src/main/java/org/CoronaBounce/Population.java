@@ -41,12 +41,23 @@ public class Population {
     public void afficher_pop(){
      int i=0;
      for(Individu individu:liste_individu){
-      System.out.println("Individu num :"+i+"de position suivante "+individu.getPositionX()+ "et"+individu.getPositionY()+"et de etat de sante "+individu.getEtat_sante());
+      System.out.println("Individu num :" +i+ "de position suivante "+individu.getPositionX()+ " et "+individu.getPositionY()+" et de etat de sante "+individu.getEtat_sante());
       i++;
      }
      System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
      System.out.println("Pourcentage de contamination: "+this.Pourcentage_contaminations()+" %  Pourcentage de guérison :"+this.Pourcentage_guerisons()+ "% Pourcentage de non contamination est :"+(100-this.Pourcentage_guerisons()-this.Pourcentage_contaminations()+" %"));
     }
+ public void afficher_deplacement (){
+     System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
+  int i=0;
+  for(Individu individu:liste_individu){
+   individu.Deplacer();
+   System.out.println("Individu num :" +i+ "de position suivante "+individu.getPositionX()+ " et "+individu.getPositionY()+" et de etat de sante "+individu.getEtat_sante());
+   i++;
+  }
+  System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
+  System.out.println("Pourcentage de contamination: "+this.Pourcentage_contaminations()+" %  Pourcentage de guérison :"+this.Pourcentage_guerisons()+ "% Pourcentage de non contamination est :"+(100-this.Pourcentage_guerisons()-this.Pourcentage_contaminations()+" %"));
+ }
     public double distance (Individu i1,Individu i2){
      int x1= i1.getPositionX();
      int x2=i2.getPositionX();
@@ -56,6 +67,13 @@ public class Population {
      return dist;
 
     }
+    /*public void parcours(){
+     for(int i=0;i<nb_individus;i++){
+       for(int j=0;j<nb_individus;j++){
+
+       }
+     }
+    }*/
     public void contamination(Individu i1,Individu i2){//i1 contamine i2
            if(distance(i1,i2)<=rayon_contagion){
             i2.Contaminate(duree_contamination,duree_guerison);
