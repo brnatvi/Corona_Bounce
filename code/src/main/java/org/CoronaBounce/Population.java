@@ -1,6 +1,7 @@
 package org.CoronaBounce;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Population {
    public  final int nb_individus=20;// j'initialise le nombre des individus que la population possede
@@ -9,13 +10,42 @@ public class Population {
     public static double Pourcentage_contamination;
     public static long duree_guerison;
     public static long duree_contamination;
-    public static int nb_Sick;//le nombre des individu contaminé
-    public static int nb_Healthy;//le nombre des individus non contaminés
-    public static int nb_Recovered;//le nombre des individus guéri
+    public static int nb_Sick=0;//le nombre des individu contaminé
+    public static int nb_Healthy=0;//le nombre des individus non contaminés
+    public static int nb_Recovered=0;//le nombre des individus guéri
     public static int rayon_contagion;
 
     public Population(){
+     for(int i=0;i<nb_individus;i++){
+      Random r=new Random();
+      int m=r.nextInt(2);
+      if(m==0){
+       liste_individu.add(new Individu(0,0,0,"Healthy"));
+       nb_Healthy++;
+      }
+      else {
+       if (m == 1 && nb_Sick < 2) {
+        liste_individu.add(new Individu(0, 0, 0, "Sick"));
+        nb_Sick++;
+       }
+       else{
+        liste_individu.add(new Individu(0,0,0,"Recovered"));
+        nb_Recovered++;
 
+       }
+      }
+
+     }
+
+    }
+    public void afficher_pop(){
+     int i=0;
+     for(Individu individu:liste_individu){
+      System.out.println("Individu num :"+i+"de position suivante "+individu.getPositionX()+ "et"+individu.getPositionY()+"et de etat de sante "+individu.getEtat_sante());
+      i++;
+     }
+     System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
+     System.out.println("Pourcentage de contamination: "+this.Pourcentage_contaminations()+" %  Pourcentage de guérison :"+this.Pourcentage_guerisons()+ "% Pourcentage de non contamination est :"+(100-this.Pourcentage_guerisons()-this.Pourcentage_contaminations()+" %"));
     }
     public double distance (Individu i1,Individu i2){
      int x1= i1.getPositionX();
@@ -34,24 +64,25 @@ public class Population {
     public double Pourcentage_contaminations(){
      int cpt=0;
      for(Individu individu:liste_individu){
-      if(individu.etat_sante.compareTo("Sick")==0){
+      if(individu.getEtat_sante().compareTo("Sick")==0){
        cpt++;
       }
 
      }
+
      nb_Sick=cpt;
-      return (cpt/liste_individu.size())*100;
+      return (cpt*100)/nb_individus;
     }
      public double Pourcentage_guerisons(){
       int cpt=0;
       for(Individu individu:liste_individu){
-       if(individu.etat_sante.compareTo("Recovered")==0){
+       if(individu.getEtat_sante().compareTo("Recovered")==0){
         cpt++;
        }
 
       }
       nb_Recovered=cpt;
-      return (cpt/liste_individu.size())*100;
+      return (cpt*100)/nb_individus;
     }
 
 

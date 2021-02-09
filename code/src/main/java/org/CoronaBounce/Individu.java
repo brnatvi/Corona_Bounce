@@ -48,6 +48,9 @@ public class Individu {
     public int getVitesse_deplacement() {
         return Vitesse_deplacement;
     }
+    public String getEtat_sante(){
+        return this.etat_sante;
+    }
 
 
 }
