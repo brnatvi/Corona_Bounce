@@ -1,4 +1,4 @@
-package org.CoronaBounce;
+package org.coronabounce.mvcconnectors;
 
 public interface Controllable
 {

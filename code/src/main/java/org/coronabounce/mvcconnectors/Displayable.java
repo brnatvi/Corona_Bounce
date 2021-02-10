@@ -1,4 +1,4 @@
-package org.CoronaBounce;
+package org.coronabounce.mvcconnectors;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.CoronaBounce;
+package org.coronabounce;
 
 import java.io.IOException;
 import javafx.fxml.FXML;

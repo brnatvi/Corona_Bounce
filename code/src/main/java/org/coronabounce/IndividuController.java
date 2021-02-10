@@ -1,4 +1,4 @@
-package org.CoronaBounce;
+package org.coronabounce;
 
 public class IndividuController {
 }
