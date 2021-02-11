@@ -1,5 +1,9 @@
 #Corona Bounce
 
+**Global Informations**
+
+Corona Bounce is an emidemic simulation tool with a GUI interface.
+
 **Maintainers:**
 
 Emilien Raveneau Grisard
