@@ -1,4 +1,4 @@
-package org.coronabounce.model;
+package org.coronabounce.models;
 
 import java.util.ArrayList;
 import java.util.Random;

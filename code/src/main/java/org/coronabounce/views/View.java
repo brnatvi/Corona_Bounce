@@ -1,4 +1,4 @@
-package org.coronabounce.view;
+package org.coronabounce.views;
 
 public interface View
 {

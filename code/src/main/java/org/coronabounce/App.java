@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.coronabounce.model.Population;
+import org.coronabounce.models.Population;
 
 import java.io.IOException;
 
