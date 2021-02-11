@@ -1,4 +1,6 @@
-# Corona Bounce
+#Corona Bounce
+
+**Maintainers:**
 
 Emilien Raveneau Grisard
 
