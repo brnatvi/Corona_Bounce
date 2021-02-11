@@ -2,7 +2,7 @@
 
 **Global Informations**
 
-Corona Bounce is an emidemic simulation tool with a GUI interface.
+Corona Bounce is an emidemic simulation tool with a GUI interface !
 
 **Maintainers:**
 
