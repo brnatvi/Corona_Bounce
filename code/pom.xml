@@ -20,6 +20,12 @@
             <artifactId>javafx-fxml</artifactId>
             <version>13</version>
         </dependency>
+        <dependency>
+          <!-- To be able to use tests. -->
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter-engine</artifactId>
+          <version>5.7.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -39,6 +45,33 @@
                     <mainClass>org.coronabounce.App</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+              <!-- To have information about code coverage. -->
+              <groupId>org.jacoco</groupId>
+              <artifactId>jacoco-maven-plugin</artifactId>
+              <version>0.8.6</version>
+              <executions>
+                  <execution>
+                      <goals>
+                          <goal>prepare-agent</goal>
+                      </goals>
+                  </execution>
+                  <!-- attached to Maven test phase -->
+                  <execution>
+                      <id>report</id>
+                      <phase>test</phase>
+                      <goals>
+                          <goal>report</goal>
+                      </goals>
+                  </execution>
+              </executions>
+          </plugin>
+          <!-- To have the last version that add color. -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M5</version>
+          </plugin>
         </plugins>
     </build>
 </project>
