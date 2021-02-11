@@ -1,9 +1,12 @@
 package org.coronabounce.models;
 
+import org.coronabounce.mvcconnectors.Displayable;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-public class Population {
+public class Population implements Displayable {
    public  final int nb_individus=20;// j'initialise le nombre des individus que la population possede
     public ArrayList<Individu> liste_individu=new ArrayList<Individu>();
     public static double Pourcentage_guerison;
@@ -102,7 +105,21 @@ public class Population {
       nb_Recovered=cpt;
       return (cpt*100)/nb_individus;
     }
-
+ public ArrayList<Individu> getAllPoints(){
+     return liste_individu;
+ }
+ public int getNmbPoints(){
+     return nb_individus;
+ }
+ public int getNmbHealthy(){
+     return nb_Healthy;
+ }
+ public int getNmbContagious(){
+     return nb_Sick;
+ }
+ public int getNmbRecovered(){
+     return nb_Recovered;
+ }
 
 
 
