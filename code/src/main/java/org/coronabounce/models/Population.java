@@ -7,18 +7,23 @@ import java.util.List;
 import java.util.Random;
 
 public class Population implements Displayable {
-   public  final int nb_individus=20;// j'initialise le nombre des individus que la population possede
-    public ArrayList<Individu> liste_individu=new ArrayList<Individu>();
+    //public final int getNbIndividus()=20;// j'initialise le nombre des individus que la population possede
+    private ArrayList<Individu> liste_individu=new ArrayList<Individu>();
     public static double Pourcentage_guerison;
     public static double Pourcentage_contamination;
     public static long duree_guerison;
     public static long duree_contamination;
-    public static int nb_Sick=0;//le nombre des individu contaminé
-    public static int nb_Healthy=0;//le nombre des individus non contaminés
-    public static int nb_Recovered=0;//le nombre des individus guéri
+    //public static int getNbSick()=0;//le nombre des individu contaminé
+    //public static int getNbHealthy()=0;//le nombre des individus non contaminés
+    //public static int getNbRecovered()=0;//le nombre des individus guéri
     public static int rayon_contagion;
     private static Random r=new Random();
 
+    // CONSTRUCTORS --------------------------------------------------------------
+    /**
+    * {@summary Main constructor for Population.}<br>
+    * All the other constructor use it. <br>
+    */
     public Population(int nbH, int nbS, int nbR){
       for (int i=0;i<nbH ;i++ ) {
         liste_individu.add(new Individu(0,0,0,"Healthy"));
@@ -30,16 +35,20 @@ public class Population implements Displayable {
         liste_individu.add(new Individu(0,0,0,"Recover"));
       }
     }
-
-    public Population(){
-     for(int i=0;i<nb_individus;i++){
+    /**
+    * {@summary constructor for Population that need 1 args, number of Individu.}<br>
+    * We always starts with 1 sick and nbIndividus-1 healthy.
+    */
+    public Population(int nbIndividus){
+      this(nbIndividus-1,1,0);
+     /*for(int i=0;i<nbIndividus;i++){
       int m=r.nextInt(2);
       if(m==0){
        liste_individu.add(new Individu(0,0,0,"Healthy"));
        nb_Healthy++;
       }
       else {
-       if (m == 1 && nb_Sick < 2) {
+       if (m == 1 && getNbSick() < 2) {
         liste_individu.add(new Individu(0, 0, 0, "Sick"));
         nb_Sick++;
        }
@@ -48,17 +57,27 @@ public class Population implements Displayable {
         nb_Recovered++;
        }
       }
-     }
-
+    }*/
     }
+    /**
+    * {@summary default constructor for Population, 1 sick and 19 healthy.} <br>
+    */
+    public Population(){
+      this(20);
+    }
+    // GET SET -------------------------------------------------------------------
+    public ArrayList<Individu> getAllPoints(){
+       return liste_individu;
+    }
+    // FUNCTIONS -----------------------------------------------------------------
     public void afficher_pop(){
      int i=0;
      for(Individu individu:liste_individu){
       System.out.println("Individu num :" +i+ "de position suivante "+individu.getPositionX()+ " et "+individu.getPositionY()+" et de etat de sante "+individu.getEtat_sante());
       i++;
      }
-     System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
-     System.out.println("Pourcentage de contamination: "+this.pourcentage_contaminations()+" %  Pourcentage de guérison :"+this.pourcentage_guerisons()+ "% Pourcentage de non contamination est :"+(100-this.pourcentage_guerisons()-this.pourcentage_contaminations()+" %"));
+     System.out.println("le nombre des personnes contaminées:"+getNbSick()+" de personnes guéries :"+getNbRecovered()+ " non contaminées :"+getNbHealthy());
+     System.out.println("Pourcentage de contamination: "+this.percentageSick()+" %  Pourcentage de guérison :"+this.percentageRecovered()+ "% Pourcentage de non contamination est :"+(100-this.percentageRecovered()-this.percentageSick()+" %"));
     }
  public void afficher_deplacement (){
      System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
@@ -68,8 +87,8 @@ public class Population implements Displayable {
    System.out.println("Individu num :" +i+ "de position suivante "+individu.getPositionX()+ " et "+individu.getPositionY()+" et de etat de sante "+individu.getEtat_sante());
    i++;
   }
-  System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
-  System.out.println("Pourcentage de contamination: "+this.pourcentage_contaminations()+" %  Pourcentage de guérison :"+this.pourcentage_guerisons()+ "% Pourcentage de non contamination est :"+(100-this.pourcentage_guerisons()-this.pourcentage_contaminations()+" %"));
+  System.out.println("le nombre des personnes contaminées:"+getNbSick()+" de personnes guéries :"+getNbRecovered()+ " non contaminées :"+getNbHealthy());
+  System.out.println("Pourcentage de contamination: "+this.percentageSick()+" %  Pourcentage de guérison :"+this.percentageRecovered()+ "% Pourcentage de non contamination est :"+(100-this.percentageRecovered()-this.percentageSick()+" %"));
  }
   public double distance (Individu i1,Individu i2){
    int x1= i1.getPositionX();
@@ -81,8 +100,8 @@ public class Population implements Displayable {
 
   }
   /*public void parcours(){
-   for(int i=0;i<nb_individus;i++){
-     for(int j=0;j<nb_individus;j++){
+   for(int i=0;i<getNbIndividus();i++){
+     for(int j=0;j<getNbIndividus();j++){
 
      }
    }
@@ -92,45 +111,46 @@ public class Population implements Displayable {
           i2.Contaminate(duree_contamination,duree_guerison);
          }
   }
-  public double pourcentage_contaminations(){
-   int cpt=0;
-   for(Individu individu:liste_individu){
-    if(individu.getEtat_sante().compareTo("Sick")==0){
-     cpt++;
-    }
-
-   }
-
-   nb_Sick=cpt;
-    return (cpt*100)/nb_individus;
+  // methode about Population statistics.
+  public double percentageHealthy(){
+    return (getNbHealthy()*100)/getNbIndividus();
   }
-   public double pourcentage_guerisons(){
+  public double percentageSick(){
+    return (getNbSick()*100)/getNbIndividus();
+  }
+  public double percentageRecovered(){
+    return (getNbRecovered()*100)/getNbIndividus();
+  }
+  public int getNbIndividus(){
+     return getAllPoints().size();
+  }
+  public int getNbHealthy(){
     int cpt=0;
     for(Individu individu:liste_individu){
-     if(individu.getEtat_sante().compareTo("Recovered")==0){
-      cpt++;
-     }
-
+      if(individu.getEtat_sante().compareTo("Healthy")==0){
+        cpt++;
+      }
     }
-    nb_Recovered=cpt;
-    return (cpt*100)/nb_individus;
+    return cpt;
   }
-  public ArrayList<Individu> getAllPoints(){
-     return liste_individu;
+  public int getNbSick(){
+    int cpt=0;
+    for(Individu individu:liste_individu){
+      if(individu.getEtat_sante().compareTo("Sick")==0){
+        cpt++;
+      }
+    }
+    return cpt;
   }
-  public int getNmbPoints(){
-     return nb_individus;
+  public int getNbRecovered(){
+    int cpt=0;
+    for(Individu individu:liste_individu){
+      if(individu.getEtat_sante().compareTo("Recovered")==0){
+        cpt++;
+      }
+    }
+    return cpt;
   }
-  public int getNmbHealthy(){
-     return nb_Healthy;
-  }
-  public int getNmbContagious(){
-     return nb_Sick;
-  }
-  public int getNmbRecovered(){
-     return nb_Recovered;
-  }
-
 
 
 }
