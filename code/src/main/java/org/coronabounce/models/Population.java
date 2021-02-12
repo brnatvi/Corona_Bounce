@@ -9,14 +9,14 @@ import java.util.Random;
 public class Population implements Displayable {
    public  final int nb_individus=20;// j'initialise le nombre des individus que la population possede
     public ArrayList<Individu> liste_individu=new ArrayList<Individu>();
-    public static double Pourcentage_guerison;
-    public static double Pourcentage_contamination;
-    public static long duree_guerison;
-    public static long duree_contamination;
-    public static int nb_Sick=0;//le nombre des individu contaminé
-    public static int nb_Healthy=0;//le nombre des individus non contaminés
-    public static int nb_Recovered=0;//le nombre des individus guéri
-    public static int rayon_contagion;
+    public  double Pourcentage_guerison;
+    public  double Pourcentage_contamination;
+    public  long duree_guerison;
+    public  long duree_contamination;
+    public  int nb_Sick=0;//le nombre des individu contaminé
+    public  int nb_Healthy=0;//le nombre des individus non contaminés
+    public  int nb_Recovered=0;//le nombre des individus guéri
+    public int rayon_contagion;
     private static Random r=new Random();
 
     public Population(int nbH, int nbS, int nbR){

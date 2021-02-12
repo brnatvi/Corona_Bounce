@@ -1,4 +1,5 @@
 package org.coronabounce.controllers;
+import org.coronabounce.models.Population;
 import org.coronabounce.mvcconnectors.Controllable;
 
 public class Controller implements Controllable
@@ -20,6 +21,7 @@ public class Controller implements Controllable
     {
 
     }
+
 
     @Override
     public int getRadius()
