@@ -46,10 +46,8 @@ public class Population implements Displayable {
        else{
         liste_individu.add(new Individu(0,0,0,"Recovered"));
         nb_Recovered++;
-
        }
       }
-
      }
 
     }
@@ -60,7 +58,7 @@ public class Population implements Displayable {
       i++;
      }
      System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
-     System.out.println("Pourcentage de contamination: "+this.Pourcentage_contaminations()+" %  Pourcentage de guérison :"+this.Pourcentage_guerisons()+ "% Pourcentage de non contamination est :"+(100-this.Pourcentage_guerisons()-this.Pourcentage_contaminations()+" %"));
+     System.out.println("Pourcentage de contamination: "+this.pourcentage_contaminations()+" %  Pourcentage de guérison :"+this.pourcentage_guerisons()+ "% Pourcentage de non contamination est :"+(100-this.pourcentage_guerisons()-this.pourcentage_contaminations()+" %"));
     }
  public void afficher_deplacement (){
      System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
@@ -71,67 +69,67 @@ public class Population implements Displayable {
    i++;
   }
   System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
-  System.out.println("Pourcentage de contamination: "+this.Pourcentage_contaminations()+" %  Pourcentage de guérison :"+this.Pourcentage_guerisons()+ "% Pourcentage de non contamination est :"+(100-this.Pourcentage_guerisons()-this.Pourcentage_contaminations()+" %"));
+  System.out.println("Pourcentage de contamination: "+this.pourcentage_contaminations()+" %  Pourcentage de guérison :"+this.pourcentage_guerisons()+ "% Pourcentage de non contamination est :"+(100-this.pourcentage_guerisons()-this.pourcentage_contaminations()+" %"));
  }
-    public double distance (Individu i1,Individu i2){
-     int x1= i1.getPositionX();
-     int x2=i2.getPositionX();
-     int y1=i1.getPositionY();
-     int y2=i2.getPositionY();
-     double dist=Math.sqrt((x1-x2)*(x1-x2)-(y1-y2)*(y1-y2));
-     return dist;
+  public double distance (Individu i1,Individu i2){
+   int x1= i1.getPositionX();
+   int x2=i2.getPositionX();
+   int y1=i1.getPositionY();
+   int y2=i2.getPositionY();
+   double dist=Math.sqrt((x1-x2)*(x1-x2)-(y1-y2)*(y1-y2));
+   return dist;
 
-    }
-    /*public void parcours(){
-     for(int i=0;i<nb_individus;i++){
-       for(int j=0;j<nb_individus;j++){
-
-       }
-     }
-    }*/
-    public void contamination(Individu i1,Individu i2){//i1 contamine i2
-           if(distance(i1,i2)<=rayon_contagion){
-            i2.Contaminate(duree_contamination,duree_guerison);
-           }
-    }
-    public double Pourcentage_contaminations(){
-     int cpt=0;
-     for(Individu individu:liste_individu){
-      if(individu.getEtat_sante().compareTo("Sick")==0){
-       cpt++;
-      }
+  }
+  /*public void parcours(){
+   for(int i=0;i<nb_individus;i++){
+     for(int j=0;j<nb_individus;j++){
 
      }
-
-     nb_Sick=cpt;
-      return (cpt*100)/nb_individus;
+   }
+  }*/
+  public void contamination(Individu i1,Individu i2){//i1 contamine i2
+         if(distance(i1,i2)<=rayon_contagion){
+          i2.Contaminate(duree_contamination,duree_guerison);
+         }
+  }
+  public double pourcentage_contaminations(){
+   int cpt=0;
+   for(Individu individu:liste_individu){
+    if(individu.getEtat_sante().compareTo("Sick")==0){
+     cpt++;
     }
-     public double Pourcentage_guerisons(){
-      int cpt=0;
-      for(Individu individu:liste_individu){
-       if(individu.getEtat_sante().compareTo("Recovered")==0){
-        cpt++;
-       }
 
-      }
-      nb_Recovered=cpt;
-      return (cpt*100)/nb_individus;
+   }
+
+   nb_Sick=cpt;
+    return (cpt*100)/nb_individus;
+  }
+   public double pourcentage_guerisons(){
+    int cpt=0;
+    for(Individu individu:liste_individu){
+     if(individu.getEtat_sante().compareTo("Recovered")==0){
+      cpt++;
+     }
+
     }
- public ArrayList<Individu> getAllPoints(){
+    nb_Recovered=cpt;
+    return (cpt*100)/nb_individus;
+  }
+  public ArrayList<Individu> getAllPoints(){
      return liste_individu;
- }
- public int getNmbPoints(){
+  }
+  public int getNmbPoints(){
      return nb_individus;
- }
- public int getNmbHealthy(){
+  }
+  public int getNmbHealthy(){
      return nb_Healthy;
- }
- public int getNmbContagious(){
+  }
+  public int getNmbContagious(){
      return nb_Sick;
- }
- public int getNmbRecovered(){
+  }
+  public int getNmbRecovered(){
      return nb_Recovered;
- }
+  }
 
 
 
