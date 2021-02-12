@@ -15,30 +15,30 @@ public interface Displayable
     public ArrayList getAllPoints();
 
     /**
-     * Get total number of points
+     * Get total number of points / number od Individu.
      * @return
      */
-    public int getNmbPoints();
+    public int getNbIndividus();
 
     /**
      * Get number of healthy
      * @return
      */
-    public int getNmbHealthy();
+    public int getNbHealthy();
 
     /**
-     * Get number of contagious
+     * Get number of contagious / sick people.
      * @return
      */
-    public int getNmbContagious();
+    public int getNbSick();
 
     /**
      * Get number of recovered
      * @return
      */
-    public int getNmbRecovered();
+    public int getNbRecovered();
 
-    
+
 
     //======================================== Second Priority ========================================================//
 
