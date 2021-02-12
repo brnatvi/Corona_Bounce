@@ -3,10 +3,10 @@ package org.coronabounce.models;
 import java.util.Random;
 
 public class Individu {
-    public int PositionX;
-    public int PositionY;
-    public double Vitesse_deplacement;
-    public String etat_sante;//je propose de mettre une enumération{ Sick,Recovered,Healthy}
+    private int PositionX;
+    private int PositionY;
+    private double Vitesse_deplacement;
+    private String etat_sante;//je propose de mettre une enumération{ Sick,Recovered,Healthy}
     private static Random r=new Random();
     public Individu(int PosX,int PosY,int Vitesse,String etat_sante){
         this.PositionX=PosX;
