@@ -34,7 +34,7 @@ public class Individu {
     }
     public void Contaminate(long duree_contamination,long duree_guerison){
         try {
-            Thread.sleep(duree_contamination);//le thread attend une un moment pour que la contamination sera faite et aprés on appelle la méthode recover
+            Thread.sleep(duree_contamination);//le thread attend un moment pour que la contamination sera faite et aprés on appelle la méthode recover
             etat_sante="Sick";
             this.Recover( duree_guerison);
         } catch (InterruptedException e) {

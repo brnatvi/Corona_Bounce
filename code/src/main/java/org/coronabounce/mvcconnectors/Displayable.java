@@ -1,5 +1,6 @@
 package org.coronabounce.mvcconnectors;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Displayable
@@ -11,7 +12,7 @@ public interface Displayable
      * @param
      * @return
      */
-    public List[] getAllPoints();
+    public ArrayList getAllPoints();
 
     /**
      * Get total number of points
