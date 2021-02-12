@@ -14,10 +14,22 @@ public class Population {
     public static int nb_Healthy=0;//le nombre des individus non contaminés
     public static int nb_Recovered=0;//le nombre des individus guéri
     public static int rayon_contagion;
+    private static Random r=new Random();
+
+    public Population(int nbH, int nbS, int nbR){
+      for (int i=0;i<nbH ;i++ ) {
+        liste_individu.add(new Individu(0,0,0,"Healthy"));
+      }
+      for (int i=0;i<nbS ;i++ ) {
+        liste_individu.add(new Individu(0,0,0,"Sick"));
+      }
+      for (int i=0;i<nbR ;i++ ) {
+        liste_individu.add(new Individu(0,0,0,"Recover"));
+      }
+    }
 
     public Population(){
      for(int i=0;i<nb_individus;i++){
-      Random r=new Random();
       int m=r.nextInt(2);
       if(m==0){
        liste_individu.add(new Individu(0,0,0,"Healthy"));

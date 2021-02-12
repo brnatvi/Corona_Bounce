@@ -7,7 +7,7 @@ public class Individu {
     public int PositionY;
     public double Vitesse_deplacement;
     public String etat_sante;//je propose de mettre une enumération{ Sick,Recovered,Healthy}
-    private Random r=new Random();
+    private static Random r=new Random();
     public Individu(int PosX,int PosY,int Vitesse,String etat_sante){
         this.PositionX=PosX;
         this.PositionY=PosY;
