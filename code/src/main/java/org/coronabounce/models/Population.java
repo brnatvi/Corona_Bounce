@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Population  {
+public class Population implements Displayable{
    public  final int nb_individus=20;// j'initialise le nombre des individus que la population possede
     public ArrayList<CoquilleBille> liste_Coquille=new ArrayList<CoquilleBille>();
     public  double Pourcentage_guerison;
@@ -118,18 +118,18 @@ public class Population  {
   public ArrayList<CoquilleBille> getAllPoints(){
      return liste_Coquille;
   }
-  public int getNmbPoints(){
-     return nb_individus;
-  }
-  public int getNmbHealthy(){
-     return nb_Healthy;
-  }
-  public int getNmbContagious(){
-     return nb_Sick;
-  }
-  public int getNmbRecovered(){
-     return nb_Recovered;
-  }
+ public int getNbIndividus(){
+   return nb_individus;
+ }
+ public int getNbHealthy(){
+   return nb_Healthy;
+ }
+ public int getNbSick(){
+   return nb_Sick;
+ }
+ public int getNbRecovered(){
+   return nb_Recovered;
+ }
 
 
 
