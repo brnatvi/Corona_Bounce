@@ -31,23 +31,23 @@ public interface Controllable
      * Set duration of sickness
      * @param time - number of milliseconds
      */
-    public void setDurationCovid(int time);
+    public void setDurationCovid(long time);
 
     /**
      * Get duration of sickness from GUI's controller
      */
-    public int getDurationCovid();
+    public long getDurationCovid();
 
     /**
      * Set time of non-contamination after recovery
      * @param time - number of milliseconds
      */
-    public void setDurationNonContamination(int time);
+    public void setDurationNonContamination(long time);
 
     /**
      * Get time of non-contamination after recovery from GUI's controller
      */
-    public int getDurationNonContamination();
+    public long getDurationNonContamination();
 
 
 

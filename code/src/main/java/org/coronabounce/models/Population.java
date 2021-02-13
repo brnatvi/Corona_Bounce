@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Population implements Displayable{
-   public  final int nb_individus=20;// j'initialise le nombre des individus que la population possede
+    public  int nb_individus=20;// j'initialise le nombre des individus que la population possede
     public ArrayList<CoquilleBille> liste_Coquille=new ArrayList<CoquilleBille>();
     public  double Pourcentage_guerison;
     public  double Pourcentage_contamination;

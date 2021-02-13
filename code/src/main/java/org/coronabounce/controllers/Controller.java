@@ -4,6 +4,7 @@ import org.coronabounce.mvcconnectors.Controllable;
 
 public class Controller implements Controllable
 {
+    Population p;
     @Override
     public void setSpaceSize(int w, int h)
     {
@@ -13,7 +14,7 @@ public class Controller implements Controllable
     @Override
     public void setPersonsCount(int nmbPersons)
     {
-
+      p.nb_individus=nmbPersons;
     }
 
     @Override
@@ -30,26 +31,26 @@ public class Controller implements Controllable
     }
 
     @Override
-    public void setDurationCovid(int time)
+    public void setDurationCovid(long  time)
     {
-
+      p.duree_contamination=time;
     }
 
     @Override
-    public int getDurationCovid()
+    public long  getDurationCovid()
     {
-        return 0;
+        return p.duree_contamination;
     }
 
     @Override
-    public void setDurationNonContamination(int time)
+    public void setDurationNonContamination(long time)
     {
-
+     p.duree_guerison=time;
     }
 
     @Override
-    public int getDurationNonContamination()
+    public long getDurationNonContamination()
     {
-        return 0;
+        return p.duree_guerison;
     }
 }
