@@ -11,10 +11,7 @@ public class Population implements Displayable{
     private ArrayList<CoquilleBille> listCoquille=new ArrayList<CoquilleBille>();
     private long durationCovid;
     private long durationNonContamination;
-    private int nb_Sick=0;//le nombre des individu contaminé
-    private int nb_Healthy=0;//le nombre des individus non contaminés
-    private int nb_Recovered=0;//le nombre des individus guéri
-    private int rayon_contagion;
+    private int contaminationRadius;
     private int x, y;
     private Position s = new Position(0,0);
     private static Random r=new Random();
@@ -52,20 +49,16 @@ public class Population implements Displayable{
       System.out.println("Individu num :" +i+ "de position suivante "+coc.getPositionX()+ " et "+coc.getPositionY()+" et de etat de sante "+coc.getV().getEtatSante());
       i++;
      }
-     System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
+     System.out.println("le nombre des personnes contaminées:"+getNbSick()+" de personnes guéries :"+getNbRecovered()+ " non contaminées :"+getNbHealthy());
      System.out.println("Pourcentage de contamination: "+this.percentageSick()+" %  Pourcentage de guérison :"+this.percentageRecovered()+ "% Pourcentage de non contamination est :"+(100-this.percentageRecovered()-this.percentageSick()+" %"));
     }
- public void printMovement (){
-     System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
-  int i=0;
-  for(CoquilleBille coc:listCoquille){
-   coc.Deplacer();
-   System.out.println("Individu num :" +i+ "de position suivante "+coc.getPositionX()+ " et "+coc.getPositionY()+" et de etat de sante "+coc.getV().getEtatSante());
-   i++;
+  public void printMovement (){
+    System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
+    for(CoquilleBille coc:listCoquille){
+      coc.Deplacer();
+    }
+    printPop(); //il faut évité de recopier des morceaux de code et plutot réutilisé les fonctions existantes.
   }
-  System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
-  System.out.println("Pourcentage de contamination: "+this.percentageSick()+" %  Pourcentage de guérison :"+this.percentageRecovered()+ "% Pourcentage de non contamination est :"+(100-this.percentageRecovered()-this.percentageSick()+" %"));
- }
   public double distance (CoquilleBille i1,CoquilleBille i2){
    int x1= i1.getPositionX();
    int x2=i2.getPositionX();
@@ -83,47 +76,51 @@ public class Population implements Displayable{
    }
   }*/
   public void contamination(CoquilleBille i1,CoquilleBille i2){
-         if(distance(i1,i2)<=rayon_contagion){
-          i2.Contaminate(durationCovid,durationNonContamination);
-         }
+    if(distance(i1,i2)<=contaminationRadius){
+      i2.Contaminate(durationCovid,durationNonContamination);
+    }
   }
   public double percentageSick(){
+    return (getNbSick()*100)/getNbIndividus();
+  }
+  public double percentageRecovered(){
+    return (getNbRecovered()*100)/getNbIndividus();
+  }
+  public double percentageHealthy(){
+    return (getNbHealthy()*100)/getNbIndividus();
+  }
+  public ArrayList<CoquilleBille> getAllPoints(){
+     return listCoquille;
+  }
+  public int getNbIndividus(){
+    return getAllPoints().size();
+  }
+ public int getNbHealthy(){
+   int cpt=0;
+   for(CoquilleBille coc:listCoquille){
+    if(coc.getV().getEtatSante().compareTo("Healthy")==0){
+     cpt++;
+    }
+   }
+   return cpt;
+ }
+ public int getNbSick(){
    int cpt=0;
    for(CoquilleBille coc:listCoquille){
     if(coc.getV().getEtatSante().compareTo("Sick")==0){
      cpt++;
     }
-
    }
-
-   nb_Sick=cpt;
-    return (cpt*100)/nbIndividus;
-  }
-   public double percentageRecovered(){
-    int cpt=0;
-    for(CoquilleBille coc:listCoquille){
-     if(coc.getV().getEtatSante().compareTo("Recovered")==0){
-      cpt++;
-     }
-
-    }
-    nb_Recovered=cpt;
-    return (cpt*100)/nbIndividus;
-  }
-  public ArrayList<CoquilleBille> getAllPoints(){
-     return listCoquille;
-  }
- public int getNbIndividus(){
-   return getAllPoints().size();
- }
- public int getNbHealthy(){
-   return nb_Healthy;
- }
- public int getNbSick(){
-   return nb_Sick;
+   return cpt;
  }
  public int getNbRecovered(){
-   return nb_Recovered;
+   int cpt=0;
+   for(CoquilleBille coc:listCoquille){
+    if(coc.getV().getEtatSante().compareTo("Recovered")==0){
+     cpt++;
+    }
+   }
+   return cpt;
  }
 
  public long getDurationCovid(){
