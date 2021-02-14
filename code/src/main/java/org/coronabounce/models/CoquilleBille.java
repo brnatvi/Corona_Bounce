@@ -5,19 +5,19 @@ import java.util.Random;
 public class CoquilleBille {
     public int PositionX;
     public int PositionY;
-    public double Vitesse_deplacement;
+    public double movingSpeed;
     Individu v;
     public static Random r  =new Random();
     public CoquilleBille(int PosX, int PosY,double Vitesse,Individu v){
         this.PositionX=PosX;
         this.PositionY=PosY;
-        this.Vitesse_deplacement=Vitesse;
+        this.movingSpeed=Vitesse;
         this.v=v;
     }
     public void Deplacer(){
         int m=r.nextInt(5);
         int m1=r.nextInt(10);//bound=10 car notre fenetre de population est rectangulaire
-        this.Vitesse_deplacement=Math.sqrt( (m*m)+(m1*m1));
+        this.movingSpeed=Math.sqrt( (m*m)+(m1*m1));
         this.PositionX=this.getPositionX()+m1;
         this.PositionY=this.getPositionY()+m;
 
@@ -49,7 +49,7 @@ public class CoquilleBille {
     public int getPositionY() {
         return PositionY;
     }
-    public double getVitesse_deplacement() {
-        return Vitesse_deplacement;
+    public double getMovingSpeed() {
+        return movingSpeed;
     }
 }
