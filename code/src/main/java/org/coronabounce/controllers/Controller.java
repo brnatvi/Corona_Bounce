@@ -14,7 +14,8 @@ public class Controller implements Controllable
     @Override
     public void setPersonsCount(int nmbPersons)
     {
-      p.nb_individus=nmbPersons;
+      //ca me parait un peu difficile a faire. Soit on doit supprimer des CoquilleBilles soit on doit en ajouter.
+      //p.getNbIndividus()=nmbPersons;
     }
 
     @Override
@@ -31,26 +32,26 @@ public class Controller implements Controllable
     }
 
     @Override
-    public void setDurationCovid(long  time)
+    public void setDurationCovid(long time)
     {
-      p.duree_contamination=time;
+      p.setDurationCovid(time);
     }
 
     @Override
-    public long  getDurationCovid()
+    public long getDurationCovid()
     {
-        return p.duree_contamination;
+        return p.getDurationCovid();
     }
 
     @Override
     public void setDurationNonContamination(long time)
     {
-     p.duree_guerison=time;
+     p.setDurationNonContamination(time);
     }
 
     @Override
     public long getDurationNonContamination()
     {
-        return p.duree_guerison;
+        return p.getDurationNonContamination();
     }
 }

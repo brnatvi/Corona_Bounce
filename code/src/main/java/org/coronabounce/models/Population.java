@@ -7,15 +7,15 @@ import java.util.List;
 import java.util.Random;
 
 public class Population implements Displayable{
-    public  int nb_individus=20;// j'initialise le nombre des individus que la population possede
-    public ArrayList<CoquilleBille> listCoquille=new ArrayList<CoquilleBille>();
-    public  long duree_guerison;
-    public  long duree_contamination;
-    public  int nb_Sick=0;//le nombre des individu contaminé
-    public  int nb_Healthy=0;//le nombre des individus non contaminés
-    public  int nb_Recovered=0;//le nombre des individus guéri
-    public  int rayon_contagion;
-    private int x,  y;
+    private int nb_individus=20;// j'initialise le nombre des individus que la population possede
+    private ArrayList<CoquilleBille> listCoquille=new ArrayList<CoquilleBille>();
+    private long durationCovid;
+    private long durationNonContamination;
+    private int nb_Sick=0;//le nombre des individu contaminé
+    private int nb_Healthy=0;//le nombre des individus non contaminés
+    private int nb_Recovered=0;//le nombre des individus guéri
+    private int rayon_contagion;
+    private int x, y;
     private Position s = new Position(0,0);
     private static Random r=new Random();
 
@@ -70,7 +70,7 @@ public class Population implements Displayable{
     public void printPop(){
      int i=0;
      for(CoquilleBille coc:listCoquille){
-      System.out.println("Individu num :" +i+ "de position suivante "+coc.getPositionX()+ " et "+coc.getPositionY()+" et de etat de sante "+coc.v.getEtatSante());
+      System.out.println("Individu num :" +i+ "de position suivante "+coc.getPositionX()+ " et "+coc.getPositionY()+" et de etat de sante "+coc.getV().getEtatSante());
       i++;
      }
      System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
@@ -81,7 +81,7 @@ public class Population implements Displayable{
   int i=0;
   for(CoquilleBille coc:listCoquille){
    coc.Deplacer();
-   System.out.println("Individu num :" +i+ "de position suivante "+coc.getPositionX()+ " et "+coc.getPositionY()+" et de etat de sante "+coc.v.getEtatSante());
+   System.out.println("Individu num :" +i+ "de position suivante "+coc.getPositionX()+ " et "+coc.getPositionY()+" et de etat de sante "+coc.getV().getEtatSante());
    i++;
   }
   System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
@@ -105,13 +105,13 @@ public class Population implements Displayable{
   }*/
   public void contamination(CoquilleBille i1,CoquilleBille i2){
          if(distance(i1,i2)<=rayon_contagion){
-          i2.Contaminate(duree_contamination,duree_guerison);
+          i2.Contaminate(durationCovid,durationNonContamination);
          }
   }
   public double percentageSick(){
    int cpt=0;
    for(CoquilleBille coc:listCoquille){
-    if(coc.v.getEtatSante().compareTo("Sick")==0){
+    if(coc.getV().getEtatSante().compareTo("Sick")==0){
      cpt++;
     }
 
@@ -123,7 +123,7 @@ public class Population implements Displayable{
    public double percentageRecovered(){
     int cpt=0;
     for(CoquilleBille coc:listCoquille){
-     if(coc.v.getEtatSante().compareTo("Recovered")==0){
+     if(coc.getV().getEtatSante().compareTo("Recovered")==0){
       cpt++;
      }
 
@@ -135,7 +135,7 @@ public class Population implements Displayable{
      return listCoquille;
   }
  public int getNbIndividus(){
-   return nb_individus;
+   return getAllPoints().size();
  }
  public int getNbHealthy(){
    return nb_Healthy;
@@ -145,6 +145,19 @@ public class Population implements Displayable{
  }
  public int getNbRecovered(){
    return nb_Recovered;
+ }
+
+ public long getDurationCovid(){
+   return durationCovid;
+ }
+ public void setDurationCovid(long l){
+   durationCovid=l;
+ }
+ public long getDurationNonContamination(){
+   return durationNonContamination;
+ }
+ public void setDurationNonContamination(long l){
+   durationNonContamination=l;
  }
 
 

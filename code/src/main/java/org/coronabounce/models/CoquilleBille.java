@@ -3,11 +3,12 @@ package org.coronabounce.models;
 import java.util.Random;
 
 public class CoquilleBille {
-    public int PositionX;
-    public int PositionY;
-    public double movingSpeed;
-    Individu v;
-    public static Random r  =new Random();
+    private int PositionX;
+    private int PositionY;
+    private double movingSpeed;
+    private Individu v;
+    private static Random r  =new Random();
+
     public CoquilleBille(int PosX, int PosY,double Vitesse,Individu v){
         this.PositionX=PosX;
         this.PositionY=PosY;
@@ -25,7 +26,7 @@ public class CoquilleBille {
     public void Recover(long duree_guerison){
         try {
             Thread.sleep(duree_guerison);//aprés le moment de la contamination on appelle la méthode recover qui attend le temps de guerison pour que son etat de santé se modifie
-            v.etatSante="Recovered";
+            v.setEtatSante("Recovered");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -35,7 +36,7 @@ public class CoquilleBille {
     public void Contaminate(long duree_contamination,long duree_guerison){
         try {
             Thread.sleep(duree_contamination);//le thread attend un moment pour que la contamination sera faite et aprés on appelle la méthode recover
-            v.etatSante="Sick";
+            v.setEtatSante("Sick");
             this.Recover( duree_guerison);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -51,5 +52,8 @@ public class CoquilleBille {
     }
     public double getMovingSpeed() {
         return movingSpeed;
+    }
+    public Individu getV(){
+      return v;
     }
 }
