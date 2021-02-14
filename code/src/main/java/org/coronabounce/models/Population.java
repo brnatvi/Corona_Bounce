@@ -17,17 +17,28 @@ public class Population implements Displayable{
     public  int nb_Healthy=0;//le nombre des individus non contaminés
     public  int nb_Recovered=0;//le nombre des individus guéri
     public  int rayon_contagion;
+    private int x,  y;
+    private Position s = new Position(0,0);
     private static Random r=new Random();
 
     public Population(int nbH, int nbS, int nbR){
       for (int i=0;i<nbH ;i++ ) {
-        liste_Coquille.add(new CoquilleBille(0,0,0,new Individu("Healthy")));
+
+          x=s.randomPos().getX();
+          y=s.randomPos().getY();
+
+        liste_Coquille.add(new CoquilleBille(x,y,0,new Individu("Healthy")));
       }
       for (int i=0;i<nbS ;i++ ) {
-        liste_Coquille.add(new CoquilleBille(0,0,0,new Individu("Sick")));
+
+          x=s.randomPos().getX();
+          y=s.randomPos().getY();
+        liste_Coquille.add(new CoquilleBille(x,y,0,new Individu("Sick")));
       }
       for (int i=0;i<nbR ;i++ ) {
-        liste_Coquille.add(new CoquilleBille(0,0,0,new Individu("Recover")));
+          x=s.randomPos().getX();
+          y=s.randomPos().getY();
+        liste_Coquille.add(new CoquilleBille(x,y,0,new Individu("Recover")));
       }
     }
 
@@ -35,16 +46,23 @@ public class Population implements Displayable{
      for(int i=0;i<nb_individus;i++){
       int m=r.nextInt(2);
       if(m==0){
-       liste_Coquille.add(new CoquilleBille(0,0,0,new Individu("Healthy")));
+          x=s.randomPos().getX();
+          y=s.randomPos().getY();
+
+       liste_Coquille.add(new CoquilleBille(x,y,0,new Individu("Healthy")));
        nb_Healthy++;
       }
       else {
        if (m == 1 && nb_Sick < 2) {
-        liste_Coquille.add(new CoquilleBille(0,0,0,new Individu("Sick")));
+           x=s.randomPos().getX();
+           y=s.randomPos().getY();
+        liste_Coquille.add(new CoquilleBille(x,y,0,new Individu("Sick")));
         nb_Sick++;
        }
        else{
-        liste_Coquille.add(new CoquilleBille(0,0,0,new Individu("Recover")));
+           x=s.randomPos().getX();
+           y=s.randomPos().getY();
+        liste_Coquille.add(new CoquilleBille(x,y,0,new Individu("Recover")));
         nb_Recovered++;
        }
       }
