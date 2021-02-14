@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Population implements Displayable{
-    private int nb_individus=20;// j'initialise le nombre des individus que la population possede
+    private int nbIndividus=20;// j'initialise le nombre des individus que la population possede
     private ArrayList<CoquilleBille> listCoquille=new ArrayList<CoquilleBille>();
     private long durationCovid;
     private long durationNonContamination;
@@ -40,32 +40,11 @@ public class Population implements Displayable{
       }
     }
 
+    public Population(int nbIndividus){
+      this(nbIndividus-1, 1,0);
+    }
     public Population(){
-     for(int i=0;i<nb_individus;i++){
-      int m=r.nextInt(2);
-      if(m==0){
-          x=s.randomPos().getX();
-          y=s.randomPos().getY();
-
-       listCoquille.add(new CoquilleBille(x,y,0,new Individu("Healthy")));
-       nb_Healthy++;
-      }
-      else {
-       if (m == 1 && nb_Sick < 2) {
-           x=s.randomPos().getX();
-           y=s.randomPos().getY();
-        listCoquille.add(new CoquilleBille(x,y,0,new Individu("Sick")));
-        nb_Sick++;
-       }
-       else{
-           x=s.randomPos().getX();
-           y=s.randomPos().getY();
-        listCoquille.add(new CoquilleBille(x,y,0,new Individu("Recover")));
-        nb_Recovered++;
-       }
-      }
-     }
-
+      this(20);
     }
     public void printPop(){
      int i=0;
@@ -97,8 +76,8 @@ public class Population implements Displayable{
 
   }
   /*public void parcours(){
-   for(int i=0;i<nb_individus;i++){
-     for(int j=0;j<nb_individus;j++){
+   for(int i=0;i<nbIndividus;i++){
+     for(int j=0;j<nbIndividus;j++){
 
      }
    }
@@ -118,7 +97,7 @@ public class Population implements Displayable{
    }
 
    nb_Sick=cpt;
-    return (cpt*100)/nb_individus;
+    return (cpt*100)/nbIndividus;
   }
    public double percentageRecovered(){
     int cpt=0;
@@ -129,7 +108,7 @@ public class Population implements Displayable{
 
     }
     nb_Recovered=cpt;
-    return (cpt*100)/nb_individus;
+    return (cpt*100)/nbIndividus;
   }
   public ArrayList<CoquilleBille> getAllPoints(){
      return listCoquille;
