@@ -3,20 +3,20 @@ package org.coronabounce.models;
 import java.util.Random;
 
 public class Individu {
-    public String etat_sante;//je propose de mettre une enumération{ Sick,Recovered,Healthy}
+    public String etatSante;//je propose de mettre une enumération{ Sick,Recovered,Healthy}
     private static Random r=new Random();
-    public Individu(String etat_sante){
+    public Individu(String etatSante){
 
-        this.etat_sante=etat_sante;
+        this.etatSante=etatSante;
     }
 
 
-    public void setEtat_sante(String etat_sante) {
-        this.etat_sante = etat_sante;
+    public void setEtatSante(String etatSante) {
+        this.etatSante = etatSante;
     }
 
-    public String getEtat_sante(){
-        return this.etat_sante;
+    public String getEtatSante(){
+        return this.etatSante;
     }
 
 

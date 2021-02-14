@@ -8,9 +8,7 @@ import java.util.Random;
 
 public class Population implements Displayable{
     public  int nb_individus=20;// j'initialise le nombre des individus que la population possede
-    public ArrayList<CoquilleBille> liste_Coquille=new ArrayList<CoquilleBille>();
-    public  double Pourcentage_guerison;
-    public  double Pourcentage_contamination;
+    public ArrayList<CoquilleBille> listCoquille=new ArrayList<CoquilleBille>();
     public  long duree_guerison;
     public  long duree_contamination;
     public  int nb_Sick=0;//le nombre des individu contaminé
@@ -27,18 +25,18 @@ public class Population implements Displayable{
           x=s.randomPos().getX();
           y=s.randomPos().getY();
 
-        liste_Coquille.add(new CoquilleBille(x,y,0,new Individu("Healthy")));
+        listCoquille.add(new CoquilleBille(x,y,0,new Individu("Healthy")));
       }
       for (int i=0;i<nbS ;i++ ) {
 
           x=s.randomPos().getX();
           y=s.randomPos().getY();
-        liste_Coquille.add(new CoquilleBille(x,y,0,new Individu("Sick")));
+        listCoquille.add(new CoquilleBille(x,y,0,new Individu("Sick")));
       }
       for (int i=0;i<nbR ;i++ ) {
           x=s.randomPos().getX();
           y=s.randomPos().getY();
-        liste_Coquille.add(new CoquilleBille(x,y,0,new Individu("Recover")));
+        listCoquille.add(new CoquilleBille(x,y,0,new Individu("Recover")));
       }
     }
 
@@ -49,45 +47,45 @@ public class Population implements Displayable{
           x=s.randomPos().getX();
           y=s.randomPos().getY();
 
-       liste_Coquille.add(new CoquilleBille(x,y,0,new Individu("Healthy")));
+       listCoquille.add(new CoquilleBille(x,y,0,new Individu("Healthy")));
        nb_Healthy++;
       }
       else {
        if (m == 1 && nb_Sick < 2) {
            x=s.randomPos().getX();
            y=s.randomPos().getY();
-        liste_Coquille.add(new CoquilleBille(x,y,0,new Individu("Sick")));
+        listCoquille.add(new CoquilleBille(x,y,0,new Individu("Sick")));
         nb_Sick++;
        }
        else{
            x=s.randomPos().getX();
            y=s.randomPos().getY();
-        liste_Coquille.add(new CoquilleBille(x,y,0,new Individu("Recover")));
+        listCoquille.add(new CoquilleBille(x,y,0,new Individu("Recover")));
         nb_Recovered++;
        }
       }
      }
 
     }
-    public void afficher_pop(){
+    public void printPop(){
      int i=0;
-     for(CoquilleBille coc:liste_Coquille){
-      System.out.println("Individu num :" +i+ "de position suivante "+coc.getPositionX()+ " et "+coc.getPositionY()+" et de etat de sante "+coc.v.getEtat_sante());
+     for(CoquilleBille coc:listCoquille){
+      System.out.println("Individu num :" +i+ "de position suivante "+coc.getPositionX()+ " et "+coc.getPositionY()+" et de etat de sante "+coc.v.getEtatSante());
       i++;
      }
      System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
-     System.out.println("Pourcentage de contamination: "+this.pourcentage_contaminations()+" %  Pourcentage de guérison :"+this.pourcentage_guerisons()+ "% Pourcentage de non contamination est :"+(100-this.pourcentage_guerisons()-this.pourcentage_contaminations()+" %"));
+     System.out.println("Pourcentage de contamination: "+this.percentageSick()+" %  Pourcentage de guérison :"+this.percentageRecovered()+ "% Pourcentage de non contamination est :"+(100-this.percentageRecovered()-this.percentageSick()+" %"));
     }
- public void afficher_deplacement (){
+ public void printMovement (){
      System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
   int i=0;
-  for(CoquilleBille coc:liste_Coquille){
+  for(CoquilleBille coc:listCoquille){
    coc.Deplacer();
-   System.out.println("Individu num :" +i+ "de position suivante "+coc.getPositionX()+ " et "+coc.getPositionY()+" et de etat de sante "+coc.v.getEtat_sante());
+   System.out.println("Individu num :" +i+ "de position suivante "+coc.getPositionX()+ " et "+coc.getPositionY()+" et de etat de sante "+coc.v.getEtatSante());
    i++;
   }
   System.out.println("le nombre des personnes contaminées:"+nb_Sick+" de personnes guéries :"+nb_Recovered+ " non contaminées :"+nb_Healthy);
-  System.out.println("Pourcentage de contamination: "+this.pourcentage_contaminations()+" %  Pourcentage de guérison :"+this.pourcentage_guerisons()+ "% Pourcentage de non contamination est :"+(100-this.pourcentage_guerisons()-this.pourcentage_contaminations()+" %"));
+  System.out.println("Pourcentage de contamination: "+this.percentageSick()+" %  Pourcentage de guérison :"+this.percentageRecovered()+ "% Pourcentage de non contamination est :"+(100-this.percentageRecovered()-this.percentageSick()+" %"));
  }
   public double distance (CoquilleBille i1,CoquilleBille i2){
    int x1= i1.getPositionX();
@@ -110,10 +108,10 @@ public class Population implements Displayable{
           i2.Contaminate(duree_contamination,duree_guerison);
          }
   }
-  public double pourcentage_contaminations(){
+  public double percentageSick(){
    int cpt=0;
-   for(CoquilleBille coc:liste_Coquille){
-    if(coc.v.getEtat_sante().compareTo("Sick")==0){
+   for(CoquilleBille coc:listCoquille){
+    if(coc.v.getEtatSante().compareTo("Sick")==0){
      cpt++;
     }
 
@@ -122,10 +120,10 @@ public class Population implements Displayable{
    nb_Sick=cpt;
     return (cpt*100)/nb_individus;
   }
-   public double pourcentage_guerisons(){
+   public double percentageRecovered(){
     int cpt=0;
-    for(CoquilleBille coc:liste_Coquille){
-     if(coc.v.getEtat_sante().compareTo("Recovered")==0){
+    for(CoquilleBille coc:listCoquille){
+     if(coc.v.getEtatSante().compareTo("Recovered")==0){
       cpt++;
      }
 
@@ -134,7 +132,7 @@ public class Population implements Displayable{
     return (cpt*100)/nb_individus;
   }
   public ArrayList<CoquilleBille> getAllPoints(){
-     return liste_Coquille;
+     return listCoquille;
   }
  public int getNbIndividus(){
    return nb_individus;

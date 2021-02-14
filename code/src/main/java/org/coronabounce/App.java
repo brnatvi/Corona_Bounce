@@ -35,8 +35,8 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
         Population p=new Population();
-        p.afficher_pop();
-        p.afficher_deplacement();
+        p.printPop();
+        p.printMovement();
 
     }
 
