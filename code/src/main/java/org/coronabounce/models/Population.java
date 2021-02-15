@@ -123,6 +123,7 @@ public class Population implements Displayable{
  public void Add_individu(Individu i){
         CoquilleBille coc=new CoquilleBille(0,i);
         listCoquille.add(coc);
+        this.nbIndividus++;
  }
 
 
