@@ -7,8 +7,8 @@ public class Position {
 
     private double posX;
     private double posY;
-    private static   double width;
-    private static  double  height;
+    private static   double width =100;
+    private static  double  height=50;
 
    double getX(){ return this.posX;}
    double getY() { return this.posY;}

@@ -25,7 +25,7 @@ public interface Controllable
     /**
      * Get radius of contamination around point from GUI ()
      */
-    public int getRadius();
+    public double getRadius();
 
     /**
      * Set duration of sickness

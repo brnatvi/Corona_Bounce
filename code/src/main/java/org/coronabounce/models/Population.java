@@ -11,7 +11,7 @@ public class Population implements Displayable{
     private ArrayList<CoquilleBille> listCoquille=new ArrayList<CoquilleBille>();
     private long durationCovid;
     private long durationNonContamination;
-    private int contaminationRadius;
+    private double contaminationRadius;
     private static Random r=new Random();
 
     public Population(int nbH, int nbS, int nbR){
@@ -50,10 +50,10 @@ public class Population implements Displayable{
     printPop(); //il faut évité de recopier des morceaux de code et plutot réutilisé les fonctions existantes.
   }
   public double distance (CoquilleBille i1,CoquilleBille i2){
-   int x1= i1.getPositionX();
-   int x2=i2.getPositionX();
-   int y1=i1.getPositionY();
-   int y2=i2.getPositionY();
+   double x1= i1.getPositionX();
+   double x2=i2.getPositionX();
+   double y1=i1.getPositionY();
+   double y2=i2.getPositionY();
    double dist=Math.sqrt((x1-x2)*(x1-x2)-(y1-y2)*(y1-y2));
    return dist;
 
@@ -61,7 +61,7 @@ public class Population implements Displayable{
 
   public void contamination(CoquilleBille i1,CoquilleBille i2){
     if(distance(i1,i2)<=contaminationRadius){
-      i2.contaminate(durationCovid,durationNonContamination);
+      i2.getV().Contaminate(durationCovid,durationNonContamination);
     }
   }
   public double percentageSick(){
@@ -120,7 +120,15 @@ public class Population implements Displayable{
    durationNonContamination=l;
  }
 
- public void Add_individu(Individu i){
+    public void setContaminationRadius(double contaminationRadius) {
+        this.contaminationRadius = contaminationRadius;
+    }
+
+    public double getContaminationRadius() {
+        return contaminationRadius;
+    }
+
+    public void Add_individu(Individu i){
         CoquilleBille coc=new CoquilleBille(0,i);
         listCoquille.add(coc);
         this.nbIndividus++;

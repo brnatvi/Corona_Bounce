@@ -23,14 +23,14 @@ public class Controller implements Controllable
     @Override
     public void setRadius(double pxls)
     {
-
+      p.setContaminationRadius(pxls);
     }
 
 
     @Override
-    public int getRadius()
+    public double getRadius()
     {
-        return 0;
+        return p.getContaminationRadius();
     }
 
     @Override

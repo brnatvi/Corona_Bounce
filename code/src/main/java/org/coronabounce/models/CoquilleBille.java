@@ -3,8 +3,8 @@ package org.coronabounce.models;
 import java.util.Random;
 
 public class CoquilleBille {
-    private int PositionX;
-    private int PositionY;
+    private double PositionX;
+    private double PositionY;
     private double movingSpeed;
     private Individu v;
     private static Random r  =new Random();
@@ -44,11 +44,11 @@ public class CoquilleBille {
         }
 
     }
-    public int getPositionX() {
+    public double getPositionX() {
         return PositionX;
     }
 
-    public int getPositionY() {
+    public double getPositionY() {
         return PositionY;
     }
     public double getMovingSpeed() {
