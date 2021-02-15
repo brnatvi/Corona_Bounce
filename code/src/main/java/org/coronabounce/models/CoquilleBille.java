@@ -24,7 +24,7 @@ public class CoquilleBille {
         this.PositionY=this.getPositionY()+m;
 
     }
-    public void Recover(long duree_guerison){
+    public void recover(long duree_guerison){
         try {
             Thread.sleep(duree_guerison);//aprés le moment de la contamination on appelle la méthode recover qui attend le temps de guerison pour que son etat de santé se modifie
             v.setEtatSante("Recovered");
@@ -34,11 +34,11 @@ public class CoquilleBille {
 
 
     }
-    public void Contaminate(long duree_contamination,long duree_guerison){
+    public void contaminate(long duree_contamination,long duree_guerison){
         try {
             Thread.sleep(duree_contamination);//le thread attend un moment pour que la contamination sera faite et aprés on appelle la méthode recover
             v.setEtatSante("Sick");
-            this.Recover( duree_guerison);
+            this.recover( duree_guerison);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
