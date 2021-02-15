@@ -61,7 +61,7 @@ public class Population implements Displayable{
 
   public void contamination(CoquilleBille i1,CoquilleBille i2){
     if(distance(i1,i2)<=contaminationRadius){
-      i2.Contaminate(durationCovid,durationNonContamination);
+      i2.contaminate(durationCovid,durationNonContamination);
     }
   }
   public double percentageSick(){
