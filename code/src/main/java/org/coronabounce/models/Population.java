@@ -12,28 +12,18 @@ public class Population implements Displayable{
     private long durationCovid;
     private long durationNonContamination;
     private int contaminationRadius;
-    private int x, y;
-    private Position s = new Position(0,0);
     private static Random r=new Random();
 
     public Population(int nbH, int nbS, int nbR){
       for (int i=0;i<nbH ;i++ ) {
 
-          x=s.randomPos().getX();
-          y=s.randomPos().getY();
-
-        listCoquille.add(new CoquilleBille(x,y,0,new Individu("Healthy")));
+        listCoquille.add(new CoquilleBille(0,new Individu("Healthy")));
       }
       for (int i=0;i<nbS ;i++ ) {
-
-          x=s.randomPos().getX();
-          y=s.randomPos().getY();
-        listCoquille.add(new CoquilleBille(x,y,0,new Individu("Sick")));
+        listCoquille.add(new CoquilleBille(0,new Individu("Sick")));
       }
       for (int i=0;i<nbR ;i++ ) {
-          x=s.randomPos().getX();
-          y=s.randomPos().getY();
-        listCoquille.add(new CoquilleBille(x,y,0,new Individu("Recover")));
+        listCoquille.add(new CoquilleBille(0,new Individu("Recover")));
       }
     }
 
@@ -68,13 +58,7 @@ public class Population implements Displayable{
    return dist;
 
   }
-  /*public void parcours(){
-   for(int i=0;i<nbIndividus;i++){
-     for(int j=0;j<nbIndividus;j++){
 
-     }
-   }
-  }*/
   public void contamination(CoquilleBille i1,CoquilleBille i2){
     if(distance(i1,i2)<=contaminationRadius){
       i2.Contaminate(durationCovid,durationNonContamination);
@@ -136,6 +120,11 @@ public class Population implements Displayable{
    durationNonContamination=l;
  }
 
+ public void Add_individu(Individu i){
+        CoquilleBille coc=new CoquilleBille(0,i);
+        listCoquille.add(coc);
+        this.nbIndividus++;
+ }
 
 
 }
