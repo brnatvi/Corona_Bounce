@@ -9,9 +9,10 @@ public class CoquilleBille {
     private Individu v;
     private static Random r  =new Random();
 
-    public CoquilleBille(int PosX, int PosY,double Vitesse,Individu v){
-        this.PositionX=PosX;
-        this.PositionY=PosY;
+    public CoquilleBille(double Vitesse,Individu v){
+        Position p=new Position();
+        this.PositionX=p.getX();
+        this.PositionY=p.getY();
         this.movingSpeed=Vitesse;
         this.v=v;
     }
