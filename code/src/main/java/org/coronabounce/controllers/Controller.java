@@ -1,14 +1,16 @@
 package org.coronabounce.controllers;
 import org.coronabounce.models.Population;
+import org.coronabounce.models.Position;
 import org.coronabounce.mvcconnectors.Controllable;
 
 public class Controller implements Controllable
 {
     Population p;
     @Override
-    public void setSpaceSize(int w, int h)
+    public void setSpaceSize(double w, double h)
     {
-
+        Position.setWidth(w);
+        Position.setHeight(h);
     }
 
     @Override
@@ -19,7 +21,7 @@ public class Controller implements Controllable
     }
 
     @Override
-    public void setRadius(int pxls)
+    public void setRadius(double pxls)
     {
 
     }

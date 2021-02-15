@@ -8,7 +8,7 @@ public interface Controllable
      * Set width and height of field
      * @param w, h - width, height
      */
-    public void setSpaceSize(int w, int h);
+    public void setSpaceSize(double w, double h);
 
     /**
      * Set total number of persons in simulation to model
@@ -20,7 +20,7 @@ public interface Controllable
      * Set radius of contamination around point to model
      * @param pxls number of pixels
      */
-    public void setRadius(int pxls);
+    public void setRadius(double pxls);
 
     /**
      * Get radius of contamination around point from GUI ()
