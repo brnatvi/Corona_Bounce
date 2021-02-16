@@ -4,10 +4,10 @@ import java.util.Random;
 
 
 /** Elle sera abstract **/
-public   class  Individu {
+public   class individual {
     private String etatSante;//je propose de mettre une enumération{ Sick,Recovered,Healthy}
     private static Random r=new Random();
-    public Individu(String etatSante){
+    public individual(String etatSante){
       this.etatSante=etatSante;
    }
 

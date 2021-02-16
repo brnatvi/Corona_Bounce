@@ -3,7 +3,6 @@ package org.coronabounce.models;
 import org.coronabounce.mvcconnectors.Displayable;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Population implements Displayable{
@@ -17,13 +16,13 @@ public class Population implements Displayable{
     public Population(int nbH, int nbS, int nbR){
       for (int i=0;i<nbH ;i++ ) {
 
-        listCoquille.add(new CoquilleBille(0,new Individu("Healthy")));
+        listCoquille.add(new CoquilleBille(0,new individual("Healthy")));
       }
       for (int i=0;i<nbS ;i++ ) {
-        listCoquille.add(new CoquilleBille(0,new Individu("Sick")));
+        listCoquille.add(new CoquilleBille(0,new individual("Sick")));
       }
       for (int i=0;i<nbR ;i++ ) {
-        listCoquille.add(new CoquilleBille(0,new Individu("Recover")));
+        listCoquille.add(new CoquilleBille(0,new individual("Recover")));
       }
     }
 
@@ -128,7 +127,7 @@ public class Population implements Displayable{
         return contaminationRadius;
     }
 
-    public void Add_individu(Individu i){
+    public void Add_individu(individual i){
         CoquilleBille coc=new CoquilleBille(0,i);
         listCoquille.add(coc);
         this.nbIndividus++;
