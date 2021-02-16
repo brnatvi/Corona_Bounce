@@ -30,6 +30,10 @@ public class Position {
     this.posY=r.nextInt((int)height);
 
    }
+   public Position(double PosX,double PosY){
+       this.posX=PosX;
+       this.posY=PosY;
+   }
 
 
 

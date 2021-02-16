@@ -35,7 +35,7 @@ public class Population implements Displayable{
     public void printPop(){
      int i=0;
      for(CoquilleBille coc:listCoquille){
-      System.out.println("Individu num :" +i+ "de position suivante "+coc.getPositionX()+ " et "+coc.getPositionY()+" et de etat de sante "+coc.getV().getEtatSante());
+      System.out.println("Individu num :" +i+ "de position suivante "+coc.getPosition().getX()+ " et "+coc.getPosition().getY()+" et de etat de sante "+coc.getV().getEtatSante());
       i++;
      }
      System.out.println("le nombre des personnes contaminées:"+getNbSick()+" de personnes guéries :"+getNbRecovered()+ " non contaminées :"+getNbHealthy());
@@ -49,10 +49,10 @@ public class Population implements Displayable{
     printPop(); //il faut évité de recopier des morceaux de code et plutot réutilisé les fonctions existantes.
   }
   public double distance (CoquilleBille i1,CoquilleBille i2){
-   double x1= i1.getPositionX();
-   double x2=i2.getPositionX();
-   double y1=i1.getPositionY();
-   double y2=i2.getPositionY();
+   double x1= i1.getPosition().getX();
+   double x2=i2.getPosition().getX();
+   double y1=i1.getPosition().getY();
+   double y2=i2.getPosition().getY();
    double dist=Math.sqrt((x1-x2)*(x1-x2)-(y1-y2)*(y1-y2));
    return dist;
 
