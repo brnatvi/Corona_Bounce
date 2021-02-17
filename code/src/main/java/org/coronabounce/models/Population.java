@@ -13,9 +13,10 @@ public class Population implements Displayable{
     private double contaminationRadius;
     private static Random r=new Random();
 
+    //========================= Constructors ==========================================================================/
+
     public Population(int nbH, int nbS, int nbR){
       for (int i=0;i<nbH ;i++ ) {
-
         listCoquille.add(new CoquilleBille(0,new individual("Healthy")));
       }
       for (int i=0;i<nbS ;i++ ) {
@@ -29,109 +30,107 @@ public class Population implements Displayable{
     public Population(int nbIndividus){
       this(nbIndividus-1, 1,0);
     }
+
     public Population(){
       this(20);
     }
-    public void printPop(){
-     int i=0;
-     for(CoquilleBille coc:listCoquille){
-      System.out.println("Individu num :" +i+ "de position suivante "+coc.getPosition().getX()+ " et "+coc.getPosition().getY()+" et de etat de sante "+coc.getV().getEtatSante());
-      i++;
-     }
-     System.out.println("le nombre des personnes contaminées:"+getNbSick()+" de personnes guéries :"+getNbRecovered()+ " non contaminées :"+getNbHealthy());
-     System.out.println("Pourcentage de contamination: "+this.percentageSick()+" %  Pourcentage de guérison :"+this.percentageRecovered()+ "% Pourcentage de non contamination est :"+(100-this.percentageRecovered()-this.percentageSick()+" %"));
-    }
-  public void printMovement (){
-    System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
-    for(CoquilleBille coc:listCoquille){
-      coc.Deplacer();
-    }
-    printPop(); //il faut évité de recopier des morceaux de code et plutot réutilisé les fonctions existantes.
-  }
-  public double distance (CoquilleBille i1,CoquilleBille i2){
-   double x1= i1.getPosition().getX();
-   double x2=i2.getPosition().getX();
-   double y1=i1.getPosition().getY();
-   double y2=i2.getPosition().getY();
-   double dist=Math.sqrt((x1-x2)*(x1-x2)-(y1-y2)*(y1-y2));
-   return dist;
 
-  }
 
-  public void contamination(CoquilleBille i1,CoquilleBille i2){
-    if(distance(i1,i2)<=contaminationRadius){
-      i2.getV().Contaminate(durationCovid,durationNonContamination);
-    }
-  }
-  public double percentageSick(){
-    return (getNbSick()*100)/getNbIndividus();
-  }
-  public double percentageRecovered(){
-    return (getNbRecovered()*100)/getNbIndividus();
-  }
-  public double percentageHealthy(){
-    return (getNbHealthy()*100)/getNbIndividus();
-  }
-  public ArrayList<CoquilleBille> getAllPoints(){
-     return listCoquille;
-  }
-  public int getNbIndividus(){
-    return getAllPoints().size();
-  }
- public int getNbHealthy(){
-   int cpt=0;
-   for(CoquilleBille coc:listCoquille){
-    if(coc.getV().getEtatSante().compareTo("Healthy")==0){
-     cpt++;
-    }
-   }
-   return cpt;
- }
- public int getNbSick(){
-   int cpt=0;
-   for(CoquilleBille coc:listCoquille){
-    if(coc.getV().getEtatSante().compareTo("Sick")==0){
-     cpt++;
-    }
-   }
-   return cpt;
- }
- public int getNbRecovered(){
-   int cpt=0;
-   for(CoquilleBille coc:listCoquille){
-    if(coc.getV().getEtatSante().compareTo("Recovered")==0){
-     cpt++;
-    }
-   }
-   return cpt;
- }
-
- public long getDurationCovid(){
-   return durationCovid;
- }
- public void setDurationCovid(long l){
-   durationCovid=l;
- }
- public long getDurationNonContamination(){
-   return durationNonContamination;
- }
- public void setDurationNonContamination(long l){
-   durationNonContamination=l;
- }
-
-    public void setContaminationRadius(double contaminationRadius) {
-        this.contaminationRadius = contaminationRadius;
-    }
-
-    public double getContaminationRadius() {
-        return contaminationRadius;
-    }
+    public ArrayList<CoquilleBille> getAllPoints(){ return listCoquille; }
 
     public void Add_individu(individual i){
         CoquilleBille coc=new CoquilleBille(0,i);
         listCoquille.add(coc);
         this.nbIndividus++;
- }
+    }
 
 
+    //========================= Virus Getters/Setters==================================================================/
+
+    public long getDurationCovid(){ return durationCovid; }
+
+    public void setDurationCovid(long l){ durationCovid=l; }
+
+    public long getDurationNonContamination(){ return durationNonContamination; }
+
+    public void setDurationNonContamination(long l){ durationNonContamination=l; }
+
+    public void setContaminationRadius(double contaminationRadius){ this.contaminationRadius = contaminationRadius; }
+
+    public double getContaminationRadius() { return contaminationRadius; }
+
+
+    //========================= Points Interactions ===================================================================/
+
+    public double distance (CoquilleBille i1,CoquilleBille i2){
+     double x1= i1.getPosition().getX();
+     double x2=i2.getPosition().getX();
+     double y1=i1.getPosition().getY();
+     double y2=i2.getPosition().getY();
+     double dist=Math.sqrt((x1-x2)*(x1-x2)-(y1-y2)*(y1-y2));
+     return dist;
+    }
+
+    public void contamination(CoquilleBille i1,CoquilleBille i2){
+      if(distance(i1,i2)<=contaminationRadius){
+        i2.getV().Contaminate(durationCovid,durationNonContamination);
+      }
+    }
+
+    //========================= Prints ================================================================================/
+
+    public void printPop(){
+        int i=0;
+        for(CoquilleBille coc:listCoquille){
+            System.out.println("Individu num :" +i+ "de position suivante "+coc.getPosition().getX()+ " et "+coc.getPosition().getY()+" et de etat de sante "+coc.getV().getEtatSante());
+            i++;
+        }
+        System.out.println("le nombre des personnes contaminées:"+getNbSick()+" de personnes guéries :"+getNbRecovered()+ " non contaminées :"+getNbHealthy());
+        System.out.println("Pourcentage de contamination: "+this.percentageSick()+" %  Pourcentage de guérison :"+this.percentageRecovered()+ "% Pourcentage de non contamination est :"+(100-this.percentageRecovered()-this.percentageSick()+" %"));
+    }
+
+    public void printMovement (){
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
+        for(CoquilleBille coc:listCoquille){
+            coc.Deplacer();
+        }
+        printPop(); //il faut évité de recopier des morceaux de code et plutot réutilisé les fonctions existantes.
+    }
+
+    //========================= Population Statistics =================================================================/
+
+    public int getNbIndividus() { return getAllPoints().size(); }
+    public double percentageSick() { return (getNbSick()*100)/getNbIndividus(); }
+    public double percentageRecovered() { return (getNbRecovered()*100)/getNbIndividus(); }
+    public double percentageHealthy() { return (getNbHealthy()*100)/getNbIndividus(); }
+
+    public int getNbHealthy(){
+      int cpt=0;
+      for(CoquilleBille coc:listCoquille){
+       if(coc.getV().getEtatSante().compareTo("Healthy")==0){
+        cpt++;
+       }
+      }
+      return cpt;
+    }
+
+    public int getNbSick(){
+      int cpt=0;
+      for(CoquilleBille coc:listCoquille){
+       if(coc.getV().getEtatSante().compareTo("Sick")==0){
+        cpt++;
+       }
+      }
+      return cpt;
+    }
+
+    public int getNbRecovered(){
+      int cpt=0;
+      for(CoquilleBille coc:listCoquille){
+       if(coc.getV().getEtatSante().compareTo("Recovered")==0){
+        cpt++;
+       }
+      }
+      return cpt;
+    }
 }
