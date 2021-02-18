@@ -7,10 +7,11 @@ import java.util.Random;
 
 public class Population implements Displayable{
     private ArrayList<CoquilleBille> listCoquille=new ArrayList<CoquilleBille>();
-    private long durationCovid;
-    private long durationNonContamination;
+    private long durationCovid;// cobien dure la maldaie
+    private long durationNonContamination;//pour passer de Recovered a healthy
+    private long durationHealing;//combien dure la guerison ex:14 jours
+
     private double contaminationRadius;
-    private static Random r=new Random();
 
     //========================= Constructors ==========================================================================/
 
@@ -69,11 +70,11 @@ public class Population implements Displayable{
      return dist;
     }
 
-    public void contamination( CoquilleBille i1, CoquilleBille i2)
+    public void Interaction( CoquilleBille i1, CoquilleBille i2)
     {
         if(i1.getV().isSick() && distance(i1, i2) <= contaminationRadius) {
 
-            i1.getV().contact(i2,durationCovid,durationNonContamination);
+            i1.getV().contact(i2,durationCovid,durationHealing,durationNonContamination);
         }
     }
 

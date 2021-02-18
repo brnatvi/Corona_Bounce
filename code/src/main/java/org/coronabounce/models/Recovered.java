@@ -7,26 +7,23 @@ import java.util.Random;
 public class Recovered extends Individual{
 
 
+    @Override
+    public void contact(CoquilleBille coc, long durationCovid, long durationHealing, long durationNonContamination) {
 
-    public void contact(CoquilleBille coc, long durationCovid, long durationNonContamination)
-    {}
+    }
+
     // La personne encapsulée dans coc retrouve sa santé
-    static void recover(CoquilleBille coc , long durationNonContamination)
+    static void recover(CoquilleBille coc , long healing_duration, long durationNonContamination )
     {
-
-
         try {
-
             //aprés le moment de la contamination on appelle la méthode recover
             // qui attend le temps de guerison pour que son etat de santé se modifie
-            Thread.sleep(durationNonContamination);
-
+            Thread.sleep(healing_duration);
             coc.setIndividual(new Recovered());
-
+            Healthy.healing(coc,durationNonContamination);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
     }
 

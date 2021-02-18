@@ -4,7 +4,7 @@ import java.util.Random;
 
 public  abstract class Individual {
 
-    public abstract void contact (CoquilleBille coc,long durationCovid , long durationNonContamination);
+    public abstract void contact (CoquilleBille coc,long durationCovid ,long durationHealing, long durationNonContamination);
 
 
     boolean isSick()
