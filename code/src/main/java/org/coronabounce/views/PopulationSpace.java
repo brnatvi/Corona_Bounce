@@ -1,6 +1,9 @@
 package org.coronabounce.views;
+import org.coronabounce.models.CoquilleBille;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
+
+import java.util.ArrayList;
 
 public class PopulationSpace
 {
@@ -16,7 +19,7 @@ public class PopulationSpace
     //================= Getters from Model ============================================================================/
 
     public ArrayList<CoquilleBille> allIndividuals() { return model.getAllPoints(); }
-    public getStateIndivid() { this.allIndividuals(). }
+    public void  getStateIndivid() { this.allIndividuals(); }
 
 
     //================= Own functions =================================================================================/

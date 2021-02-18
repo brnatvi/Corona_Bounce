@@ -1,17 +1,13 @@
 package org.coronabounce.models;
 import java.util.Random;
 
-public class Healthy {}
-/*****   public class Healthy extends Individu{
 
 
 
-Individu CreateIndividual() {
-    return new Healthy();
+public class Healthy extends Individual {
+
+    @Override
+    public void contact(CoquilleBille coc, long durationCovid, long durationNonContamination)
+    {}
+
 }
-
-public Individu actionOn(Individu x)
-{      return x;              } ***/
-
-
-
