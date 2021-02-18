@@ -17,7 +17,8 @@ public class CoquilleBille {
         int m=r.nextInt(5);
         int m1=r.nextInt(10);//bound=10 car notre fenetre de population est rectangulaire
         this.movingSpeed=Math.sqrt( (m*m)+(m1*m1));
-        this.p=new Position(this.p.getX()+m1,this.p.getY()+m);
+        //this.p=new Position(this.p.getX()+m1,this.p.getY()+m);
+        this.p.setPos(this.p.getX()+m1,this.p.getY()+m);
     }
 
     public double getMovingSpeed() {

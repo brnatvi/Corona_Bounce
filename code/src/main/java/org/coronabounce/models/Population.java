@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Population implements Displayable{
-    private int nbIndividus=20;// j'initialise le nombre des individus que la population possede
     private ArrayList<CoquilleBille> listCoquille=new ArrayList<CoquilleBille>();
     private long durationCovid;
     private long durationNonContamination;
@@ -31,9 +30,7 @@ public class Population implements Displayable{
     public Population(int nbIndividus){
         this(nbIndividus-1, 1,0);
     }
-    public Population(){
-        this(20);
-    }
+
 
     public ArrayList<CoquilleBille> getAllPoints(){ return listCoquille; }
 
@@ -42,7 +39,6 @@ public class Population implements Displayable{
     public void addIndividual(Individual i){
         CoquilleBille coc=new CoquilleBille(0,i);
         listCoquille.add(coc);
-        this.nbIndividus++;
     }
 
 
@@ -86,7 +82,7 @@ public class Population implements Displayable{
     public void printPop(){
         int i=0;
         for(CoquilleBille coc:listCoquille){
-            System.out.println("Individu num :" +i+ "de position suivante "+coc.getPosition().getX()+ " et "+coc.getPosition().getY()+" et de etat de sante "+coc.getV().healthState());
+            System.out.println("Individu num :" +i+ "de position suivante "+coc.getPosition().getX()+ " et "+coc.getPosition().getY()+" et de etat de sante "+coc.getV().healthState()+ " Vitesse : "+coc.getMovingSpeed());
             i++;
         }
         System.out.println("le nombre des personnes contaminées:"+getNbSick()+" de personnes guéries :"+getNbRecovered()+ " non contaminées :"+getNbHealthy());
@@ -98,7 +94,7 @@ public class Population implements Displayable{
         for(CoquilleBille coc:listCoquille){
             coc.Deplacer();
         }
-        printPop(); //il faut évité de recopier des morceaux de code et plutot réutilisé les fonctions existantes.
+        printPop();
     }
 
     //========================= Population Statistics =================================================================/
