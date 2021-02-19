@@ -7,7 +7,6 @@ public class Sick extends Individual {
 
     @Override
     public void contact(CoquilleBille coc, long durationCovid, long durationHealing,long durationNonContamination) {
-
         contaminate(coc,durationCovid,durationHealing,durationNonContamination);
     }
     //La personne malade contamine l'individual encapsulé par coc
