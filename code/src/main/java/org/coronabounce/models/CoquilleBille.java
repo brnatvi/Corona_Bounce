@@ -19,7 +19,7 @@ public class CoquilleBille {
         this.p=new Position();
         this.movingSpeed=speed;
         this.individual=individual;
-        this.direction=r.randInt(360);
+        //this.direction=r.randInt(360);
     }
     /**
     * The moving funtion.
