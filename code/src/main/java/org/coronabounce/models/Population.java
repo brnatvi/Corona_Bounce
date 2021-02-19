@@ -75,9 +75,9 @@ public class Population implements Displayable{
 
     public void Interaction( CoquilleBille i1, CoquilleBille i2)
     {
-        if(i1.getV().isSick() && distance(i1, i2) <= contaminationRadius) {
+        if(i1.getIndividual().isSick() && distance(i1, i2) <= contaminationRadius) {
 
-            i1.getV().contact(i2,durationCovid,durationHealing,durationNonContamination);
+            i1.getIndividual().contact(i2,durationCovid,durationHealing,durationNonContamination);
         }
     }
 
@@ -86,7 +86,7 @@ public class Population implements Displayable{
     public void printPop(){
         int i=0;
         for(CoquilleBille coc:listCoquille){
-            System.out.println("Individu num :" +i+ "de position suivante "+coc.getPosition().getX()+ " et "+coc.getPosition().getY()+" et de etat de sante "+coc.getV().healthState()+ " Vitesse : "+coc.getMovingSpeed());
+            System.out.println("Individu num :" +i+ "de position suivante "+coc.getPosition().getX()+ " et "+coc.getPosition().getY()+" et de etat de sante "+coc.getIndividual().healthState()+ " Vitesse : "+coc.getMovingSpeed());
             i++;
         }
         System.out.println("le nombre des personnes contaminées:"+getNbSick()+" de personnes guéries :"+getNbRecovered()+ " non contaminées :"+getNbHealthy());
@@ -96,7 +96,7 @@ public class Population implements Displayable{
     public void printMovement (){
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
         for(CoquilleBille coc:listCoquille){
-            coc.Deplacer();
+            coc.Move();
         }
         printPop();
     }
@@ -112,7 +112,7 @@ public class Population implements Displayable{
         int cpt=0;
         for(CoquilleBille coc : listCoquille)
         {
-            if(coc.getV() instanceof Healthy)
+            if(coc.getIndividual() instanceof Healthy)
             {
                 cpt++;
             }
@@ -124,7 +124,7 @@ public class Population implements Displayable{
         int cpt=0;
         for(CoquilleBille coc : listCoquille)
         {
-            if(coc.getV() instanceof Sick)
+            if(coc.getIndividual() instanceof Sick)
             {
                 cpt++;
             }
@@ -138,7 +138,7 @@ public class Population implements Displayable{
         int cpt=0;
         for(CoquilleBille coc : listCoquille)
         {
-            if(coc.getV() instanceof Recovered)
+            if(coc.getIndividual() instanceof Recovered)
             {
                 cpt++;
             }

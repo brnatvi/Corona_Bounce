@@ -10,7 +10,7 @@ public class Sick extends Individual {
 
         contaminate(coc,durationCovid,durationHealing,durationNonContamination);
     }
-    //La personne malade contamine l'individu encapsulé par coc
+    //La personne malade contamine l'individual encapsulé par coc
     public static  void contaminate(CoquilleBille coc, long durationCovid,long durationHealing,long durationNonContamination)
     {
 

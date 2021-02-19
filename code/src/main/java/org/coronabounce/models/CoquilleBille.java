@@ -3,17 +3,29 @@ package org.coronabounce.models;
 import java.util.Random;
 
 public class CoquilleBille {
+    /**
+    * A moving speed to move faster or slower. It need to be &#62;0.
+    */
     private double movingSpeed;
-    private Individual v;
+    /**
+    * A direction were to move between 0° & 359°.
+    */
+    private int direction;
+    private Individual individual;
     private Position p;
-    private static Random r  =new Random();
+    private static Random r = new Random();
 
-    public CoquilleBille(double Vitesse, Individual v){
+    public CoquilleBille(double speed, Individual individual){
         this.p=new Position();
-        this.movingSpeed=Vitesse;
-        this.v=v;
+        this.movingSpeed=speed;
+        this.individual=individual;
+        this.direction=r.randInt(360);
     }
-    public void Deplacer(){
+    /**
+    * The moving funtion.
+    */
+    public void Move(){
+      //TODO update move to use direction.
         int m=r.nextInt(5);
         int m1=r.nextInt(10);//bound=10 car notre fenetre de population est rectangulaire
         this.movingSpeed=this.movingSpeed+Math.sqrt( (m*m)+(m1*m1));
@@ -21,16 +33,11 @@ public class CoquilleBille {
         this.p.setPos(this.p.getX()+m1,this.p.getY()+m);
     }
 
-    public double getMovingSpeed() {
-        return movingSpeed;
-    }
-    public Individual getV(){
-        return v;
-    }
-    public void setIndividual(Individual v){ this.v=v;}
-    public Position getPosition(){
-        return this.p;
-    }
+    public double getMovingSpeed() {return movingSpeed;}
+    public int getDirection() {return direction;}
+    public Individual getIndividual(){return individual;}
+    public void setIndividual(Individual individual){ this.individual=individual;}
+    public Position getPosition(){return this.p;}
 
 
 }
