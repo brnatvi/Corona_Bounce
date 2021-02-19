@@ -4,6 +4,12 @@ import java.util.Random;
 
 public  abstract class Individual {
 
+    /**
+    *{@summary this will return the health state as a string.}
+    */
+    public String healthState(){
+      return getClass().getSimpleName();
+    }
     public abstract void contact (CoquilleBille coc,long durationCovid ,long durationHealing, long durationNonContamination);
 
 
@@ -12,15 +18,5 @@ public  abstract class Individual {
         if(this instanceof  Sick) return true;
         return false;
     }
-// Ce sera juste utilisé lors de l'affichage des statistiques de la population ( void printPop)
-
-    String healthState()
-    {
-        if(this instanceof  Sick) return "sick";
-        else if(this instanceof  Healthy) return "healthy";
-        return "recovered";
-
-    }
-
 
 }
