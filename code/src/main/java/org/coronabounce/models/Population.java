@@ -57,6 +57,9 @@ public class Population implements Displayable{
     public void setContaminationRadius(double contaminationRadius){ this.contaminationRadius = contaminationRadius; }
 
     public double getContaminationRadius() { return contaminationRadius; }
+    public ArrayList<CoquilleBille> getListCoquille(){
+        return this.listCoquille;
+    }
 
 
     //========================= Points Interactions ===================================================================/
