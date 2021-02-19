@@ -10,7 +10,10 @@ public  abstract class Individual {
     public String healthState(){
       return getClass().getSimpleName();
     }
-    public abstract void contact (CoquilleBille coc,long durationCovid ,long durationHealing, long durationNonContamination);
+    /**
+    *{@summary To Override if we need to have an action in contact.}
+    */
+    public void contact (CoquilleBille coc,long durationCovid ,long durationHealing, long durationNonContamination){}
 
 
     boolean isSick()

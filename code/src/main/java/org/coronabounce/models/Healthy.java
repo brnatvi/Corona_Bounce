@@ -6,9 +6,6 @@ import java.util.Random;
 
 public class Healthy extends Individual {
 
-    @Override
-    public void contact(CoquilleBille coc, long durationCovid,long durationHealing, long durationNonContamination)
-    {}
     static void healing(CoquilleBille coc, long durationNonContamination)
     {
         try{

@@ -7,11 +7,6 @@ import java.util.Random;
 public class Recovered extends Individual{
 
 
-    @Override
-    public void contact(CoquilleBille coc, long durationCovid, long durationHealing, long durationNonContamination) {
-
-    }
-
     // La personne encapsulée dans coc retrouve sa santé
     static void recover(CoquilleBille coc , long healing_duration, long durationNonContamination )
     {
