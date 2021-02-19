@@ -3,10 +3,11 @@ package org.coronabounce.models;
 import org.coronabounce.mvcconnectors.Displayable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Population implements Displayable{
-    private ArrayList<CoquilleBille> listCoquille=new ArrayList<CoquilleBille>();
+    private List<CoquilleBille> listCoquille=new ArrayList<CoquilleBille>();
     private long durationCovid;// cobien dure la maldaie
     private long durationNonContamination;//pour passer de Recovered a healthy
     private long durationHealing;//combien dure la guerison ex:14 jours
@@ -33,7 +34,7 @@ public class Population implements Displayable{
     }
 
 
-    public ArrayList<CoquilleBille> getAllPoints(){ return listCoquille; }
+    public List<CoquilleBille> getAllPoints(){ return listCoquille; }
 
 
 
@@ -57,7 +58,7 @@ public class Population implements Displayable{
     public void setContaminationRadius(double contaminationRadius){ this.contaminationRadius = contaminationRadius; }
 
     public double getContaminationRadius() { return contaminationRadius; }
-    public ArrayList<CoquilleBille> getListCoquille(){
+    public List<CoquilleBille> getListCoquille(){
         return this.listCoquille;
     }
 
@@ -73,7 +74,7 @@ public class Population implements Displayable{
      return dist;
     }
 
-    public void Interaction( CoquilleBille i1, CoquilleBille i2)
+    public void interaction( CoquilleBille i1, CoquilleBille i2)
     {
         if(i1.getIndividual().isSick() && distance(i1, i2) <= contaminationRadius) {
 
