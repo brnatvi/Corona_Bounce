@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="corona-bounce">
+    <output-path>$PROJECT_DIR$/out/artifacts/corona_bounce</output-path>
+    <root id="root">
+      <element id="archive" name="corona_bounce.jar">
+        <element id="module-output" name="corona-bounce" />
+      </element>
+    </root>
+  </artifact>
+</component>
