@@ -31,7 +31,6 @@ public class PopulationSpace
                 }
             }
         };
-
     }
 
     //================= Getters from Model ============================================================================/
@@ -39,4 +38,11 @@ public class PopulationSpace
 
     //================= Own functions =================================================================================/
 
+    /**
+     * This function interrogate observable list of points 30 times per seconds.
+     */
+    public void scanState()
+    {
+        this.timer.schedule(timerTask, 0, 33);
+    }
 }
