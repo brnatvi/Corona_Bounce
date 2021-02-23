@@ -8,8 +8,8 @@ public class Position {
     private double posX;
     private double posY;
 
-   double getX(){ return this.posX;}
-   double getY() { return this.posY;}
+   public double getX(){ return this.posX;}
+   public double getY() { return this.posY;}
 
 
     void setPos(double x, double y){
