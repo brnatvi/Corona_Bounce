@@ -1,7 +1,6 @@
 package org.coronabounce.views;
 
 import javafx.collections.ObservableList;
-import javafx.scene.shape.Circle;
 import org.coronabounce.models.*;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
@@ -15,10 +14,6 @@ public class PopulationSpace
     private Timer timer;
     private TimerTask timerTask;
 
-   // class Dot extends Circle
-   // {
-   //
-   // }
 
     public PopulationSpace (Displayable m, Controllable c)
     {
@@ -36,23 +31,16 @@ public class PopulationSpace
                     String state = cb.getIndividual().healthState();
                     double coordX = cb.getPosition().getX();
                     double coordY = cb.getPosition().getY();
-                 //   if (state.equals("Healthy"))
-                 //   {
-                 //       // TODO repaint Dot
-                 //   }
-                 //   if (state.equals("Recovered"))
-                 //   {
-                 //       // TODO repaint Dot
-                 //   }
-                 //   if (state.equals("Sick"))
-                 //   {
-                 //       // TODO repaint Dot
-                 //   }
 
-                    // TODO change position
+                    Dot point = new Dot(coordX, coordY);
+
+                    if (state.equals("Recovered")) { point.changeColor("#ff1f40"); }
+                    if (state.equals("Sick")) { point.changeColor("DODGERBLUE"); }
                 }
             }
+            //TODO how to delete point on previous position ?
         };
+
     }
 
 
