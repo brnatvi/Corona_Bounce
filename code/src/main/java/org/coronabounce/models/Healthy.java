@@ -12,7 +12,7 @@ public class Healthy extends Individual {
 
             //le thread attend un moment pour que la contamination sera faite et aprés on appelle la méthode recover
 
-            Thread.sleep(durationNonContamination);
+            coc.getD().sleep(durationNonContamination);
             coc.setIndividual(new Healthy());
 
 

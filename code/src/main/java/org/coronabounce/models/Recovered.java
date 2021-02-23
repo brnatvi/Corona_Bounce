@@ -13,7 +13,7 @@ public class Recovered extends Individual{
         try {
             //aprés le moment de la contamination on appelle la méthode recover
             // qui attend le temps de guerison pour que son etat de santé se modifie
-            Thread.sleep(healing_duration);
+            coc.getD().sleep(healing_duration);
             coc.setIndividual(new Recovered());
             Healthy.healing(coc,durationNonContamination);
         } catch (InterruptedException e) {

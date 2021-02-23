@@ -17,7 +17,7 @@ public class Sick extends Individual {
 
             //le thread attend un moment pour que la contamination sera faite et aprés on appelle la méthode recover
 
-            Thread.sleep(durationCovid);
+            coc.getD().sleep(durationCovid);
             coc.setIndividual(new Sick());
 
             // La personne va se rétablir,( fin de la durée de contamination)
