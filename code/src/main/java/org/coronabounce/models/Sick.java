@@ -9,10 +9,10 @@ public class Sick extends Individual {
 
     @Override
     public void contact(Population p, long durationCovid, long durationHealing,long durationNonContamination) {
-        contaminate(p,durationCovid);
+        contaminate(p,durationCovid,durationHealing,durationNonContamination);
     }
     //La personne malade contamine l'individual encapsulé par coc
-    public static  void contaminate( Population p, long durationCovid)
+    public static  void contaminate( Population p, long durationCovid,long healingDuration,long durationNonContamination)
     {
         for(CoquilleBille coc: p.getListCoquille()){
             for(CoquilleBille c : p.getListCoquille()){
@@ -24,6 +24,7 @@ public class Sick extends Individual {
                             coc.setIndividual(new Sick());
                         }
                     },durationCovid);
+                    Recovered.recover(coc,healingDuration,durationNonContamination);
                 }
             }
         }

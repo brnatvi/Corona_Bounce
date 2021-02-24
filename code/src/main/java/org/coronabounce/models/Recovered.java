@@ -8,7 +8,7 @@ public class Recovered extends Individual{
 
 
     // La personne encapsulée dans coc retrouve sa santé
-    static void recover(CoquilleBille coc , long healing_duration )
+    static void recover(CoquilleBille coc , long healing_duration, long durationNonContamination)
     {     Timer t=new Timer();
     TimerTask timerTask;
         t.schedule(timerTask=new TimerTask() {
@@ -17,6 +17,7 @@ public class Recovered extends Individual{
                 coc.setIndividual(new Recovered());
             }
         },healing_duration);
+        Healthy.healing(coc,durationNonContamination);
 
     }
 
