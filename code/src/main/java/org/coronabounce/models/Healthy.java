@@ -8,20 +8,7 @@ public class Healthy extends Individual {
 
     static void healing(CoquilleBille coc, long durationNonContamination)
     {
-        try{
-
-            //le thread attend un moment pour que la contamination sera faite et aprés on appelle la méthode recover
-
-            coc.getD().sleep(durationNonContamination);
             coc.setIndividual(new Healthy());
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
     }
 
 }

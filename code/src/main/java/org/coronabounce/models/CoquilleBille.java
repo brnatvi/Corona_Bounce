@@ -14,7 +14,7 @@ public class CoquilleBille {
     private Individual individual;
     private Position p;
     private static Random r = new Random();
-    private  Thread d=new Thread();
+
 
     public CoquilleBille(double speed, Individual individual){
         this.p=new Position();
@@ -23,9 +23,6 @@ public class CoquilleBille {
         //this.direction=r.randInt(360);
     }
 
-    public Thread getD() {
-        return d;
-    }
 
     /**
     * The moving funtion.
