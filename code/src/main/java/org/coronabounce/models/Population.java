@@ -74,13 +74,13 @@ public class Population implements Displayable{
      return dist;
     }
 
-    public void interaction( CoquilleBille i1, CoquilleBille i2)
+   /* public void interaction( CoquilleBille i1, CoquilleBille i2)
     {
-        if(i1.getIndividual().isSick() && distance(i1, i2) <= contaminationRadius) {
+        if(distance(i1, i2) <= contaminationRadius) {
 
             i1.getIndividual().contact(i2,durationCovid,durationHealing,durationNonContamination);
         }
-    }
+    }*/
 
     //========================= Prints ================================================================================/
 
