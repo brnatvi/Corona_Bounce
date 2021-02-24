@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.coronabounce.models.Population;
+import org.coronabounce.models.Zone;
 
 import java.io.IOException;
 
@@ -18,7 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("corona bounce"), 1000, 600);
         stage.setScene(scene);
         stage.show();
     }
@@ -34,9 +35,8 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
-        Population p=new Population();
-        p.printPop();
-        p.printMovement();
+        Zone z=new Zone(200,100,20);
+        z.test();
 
     }
 

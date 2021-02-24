@@ -1,16 +1,17 @@
 package org.coronabounce.controllers;
 import org.coronabounce.models.Population;
 import org.coronabounce.models.Position;
+import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
 
 public class Controller implements Controllable
 {
-    Population p;
+    Zone z;
     @Override
     public void setSpaceSize(double w, double h)
     {
-        Position.setWidth(w);
-        Position.setHeight(h);
+        Zone.setWidth(w);
+        Zone.setHeight(h);
     }
 
     @Override
@@ -23,37 +24,37 @@ public class Controller implements Controllable
     @Override
     public void setRadius(double pxls)
     {
-      p.setContaminationRadius(pxls);
+      z.getP().setContaminationRadius(pxls);
     }
 
 
     @Override
     public double getRadius()
     {
-        return p.getContaminationRadius();
+        return z.getP().getContaminationRadius();
     }
 
     @Override
     public void setDurationCovid(long time)
     {
-      p.setDurationCovid(time);
+      z.getP().setDurationCovid(time);
     }
 
     @Override
     public long getDurationCovid()
     {
-        return p.getDurationCovid();
+        return z.getP().getDurationCovid();
     }
 
     @Override
     public void setDurationNonContamination(long time)
     {
-     p.setDurationNonContamination(time);
+     z.getP().setDurationNonContamination(time);
     }
 
     @Override
     public long getDurationNonContamination()
     {
-        return p.getDurationNonContamination();
+        return z.getP().getDurationNonContamination();
     }
 }

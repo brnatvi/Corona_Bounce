@@ -12,7 +12,7 @@ public interface Displayable
      * @param
      * @return
      */
-    public ArrayList getAllPoints();
+    public List getAllPoints();
 
     /**
      * Get total number of points / number od Individu.

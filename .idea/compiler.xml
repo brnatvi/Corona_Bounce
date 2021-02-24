@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="corona-bounce" />
+        <module name="coronabounce" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="corona-bounce" target="1.5" />
+      <module name="coronabounce" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

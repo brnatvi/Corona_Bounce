@@ -7,32 +7,34 @@ public class Position {
 
     private double posX;
     private double posY;
-    private static   double width =100;
-    private static  double  height=50;
 
-   double getX(){ return this.posX;}
-   double getY() { return this.posY;}
+   public double getX(){ return this.posX;}
+   public double getY() { return this.posY;}
 
-    public static void setHeight(double height) {
-        Position.height = height;
-    }
 
-    public static void setWidth(double width){
-        Position.width = width;
-    }
+    void setPos(double x, double y){
+        if(x <= Zone.getWidth() && y <=Zone.getHeight()) {
+            this.posX = x;
+            this.posY = y;
+        }
 
-    void setPos(int x, int y){ this.posY=x;this.posY=y;}
+   }
 
    public Position ()
    {
     Random r= new Random();
-    this.posX=r.nextInt((int) width);
-    this.posY=r.nextInt((int)height);
+    this.posX=r.nextInt((int) Zone.getWidth());
+    this.posY=r.nextInt((int) Zone.getHeight());
 
    }
    public Position(double PosX,double PosY){
-       this.posX=PosX;
-       this.posY=PosY;
+       if(PosX <= Zone.getWidth() && PosY <=Zone.getHeight()) {
+           this.posX = PosX;
+           this.posY = PosY;
+       }else{
+           this.posX=0;
+           this.posY=0;
+       }
    }
 
 

@@ -2,20 +2,16 @@ package org.coronabounce.models;
 import java.util.Random;
 
 
-public  class Recovered{}
-/**********
-public class Recovered extends Individu{
 
 
+public class Recovered extends Individual{
 
-    Individu CreateIndividual() {
-        return new Recovered();
+
+    // La personne encapsulée dans coc retrouve sa santé
+    static void recover(CoquilleBille coc , long healing_duration, long durationNonContamination )
+    {
+            coc.setIndividual(new Recovered());
     }
 
 
-    public Individu actionOn(Individu x)
-    {   return x; }
-
-
-
-}**********/
+}
