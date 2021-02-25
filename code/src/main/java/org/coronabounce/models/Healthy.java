@@ -13,6 +13,8 @@ public class Healthy extends Individual {
             @Override
             public void run() {
                 coc.setIndividual(new Healthy());
+                Population.nbHealthy++;
+                Population.nbRecovered--;
             }
         },durationNonContamination);
 

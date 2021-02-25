@@ -15,6 +15,8 @@ public class Recovered extends Individual{
             @Override
             public void run() {
                 coc.setIndividual(new Recovered());
+                Population.nbRecovered++;
+                Population.nbSick--;
             }
         },healing_duration);
         Healthy.healing(coc,durationNonContamination);
