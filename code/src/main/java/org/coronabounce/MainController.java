@@ -21,6 +21,7 @@ public class MainController
     private Controllable controller;
     private ObservableList<CoquilleBille> allPoints;
     private double DOT_RADIUS = 2.0;
+
     @FXML
     private Pane panel;
 
@@ -29,11 +30,6 @@ public class MainController
         this.model = m;
         this.controller = c;
         this.allPoints = (ObservableList<CoquilleBille>) model.getAllPoints();
-    }
-
-    @FXML
-    private void updatePoints()
-    {
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask()
         {
