@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.StackedAreaChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #7e5c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.coronabounce.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #7e5c;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.coronabounce.MainController">
    <children>
       <HBox layoutY="6.0" prefHeight="32.0" prefWidth="1000.0" AnchorPane.topAnchor="6.0">
          <children>
@@ -32,13 +38,6 @@
             </Button>
          </children>
       </HBox>
-      <AnchorPane layoutX="31.0" layoutY="232.0" prefHeight="323.0" prefWidth="460.0" style="-fx-background-color: #ffffff;">
-         <children>
-            <Circle fx:id="dot1" centerX="30.0" centerY="30.0" fill="#ff1f40" radius="2.0" stroke="#ff1f40" strokeType="INSIDE" />
-            <Circle centerX="50.0" centerY="50.0" fill="DODGERBLUE" radius="2.0" stroke="DODGERBLUE" strokeType="INSIDE" />
-            <Circle fx:id="dot" centerX="100.0" centerY="100.0" fill="#14902b" radius="2.0" stroke="#14902b" strokeType="INSIDE" />
-         </children>
-      </AnchorPane>
       <StackedAreaChart layoutX="134.0" layoutY="65.0" prefHeight="161.0" prefWidth="372.0">
         <xAxis>
           <NumberAxis forceZeroInRange="false" label="Change over time" minorTickLength="0.0" minorTickVisible="false" side="TOP" tickLabelsVisible="false" tickLength="0.0" tickMarkVisible="false" />
@@ -47,13 +46,6 @@
           <NumberAxis side="LEFT" tickLabelsVisible="false" />
         </yAxis>
       </StackedAreaChart>
-      <AnchorPane layoutX="520.0" layoutY="232.0" prefHeight="323.0" prefWidth="460.0" style="-fx-background-color: #ffffff;">
-         <children>
-            <Circle centerX="30.0" centerY="30.0" fill="#ff1f40" radius="2.0" stroke="#ff1f40" strokeType="INSIDE" />
-            <Circle centerX="50.0" centerY="50.0" fill="DODGERBLUE" radius="2.0" stroke="DODGERBLUE" strokeType="INSIDE" />
-            <Circle centerX="100.0" centerY="100.0" fill="#14902b" radius="2.0" stroke="#14902b" strokeType="INSIDE" />
-         </children>
-      </AnchorPane>
       <GridPane layoutX="27.0" layoutY="103.0" prefHeight="108.0" prefWidth="125.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="101.0" minWidth="10.0" prefWidth="86.0" />
@@ -72,7 +64,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;">
                <children>
-                  <Text layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Healthy" textAlignment="CENTER" wrappingWidth="59.4150390625" />
+                  <Text layoutX="8.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Helthy" textAlignment="CENTER" wrappingWidth="42.4150390625" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" GridPane.rowIndex="2">
@@ -85,44 +77,6 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <GridPane layoutX="520.0" layoutY="103.0" prefHeight="108.0" prefWidth="125.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="101.0" minWidth="10.0" prefWidth="86.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="51.0" minWidth="10.0" prefWidth="45.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <AnchorPane prefHeight="33.0" prefWidth="83.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" GridPane.rowIndex="1">
-               <children>
-                  <Text layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sick" wrappingWidth="42.4150390625" />
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;">
-               <children>
-                  <Text layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Healthy" textAlignment="CENTER" wrappingWidth="59.4150390625" />
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" GridPane.rowIndex="2">
-               <children>
-                  <Text layoutX="8.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recovered" wrappingWidth="75.4150390625" />
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" GridPane.columnIndex="1" />
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-         </children>
-      </GridPane>
-      <StackedAreaChart layoutX="628.0" layoutY="65.0" prefHeight="161.0" prefWidth="364.0">
-         <xAxis>
-            <NumberAxis forceZeroInRange="false" label="Change over time" minorTickLength="0.0" minorTickVisible="false" side="TOP" tickLabelsVisible="false" tickLength="0.0" tickMarkVisible="false" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis side="LEFT" tickLabelsVisible="false" />
-         </yAxis>
-      </StackedAreaChart>
+      <Pane fx:id="panel" accessibleRole="NODE" layoutX="27.0" layoutY="263.0" prefHeight="290.0" prefWidth="465.0" style="-fx-background-color: #ffffff;" />
    </children>
 </AnchorPane>
