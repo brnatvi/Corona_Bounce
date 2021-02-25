@@ -25,10 +25,13 @@ public class Zone {
         return width;
     }
 
+    public Population getPopulation() {return p;}
+    
+
     public static double getHeight() {
         return height;
     }
-    public  void moving(){
+    public void moving(){
         this.t=new Timer();
         this.t.schedule(this.timerTask=new TimerTask() {
             @Override

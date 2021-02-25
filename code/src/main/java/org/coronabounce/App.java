@@ -37,8 +37,8 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        Displayable model = new Population(13, 4, 3);
-        Controllable cont = new Controller();
+     //   Displayable model = new Population(13, 4, 3);
+     //   Controllable cont = new Controller();
 
         launch();
         Zone z=new Zone(200,100,20);

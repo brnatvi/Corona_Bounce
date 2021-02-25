@@ -13,7 +13,7 @@ public class Position {
 
 
     void setPos(double x, double y){
-        if(x <= Zone.getWidth() && y <=Zone.getHeight()) {
+        if(x >= 10 && x <= Zone.getWidth() && y >= 10 && y <=Zone.getHeight()) {
             this.posX = x;
             this.posY = y;
         }
@@ -23,8 +23,8 @@ public class Position {
    public Position ()
    {
     Random r= new Random();
-    this.posX=r.nextInt((int) Zone.getWidth());
-    this.posY=r.nextInt((int) Zone.getHeight());
+    this.posX=Math.abs(r.nextInt((int) Zone.getWidth()));
+    this.posY=Math.abs(r.nextInt((int) Zone.getHeight()));
 
    }
    public Position(double PosX,double PosY){
