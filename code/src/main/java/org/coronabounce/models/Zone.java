@@ -1,7 +1,5 @@
 package org.coronabounce.models;
 
-import org.coronabounce.views.Dot;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
