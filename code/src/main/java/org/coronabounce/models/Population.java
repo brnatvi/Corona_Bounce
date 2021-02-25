@@ -30,7 +30,7 @@ public class Population implements Displayable{
     }
 
     public Population(int nbIndividus){
-        this(nbIndividus-1, 1,0);
+        this(nbIndividus-5, 5,0);
     }
 
 

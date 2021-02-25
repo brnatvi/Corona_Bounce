@@ -35,6 +35,7 @@ public class Zone {
         this.t.schedule(this.timerTask=new TimerTask() {
             @Override
             public void run() {
+                Sick.contaminate(p,5000,10000,15000);
                 p.printMovement();
             }
         },0,1*5000);
@@ -48,6 +49,7 @@ public class Zone {
 
 
     public void test(){
+        p.setContaminationRadius(10);
         p.printPop();
         this.moving();
 

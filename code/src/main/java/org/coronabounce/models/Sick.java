@@ -7,8 +7,8 @@ import java.util.TimerTask;
 public class Sick extends Individual {
 
 
-    @Override
-    public void contact(Population p, long durationCovid, long durationHealing,long durationNonContamination) {
+
+    public  void contact(Population p, long durationCovid, long durationHealing,long durationNonContamination) {
         contaminate(p,durationCovid,durationHealing,durationNonContamination);
     }
     //La personne malade contamine l'individual encapsulé par coc
