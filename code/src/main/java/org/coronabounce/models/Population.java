@@ -142,7 +142,7 @@ public class Population implements Displayable {
     }
 
    public int getNbHealthy() {
-        /*int cpt=0;
+        int cpt=0;
         for(CoquilleBille coc : listCoquille)
         {
             if(coc.getIndividual() instanceof Healthy)
@@ -150,12 +150,12 @@ public class Population implements Displayable {
                 cpt++;
             }
         }
-        return cpt;*/
-       return nbHealthy;
+        return cpt;
+       //return nbHealthy;
     }
 
     public int getNbSick() {
-       /* int cpt=0;
+        int cpt=0;
         for(CoquilleBille coc : listCoquille)
         {
             if(coc.getIndividual() instanceof Sick)
@@ -163,21 +163,21 @@ public class Population implements Displayable {
                 cpt++;
             }
         }
-        return cpt;*/
-        return nbSick;
+        return cpt;
+        //return nbSick;
     }
 
 
 
     public int getNbRecovered() {
-        /*int cpt = 0;
+        int cpt = 0;
         for (CoquilleBille coc : listCoquille) {
             if (coc.getIndividual() instanceof Recovered) {
                 cpt++;
             }
         }
-        return cpt;*/
-        return nbRecovered;
+        return cpt;
+        //return nbRecovered;
     }
 
 
