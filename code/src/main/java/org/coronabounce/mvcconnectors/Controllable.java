@@ -5,11 +5,15 @@ public interface Controllable
     //======================================== First Priority ========================================================//
 
     /**
-     * Set width and height of field
+     * Set width and height of field to controller
      * @param w, h - width, height
      */
     public void setSpaceSize(double w, double h);
 
+    /**
+     * Get width and height of field from controller
+     * @return width, height in simple array
+     */
     public double[] getSpaceSize();
 
     /**
@@ -18,16 +22,20 @@ public interface Controllable
      */
     public void setPersonsCount(int nmbPersons);
 
+    /**
+     * Get total number of persons in simulation from controller
+     * @return nmbPersons
+     */
     public int getPersonsCount();
 
     /**
-     * Set radius of contamination around point to model
+     * Set radius of contamination around point from GUI to controller
      * @param pxls number of pixels
      */
     public void setRadius(double pxls);
 
     /**
-     * Get radius of contamination around point from GUI ()
+     * Get radius of contamination around point trom comtroller
      */
     public double getRadius();
 

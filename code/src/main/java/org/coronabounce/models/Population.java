@@ -1,5 +1,6 @@
 package org.coronabounce.models;
 
+import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
 
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Population implements Displayable {
+    private Controllable controller;
     private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();
     private long durationCovid;// cobien dure la maldaie
     private long durationNonContamination;//pour passer de Recovered a healthy
@@ -18,7 +20,8 @@ public class Population implements Displayable {
 
     //========================= Constructors ==========================================================================/
 
-    public Population(int nbH, int nbS, int nbR) {
+    public Population(Controllable controller, int nbH, int nbS, int nbR) {
+        this.controller = controller;
         nbSick=nbS;
         nbHealthy=nbH;
         nbRecovered=nbR;
@@ -37,8 +40,8 @@ public class Population implements Displayable {
         }
     }
 
-    public Population(int nbIndividus) {
-        this(nbIndividus - 5, 5, 0);
+    public Population(Controllable controller, int nbIndividus) {
+        this(controller, nbIndividus - 5, 5, 0);
     }
 
 

@@ -12,38 +12,30 @@ public class Controller implements Controllable
     private double HEIGTH = 250;                      // population space size (height)
     private int COUNT = 20;                           // population size
     private double RADIUS = 10;                       // radius of contamination
-    private long DURATION_CONTAMINATION = 5000;       // has contact <-> sick
+    private long DURATION_COVID = 5000;       // has contact <-> sick
     private long HEALING_DURATION = 10000;            // sick <-> recovered
     private long DURATION_NON_CONTAMINATION = 15000;  // recovered <-> can be contaminate again
 
     Zone z;
+
     @Override
     public void setSpaceSize(double w, double h)
     {
-        Zone.setWidth(w);
-        Zone.setHeight(h);
+        //TODO bring parameters from GUI settings
     }
 
     @Override
-    public double[] getSpaceSize()
-    {
-        return new double[]{this.WIDTH, this.HEIGTH};
-    }
-
+    public double[] getSpaceSize() { return new double[]{this.WIDTH, this.HEIGTH}; }
 
 
     @Override
     public void setPersonsCount(int nmbPersons)
     {
-      //ca me parait un peu difficile a faire. Soit on doit supprimer des CoquilleBilles soit on doit en ajouter.
-      //p.getNbIndividus()=nmbPersons;
+        //TODO bring parameters from GUI settings
     }
 
     @Override
-    public int getPersonsCount()
-    {
-        return this.COUNT;
-    }
+    public int getPersonsCount() { return this.COUNT; }
 
     @Override
     public void setRadius(double pxls)
@@ -67,7 +59,8 @@ public class Controller implements Controllable
     @Override
     public long getDurationCovid()
     {
-        return z.getP().getDurationCovid();
+        //return z.getP().getDurationCovid();
+        return this.DURATION_COVID;
     }
 
     @Override
@@ -79,6 +72,7 @@ public class Controller implements Controllable
     @Override
     public long getDurationNonContamination()
     {
-        return z.getP().getDurationNonContamination();
+        //return z.getP().getDurationNonContamination();
+        return this.DURATION_NON_CONTAMINATION;
     }
 }

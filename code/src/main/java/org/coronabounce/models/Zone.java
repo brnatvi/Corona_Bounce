@@ -13,12 +13,12 @@ public class Zone  {
     private static double height;
     Timer t=new Timer();
     TimerTask timerTask;
-    public Zone(Controllable controller)
+    public Zone (Controllable controller)
     {
         this.controller = controller;
         this.width = controller.getSpaceSize()[0];
         this.height = controller.getSpaceSize()[1];
-        this.p = new Population(controller.getPersonsCount());
+        this.p = new Population(controller, controller.getPersonsCount());
     }
     public static void setHeight(double height) { Zone.height = height;}
 
@@ -35,7 +35,7 @@ public class Zone  {
         this.t.schedule(this.timerTask=new TimerTask() {
             @Override
             public void run() {
-                Sick.contaminate(p,5000,10000,15000);
+                Sick.contaminate(p, controller.getDurationCovid(),10000, controller.getDurationNonContamination());
                 p.printMovement();
             }
         },0,1*150);
