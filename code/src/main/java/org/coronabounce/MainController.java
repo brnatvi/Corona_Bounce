@@ -43,9 +43,9 @@ public class MainController
                 double coordX = cb.getPosition().getX();
                 double coordY = cb.getPosition().getY();
                 Circle point = new Circle(coordX, coordY, 4);
-                if (state.equals("Healthy")) { point.setFill(valueOf("#4ACE11")); }    //green
-                if (state.equals("Recovered")) { point.setFill(valueOf("#ff8000")); }  //orange
-                if (state.equals("Sick")) { point.setFill(valueOf("#FF0040")); }      // red
+                if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
+                if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
+                if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
                 panel.getChildren().add(point);
             }
 
