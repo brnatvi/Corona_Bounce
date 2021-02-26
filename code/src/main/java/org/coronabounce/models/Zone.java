@@ -25,10 +25,13 @@ public class Zone {
         return width;
     }
 
+    public Population getPopulation() {return p;}
+    
+
     public static double getHeight() {
         return height;
     }
-    public  void moving(){
+    public void moving(){
         this.t=new Timer();
         this.t.schedule(this.timerTask=new TimerTask() {
             @Override
@@ -36,7 +39,7 @@ public class Zone {
                 Sick.contaminate(p,5000,10000,15000);
                 p.printMovement();
             }
-        },0,1*5000);
+        },0,1*150);
 
     }
 

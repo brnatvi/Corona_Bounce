@@ -77,6 +77,6 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Pane fx:id="panel" accessibleRole="NODE" layoutX="27.0" layoutY="263.0" prefHeight="290.0" prefWidth="465.0" style="-fx-background-color: #ffffff;" />
+      <Pane fx:id="panel" accessibleRole="NODE" layoutX="27.0" layoutY="263.0" prefHeight="290.0" prefWidth="465.0" style="-fx-background-color: #ffffff;"/>
    </children>
 </AnchorPane>
