@@ -8,10 +8,11 @@ import java.util.List;
 import java.util.Random;
 
 public class Population implements Displayable {
+
     private Controllable controller;
     private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();
-    private long durationCovid;// cobien dure la maldaie
-    private long durationNonContamination;//pour passer de Recovered a healthy
+    private long durationCovid;// cobien dure la maldaie                        //TODO compare and converge with parameters in Controller
+    private long durationNonContamination;//pour passer de Recovered a healthy  //TODO compare and converge with parameters in Controller
     private long durationHealing;//combien dure la guerison ex:14 jours
     public static int nbSick;
     public static int nbRecovered;
@@ -38,6 +39,9 @@ public class Population implements Displayable {
             listCoquille.add(new CoquilleBille(0, 0, new Recovered()));
 
         }
+        this.durationCovid = controller.getDurationCovid();
+        this.contaminationRadius = controller.getRadius();
+        this.durationNonContamination = controller.getDurationNonContamination();
     }
 
     public Population(Controllable controller, int nbIndividus) {

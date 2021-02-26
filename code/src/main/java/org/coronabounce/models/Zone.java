@@ -13,6 +13,7 @@ public class Zone  {
     private static double height;
     Timer t=new Timer();
     TimerTask timerTask;
+
     public Zone (Controllable controller)
     {
         this.controller = controller;
@@ -42,12 +43,8 @@ public class Zone  {
 
     }
 
-
-    public Population getP() { return p; }
-
-
     public void test(){
-        p.setContaminationRadius(10);
+       // p.setContaminationRadius(10);
         p.printPop();
         this.moving();
 

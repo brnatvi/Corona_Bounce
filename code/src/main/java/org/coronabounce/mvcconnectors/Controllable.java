@@ -40,13 +40,13 @@ public interface Controllable
     public double getRadius();
 
     /**
-     * Set duration of sickness
+     * Set duration of sickness from GUI's to controller
      * @param time - number of milliseconds
      */
     public void setDurationCovid(long time);
 
     /**
-     * Get duration of sickness from GUI's controller
+     * Get duration of sickness from controller
      */
     public long getDurationCovid();
 

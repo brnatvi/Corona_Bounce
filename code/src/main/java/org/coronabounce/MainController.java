@@ -24,16 +24,19 @@ import static javafx.scene.paint.Paint.valueOf;
 
 public class MainController
 {
+    private Controllable controller;
     @FXML
     Pane panel;
+
+    public MainController()
+    {
+        this.controller = new Controller();
+    }
 
     @FXML
     private void initialize()
     {
-        Controllable cont = new Controller();
-        Zone z = new Zone(cont);
-        Population pop = z.getPopulation();
-        pop.setContaminationRadius(10);
+        Zone z = new Zone(controller);
         Displayable model = z.getPopulation();
         List<CoquilleBille> allPoints = model.getAllPoints();
 
