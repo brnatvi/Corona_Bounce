@@ -25,6 +25,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("corona bounce"), 1000, 600);
         stage.setScene(scene);
         stage.show();
+
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -41,8 +42,9 @@ public class App extends Application {
      //   Controllable cont = new Controller();
 
         launch();
-        Zone z=new Zone(200,100,20);
-        z.test();
+       //Zone z=new Zone(200,100,20);
+       // z.moving();
+        //z.test();
 
     }
 

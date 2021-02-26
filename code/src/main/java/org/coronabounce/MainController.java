@@ -20,63 +20,42 @@ public class MainController
 {
     @FXML
     Pane panel;
-    
-    public MainController()
-    {
-
-    }
 
     @FXML
     private void initialize()
     {
-        Zone z = new Zone(200,100,20);
+        Zone z = new Zone(400,300,20);
         Population pop = z.getPopulation();
         pop.setContaminationRadius(10);
         Displayable model = z.getPopulation();
         List<CoquilleBille> allPoints = model.getAllPoints();
 
-        for (CoquilleBille cb : allPoints)
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask()
         {
-            String state = cb.getIndividual().healthState();
-            double coordX = cb.getPosition().getX();
-            double coordY = cb.getPosition().getY();
+            @Override
+            public void run()
+            {
+                for (CoquilleBille cb : allPoints)
+                {
+                    String state = cb.getIndividual().healthState();
+                    double coordX = cb.getPosition().getX();
+                    double coordY = cb.getPosition().getY();
 
-            Circle point = new Circle(coordX, coordY, 5);
+                    Circle point = new Circle(coordX, coordY, 5);
 
-            if (state.equals("Healthy")) { point.setFill(valueOf("#1abd38")); }
-            if (state.equals("Recovered")) { point.setFill(valueOf("#ff8000")); }
-            if (state.equals("Sick")) { point.setFill(valueOf("#14902b")); }
+                    if (state.equals("Healthy")) { point.setFill(valueOf("#1abd38")); }
+                    if (state.equals("Recovered")) { point.setFill(valueOf("#ff8000")); }
+                    if (state.equals("Sick")) { point.setFill(valueOf("#14902b")); }
 
-            panel.getChildren().add(point);
-        }
+                    panel.getChildren().add(point);
+                }
+            }
+        };
+
+        timer.schedule(timerTask, 1, 33);
+        z.moving();
     }
-
-    //      this.allPoints = (ObservableList<CoquilleBille>) model.getAllPoints();
-    //      Timer timer = new Timer();
-    //      TimerTask timerTask = new TimerTask()
-    //      {
-    //          @Override
-    //          public void run()
-    //          {
-    //              for (CoquilleBille cb : allPoints)
-    //              {
-    //                  String state = cb.getIndividual().healthState();
-    //                  double coordX = cb.getPosition().getX();
-    //                  double coordY = cb.getPosition().getY();
-    //
-    //                  Circle point = new Circle(coordX, coordY, DOT_RADIUS);
-    //
-    //                  if (state.equals("Healthy")) { point.setFill(valueOf("#1abd38")); }
-    //                  if (state.equals("Recovered")) { point.setFill(valueOf("#ff8000")); }
-    //                  if (state.equals("Sick")) { point.setFill(valueOf("#14902b")); }
-    //
-    //                  panel.getChildren().add(point);
-    //              }
-    //          }
-    //      };
-    //
-    //      timer.schedule(timerTask, 0, 33);
-    //  }
 
                          
     @FXML
