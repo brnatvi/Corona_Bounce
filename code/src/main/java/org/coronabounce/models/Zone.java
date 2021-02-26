@@ -39,7 +39,7 @@ public class Zone {
                 Sick.contaminate(p,5000,10000,15000);
                 p.printMovement();
             }
-        },0,1*5000);
+        },0,1*150);
 
     }
 
