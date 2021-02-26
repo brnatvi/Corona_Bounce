@@ -10,11 +10,15 @@ public interface Controllable
      */
     public void setSpaceSize(double w, double h);
 
+    public double[] getSpaceSize();
+
     /**
      * Set total number of persons in simulation to model
      * @param nmbPersons
      */
     public void setPersonsCount(int nmbPersons);
+
+    public int getPersonsCount();
 
     /**
      * Set radius of contamination around point to model

@@ -12,9 +12,11 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+import org.coronabounce.controllers.Controller;
 import org.coronabounce.models.CoquilleBille;
 import org.coronabounce.models.Population;
 import org.coronabounce.models.Zone;
+import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
 
 import static javafx.scene.paint.Paint.valueOf;
@@ -28,7 +30,8 @@ public class MainController
     @FXML
     private void initialize()
     {
-        Zone z = new Zone(400,250,20);
+        Controllable cont = new Controller();
+        Zone z = new Zone(cont);
         Population pop = z.getPopulation();
         pop.setContaminationRadius(10);
         Displayable model = z.getPopulation();

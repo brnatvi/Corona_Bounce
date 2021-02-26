@@ -1,36 +1,35 @@
 package org.coronabounce.models;
 
+import org.coronabounce.mvcconnectors.Controllable;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Zone {
+public class Zone  {
+
+    private Controllable controller;
     private Population p;
     private static double width;
     private static double height;
     Timer t=new Timer();
     TimerTask timerTask;
-    public Zone(double w,double h , int nbIndividual){
-        this.width=w;
-        this.height=h;
-        this.p=new Population(nbIndividual);
+    public Zone(Controllable controller)
+    {
+        this.controller = controller;
+        this.width = controller.getSpaceSize()[0];
+        this.height = controller.getSpaceSize()[1];
+        this.p = new Population(controller.getPersonsCount());
     }
-    public static void setHeight(double height) {Zone.height = height;
-    }
+    public static void setHeight(double height) { Zone.height = height;}
 
-    public static void setWidth(double width){
-        Zone.width = width;
-    }
+    public static void setWidth(double width){ Zone.width = width; }
 
-    public static double getWidth() {
-        return width;
-    }
+    public static double getWidth() { return width; }
 
     public Population getPopulation() {return p;}
-    
 
-    public static double getHeight() {
-        return height;
-    }
+    public static double getHeight() { return height; }
+    
     public void moving(){
         this.t=new Timer();
         this.t.schedule(this.timerTask=new TimerTask() {
@@ -44,9 +43,7 @@ public class Zone {
     }
 
 
-    public Population getP() {
-        return p;
-    }
+    public Population getP() { return p; }
 
 
     public void test(){
