@@ -101,7 +101,7 @@ public class Population implements Displayable {
     public void printPop() {
         int i = 0;
         for (CoquilleBille coc : listCoquille) {
-            System.out.println("Individu num :" + i + "de position suivante " + coc.getPosition().getX() + " et " + coc.getPosition().getY() + " et de etat de sante " + coc.getIndividual().healthState() + " Vitesse : " + coc.getMovingSpeed());
+            System.out.printf("Individu num : %d de position suivante  %.3f et  %.3f et de etat de sante  %s  Vitesse : %.3f \n", i, coc.getPosition().getX(), coc.getPosition().getY(), coc.getIndividual().healthState(), coc.getMovingSpeed());
             i++;
         }
         System.out.println("le nombre des personnes contaminées:" + getNbSick() + " de personnes guéries :" + getNbRecovered() + " non contaminées :" + getNbHealthy());
