@@ -2,8 +2,6 @@ package org.coronabounce;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -14,7 +12,6 @@ import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.models.CoquilleBille;
-import org.coronabounce.models.Population;
 import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
@@ -37,29 +34,26 @@ public class MainController
     private void initialize()
     {
         Zone z = new Zone(controller);
-        Displayable model = z.getPopulation();
+        Displayable model = z.getPopulation();                     //TODO check it
         List<CoquilleBille> allPoints = model.getAllPoints();
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(33), ev -> {
             panel.getChildren().retainAll();
             for (CoquilleBille cb : allPoints)
             {
-
                 String state = cb.getIndividual().healthState();
                 double coordX = cb.getPosition().getX();
                 double coordY = cb.getPosition().getY();
-                Circle point = new Circle(coordX, coordY, 4);
+                Circle point = new Circle(coordX, coordY, controller.getRadius());
                 if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
                 if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
                 if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
                 panel.getChildren().add(point);
             }
-
         }));
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-        //timer.schedule(timerTask, 0, 33);
         z.moving();
     }
 

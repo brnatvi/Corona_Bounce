@@ -4,12 +4,12 @@ import org.coronabounce.mvcconnectors.Controllable;
 
 public class Controller implements Controllable
 {
-    //these constants are initials and will be changed during the changing the settings of program
+    //these constants are initials and will be changed during the changing the settings of program in GUI
 
     private double WIDTH = 400;                       // population space size (width)
     private double HEIGTH = 250;                      // population space size (height)
     private int COUNT = 20;                           // population size
-    private double RADIUS = 10;                       // radius of contamination
+    private double RADIUS = 20;                       // radius of contamination
     private long DURATION_COVID = 5000;               // has contact <-> sick  //TODO compare and converge with parameters in Population
     private long HEALING_DURATION = 10000;            // sick <-> recovered    //TODO compare and converge with parameters in Population
     private long DURATION_NON_CONTAMINATION = 15000;  // recovered <-> can be contaminate again

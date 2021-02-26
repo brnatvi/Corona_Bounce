@@ -21,9 +21,9 @@ public class Zone  {
         this.height = controller.getSpaceSize()[1];
         this.p = new Population(controller, controller.getPersonsCount());
     }
-    public static void setHeight(double height) { Zone.height = height;}
+    public static void setHeight(double h) { Zone.height = h;}
 
-    public static void setWidth(double width){ Zone.width = width; }
+    public static void setWidth(double w){ Zone.width = w; }
 
     public static double getWidth() { return width; }
 
