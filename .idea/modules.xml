@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/corona-bounce.iml" filepath="$PROJECT_DIR$/.idea/corona-bounce.iml" />
-      <module fileurl="file://$PROJECT_DIR$/code/coronabounce.iml" filepath="$PROJECT_DIR$/code/coronabounce.iml" />
     </modules>
   </component>
 </project>
