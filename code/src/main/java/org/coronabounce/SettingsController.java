@@ -21,13 +21,13 @@ public class SettingsController
 
     }
 
-    @FXML
-    public int individualsNumberSettings () {
-        return 0;
-    }
-
-    public TextField individualsNumberSettings;
-
-    int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
+//    @FXML
+//    public int individualsNumberSettings () {
+//        return 0;
+//    }
+//
+//    public TextField individualsNumberSettings;
+//
+//    int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
     
 }
