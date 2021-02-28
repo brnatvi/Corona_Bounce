@@ -33,6 +33,7 @@ public class Controller implements Controllable
     public void setPersonsCount(int nmbPersons)
     {
         //TODO bring parameters from GUI settings
+        this.COUNT = nmbPersons;
     }
 
 

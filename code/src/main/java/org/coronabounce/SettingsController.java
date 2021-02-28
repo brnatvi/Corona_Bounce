@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
+import org.coronabounce.controllers.Controller;
+import org.coronabounce.mvcconnectors.Controllable;
 
 public class SettingsController
 {
@@ -16,9 +18,11 @@ public class SettingsController
     }
 
     @FXML
-    public void passSettingsToController(MouseEvent mouseEvent)
-    {
-
+    public void passSettingsToController(MouseEvent mouseEvent) throws IOException {
+        MainController mc = new MainController();
+        Controllable c = mc.getController();
+        c.setPersonsCount(9);
+        App.setRoot("corona bounce");
     }
 
 //    @FXML
@@ -26,8 +30,11 @@ public class SettingsController
 //        return 0;
 //    }
 //
-//    public TextField individualsNumberSettings;
-//
-//    int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
-    
+
+    public TextField individualsNumberSettings;
+
+    public void attributeIndividualsNumber() {
+        int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
+    }
+
 }

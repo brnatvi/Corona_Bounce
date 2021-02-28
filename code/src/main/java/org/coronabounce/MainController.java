@@ -57,7 +57,10 @@ public class MainController
         z.moving();
     }
 
-                         
+    public Controllable getController() {
+        return controller;
+    }
+
     @FXML
     private void switchToSettings() throws IOException {
         App.setRoot("settings");
