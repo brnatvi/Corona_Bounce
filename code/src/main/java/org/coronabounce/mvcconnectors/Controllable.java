@@ -61,7 +61,10 @@ public interface Controllable
      */
     public long getDurationNonContamination();
 
-
+    /**
+     * Get radius of dot
+     */
+    public double getRadiusDot();
 
     //======================================== Second Priority ========================================================//
 
