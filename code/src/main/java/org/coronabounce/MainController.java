@@ -30,6 +30,10 @@ public class MainController
     private Displayable model ;                     //TODO check it
     private List<CoquilleBille> allPoints;
 
+    XYChart.Series healthy;
+    XYChart.Series sick;
+    XYChart.Series recovered;
+
     @FXML AnchorPane mainPane;
     @FXML Pane panel;                            // field with moving points
     @FXML GridPane mainGrid;                     // grid contains statistic's grid (gridStatistic) and graph (graphPanel)
@@ -45,6 +49,9 @@ public class MainController
         this.zone = new Zone(controller);
         this.model = zone.getPopulation();
         this.allPoints = model.getAllPoints();
+        this.healthy = new XYChart.Series();
+        this.sick = new XYChart.Series();
+        this.recovered = new XYChart.Series();
     }
 
     @FXML
@@ -58,9 +65,6 @@ public class MainController
         yAxis.setTickLabelsVisible(false);
         yAxis.setTickMarkVisible(false);
         AreaChart graphPanel = new AreaChart(xAxis, yAxis);
-        XYChart.Series healthy = new XYChart.Series();
-        XYChart.Series sick = new XYChart.Series();
-        XYChart.Series recovered = new XYChart.Series();
         graphPanel.getData().addAll(healthy, sick, recovered);
 
         // fil mainGrid by graphPanel
@@ -71,6 +75,20 @@ public class MainController
         graphPanel.setHorizontalGridLinesVisible(false);
         graphPanel.setVerticalGridLinesVisible(false);
 
+    }
+
+    public Controllable getController() {
+        return controller;
+    }
+
+    @FXML
+    private void switchToSettings() throws IOException{
+        App.setRoot("settings");
+    }
+
+    @FXML
+    private void runMoving() throws IOException
+    {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(33), ev -> {
             panel.getChildren().retainAll();
 
@@ -96,20 +114,11 @@ public class MainController
             healthy.getData().add(new XYChart.Data("", model.getNbIndividus()));                    //TODO doesn't work
             sick.getData().add(new XYChart.Data("", model.getNbSick()));
             recovered.getData().add(new XYChart.Data("", model.getNbRecovered() + model.getNbSick()));
-            
+
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
         zone.moving();
-    }
-
-    public Controllable getController() {
-        return controller;
-    }
-
-    @FXML
-    private void switchToSettings() throws IOException {
-        App.setRoot("settings");
     }
 
 }

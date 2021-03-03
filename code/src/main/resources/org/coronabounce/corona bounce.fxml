@@ -16,7 +16,7 @@
    <children>
       <HBox layoutY="6.0" prefHeight="32.0" prefWidth="1000.0" AnchorPane.topAnchor="6.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="159.0" text="Start">
+            <Button fx:id="btnStart" mnemonicParsing="false" onMouseClicked="#runMoving" onMousePressed="#runMoving" prefHeight="30.0" prefWidth="159.0" text="Start">
                <font>
                   <Font name="DejaVu Serif Bold" size="15.0" />
                </font>
