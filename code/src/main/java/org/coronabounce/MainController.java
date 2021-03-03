@@ -77,6 +77,7 @@ public class MainController
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(33), ev -> {
             panel.getChildren().retainAll();
 
+            // update points
             for (CoquilleBille cb : allPoints)
             {
                 String state = cb.getIndividual().healthState();
@@ -87,16 +88,18 @@ public class MainController
                 if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
                 if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
                 panel.getChildren().add(point);
-
-                // reload statistics
-                labelHealthy.setText(String.valueOf(model.getNbHealthy()));
-                labelSick.setText(String.valueOf(model.getNbSick()));
-                labelRecovered.setText(String.valueOf(model.getNbRecovered()));
-
-                //healthy.getData().add(new XYChart.Data("", model.getNbIndividus()));                    //TODO doesn't work
-                //sick.getData().add(new XYChart.Data("", model.getNbSick()));
-                //recovered.getData().add(new XYChart.Data("", model.getNbRecovered() + model.getNbSick()));
             }
+
+            // update statistics
+            labelHealthy.setText(String.valueOf(model.getNbHealthy()));
+            labelSick.setText(String.valueOf(model.getNbSick()));
+            labelRecovered.setText(String.valueOf(model.getNbRecovered()));
+
+            // draw graph
+            healthy.getData().add(new XYChart.Data("", model.getNbIndividus()));                    //TODO doesn't work
+            sick.getData().add(new XYChart.Data("", model.getNbSick()));
+            recovered.getData().add(new XYChart.Data("", model.getNbRecovered() + model.getNbSick()));
+            
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
