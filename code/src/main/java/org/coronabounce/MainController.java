@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
@@ -22,13 +21,15 @@ import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
 
-import static javafx.scene.input.KeyCode.Y;
 import static javafx.scene.paint.Paint.valueOf;
-
 
 public class MainController
 {
     private Controllable controller;
+    private Zone zone;                              //TODO check it
+    private Displayable model ;                     //TODO check it
+    private List<CoquilleBille> allPoints;
+
     @FXML AnchorPane mainPane;
     @FXML Pane panel;                            // field with moving points
     @FXML GridPane mainGrid;                     // grid contains statistic's grid (gridStatistic) and graph (graphPanel)
@@ -41,16 +42,14 @@ public class MainController
     public MainController()
     {
         this.controller = new Controller();
+        this.zone = new Zone(controller);
+        this.model = zone.getPopulation();
+        this.allPoints = model.getAllPoints();
     }
 
     @FXML
     private void initialize()
     {
-        Zone z = new Zone(controller);
-        Displayable model = z.getPopulation();                     //TODO check it
-        List<CoquilleBille> allPoints = model.getAllPoints();
-
-
         // init graphPanel
         NumberAxis xAxis = new NumberAxis();
         xAxis.setTickLabelsVisible(false);
@@ -64,7 +63,6 @@ public class MainController
         XYChart.Series recovered = new XYChart.Series();
         graphPanel.getData().addAll(healthy, sick, recovered);
 
-
         // fil mainGrid by graphPanel
         mainGrid.add(graphPanel, 1,0 );
         graphPanel.setPrefSize(371, 160);
@@ -72,7 +70,6 @@ public class MainController
         graphPanel.setLayoutY(59);
         graphPanel.setHorizontalGridLinesVisible(false);
         graphPanel.setVerticalGridLinesVisible(false);
-
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(33), ev -> {
             panel.getChildren().retainAll();
@@ -103,7 +100,7 @@ public class MainController
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-        z.moving();
+        zone.moving();
     }
 
     public Controllable getController() {
