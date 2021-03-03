@@ -7,6 +7,10 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.chart.StackedAreaChart;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -22,8 +26,15 @@ import static javafx.scene.paint.Paint.valueOf;
 public class MainController
 {
     private Controllable controller;
-    @FXML
-    Pane panel;
+    @FXML Pane panel;
+    @FXML AnchorPane statHealthy;
+    @FXML AnchorPane statSick;
+    @FXML AnchorPane statRecovered;
+    @FXML StackedAreaChart statPanel;
+    @FXML ChoiceBox btnScenario;
+    @FXML Label labelHealthy;
+    @FXML Label labelSick;
+    @FXML Label labelRecovered;
 
     public MainController()
     {
@@ -39,6 +50,7 @@ public class MainController
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(33), ev -> {
             panel.getChildren().retainAll();
+
             for (CoquilleBille cb : allPoints)
             {
                 String state = cb.getIndividual().healthState();
@@ -49,6 +61,9 @@ public class MainController
                 if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
                 if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
                 panel.getChildren().add(point);
+                labelHealthy.setText(String.valueOf(model.getNbHealthy()));
+                labelSick.setText(String.valueOf(model.getNbSick()));
+                labelRecovered.setText(String.valueOf(model.getNbRecovered()));
             }
         }));
 
