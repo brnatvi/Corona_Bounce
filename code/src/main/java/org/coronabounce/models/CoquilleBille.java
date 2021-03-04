@@ -29,11 +29,16 @@ public class CoquilleBille {
 
 
     /**
-    * The moving funtion.
+    *{@summary The moving funtion.}<br>
+    *Speed will be modify if this hurt a limit of the map.
     */
     public void move(){
-        movingSpeedX=getRandomMovingSpeed(5);
-        movingSpeedY=getRandomMovingSpeed(5);
+        if (Zone.outOfX(p.getX())) {
+          movingSpeedX*=-1;
+        }
+        if (Zone.outOfY(p.getY())) {
+          movingSpeedY*=-1;
+        }
         this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
     }
 

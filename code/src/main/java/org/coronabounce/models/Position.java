@@ -23,11 +23,17 @@ public class Position {
     }
 
 
-    void setPos(double x, double y) {
-        if (x >= 10 && x <= Zone.getWidth() && y >= 10 && y <= Zone.getHeight()) {
+    public void setPos(double x, double y) {
+      if(x<0){x=0;}
+      else if(x>Zone.getWidth()){x=Zone.getWidth();}
+      if(y<0){y=0;}
+      else if(y>Zone.getHeight()){y=Zone.getHeight();}
+      this.posX = x;
+      this.posY = y;
+        /*if (x >= 10 && x <= Zone.getWidth() && y >= 10 && y <= Zone.getHeight()) {
             this.posX = x;
             this.posY = y;
-        }
+        }*/
 
     }
 
