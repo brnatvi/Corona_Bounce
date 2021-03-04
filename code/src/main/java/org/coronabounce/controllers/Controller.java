@@ -74,6 +74,6 @@ public class Controller implements Controllable
         //TODO bring parameters from GUI settings
         //z.getP().setDurationNonContamination(time);
     }
-    
+
 
 }

@@ -9,22 +9,22 @@ public class Zone  {
 
     private Controllable controller;
     private Population p;
-    private static double width;
-    private static double height;
+    private static double width=1;
+    private static double height=1;
     private Timer t=new Timer();
     private TimerTask timerTask;
 
     public Zone (Controllable controller)
     {
         this.controller = controller;
-        this.width = controller.getSpaceSize()[0];
-        this.height = controller.getSpaceSize()[1];
+        setWidth(controller.getSpaceSize()[0]);
+        setHeight(controller.getSpaceSize()[1]);
         this.p = new Population(controller, controller.getPersonsCount());
     }
     public static double getWidth() { return width; }
-    public static void setWidth(double w){ Zone.width = w; }
+    public static void setWidth(double w){ if(w>=1){width = w;}}
     public static double getHeight() { return height; }
-    public static void setHeight(double h) { Zone.height = h;}
+    public static void setHeight(double h) { if(h>=1){height = h;}}
     public Population getPopulation() {return p;}
 
 
