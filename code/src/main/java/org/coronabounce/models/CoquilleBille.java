@@ -22,7 +22,6 @@ public class CoquilleBille {
         this.movingSpeedX=speedX;
         this.movingSpeedY=speedY;
         this.individual=individual;
-        //this.direction=r.randInt(360);
     }
     public CoquilleBille(Individual individual){
       this(getRandomMovingSpeed(5),getRandomMovingSpeed(5),individual);
@@ -32,21 +31,7 @@ public class CoquilleBille {
     /**
     * The moving funtion.
     */
-
     public void move(){
-      //TODO update move to use direction.
-        /*Random r1=new Random();
-        int m0=r.nextInt(5)+1;
-        this.movingSpeedX=r1.nextDouble()*m0;
-        this.movingSpeedY=r1.nextDouble()*m0;
-        Boolean bool1= r1.nextBoolean();
-        Boolean bool2=r1.nextBoolean();
-        if(bool1){
-            this.movingSpeedX= -this.movingSpeedX ;
-        }
-        if (bool2) {
-            this.movingSpeedY= -this.movingSpeedY;
-        }*/
         movingSpeedX=getRandomMovingSpeed(5);
         movingSpeedY=getRandomMovingSpeed(5);
         this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
