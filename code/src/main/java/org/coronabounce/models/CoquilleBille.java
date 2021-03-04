@@ -5,15 +5,13 @@ import java.util.Random;
 public class CoquilleBille {
 
     /**
-    * A moving speed to move faster or slower. It need to be &#62;0.
+    * A moving speed in x to move faster or slower.
     */
     private double movingSpeedX;
-    private double movingSpeedY;
-
     /**
-    * A direction were to move between 0° & 359°.
+    * A moving speed in y to move faster or slower.
     */
-    private int direction;
+    private double movingSpeedY;
     private Individual individual;
     private Position p;
     private static Random r = new Random();
@@ -55,7 +53,6 @@ public class CoquilleBille {
     }
 
     public double getMovingSpeed() {return Math.sqrt( (this.movingSpeedX*this.movingSpeedX)+(this.movingSpeedY*this.movingSpeedY));}
-    public int getDirection() {return direction;}
     public Individual getIndividual(){return individual;}
     public void setIndividual(Individual individual){ this.individual=individual;}
     public Position getPosition(){return this.p;}
@@ -65,8 +62,7 @@ public class CoquilleBille {
     */
     private static double getRandomMovingSpeed(int maxSpeed){
       if(maxSpeed<1){maxSpeed=1;}
-      Boolean bool=r.nextBoolean();
-      if(bool){maxSpeed=maxSpeed*(-1);}
+      if(r.nextBoolean()){maxSpeed=maxSpeed*(-1);}
       return r.nextDouble()*maxSpeed;
     }
 }
