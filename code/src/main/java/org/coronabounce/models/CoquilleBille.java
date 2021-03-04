@@ -32,7 +32,7 @@ public class CoquilleBille {
     * The moving funtion.
     */
 
-    public void Move(){
+    public void move(){
       //TODO update move to use direction.
         Random r1=new Random();
         int m0=r.nextInt(5)+1;

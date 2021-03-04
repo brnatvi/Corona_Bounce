@@ -118,7 +118,7 @@ public class Population implements Displayable {
     public void printMovement() {
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
         for (CoquilleBille coc : listCoquille) {
-            coc.Move();
+            coc.move();
         }
         printPop();
     }
@@ -196,4 +196,3 @@ public class Population implements Displayable {
         return Sick.nbSick;
     }*/
 }
-
