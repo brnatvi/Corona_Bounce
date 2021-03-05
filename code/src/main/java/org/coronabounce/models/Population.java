@@ -28,15 +28,15 @@ public class Population implements Displayable {
         nbRecovered=nbR;
         for (int i = 0; i < nbH; i++) {
 
-            listCoquille.add(new CoquilleBille(new Healthy()));
+            listCoquille.add(new CoquilleBille(0,0,new Healthy()));
 
         }
         for (int i = 0; i < nbS; i++) {
-            listCoquille.add(new CoquilleBille(new Sick()));
+            listCoquille.add(new CoquilleBille(0,0,new Sick()));
 
         }
         for (int i = 0; i < nbR; i++) {
-            listCoquille.add(new CoquilleBille(new Recovered()));
+            listCoquille.add(new CoquilleBille(0,0,new Recovered()));
 
         }
         this.durationCovid = controller.getDurationCovid();
@@ -55,7 +55,7 @@ public class Population implements Displayable {
 
 
     public void addIndividual(Individual i) {
-        CoquilleBille coc = new CoquilleBille(i);
+        CoquilleBille coc = new CoquilleBille(0,0,i);
         listCoquille.add(coc);
     }
 
@@ -118,7 +118,7 @@ public class Population implements Displayable {
     public void printMovement() {
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
         for (CoquilleBille coc : listCoquille) {
-            coc.move();
+            coc.Move();
         }
         printPop();
     }
