@@ -179,7 +179,11 @@ public class Population implements Displayable {
         return cpt;
         //return nbRecovered;
     }
-
+    public void interaction(long durationCovid,long healingDuration,long durationNonContamination){
+        for(CoquilleBille coc:listCoquille){
+         coc.getIndividual().contact(coc,this,durationCovid,healingDuration,durationNonContamination);
+        }
+    }
 
    /* @Override
     public int getNbHealthy() {
@@ -195,4 +199,5 @@ public class Population implements Displayable {
     public int getNbSick() {
         return Sick.nbSick;
     }*/
+
 }

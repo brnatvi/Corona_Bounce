@@ -5,10 +5,13 @@ import java.util.TimerTask;
 
 
 public class Recovered extends Individual{
-
+    /*@Override
+    public void contact(CoquilleBille coc, Population p, long durationCovid, long durationHealing, long durationNonContamination) {
+        recover(coc, durationHealing, durationNonContamination);
+    }*/
 
     // La personne encapsulée dans coc retrouve sa santé
-    static void recover(CoquilleBille coc , long healing_duration, long durationNonContamination)
+     public static void recover(CoquilleBille coc , long healing_duration, long durationNonContamination)
     {     Timer t=new Timer();
     TimerTask timerTask;
         t.schedule(timerTask=new TimerTask() {

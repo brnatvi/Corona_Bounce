@@ -5,8 +5,12 @@ import java.util.TimerTask;
 
 
 public class Healthy extends Individual {
+   /* @Override
+    public void contact(CoquilleBille coc, Population p, long durationCovid, long durationHealing, long durationNonContamination) {
+        healing(coc,  durationNonContamination);
+    }*/
 
-    static void healing(CoquilleBille coc, long durationNonContamination)
+    public static void healing(CoquilleBille coc, long durationNonContamination)
     {  Timer t=new Timer();
         TimerTask timerTask;
         t.schedule(timerTask=new TimerTask() {

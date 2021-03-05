@@ -13,7 +13,7 @@ public  abstract class Individual {
     /**
     *{@summary To Override if we need to have an action in contact.}
     */
-    public void contact (Population p,long durationCovid ,long durationHealing, long durationNonContamination){}
+    public void contact (CoquilleBille coc,Population p,long durationCovid ,long durationHealing, long durationNonContamination){}
 
 
     boolean isSick()

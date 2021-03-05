@@ -33,15 +33,15 @@ public class Zone  {
         this.t.schedule(this.timerTask=new TimerTask() {
             @Override
             public void run() {
-                Sick.contaminate(p, controller.getDurationCovid(),10000, controller.getDurationNonContamination());
+                p.interaction(controller.getDurationCovid(),10000, controller.getDurationNonContamination());
                 p.printMovement();
             }
-        },0,1*150);
+        },0,1*100);
 
     }
 
     public void test(){
-       // p.setContaminationRadius(10);
+        p.setContaminationRadius(50);
         p.printPop();
         this.moving();
     }
