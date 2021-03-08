@@ -46,7 +46,11 @@ public class MainController
     public MainController()
     {
         this.controller = new Controller();
-        this.zone = new Zone(controller);
+        changeController(controller);
+    }
+
+    public void changeController(Controllable c) {
+        this.zone = new Zone(c);
         this.model = zone.getPopulation();
         this.allPoints = model.getAllPoints();
         this.healthy = new XYChart.Series();

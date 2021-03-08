@@ -12,6 +12,12 @@ import org.coronabounce.mvcconnectors.Controllable;
 public class SettingsController
 {
 
+    MainController mainController;
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
@@ -19,9 +25,12 @@ public class SettingsController
 
     @FXML
     public void passSettingsToController(MouseEvent mouseEvent) throws IOException {
-        MainController mc = new MainController();
-        Controllable c = mc.getController();
+        //MainController mc = new MainController();
+        Controllable c = new Controller();
         c.setPersonsCount(9);
+        //App.setRoot("corona bounce");
+
+        mainController.changeController(c);
         App.setRoot("corona bounce");
     }
 
