@@ -18,17 +18,25 @@ public class SettingsController
         this.mainController = mainController;
     }
 
+    @FXML TextField individualsNumberSettings;
+
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
     }
 
+//    public void attributeIndividualsNumber() {
+//        int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
+//    }
+
     @FXML
     public void passSettingsToController(MouseEvent mouseEvent) throws IOException {
-        //MainController mc = new MainController();
         Controllable c = new Controller();
-        c.setPersonsCount(9);
-        //App.setRoot("corona bounce");
+//        int newIndividualsNumber = 20;
+        int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
+        c.setPersonsCount(newIndividualsNumber);
+//        c.setPersonsCount(8);
+
 
         mainController.changeController(c);
         App.setRoot("corona bounce");
@@ -40,10 +48,8 @@ public class SettingsController
 //    }
 //
 
-    public TextField individualsNumberSettings;
+//    public TextField individualsNumberSettings;
 
-    public void attributeIndividualsNumber() {
-        int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
-    }
+
 
 }
