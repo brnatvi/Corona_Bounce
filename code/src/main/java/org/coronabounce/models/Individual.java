@@ -15,11 +15,6 @@ public  abstract class Individual {
     */
     public void contact (CoquilleBille coc,Population p){}
 
-
-    boolean isSick()
-    {
-        if(this instanceof  Sick) return true;
-        return false;
-    }
+    public boolean isSick(){return false;}
 
 }

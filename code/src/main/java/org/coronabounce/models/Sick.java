@@ -30,5 +30,7 @@ public class Sick extends Individual {
         }
         // La personne va se rétablir,( fin de la durée de contamination
     }
+    @Override
+    public boolean isSick(){return true;}
 
 }
