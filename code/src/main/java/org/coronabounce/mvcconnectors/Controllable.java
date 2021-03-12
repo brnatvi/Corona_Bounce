@@ -32,12 +32,12 @@ public interface Controllable
      * Set radius of contamination around point from GUI to controller
      * @param pxls number of pixels
      */
-    public void setRadius(double pxls);
+    public void setContaminationRadius(double pxls);
 
     /**
      * Get radius of contamination around point trom comtroller
      */
-    public double getRadius();
+    public double getContaminationRadius();
 
     /**
      * Set duration of sickness from GUI's to controller
@@ -67,7 +67,7 @@ public interface Controllable
     /**
      * Get radius of dot
      */
-    public double getRadiusDot();
+    public double getContaminationRadiusDot();
 
     //======================================== Second Priority ========================================================//
 

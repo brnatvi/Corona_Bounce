@@ -9,7 +9,7 @@ public class Controller implements Controllable
     private double WIDTH = 465;                       // population space size (width)
     private double HEIGTH = 290;                      // population space size (height)
     private int COUNT = 20;                           // population size
-    private double RADIUS = 20;                       // radius of contamination
+    private double CONTAMINATION_RADIUS = 20;                       // radius of contamination
     private long DURATION_COVID = 5000;               // has contact <-> sick  //TODO compare and converge with parameters in Population
     private long DURATION_HEALING = 10000;            // sick <-> recovered    //TODO compare and converge with parameters in Population
     private long DURATION_NON_CONTAMINATION = 15000;  // recovered <-> can be contaminate again
@@ -38,10 +38,10 @@ public class Controller implements Controllable
 
 
     @Override
-    public double getRadius() { return this.RADIUS; }
+    public double getContaminationRadius() { return this.CONTAMINATION_RADIUS; }
 
     @Override
-    public void setRadius(double pxls)
+    public void setContaminationRadius(double pxls)
     {
         //TODO bring parameters from GUI settings
         //z.getP().setContaminationRadius(pxls);
@@ -75,7 +75,7 @@ public class Controller implements Controllable
     public void setDurationHealing(long l){ }
 
     @Override
-    public double getRadiusDot()
+    public double getContaminationRadiusDot()
     {
       return this.RADIUS_DOT;
     }

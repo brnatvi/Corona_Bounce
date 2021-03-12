@@ -40,7 +40,7 @@ public class Population implements Displayable {
 
         }
         /*this.durationCovid = controller.getDurationCovid();
-        this.contaminationRadius = controller.getRadius();
+        this.contaminationRadius = controller.getContaminationRadius();
         this.durationNonContamination = controller.getDurationNonContamination();*/
     }
 
@@ -81,10 +81,10 @@ public class Population implements Displayable {
         controller.setDurationHealing(l);
     }
     public double getContaminationRadius() {
-      return controller.getRadius();
+      return controller.getContaminationRadius();
     }
     public void setContaminationRadius(double d) {
-        controller.setRadius(d);
+        controller.setContaminationRadius(d);
     }
     public List<CoquilleBille> getListCoquille() {
         return this.listCoquille;

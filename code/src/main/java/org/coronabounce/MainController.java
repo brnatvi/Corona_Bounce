@@ -85,7 +85,7 @@ public class MainController
             String state = cb.getIndividual().healthState();
             double coordX = cb.getPosition().getX();
             double coordY = cb.getPosition().getY();
-            Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
+            Circle point = new Circle(coordX, coordY, controller.getContaminationRadiusDot());
             if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
             if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
             if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
@@ -120,7 +120,7 @@ public class MainController
                 String state = cb.getIndividual().healthState();
                 double coordX = cb.getPosition().getX();
                 double coordY = cb.getPosition().getY();
-                Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
+                Circle point = new Circle(coordX, coordY, controller.getContaminationRadiusDot());
                 if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
                 if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
                 if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
