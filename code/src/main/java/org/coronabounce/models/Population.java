@@ -11,9 +11,9 @@ public class Population implements Displayable {
 
     private Controllable controller;
     private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();
-    private long durationCovid;// cobien dure la maldaie                        //TODO compare and converge with parameters in Controller
-    private long durationNonContamination;//pour passer de Recovered a healthy  //TODO compare and converge with parameters in Controller
-    private long durationHealing;//combien dure la guerison ex:14 jours
+    //private long durationCovid;// cobien dure la maldaie                        //TODO compare and converge with parameters in Controller
+    //private long durationNonContamination;//pour passer de Recovered a healthy  //TODO compare and converge with parameters in Controller
+    //private long durationHealing=10000;//combien dure la guerison ex:14 jours
     public static int nbSick;
     public static int nbRecovered;
     public static int nbHealthy;
@@ -39,9 +39,9 @@ public class Population implements Displayable {
             listCoquille.add(new CoquilleBille(new Recovered()));
 
         }
-        this.durationCovid = controller.getDurationCovid();
+        /*this.durationCovid = controller.getDurationCovid();
         this.contaminationRadius = controller.getRadius();
-        this.durationNonContamination = controller.getDurationNonContamination();
+        this.durationNonContamination = controller.getDurationNonContamination();*/
     }
 
     public Population(Controllable controller, int nbIndividus) {
@@ -63,29 +63,29 @@ public class Population implements Displayable {
     //========================= Virus Getters/Setters==================================================================/
 
     public long getDurationCovid() {
-        return durationCovid;
+        return controller.getDurationCovid();
     }
-
     public void setDurationCovid(long l) {
-        durationCovid = l;
+        controller.setDurationCovid(l);
     }
-
     public long getDurationNonContamination() {
-        return durationNonContamination;
+        return controller.getDurationNonContamination();
     }
-
     public void setDurationNonContamination(long l) {
-        durationNonContamination = l;
+        controller.setDurationNonContamination(l);
     }
-
-    public void setContaminationRadius(double contaminationRadius) {
-        this.contaminationRadius = contaminationRadius;
+    public long getDurationHealing() {
+        return controller.getDurationHealing();
     }
-
+    public void setDurationHealing(long l) {
+        controller.setDurationHealing(l);
+    }
     public double getContaminationRadius() {
-        return contaminationRadius;
+      return controller.getRadius();
     }
-
+    public void setContaminationRadius(double d) {
+        controller.setRadius(d);
+    }
     public List<CoquilleBille> getListCoquille() {
         return this.listCoquille;
     }
@@ -116,11 +116,13 @@ public class Population implements Displayable {
     }
 
     public void printMovement() {
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
+        //System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
         for (CoquilleBille coc : listCoquille) {
             coc.move();
+            interaction();
+            //coc.contact(this, durationCovid, healingDuration, durationNonContamination);
         }
-        printPop();
+        //printPop();
     }
 
     //========================= Population Statistics =================================================================/
@@ -179,9 +181,9 @@ public class Population implements Displayable {
         return cpt;
         //return nbRecovered;
     }
-    public void interaction(long durationCovid,long healingDuration,long durationNonContamination){
+    public void interaction(){
         for(CoquilleBille coc:listCoquille){
-         coc.getIndividual().contact(coc,this,durationCovid,healingDuration,durationNonContamination);
+         coc.getIndividual().contact(coc,this,getDurationCovid(),getDurationHealing(),getDurationNonContamination());
         }
     }
 

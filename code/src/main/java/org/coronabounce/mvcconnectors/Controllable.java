@@ -61,6 +61,9 @@ public interface Controllable
      */
     public long getDurationNonContamination();
 
+    public long getDurationHealing();
+    public void setDurationHealing(long l);
+
     /**
      * Get radius of dot
      */
