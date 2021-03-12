@@ -8,11 +8,11 @@ public class Sick extends Individual {
 
 
 
-    public void contact(CoquilleBille coc,Population p, long durationCovid, long durationHealing,long durationNonContamination) {
-        contaminate( coc,p,durationCovid,durationHealing,durationNonContamination);
+    public void contact(CoquilleBille coc,Population p) {
+        contaminate(coc,p);
     }
     //La personne malade contamine l'individual encapsulé par coc
-    public void contaminate(CoquilleBille coc,Population p, long durationCovid,long healingDuration,long durationNonContamination)
+    public void contaminate(CoquilleBille coc,Population p)
     {
         for(CoquilleBille c : p.getListCoquille()){
             if( coc!=c && p.distance(coc,c)<= p.getContaminationRadius() && coc.getIndividual().isSick()){
@@ -24,8 +24,8 @@ public class Sick extends Individual {
                         Population.nbSick++;
                         Population.nbHealthy--;
                     }
-                },durationCovid);
-                Recovered.recover(coc,healingDuration,durationNonContamination);
+                },p.getDurationCovid());
+                Recovered.recover(coc,p.getDurationHealing(),p.getDurationNonContamination());
             }
         }
         // La personne va se rétablir,( fin de la durée de contamination

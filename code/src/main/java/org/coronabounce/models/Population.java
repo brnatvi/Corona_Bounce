@@ -119,9 +119,9 @@ public class Population implements Displayable {
         //System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
         for (CoquilleBille coc : listCoquille) {
             coc.move();
-            interaction();
             //coc.contact(this, durationCovid, healingDuration, durationNonContamination);
         }
+        interaction();
         //printPop();
     }
 
@@ -183,7 +183,7 @@ public class Population implements Displayable {
     }
     public void interaction(){
         for(CoquilleBille coc:listCoquille){
-         coc.getIndividual().contact(coc,this,getDurationCovid(),getDurationHealing(),getDurationNonContamination());
+         coc.getIndividual().contact(coc,this);
         }
     }
 
