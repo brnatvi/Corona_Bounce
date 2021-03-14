@@ -33,5 +33,10 @@ public class Sick extends Individual {
     }
     @Override
     public boolean isSick(){return true;}
+    @Override
+    public void updateState(CoquilleBille coc){
+      //TODO if est malade depuis longtemps
+      //coc.setIndividual(new Recovered());
+    }
 
 }

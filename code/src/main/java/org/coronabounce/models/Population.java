@@ -95,6 +95,11 @@ public class Population implements Displayable {
             coc.getIndividual().contact(coc,this);
         }
     }
+    public void updateState(){
+        for(CoquilleBille coc:listCoquille){
+            coc.getIndividual().updateState(coc);
+        }
+    }
     //========================= Prints ================================================================================/
 
     public void printPop() {

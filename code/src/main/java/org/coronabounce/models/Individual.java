@@ -15,6 +15,8 @@ public  abstract class Individual {
     */
     public void contact (CoquilleBille coc,Population p){}
 
+    public void updateState (CoquilleBille coc){}
+
     public boolean isSick(){return false;}
 
 }
