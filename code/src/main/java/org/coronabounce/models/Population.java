@@ -11,21 +11,12 @@ public class Population implements Displayable {
 
     private Controllable controller;
     private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();
-    //private long durationCovid;// cobien dure la maldaie                        //TODO compare and converge with parameters in Controller
-    //private long durationNonContamination;//pour passer de Recovered a healthy  //TODO compare and converge with parameters in Controller
-    //private long durationHealing=10000;//combien dure la guerison ex:14 jours
-    //public static int nbSick;
-    //public static int nbRecovered;
-    //public static int nbHealthy;
     private double contaminationRadius;
 
     //========================= Constructors ==========================================================================/
 
     public Population(Controllable controller, int nbH, int nbS, int nbR) {
         this.controller = controller;
-        //nbSick=nbS;
-        //nbHealthy=nbH;
-        //nbRecovered=nbR;
         for (int i = 0; i < nbH; i++) {
 
             listCoquille.add(new CoquilleBille(new Healthy()));
@@ -39,9 +30,6 @@ public class Population implements Displayable {
             listCoquille.add(new CoquilleBille(new Recovered()));
 
         }
-        /*this.durationCovid = controller.getDurationCovid();
-        this.contaminationRadius = controller.getContaminationRadius();
-        this.durationNonContamination = controller.getDurationNonContamination();*/
     }
 
     public Population(Controllable controller, int nbIndividus) {
