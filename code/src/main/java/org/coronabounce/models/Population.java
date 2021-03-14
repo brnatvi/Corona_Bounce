@@ -14,18 +14,18 @@ public class Population implements Displayable {
     //private long durationCovid;// cobien dure la maldaie                        //TODO compare and converge with parameters in Controller
     //private long durationNonContamination;//pour passer de Recovered a healthy  //TODO compare and converge with parameters in Controller
     //private long durationHealing=10000;//combien dure la guerison ex:14 jours
-    public static int nbSick;
-    public static int nbRecovered;
-    public static int nbHealthy;
+    //public static int nbSick;
+    //public static int nbRecovered;
+    //public static int nbHealthy;
     private double contaminationRadius;
 
     //========================= Constructors ==========================================================================/
 
     public Population(Controllable controller, int nbH, int nbS, int nbR) {
         this.controller = controller;
-        nbSick=nbS;
-        nbHealthy=nbH;
-        nbRecovered=nbR;
+        //nbSick=nbS;
+        //nbHealthy=nbH;
+        //nbRecovered=nbR;
         for (int i = 0; i < nbH; i++) {
 
             listCoquille.add(new CoquilleBille(new Healthy()));

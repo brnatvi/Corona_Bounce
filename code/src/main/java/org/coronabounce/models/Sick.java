@@ -24,8 +24,8 @@ public class Sick extends Individual {
         for(CoquilleBille c : p.getListCoquille()){
             if(!coc.equals(c) && p.distance(coc,c)<= p.getContaminationRadius() && c.getIndividual() instanceof Healthy){
                 c.setIndividual(new Sick());
-                p.nbSick++;
-                p.nbHealthy--;
+                //p.nbSick++; //c'est actualisé dans population maintenant
+                //p.nbHealthy--;
                 //Recovered.recover(coc,p.getDurationHealing(),p.getDurationNonContamination());
             }
         }
