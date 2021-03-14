@@ -46,10 +46,10 @@ public class MainController
 
     public MainController()
     {
-        timeline = null;
+        this.timeline = null;
         System.out.println("New controller\n");
         this.controller = new Controller();
-        changeController(controller);
+        changeController(this.controller);
     }
 
     public void changeController(Controllable c) {

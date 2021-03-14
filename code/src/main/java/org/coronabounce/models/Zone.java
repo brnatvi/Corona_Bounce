@@ -23,7 +23,7 @@ public class Zone  {
         this.p = new Population(controller, controller.getPersonsCount());
     }
 
-    public void stop(boolean i_bStopTimer)
+    public void stop(boolean b_StopTimer)
     {
         if (null != this.timerTask)
         {
@@ -34,8 +34,7 @@ public class Zone  {
             this.timerTask = null;
             this.t.purge();
         }
-
-        if (i_bStopTimer)
+        if (b_StopTimer)
         {
             this.t.cancel();
             this.t = null;

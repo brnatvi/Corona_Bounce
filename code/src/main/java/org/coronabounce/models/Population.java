@@ -129,79 +129,66 @@ public class Population implements Displayable {
 
     //========================= Population Statistics =================================================================/
 
-    public int getNbIndividus() {
+   public int getNbIndividus() {
         return getAllPoints().size();
     }
 
-    public double percentageSick() {
-        return (getNbSick() * 100) / getNbIndividus();
-    }
-
-    public double percentageRecovered() {
-        return (getNbRecovered() * 100) / getNbIndividus();
-    }
-
-    public double percentageHealthy() {
-        return (getNbHealthy() * 100) / getNbIndividus();
-    }
+   public int[] countStatistique()
+   {
+       int health = 0;
+       int sick = 0;
+       int recover = 0;
+       for(CoquilleBille coc : listCoquille)
+       {
+           if (coc.getIndividual() instanceof Healthy) { health++; }
+           if (coc.getIndividual() instanceof Sick) { sick++; }
+           if (coc.getIndividual() instanceof Recovered) { recover++; }
+       }
+       return new int[] {health, sick, recover};
+   }
 
    public int getNbHealthy() {
-        int cpt=0;
-        for(CoquilleBille coc : listCoquille)
-        {
-            if(coc.getIndividual() instanceof Healthy)
-            {
-                cpt++;
-            }
-        }
-        return cpt;
-       //return nbHealthy;
+        //int cpt=0;
+        //for(CoquilleBille coc : listCoquille)
+        //{
+        //    if(coc.getIndividual() instanceof Healthy)
+        //    {
+        //        cpt++;
+        //    }
+        //}
+        //return cpt;
+       return countStatistique()[0];
     }
 
     public int getNbSick() {
-        int cpt=0;
-        for(CoquilleBille coc : listCoquille)
-        {
-            if(coc.getIndividual() instanceof Sick)
-            {
-                cpt++;
-            }
-        }
-        return cpt;
-        //return nbSick;
+        //int cpt=0;
+        //for(CoquilleBille coc : listCoquille)
+        //{
+        //    if(coc.getIndividual() instanceof Sick)
+        //    {
+        //        cpt++;
+        //    }
+        //}
+        //return cpt;
+        return countStatistique()[1];
     }
-
-
 
     public int getNbRecovered() {
-        int cpt = 0;
-        for (CoquilleBille coc : listCoquille) {
-            if (coc.getIndividual() instanceof Recovered) {
-                cpt++;
-            }
-        }
-        return cpt;
-        //return nbRecovered;
+        //int cpt = 0;
+        //for (CoquilleBille coc : listCoquille) {
+        //    if (coc.getIndividual() instanceof Recovered) {
+        //        cpt++;
+        //    }
+        //}
+        //return cpt;
+        return countStatistique()[2];
     }
+
+
     public void interaction(){
         for(CoquilleBille coc:listCoquille){
          coc.getIndividual().contact(coc,this);
         }
     }
-
-   /* @Override
-    public int getNbHealthy() {
-        return Healthy.nbHealthy;
-    }
-
-    @Override
-    public int getNbRecovered() {
-        return Recovered.nbRecovered;
-    }
-
-    @Override
-    public int getNbSick() {
-        return Sick.nbSick;
-    }*/
 
 }
