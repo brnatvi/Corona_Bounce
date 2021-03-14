@@ -26,12 +26,13 @@ public class IndividualTest extends Assertions{
   @Test
   public void testContact(){
     Controller c = new Controller();
-    Population p = new Population(c, 1, 1, 0);
+    Population p = new Population(c, 0, 0, 0);
     Individual i1 = new Sick();
     Individual i2 = new Healthy();
     p.addIndividual(i1);
     p.addIndividual(i2);
     CoquilleBille coc1=null, coc2=null;
+    assertEquals(2,p.getAllPoints().size());
     for (CoquilleBille coc : p.getAllPoints() ) {
       if(coc.getIndividual().isSick()){
         coc1 = coc;
@@ -43,15 +44,15 @@ public class IndividualTest extends Assertions{
     assertTrue(coc2!=null);
     coc1.getPosition().setPos(0,0);
     coc2.getPosition().setPos(1,1);
-    assertTrue(i1.isSick());
-    assertTrue(!i2.isSick());
-    c.setContaminationRadius(0.5);
+    assertTrue(coc1.getIndividual().isSick());
+    assertTrue(!coc2.getIndividual().isSick());
+    c.setContaminationRadius(0.2);
     p.interaction();
-    assertTrue(i1.isSick());
-    assertTrue(!i2.isSick());
+    assertTrue(coc1.getIndividual().isSick());
+    assertTrue(!coc2.getIndividual().isSick());
     c.setContaminationRadius(10);
     p.interaction();
-    assertTrue(i1.isSick());
-    assertTrue(i2.isSick());
+    assertTrue(coc1.getIndividual().isSick());
+    assertTrue(coc2.getIndividual().isSick());
   }
 }

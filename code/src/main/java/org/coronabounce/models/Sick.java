@@ -11,21 +11,22 @@ public class Sick extends Individual {
     public void contact(CoquilleBille coc,Population p) {
         contaminate(coc,p);
     }
-    //La personne malade contamine l'individual encapsulé par coc
-    public void contaminate(CoquilleBille coc,Population p)
-    {
+    /**
+    *A function that transform to Sick an Individual if :
+    *<ul>
+    *<li> It is a different Individual.
+    *<li> It is close to this.
+    *<li> It is a Healthy Individual.
+    *</ul>
+    *It will update nbSick and nbHealthy Population value.
+    */
+    public void contaminate(CoquilleBille coc,Population p){
         for(CoquilleBille c : p.getListCoquille()){
-            if( coc!=c && p.distance(coc,c)<= p.getContaminationRadius() && coc.getIndividual().isSick()){
-                Timer t=new Timer();
-                t.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        coc.setIndividual(new Sick());
-                        Population.nbSick++;
-                        Population.nbHealthy--;
-                    }
-                },p.getDurationCovid());
-                Recovered.recover(coc,p.getDurationHealing(),p.getDurationNonContamination());
+            if(!coc.equals(c) && p.distance(coc,c)<= p.getContaminationRadius() && c.getIndividual() instanceof Healthy){
+                c.setIndividual(new Sick());
+                p.nbSick++;
+                p.nbHealthy--;
+                //Recovered.recover(coc,p.getDurationHealing(),p.getDurationNonContamination());
             }
         }
         // La personne va se rétablir,( fin de la durée de contamination

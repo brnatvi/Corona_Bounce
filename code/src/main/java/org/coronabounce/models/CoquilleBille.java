@@ -14,6 +14,8 @@ public class CoquilleBille {
     private double movingSpeedY;
     private Individual individual;
     private Position p;
+    private final int id;
+    private static int idCpt=0;
     private static Random r = new Random();
 
 
@@ -22,9 +24,17 @@ public class CoquilleBille {
         this.movingSpeedX=speedX;
         this.movingSpeedY=speedY;
         this.individual=individual;
+        id=idCpt++;
     }
     public CoquilleBille(Individual individual){
       this(getRandomMovingSpeed(5),getRandomMovingSpeed(5),individual);
+    }
+
+    public boolean equals(Object o){
+      if(o!= null && o instanceof CoquilleBille){
+        return getId()==((CoquilleBille)(o)).getId();
+      }
+      return false;
     }
 
 
@@ -46,6 +56,7 @@ public class CoquilleBille {
     public Individual getIndividual(){return individual;}
     public void setIndividual(Individual individual){ this.individual=individual;}
     public Position getPosition(){return this.p;}
+    public int getId(){return id;}
     /**
     *{@summary Return a random moving speed between -maxSpeed & maxSpeed.}<br>
     *@param maxSpeed The max speed that can be return.

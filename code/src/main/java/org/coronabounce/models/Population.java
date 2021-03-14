@@ -98,7 +98,7 @@ public class Population implements Displayable {
         double x2 = i2.getPosition().getX();
         double y1 = i1.getPosition().getY();
         double y2 = i2.getPosition().getY();
-        double dist = Math.sqrt((x1 - x2) * (x1 - x2) - (y1 - y2) * (y1 - y2));
+        double dist = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
         return dist;
     }
 
