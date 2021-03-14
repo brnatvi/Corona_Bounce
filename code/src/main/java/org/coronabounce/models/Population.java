@@ -115,7 +115,6 @@ public class Population implements Displayable {
             coc.move();
             //coc.contact(this, durationCovid, healingDuration, durationNonContamination);
         }
-        interaction();
         printPop();
     }
 
