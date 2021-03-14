@@ -26,8 +26,8 @@ import static javafx.scene.paint.Paint.valueOf;
 public class MainController
 {
     private Controllable controller;
-    private Zone zone = null;                              //TODO check it
-    private Displayable model ;                     //TODO check it
+    private Zone zone = null;
+    private Displayable model ;
     private List<CoquilleBille> allPoints;
     private Timeline timeline;
 
@@ -43,6 +43,8 @@ public class MainController
     @FXML Label labelHealthy;
     @FXML Label labelSick;
     @FXML Label labelRecovered;
+
+    //========================= Constructors ==========================================================================/
 
     public MainController()
     {
@@ -65,6 +67,14 @@ public class MainController
         this.sick = new XYChart.Series();
         this.recovered = new XYChart.Series();
     }
+
+    //========================= Getters ===============================================================================/
+
+    public Controllable getController() {
+        return controller;
+    }
+
+    //========================= Own functions =========================================================================/
 
     @FXML
     private void initialize()
@@ -107,15 +117,19 @@ public class MainController
 
     }
 
-    public Controllable getController() {
-        return controller;
-    }
+    //========================= Button's functions ====================================================================/
 
+    /**
+     * Function for button "Settings" - redirect to window settings
+     */
     @FXML
     private void switchToSettings() throws IOException{
         App.setRoot("settings");
     }
 
+    /**
+     * Function for button "Start" - create Timeline and launch function moving() on zone
+     */
     @FXML
     private void launchMoving() throws IOException
     {
@@ -163,5 +177,4 @@ public class MainController
         timeline.play();
         zone.moving();
     }
-
 }

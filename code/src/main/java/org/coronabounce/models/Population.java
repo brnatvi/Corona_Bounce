@@ -102,7 +102,11 @@ public class Population implements Displayable {
         return dist;
     }
 
-
+    public void interaction(){
+        for(CoquilleBille coc:listCoquille){
+            coc.getIndividual().contact(coc,this);
+        }
+    }
     //========================= Prints ================================================================================/
 
     public void printPop() {
@@ -129,9 +133,7 @@ public class Population implements Displayable {
 
     //========================= Population Statistics =================================================================/
 
-   public int getNbIndividus() {
-        return getAllPoints().size();
-    }
+   public int getNbIndividus() { return getAllPoints().size(); }
 
    public int[] countStatistique()
    {
@@ -147,48 +149,9 @@ public class Population implements Displayable {
        return new int[] {health, sick, recover};
    }
 
-   public int getNbHealthy() {
-        //int cpt=0;
-        //for(CoquilleBille coc : listCoquille)
-        //{
-        //    if(coc.getIndividual() instanceof Healthy)
-        //    {
-        //        cpt++;
-        //    }
-        //}
-        //return cpt;
-       return countStatistique()[0];
-    }
+   public int getNbHealthy() { return countStatistique()[0]; }
 
-    public int getNbSick() {
-        //int cpt=0;
-        //for(CoquilleBille coc : listCoquille)
-        //{
-        //    if(coc.getIndividual() instanceof Sick)
-        //    {
-        //        cpt++;
-        //    }
-        //}
-        //return cpt;
-        return countStatistique()[1];
-    }
+   public int getNbSick() { return countStatistique()[1]; }
 
-    public int getNbRecovered() {
-        //int cpt = 0;
-        //for (CoquilleBille coc : listCoquille) {
-        //    if (coc.getIndividual() instanceof Recovered) {
-        //        cpt++;
-        //    }
-        //}
-        //return cpt;
-        return countStatistique()[2];
-    }
-
-
-    public void interaction(){
-        for(CoquilleBille coc:listCoquille){
-         coc.getIndividual().contact(coc,this);
-        }
-    }
-
+   public int getNbRecovered() { return countStatistique()[2]; }
 }
