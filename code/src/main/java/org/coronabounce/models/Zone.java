@@ -12,15 +12,36 @@ public class Zone  {
     private static double width=1;
     private static double height=1;
     private Timer t=new Timer();
-    private TimerTask timerTask;
+    private TimerTask timerTask = null;
 
     public Zone (Controllable controller)
     {
+        System.out.println("Mew zone");
         this.controller = controller;
         setWidth(controller.getSpaceSize()[0]);
         setHeight(controller.getSpaceSize()[1]);
         this.p = new Population(controller, controller.getPersonsCount());
     }
+
+    public void stop(boolean i_bStopTimer)
+    {
+        if (null != this.timerTask)
+        {
+            if (!this.timerTask.cancel())
+            {
+                System.out.println("Can't cancel task!\n");
+            }
+            this.timerTask = null;
+            this.t.purge();
+        }
+
+        if (i_bStopTimer)
+        {
+            this.t.cancel();
+            this.t = null;
+        }
+    }
+
     public static double getWidth() { return width; }
     public static void setWidth(double w){ if(w>=1){width = w;}}
     public static double getHeight() { return height; }
@@ -29,16 +50,16 @@ public class Zone  {
 
 
     public void moving(){
-        this.t=new Timer();
-        this.t.schedule(this.timerTask=new TimerTask() {
+        stop(false);
+        this.t. schedule(this.timerTask=new TimerTask() {
             @Override
             public void run() {
                 //p.interaction(controller.getDurationCovid(),10000, controller.getDurationNonContamination()); // ses informations sont sauvegardé dans Population, on n'as pas besoin de les transmettre a chaque fois.
                 p.interaction();
                 p.printMovement();
+                System.out.println("Task hash:" + this.hashCode());
             }
-        },0,1*100);
-
+        },0,1*33);
     }
 
     public void test(){

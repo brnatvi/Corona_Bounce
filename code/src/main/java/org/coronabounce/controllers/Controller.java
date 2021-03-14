@@ -75,7 +75,7 @@ public class Controller implements Controllable
     public void setDurationHealing(long l){ }
 
     @Override
-    public double getContaminationRadiusDot()
+    public double getRadiusDot()
     {
       return this.RADIUS_DOT;
     }

@@ -26,9 +26,10 @@ import static javafx.scene.paint.Paint.valueOf;
 public class MainController
 {
     private Controllable controller;
-    private Zone zone;                              //TODO check it
+    private Zone zone = null;                              //TODO check it
     private Displayable model ;                     //TODO check it
     private List<CoquilleBille> allPoints;
+    private Timeline timeline;
 
     XYChart.Series healthy;
     XYChart.Series sick;
@@ -45,11 +46,18 @@ public class MainController
 
     public MainController()
     {
+        timeline = null;
+        System.out.println("New controller\n");
         this.controller = new Controller();
         changeController(controller);
     }
 
     public void changeController(Controllable c) {
+        System.out.println("Change controller\n");
+        if (null != this.zone)
+        {
+            this.zone.stop(true);
+        }
         this.zone = new Zone(c);
         this.model = zone.getPopulation();
         this.allPoints = model.getAllPoints();
@@ -85,7 +93,7 @@ public class MainController
             String state = cb.getIndividual().healthState();
             double coordX = cb.getPosition().getX();
             double coordY = cb.getPosition().getY();
-            Circle point = new Circle(coordX, coordY, controller.getContaminationRadiusDot());
+            Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
             if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
             if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
             if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
@@ -111,7 +119,20 @@ public class MainController
     @FXML
     private void launchMoving() throws IOException
     {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(33), ev -> {
+        //System.out.println("Create time line\n");
+        //for (StackTraceElement ste : Thread.currentThread().getStackTrace())
+        //{
+        //    System.out.println(ste);
+        //}
+        //System.out.println("***********************************");
+
+        if (null != timeline)
+        {
+            timeline.stop();
+            timeline = null;
+        }
+
+        timeline = new Timeline(new KeyFrame(Duration.millis(33), ev -> {
             panel.getChildren().retainAll();
 
             // update points
@@ -120,7 +141,7 @@ public class MainController
                 String state = cb.getIndividual().healthState();
                 double coordX = cb.getPosition().getX();
                 double coordY = cb.getPosition().getY();
-                Circle point = new Circle(coordX, coordY, controller.getContaminationRadiusDot());
+                Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
                 if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
                 if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
                 if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
@@ -131,12 +152,12 @@ public class MainController
             labelHealthy.setText(String.valueOf(model.getNbHealthy()));
             labelSick.setText(String.valueOf(model.getNbSick()));
             labelRecovered.setText(String.valueOf(model.getNbRecovered()));
-
+              
             // draw graph
-            healthy.getData().add(new XYChart.Data("", model.getNbIndividus()));                    //TODO doesn't work
+            /*healthy.getData().add(new XYChart.Data("", model.getNbIndividus()));                    //TODO doesn't work
             sick.getData().add(new XYChart.Data("", model.getNbSick()));
             recovered.getData().add(new XYChart.Data("", model.getNbRecovered() + model.getNbSick()));
-
+             */
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
