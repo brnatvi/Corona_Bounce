@@ -103,14 +103,14 @@ public class Population implements Displayable {
     //========================= Prints ================================================================================/
 
     public void printPop() {
-        //int i = 0;
-        //for (CoquilleBille coc : listCoquille) {
-        //    System.out.printf("Individu num : %d de position suivante  %.3f et  %.3f et de etat de sante  %s  Vitesse : %.3f \n", i, coc.getPosition().getX(), coc.getPosition().getY(), coc.getIndividual().healthState(), coc.getMovingSpeed());
-        //    i++;
-        //}
+        int i = 0;
+        for (CoquilleBille coc : listCoquille) {
+            System.out.printf("Individu num : %d de position suivante  %.3f et  %.3f et de etat de sante  %s  Vitesse : %.3f \n", i, coc.getPosition().getX(), coc.getPosition().getY(), coc.getIndividual().healthState(), coc.getMovingSpeed());
+           i++;
+        }
         int count = getNbSick() + getNbRecovered() + getNbHealthy();
-        System.out.println("le nombre des personnes:" + count);
-        //System.out.println("le nombre des personnes contaminées:" + getNbSick() + " de personnes guéries :" + getNbRecovered() + " non contaminées :" + getNbHealthy());
+        //System.out.println("le nombre des personnes:" + count);
+        System.out.println("le nombre des personnes contaminées:" + getNbSick() + " de personnes guéries :" + getNbRecovered() + " non contaminées :" + getNbHealthy());
         //System.out.println("Pourcentage de contamination: " + this.percentageSick() + " %  Pourcentage de guérison :" + this.percentageRecovered() + "% Pourcentage de non contamination est :" + this.percentageHealthy()+" %");
     }
 
@@ -118,7 +118,6 @@ public class Population implements Displayable {
         //System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
         for (CoquilleBille coc : listCoquille) {
             coc.move();
-            //coc.contact(this, durationCovid, healingDuration, durationNonContamination);
         }
         printPop();
     }

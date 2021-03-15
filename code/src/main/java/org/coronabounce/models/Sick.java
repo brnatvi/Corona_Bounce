@@ -1,4 +1,6 @@
 package org.coronabounce.models;
+import org.coronabounce.controllers.Controller;
+
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,22 +16,34 @@ public class Sick extends Individual {
     /**
     *A function that transform to Sick an Individual if :
     *<ul>
-    *<li> It is a different Individual.
+    *<li> It is a  different Individual.
     *<li> It is close to this.
     *<li> It is a Healthy Individual.
     *</ul>
-    *It will update nbSick and nbHealthy Population value.
     */
     public void contaminate(CoquilleBille coc,Population p){
         for(CoquilleBille c : p.getListCoquille()){
             if(!coc.equals(c) && p.distance(coc,c)<= p.getContaminationRadius() && c.getIndividual() instanceof Healthy){
-                c.setIndividual(new Sick());
+                c.setIndividual(new Incubating());
                 //p.nbSick++; //c'est actualisé dans population maintenant
-                //p.nbHealthy--;
                 //Recovered.recover(coc,p.getDurationHealing(),p.getDurationNonContamination());
+                TimerTask timerTask;
+                //become sick after p.getDurationCovid()
+                t.schedule(timerTask=new TimerTask() {
+                    @Override
+                    public void run() {
+                        c.setIndividual(new Sick());
+                    }
+                },p.getDurationCovid());
+                //become Recovered after p.getDurationCovid()+p.getDurationHealing()
+                t.schedule(timerTask=new TimerTask() {
+                    @Override
+                    public void run() {
+                        c.setIndividual(new Recovered());
+                    }
+                },p.getDurationCovid()+p.getDurationHealing());
             }
         }
-        // La personne va se rétablir,( fin de la durée de contamination
     }
     @Override
     public boolean isSick(){return true;}

@@ -1,9 +1,10 @@
 package org.coronabounce.models;
 
 import java.util.Random;
+import java.util.Timer;
 
 public  abstract class Individual {
-
+      public Timer t=new Timer();
     /**
     *{@summary this will return the health state as a string.}
     */
