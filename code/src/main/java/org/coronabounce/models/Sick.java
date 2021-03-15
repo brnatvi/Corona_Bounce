@@ -29,14 +29,14 @@ public class Sick extends Individual {
                 //Recovered.recover(coc,p.getDurationHealing(),p.getDurationNonContamination());
                 TimerTask timerTask;
                 //become sick after p.getDurationCovid()
-                t.schedule(timerTask=new TimerTask() {
+                p.getT().schedule(timerTask=new TimerTask() {
                     @Override
                     public void run() {
                         c.setIndividual(new Sick());
                     }
                 },p.getDurationCovid());
                 //become Recovered after p.getDurationCovid()+p.getDurationHealing()
-                t.schedule(timerTask=new TimerTask() {
+                p.getT().schedule(timerTask=new TimerTask() {
                     @Override
                     public void run() {
                         c.setIndividual(new Recovered());

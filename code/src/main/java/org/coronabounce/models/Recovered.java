@@ -14,7 +14,7 @@ public class Recovered extends Individual{
      public void recover(CoquilleBille coc ,Population p)
     {
         TimerTask timerTask;
-        t.schedule(timerTask=new TimerTask() {
+        p.getT().schedule(timerTask=new TimerTask() {
             @Override
             public void run() {
                 coc.setIndividual(new Healthy());

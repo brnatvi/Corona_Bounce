@@ -1,6 +1,7 @@
 package org.coronabounce.models;
 
 import java.util.Random;
+import java.util.Timer;
 
 public class CoquilleBille {
 
@@ -26,6 +27,9 @@ public class CoquilleBille {
         this.individual=individual;
         id=idCpt++;
     }
+
+
+
     public CoquilleBille(Individual individual){
       this(getRandomMovingSpeed(5),getRandomMovingSpeed(5),individual);
     }

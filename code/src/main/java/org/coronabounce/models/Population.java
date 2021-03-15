@@ -6,12 +6,14 @@ import org.coronabounce.mvcconnectors.Displayable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
 
 public class Population implements Displayable {
 
     private Controllable controller;
     private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();
     private double contaminationRadius;
+    public Timer t=new Timer();
 
     //========================= Constructors ==========================================================================/
 
@@ -40,6 +42,9 @@ public class Population implements Displayable {
     public List<CoquilleBille> getAllPoints() {
         return listCoquille;
     }
+    public Timer getT() {
+        return t;
+        }
 
 
     public void addIndividual(Individual i) {
@@ -119,7 +124,7 @@ public class Population implements Displayable {
         for (CoquilleBille coc : listCoquille) {
             coc.move();
         }
-        printPop();
+        //printPop();
     }
 
     //========================= Population Statistics =================================================================/

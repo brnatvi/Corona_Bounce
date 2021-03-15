@@ -63,8 +63,8 @@ public class Zone  {
     }
 
     public void test(){
-        p.setContaminationRadius(50);
-        p.printPop();
+
+        //p.printPop();
         this.moving();
     }
     /**
