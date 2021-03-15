@@ -1,4 +1,6 @@
 package org.coronabounce.models;
+import org.coronabounce.controllers.Controller;
+
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,10 +25,20 @@ public class Sick extends Individual {
     public void contaminate(CoquilleBille coc,Population p){
         for(CoquilleBille c : p.getListCoquille()){
             if(!coc.equals(c) && p.distance(coc,c)<= p.getContaminationRadius() && c.getIndividual() instanceof Healthy){
-                c.setIndividual(new Sick());
+                //c.setIndividual(new Sick());
                 //p.nbSick++; //c'est actualisé dans population maintenant
                 //p.nbHealthy--;
                 //Recovered.recover(coc,p.getDurationHealing(),p.getDurationNonContamination());
+                TimerTask timerTask;
+                t.schedule(timerTask=new TimerTask() {
+                    @Override
+                    public void run() {
+                        c.setIndividual(new Sick());
+                        //Population.nbRecovered++;
+                        //Population.nbSick--;
+                    }
+                },p.getDurationCovid());
+                c.setIndividual(new Recovered());
             }
         }
         // La personne va se rétablir,( fin de la durée de contamination
