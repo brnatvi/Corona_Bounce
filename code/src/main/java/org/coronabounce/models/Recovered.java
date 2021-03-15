@@ -17,11 +17,12 @@ public class Recovered extends Individual{
         t.schedule(timerTask=new TimerTask() {
             @Override
             public void run() {
+                coc.setIndividual(new Healthy());
                 //coc.setIndividual(new Recovered());
                 //Population.nbRecovered++;
                 //Population.nbSick--;
             }
-        },p.getDurationHealing());
+        },p.getDurationNonContamination());
 
 
     }

@@ -12,15 +12,6 @@ public class Healthy extends Individual {
 
     public  void healing(CoquilleBille coc,Population p)
     {
-        TimerTask timerTask;
-        t.schedule(timerTask=new TimerTask() {
-            @Override
-            public void run() {
-                coc.setIndividual(new Healthy());
-                //Population.nbHealthy++;
-                //Population.nbRecovered--;
-            }
-        },p.getDurationNonContamination());
 
     }
 

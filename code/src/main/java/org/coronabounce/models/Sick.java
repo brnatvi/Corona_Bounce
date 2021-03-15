@@ -30,6 +30,7 @@ public class Sick extends Individual {
                 //p.nbHealthy--;
                 //Recovered.recover(coc,p.getDurationHealing(),p.getDurationNonContamination());
                 TimerTask timerTask;
+
                 t.schedule(timerTask=new TimerTask() {
                     @Override
                     public void run() {
@@ -38,7 +39,17 @@ public class Sick extends Individual {
                         //Population.nbSick--;
                     }
                 },p.getDurationCovid());
-                c.setIndividual(new Recovered());
+
+                t.schedule(timerTask=new TimerTask() {
+                    @Override
+                    public void run() {
+                        c.setIndividual(new Recovered());
+                        //coc.setIndividual(new Recovered());
+                        //Population.nbRecovered++;
+                        //Population.nbSick--;
+                    }
+                },p.getDurationHealing());
+
             }
         }
         // La personne va se rétablir,( fin de la durée de contamination
