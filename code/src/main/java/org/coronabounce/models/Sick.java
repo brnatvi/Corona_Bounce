@@ -20,8 +20,8 @@ public class Sick extends Individual {
       },p.getDurationCovid()+p.getDurationHealing());
     }
 
-    public void contact(CoquilleBille coc,Population p) {
-        contaminate(coc,p);
+    public void contact() {
+        contaminate();
     }
     /**
     *A function that transform to Sick an Individual if :
@@ -31,7 +31,7 @@ public class Sick extends Individual {
     *<li> It is a Healthy Individual.
     *</ul>
     */
-    public void contaminate(CoquilleBille coc,Population p){
+    private void contaminate(){
         for(CoquilleBille c : p.getListCoquille()){
             if(!coc.equals(c) && p.distance(coc,c)<= p.getContaminationRadius() && c.getIndividual() instanceof Healthy){
                 c.setIndividual(new Incubating(c,p));
@@ -42,10 +42,5 @@ public class Sick extends Individual {
     }
     @Override
     public boolean isSick(){return true;}
-    @Override
-    public void updateState(CoquilleBille coc){
-      //TODO if est malade depuis longtemps
-      //coc.setIndividual(new Recovered());
-    }
 
 }

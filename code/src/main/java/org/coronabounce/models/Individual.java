@@ -4,8 +4,8 @@ import java.util.Random;
 import java.util.Timer;
 
 public  abstract class Individual {
-    private CoquilleBille coc;
-    private Population p;
+    protected CoquilleBille coc;
+    protected Population p;
 
     public Individual(CoquilleBille coc, Population p){
       this.coc=coc;
@@ -21,10 +21,10 @@ public  abstract class Individual {
     /**
     *{@summary To Override if we need to have an action in contact.}
     */
-    public void contact (CoquilleBille coc,Population p){}
-
-    public void updateState (CoquilleBille coc){}
+    public void contact (){}
 
     public boolean isSick(){return false;}
+
+    public void setCoc(CoquilleBille coc){this.coc=coc;}
 
 }

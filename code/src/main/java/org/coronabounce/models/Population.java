@@ -105,12 +105,7 @@ public class Population implements Displayable {
 
     public void interaction(){
         for(CoquilleBille coc:listCoquille){
-            coc.getIndividual().contact(coc,this);
-        }
-    }
-    public void updateState(){
-        for(CoquilleBille coc:listCoquille){
-            coc.getIndividual().updateState(coc);
+            coc.getIndividual().contact();
         }
     }
     //========================= Prints ================================================================================/
