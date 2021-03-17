@@ -49,11 +49,14 @@ public class Zone  {
 
 
     public void moving(){
+        /** if we apply this (p.socialDistancing()) with 100persons for example, it is quiet visible that the contamination rate slows down **/
+       //p.socialDistancing();
         stop(false);
         this.t. schedule(this.timerTask=new TimerTask() {
             @Override
             public void run() {
                 //p.interaction(controller.getDurationCovid(),10000, controller.getDurationNonContamination()); // ses informations sont sauvegardé dans Population, on n'as pas besoin de les transmettre a chaque fois.
+
                 p.interaction();
                 //p.updateState();
                 p.printMovement();

@@ -61,6 +61,7 @@ public class CoquilleBille {
     public void setIndividual(Individual individual){ this.individual=individual;}
     public Position getPosition(){return this.p;}
     public int getId(){return id;}
+    public void setMovingSpeed(double Vx, double Vy) { this.movingSpeedX=Vx; this.movingSpeedY=Vy; }
     /**
     *{@summary Return a random moving speed between -maxSpeed & maxSpeed.}<br>
     *@param maxSpeed The max speed that can be return.
