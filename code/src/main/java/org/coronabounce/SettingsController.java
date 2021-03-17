@@ -2,6 +2,7 @@ package org.coronabounce;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
@@ -19,6 +20,7 @@ public class SettingsController
     }
 
     @FXML TextField individualsNumberSettings;
+    @FXML Slider sliderCovidDuration;
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -35,7 +37,9 @@ public class SettingsController
 //        int newIndividualsNumber = 20;
         int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
         c.setPersonsCount(newIndividualsNumber);
+        double newCovidDuration = (sliderCovidDuration.getValue())*1000;
 //        c.setPersonsCount(8);
+        c.setDurationCovid((long)newCovidDuration);
 
 
         mainController.changeController(c);
