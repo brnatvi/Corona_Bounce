@@ -21,6 +21,7 @@ public class SettingsController
 
     @FXML TextField individualsNumberSettings;
     @FXML Slider sliderCovidDuration;
+    @FXML Slider sliderContaminationRadius;
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -40,7 +41,8 @@ public class SettingsController
         double newCovidDuration = (sliderCovidDuration.getValue())*1000;
 //        c.setPersonsCount(8);
         c.setDurationCovid((long)newCovidDuration);
-
+        double newContaminationRadius = (sliderContaminationRadius.getValue());
+        c.setContaminationRadius(newContaminationRadius);
 
         mainController.changeController(c);
         App.setRoot("corona bounce");

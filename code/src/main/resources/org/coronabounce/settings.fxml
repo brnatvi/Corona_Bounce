@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -16,15 +13,8 @@
       <Slider fx:id="sliderCovidDuration" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0" max="6.0" min="2.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
       <Button fx:id="btnApplySettings" layoutX="287.0" layoutY="346.0" mnemonicParsing="false" onMouseClicked="#passSettingsToController" onMousePressed="#passSettingsToController" prefHeight="26.0" prefWidth="84.0" text="Apply" />
       <TextField fx:id="individualsNumberSettings" layoutX="287.0" layoutY="84.0" prefHeight="36.0" prefWidth="53.0" text="0" />
-      <Spinner layoutX="53.0" layoutY="250.0">
-         <opaqueInsets>
-            <Insets bottom="2.0" left="3.0" right="1.0" />
-         </opaqueInsets>
-         <effect>
-            <Glow />
-         </effect></Spinner>
       <Accordion layoutX="36.0" layoutY="45.0" />
-      <Text layoutX="64.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Persons number" wrappingWidth="197.0">
+      <Text layoutX="57.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Persons number" wrappingWidth="197.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -34,15 +24,17 @@
             <Font name="Avenir Book" size="24.0" />
          </font>
       </Text>
-      <Text layoutX="64.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Illness duration" wrappingWidth="237.0">
+      <Text layoutX="57.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Illness duration (in seconds)" wrappingWidth="264.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="64.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contamination radius" wrappingWidth="237.0">
+      <Text layoutX="57.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contamination radius (in pixels)" wrappingWidth="278.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
+      <Accordion layoutX="53.0" layoutY="235.0" />
+      <Slider fx:id="sliderContaminationRadius" layoutX="53.0" layoutY="265.0" majorTickUnit="10.0" max="30.0" min="10.0" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
    </children>
 </AnchorPane>
