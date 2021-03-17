@@ -7,6 +7,17 @@ import java.util.TimerTask;
 
 
 public class Incubating extends Individual {
-    @Override
-    public boolean isSick(){return true;}
+  public Incubating(CoquilleBille coc, Population p){
+    super(coc,p);
+    TimerTask timerTask;
+    //become sick after p.getDurationCovid()
+    p.getT().schedule(timerTask=new TimerTask() {
+        @Override
+        public void run() {
+            coc.setIndividual(new Sick(coc,p));
+        }
+    },p.getDurationCovid());
+  }
+  @Override
+  public boolean isSick(){return true;}
 }

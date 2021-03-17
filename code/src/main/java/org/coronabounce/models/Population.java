@@ -20,16 +20,24 @@ public class Population implements Displayable {
     public Population(Controllable controller, int nbH, int nbS, int nbR) {
         this.controller = controller;
         for (int i = 0; i < nbH; i++) {
-
-            listCoquille.add(new CoquilleBille(new Healthy()));
+            CoquilleBille coc = new CoquilleBille(null);
+            Individual in = new Healthy(coc,this);
+            coc.setIndividual(in);
+            listCoquille.add(coc);
 
         }
         for (int i = 0; i < nbS; i++) {
-            listCoquille.add(new CoquilleBille(new Sick()));
+            CoquilleBille coc = new CoquilleBille(null);
+            Individual in = new Sick(coc,this);
+            coc.setIndividual(in);
+            listCoquille.add(coc);
 
         }
         for (int i = 0; i < nbR; i++) {
-            listCoquille.add(new CoquilleBille(new Recovered()));
+            CoquilleBille coc = new CoquilleBille(null);
+            Individual in = new Recovered(coc,this);
+            coc.setIndividual(in);
+            listCoquille.add(coc);
 
         }
     }

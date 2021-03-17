@@ -4,6 +4,13 @@ import java.util.Random;
 import java.util.Timer;
 
 public  abstract class Individual {
+    private CoquilleBille coc;
+    private Population p;
+
+    public Individual(CoquilleBille coc, Population p){
+      this.coc=coc;
+      this.p=p;
+    }
 
     /**
     *{@summary this will return the health state as a string.}

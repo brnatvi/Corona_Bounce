@@ -8,7 +8,17 @@ import java.util.TimerTask;
 
 public class Sick extends Individual {
 
-
+  public Sick(CoquilleBille coc, Population p){
+      super(coc,p);
+      TimerTask timerTask;
+      //become Recovered after p.getDurationCovid()+p.getDurationHealing()
+      p.getT().schedule(timerTask=new TimerTask() {
+          @Override
+          public void run() {
+              coc.setIndividual(new Recovered(coc,p));
+          }
+      },p.getDurationCovid()+p.getDurationHealing());
+    }
 
     public void contact(CoquilleBille coc,Population p) {
         contaminate(coc,p);
@@ -24,24 +34,9 @@ public class Sick extends Individual {
     public void contaminate(CoquilleBille coc,Population p){
         for(CoquilleBille c : p.getListCoquille()){
             if(!coc.equals(c) && p.distance(coc,c)<= p.getContaminationRadius() && c.getIndividual() instanceof Healthy){
-                c.setIndividual(new Incubating());
+                c.setIndividual(new Incubating(c,p));
                 //p.nbSick++; //c'est actualisé dans population maintenant
                 //Recovered.recover(coc,p.getDurationHealing(),p.getDurationNonContamination());
-                TimerTask timerTask;
-                //become sick after p.getDurationCovid()
-                p.getT().schedule(timerTask=new TimerTask() {
-                    @Override
-                    public void run() {
-                        c.setIndividual(new Sick());
-                    }
-                },p.getDurationCovid());
-                //become Recovered after p.getDurationCovid()+p.getDurationHealing()
-                p.getT().schedule(timerTask=new TimerTask() {
-                    @Override
-                    public void run() {
-                        c.setIndividual(new Recovered());
-                    }
-                },p.getDurationCovid()+p.getDurationHealing());
             }
         }
     }
