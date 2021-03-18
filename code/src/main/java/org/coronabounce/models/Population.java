@@ -1,5 +1,6 @@
 package org.coronabounce.models;
 
+import javafx.beans.value.ObservableNumberValue;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
 
@@ -13,6 +14,10 @@ public class Population implements Displayable {
     private Controllable controller;
     private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();
     private double contaminationRadius;
+    public int nbSick;
+    public int nbHeealthy;
+    public int nbRecovered;
+
     public Timer t=new Timer();
 
     //========================= Constructors ==========================================================================/
@@ -173,9 +178,9 @@ public class Population implements Displayable {
        return new int[] {health, sick, recover};
    }
 
-   public int getNbHealthy() { return countStatistique()[0]; }
+   public int getNbHealthy() { return nbHeealthy; }
 
-   public int getNbSick() { return countStatistique()[1]; }
+   public int getNbSick() { return nbSick; }
 
-   public int getNbRecovered() { return countStatistique()[2]; }
+   public int getNbRecovered() { return nbRecovered; }
 }

@@ -8,15 +8,18 @@ public class Recovered extends Individual{
 
     public Recovered(CoquilleBille coc, Population p){
       super(coc,p);
+       p.nbRecovered++;
       TimerTask timerTask;
       p.getT().schedule(timerTask=new TimerTask() {
           @Override
           public void run() {
               coc.setIndividual(new Healthy(coc,p));
-              //Population.nbRecovered++;
-              //Population.nbSick--;
+              p.nbRecovered --;
+
           }
       },p.getDurationNonContamination());
+
+
     }
 
 }

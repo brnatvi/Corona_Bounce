@@ -8,6 +8,7 @@ public class Healthy extends Individual {
 
     public Healthy(CoquilleBille coc, Population p){
       super(coc,p);
+      p.nbHeealthy++;
     }
     /*@Override
     public void contact(CoquilleBille coc, Population p) {
