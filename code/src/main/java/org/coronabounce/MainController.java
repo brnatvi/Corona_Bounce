@@ -118,7 +118,6 @@ public class MainController
             double coordY1 = cb.getPosition().getY();
             Circle point = new Circle(coordX1, coordY1, controller.getRadiusDot());
             if (state1.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
-            if (state1.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
             if (state1.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
             panel1.getChildren().add(point);
         }
@@ -130,7 +129,6 @@ public class MainController
             double coordY2 = cb.getPosition().getY();
             Circle point = new Circle(coordX2, coordY2, controller.getRadiusDot());
             if (state2.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
-            if (state2.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
             if (state2.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
             panel2.getChildren().add(point);
         }
@@ -192,6 +190,7 @@ public class MainController
                 double coordY = cb.getPosition().getY();
                 Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
                 if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
+                if (state.equals("Incubating")) { point.setFill(valueOf("#ccb2b4")); }    //rose
                 if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
                 if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
                 panel1.getChildren().add(point);
@@ -204,6 +203,7 @@ public class MainController
                 double coordY2 = cb.getPosition().getY();
                 Circle point = new Circle(coordX2, coordY2, controller.getRadiusDot());
                 if (state2.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
+                if (state2.equals("Incubating")) { point.setFill(valueOf("#ccb2b4")); }    //rose
                 if (state2.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
                 if (state2.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
                 panel2.getChildren().add(point);
