@@ -17,7 +17,7 @@ public class Population implements Displayable {
     public int nbSick;
     public int nbHeealthy;
     public int nbRecovered;
-
+    Wall mur= new Wall();
     public Timer t=new Timer();
 
     //========================= Constructors ==========================================================================/
@@ -113,29 +113,37 @@ public class Population implements Displayable {
             coc.getIndividual().contact();
         }
     }
-    public void socialDistancing()
+
+    public void separate()
     {
-        /** See what happens if only a part of the population can move
-        For instance , 1/4 can move and 3/4 can't **/
-
-
-        int cpt=(3*this.getNbIndividus())/4;
-
-            while( cpt> 0)
-            {
-
-                Random r = new Random();
-                int index = r.nextInt(this.getNbIndividus());
-                //make sure to get a new coquille(check if the coquille has already been chosen or not)
-                while(this.listCoquille.get(index).getMovingSpeed()==0) index=r.nextInt(this.getNbIndividus());
-                this.listCoquille.get(index).setMovingSpeed(0,0);
-                cpt--;
-            }
-
-
-
+       for(CoquilleBille coc : listCoquille) {
+          mur.separatePop(coc);
+       }
 
     }
+
+    public void  lockDown()
+    {
+        /** See what happens if only a part of the population can move
+         For instance , 1/4 can move and 3/4 can't **/
+
+
+        int cpt = (3 * this.getNbIndividus()) / 4;
+
+        while (cpt > 0) {
+
+            Random r = new Random();
+            int index = r.nextInt(this.getNbIndividus());
+            //make sure to get a new coquille(check if the coquille has already been chosen or not)
+            while (this.listCoquille.get(index).getMovingSpeed() == 0) index = r.nextInt(this.getNbIndividus());
+            this.listCoquille.get(index).setMovingSpeed(0, 0);
+            cpt--;
+        }
+    }
+
+
+
+
 
 
     //========================= Prints ================================================================================/
@@ -158,6 +166,8 @@ public class Population implements Displayable {
             coc.move();
         }
         //printPop();
+       // System.out.println(Zone.getWidth());
+
     }
 
     //========================= Population Statistics =================================================================/
