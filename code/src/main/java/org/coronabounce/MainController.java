@@ -60,6 +60,7 @@ public class MainController
     }
 
     public void changeController(Controllable c) {
+        if(zone1!=null) {closeTimer();}
         System.out.println("Change controller\n");
         if (null != this.zone1)
         {
@@ -79,6 +80,16 @@ public class MainController
         this.zone2 = new Zone(c);
         this.model2 = zone2.getPopulation();
         this.allPoints2 = model2.getAllPoints();
+    }
+    public void closeTimer(){
+      try{
+          if(zone1==null){return;}
+          zone1.getPopulation().closeTimer();
+          if(zone2==null){return;}
+          zone2.getPopulation().closeTimer();
+      }catch (Exception e) {
+          System.out.println("An error append when trying to stop old Pupolations Timers");
+      }
     }
 
     //========================= Getters ===============================================================================/
@@ -181,7 +192,7 @@ public class MainController
 
             panel1.getChildren().retainAll();
             panel2.getChildren().retainAll();
-            
+
             // update points
             for (CoquilleBille cb : allPoints1)
             {
@@ -235,6 +246,6 @@ public class MainController
     @FXML
     private void resetModel()
     {
-        
+
     }
 }

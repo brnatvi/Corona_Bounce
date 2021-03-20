@@ -10,8 +10,9 @@ public class Sick extends Individual {
 
   public Sick(CoquilleBille coc, Population p){
       super(coc,p);
-        p.nbSick++;
-       // p.nbHeealthy--;
+      p.nbSick++;
+      // p.nbHeealthy--;
+      // System.out.println("new timer task for timer : "+p.getT());//@a
       TimerTask timerTask;
       //become Recovered after p.getDurationCovid()+p.getDurationHealing()
       p.getT().schedule(timerTask=new TimerTask() {
