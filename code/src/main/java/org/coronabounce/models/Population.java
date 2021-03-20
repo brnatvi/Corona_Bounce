@@ -18,12 +18,13 @@ public class Population implements Displayable {
     public int nbHeealthy;
     public int nbRecovered;
     Wall mur= new Wall();
-    public Timer t=new Timer();
+    public Timer timer;
 
     //========================= Constructors ==========================================================================/
 
     public Population(Controllable controller, int nbH, int nbS, int nbR) {
         this.controller = controller;
+        timer = new Timer();
         for (int i = 0; i < nbH; i++) {
             CoquilleBille coc = new CoquilleBille(null);
             Individual in = new Healthy(coc,this);
@@ -55,9 +56,7 @@ public class Population implements Displayable {
     public List<CoquilleBille> getAllPoints() {
         return listCoquille;
     }
-    public Timer getT() {
-        return t;
-        }
+    public Timer getT() {return timer;}
 
 
     public void addIndividual(Individual i) {
@@ -139,6 +138,15 @@ public class Population implements Displayable {
             this.listCoquille.get(index).setMovingSpeed(0, 0);
             cpt--;
         }
+    }
+    /**
+    *Close timer to stop using this population.
+    */
+    public void closeTimer(){
+        if(timer==null){return;}
+        timer.purge();
+        timer.cancel();
+        timer=null;
     }
 
 

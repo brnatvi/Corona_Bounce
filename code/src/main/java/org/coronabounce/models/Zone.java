@@ -11,7 +11,7 @@ public class Zone  {
     private Population p;
     private static double width=1;
     private static double height=1;
-    private Timer t=new Timer();
+    private Timer timer=new Timer();
     private TimerTask timerTask = null;
 
     public Zone (Controllable controller)
@@ -32,12 +32,12 @@ public class Zone  {
                 System.out.println("Can't cancel task!\n");
             }
             this.timerTask = null;
-            this.t.purge();
+            this.timer.purge();
         }
         if (b_StopTimer)
         {
-            this.t.cancel();
-            this.t = null;
+            this.timer.cancel();
+            this.timer = null;
         }
     }
 
@@ -52,14 +52,13 @@ public class Zone  {
         /** if we apply this (p.socialDistancing()) with 100persons for example, it is quiet visible that the contamination rate slows down **/
        // p.lockDown();
         stop(false);
-        this.t. schedule(this.timerTask=new TimerTask() {
+        this.timer.schedule(this.timerTask=new TimerTask() {
             @Override
             public void run() {
                 //p.interaction(controller.getDurationCovid(),10000, controller.getDurationNonContamination()); // ses informations sont sauvegardé dans Population, on n'as pas besoin de les transmettre a chaque fois.
 
         //Pour le mur        //p.separate();
                 p.interaction();
-                //p.updateState();
                 p.printMovement();
                // System.out.println("Task hash:" + this.hashCode());
             }
