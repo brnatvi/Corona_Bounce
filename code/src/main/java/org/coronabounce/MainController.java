@@ -153,19 +153,18 @@ public class MainController
         }
     }
     private String getColor(String state){
-      String r = switch (state){
+      return switch (state){
         case "Healthy" :
-        yield "#A9E0F4";
+        yield "#89FF33";
         case "Incubating" :
-        yield "#ccb2b4";
-        case "Recovered" :
-        yield "#CF7EEE";
+        yield "#DEF120";
         case "Sick" :
-        yield "#830B0B";
+        yield "#FF6000";
+        case "Recovered" :
+        yield "#724100";
         default :
-        yield "#666666";
+        yield "#000000";
       };
-      return r;
     }
 
     @FXML
