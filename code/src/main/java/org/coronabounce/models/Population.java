@@ -142,7 +142,7 @@ public class Population implements Displayable {
     /**
     *Close timer to stop using this population.
     */
-    public void closeTimer(){
+    public void stopTimer(){
         if(timer==null){return;}
         timer.purge();
         timer.cancel();

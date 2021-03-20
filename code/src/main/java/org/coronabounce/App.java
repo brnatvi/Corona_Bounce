@@ -66,7 +66,7 @@ public class App extends Application {
     }
 
     private static Parent loadSettings() throws IOException {
-        // controllerMain.closeTimer();
+        // controllerMain.stopTimer();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("settings.fxml"));
         Parent p = (Parent) fxmlLoader.load();
         controllerSettings = fxmlLoader.getController();

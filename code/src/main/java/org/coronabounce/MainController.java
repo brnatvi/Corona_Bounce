@@ -60,12 +60,8 @@ public class MainController
     }
 
     public void changeController(Controllable c) {
-        if(zone1!=null) {closeTimer();}
+        stopTimer();
         System.out.println("Change controller\n");
-        if (null != this.zone1)
-        {
-            this.zone1.stop(true);
-        }
         this.zone1 = new Zone(c);
         this.model1 = zone1.getPopulation();
         this.allPoints1 = model1.getAllPoints();
@@ -73,20 +69,20 @@ public class MainController
         this.sick = new XYChart.Series();
         this.recovered = new XYChart.Series();
 
-        if (null != this.zone2)
-        {
-            this.zone2.stop(true);
-        }
         this.zone2 = new Zone(c);
         this.model2 = zone2.getPopulation();
         this.allPoints2 = model2.getAllPoints();
     }
-    public void closeTimer(){
+    public void stopTimer(){
       try{
-          if(zone1==null){return;}
-          zone1.getPopulation().closeTimer();
-          if(zone2==null){return;}
-          zone2.getPopulation().closeTimer();
+          if (zone1!=null){
+            zone1.stopTimer(true);
+            zone1.getPopulation().stopTimer();
+          }
+          if (zone2!=null){
+            zone2.stopTimer(true);
+            zone2.getPopulation().stopTimer();
+          }
       }catch (Exception e) {
           System.out.println("An error append when trying to stop old Pupolations Timers");
       }

@@ -23,7 +23,7 @@ public class Zone  {
         this.p = new Population(controller, controller.getPersonsCount());
     }
 
-    public void stop(boolean b_StopTimer)
+    public void stopTimer(boolean b_StopTimer)
     {
         if (null != this.timerTask)
         {
@@ -51,7 +51,7 @@ public class Zone  {
     public void moving(){
         /** if we apply this (p.socialDistancing()) with 100persons for example, it is quiet visible that the contamination rate slows down **/
        // p.lockDown();
-        stop(false);
+        stopTimer(false);
         this.timer.schedule(this.timerTask=new TimerTask() {
             @Override
             public void run() {
