@@ -118,33 +118,54 @@ public class MainController
         graphPanel.setVerticalGridLinesVisible(false);
 
         // init points
-        for (CoquilleBille cb : allPoints1)
-        {
-            String state1 = cb.getIndividual().healthState();
-            double coordX1 = cb.getPosition().getX();
-            double coordY1 = cb.getPosition().getY();
-            Circle point = new Circle(coordX1, coordY1, controller.getRadiusDot());
-            if (state1.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
-            if (state1.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
-            panel1.getChildren().add(point);
-        }
-
-        for (CoquilleBille cb : allPoints2)
-        {
-            String state2 = cb.getIndividual().healthState();
-            double coordX2 = cb.getPosition().getX();
-            double coordY2 = cb.getPosition().getY();
-            Circle point = new Circle(coordX2, coordY2, controller.getRadiusDot());
-            if (state2.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
-            if (state2.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
-            panel2.getChildren().add(point);
-        }
+        drawPopulation(allPoints1,false);
+        drawPopulation(allPoints2,true);
 
         // init statistics
         labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
         labelSick.setText(String.valueOf(model1.getNbSick()));
         labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
 
+    }
+    private void drawPopulation(List<CoquilleBille> lcb, boolean coord2)
+    {
+      for (CoquilleBille cb : lcb)
+      {
+        drawPoint(cb,coord2);
+      }
+    }
+    private void drawPoint(CoquilleBille cb, boolean coord2)
+    {
+        String state = cb.getIndividual().healthState();
+        String color = getColor(state);
+        double coordX = cb.getPosition().getX();
+        double coordY = cb.getPosition().getY();
+        Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
+        point.setFill(valueOf(color));
+        // if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
+        // if (state.equals("Incubating")) { point.setFill(valueOf("#ccb2b4")); }    //rose
+        // if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
+        // if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
+        if (coord2) {
+          panel2.getChildren().add(point);
+        }else{
+          panel1.getChildren().add(point);
+        }
+    }
+    private String getColor(String state){
+      String r = switch (state){
+        case "Healthy" :
+        yield "#A9E0F4";
+        case "Incubating" :
+        yield "#ccb2b4";
+        case "Recovered" :
+        yield "#CF7EEE";
+        case "Sick" :
+        yield "#830B0B";
+        default :
+        yield "#666666";
+      };
+      return r;
     }
 
     @FXML
@@ -190,31 +211,8 @@ public class MainController
             panel2.getChildren().retainAll();
 
             // update points
-            for (CoquilleBille cb : allPoints1)
-            {
-                String state = cb.getIndividual().healthState();
-                double coordX = cb.getPosition().getX();
-                double coordY = cb.getPosition().getY();
-                Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
-                if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
-                if (state.equals("Incubating")) { point.setFill(valueOf("#ccb2b4")); }    //rose
-                if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
-                if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
-                panel1.getChildren().add(point);
-            }
-
-            for (CoquilleBille cb : allPoints2)
-            {
-                String state2 = cb.getIndividual().healthState();
-                double coordX2 = cb.getPosition().getX();
-                double coordY2 = cb.getPosition().getY();
-                Circle point = new Circle(coordX2, coordY2, controller.getRadiusDot());
-                if (state2.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
-                if (state2.equals("Incubating")) { point.setFill(valueOf("#ccb2b4")); }    //rose
-                if (state2.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
-                if (state2.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
-                panel2.getChildren().add(point);
-            }
+            drawPopulation(allPoints1,false);
+            drawPopulation(allPoints2,true);
 
             // update statistics
             labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
