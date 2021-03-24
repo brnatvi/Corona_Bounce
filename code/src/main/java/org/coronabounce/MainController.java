@@ -8,9 +8,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.chart.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -21,7 +25,6 @@ import org.coronabounce.models.CoquilleBille;
 import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
-
 import static javafx.scene.paint.Paint.valueOf;
 
 public class MainController
@@ -48,6 +51,8 @@ public class MainController
     @FXML Label labelHealthy;
     @FXML Label labelSick;
     @FXML Label labelRecovered;
+    @FXML Button btnLegende;
+
 
     //========================= Constructors ==========================================================================/
 
@@ -59,7 +64,8 @@ public class MainController
         changeController(this.controller);
     }
 
-    public void changeController(Controllable c) {
+    public void changeController(Controllable c)
+    {
         stopTimer();
         System.out.println("Change controller\n");
         this.zone1 = new Zone(c);
@@ -73,24 +79,13 @@ public class MainController
         this.model2 = zone2.getPopulation();
         this.allPoints2 = model2.getAllPoints();
     }
-    public void stopTimer(){
-      try{
-          if (zone1!=null){
-            zone1.stopTimer(true);
-            zone1.getPopulation().stopTimer();
-          }
-          if (zone2!=null){
-            zone2.stopTimer(true);
-            zone2.getPopulation().stopTimer();
-          }
-      }catch (Exception e) {
-          System.out.println("An error append when trying to stop old Pupolations Timers");
-      }
-    }
+
+
 
     //========================= Getters ===============================================================================/
 
-    public Controllable getController() {
+    public Controllable getController()
+    {
         return controller;
     }
 
@@ -99,6 +94,15 @@ public class MainController
     @FXML
     private void initialize()
     {
+        Image image = new Image(getClass().getResourceAsStream("images_1.png"));
+        ImageView view = new ImageView(image);
+        Button btnLegend = new Button();
+        btnLegend.setMaxSize(42, 42);
+        btnLegend.setGraphic(view);
+
+        mainPane.getChildren().add(btnLegend);
+
+
         // init graphPanel
         NumberAxis xAxis = new NumberAxis();
         xAxis.setTickLabelsVisible(false);
@@ -110,7 +114,7 @@ public class MainController
         graphPanel.getData().addAll(healthy, sick, recovered);
 
         // fil mainGrid by graphPanel
-        mainGrid.add(graphPanel, 1,0 );
+        mainGrid.add(graphPanel, 1, 0);
         graphPanel.setPrefSize(371, 160);
         graphPanel.setLayoutX(138);
         graphPanel.setLayoutY(59);
@@ -118,8 +122,8 @@ public class MainController
         graphPanel.setVerticalGridLinesVisible(false);
 
         // init points
-        drawPopulation(allPoints1,false);
-        drawPopulation(allPoints2,true);
+        drawPopulation(allPoints1, false);
+        drawPopulation(allPoints2, true);
 
         // init statistics
         labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
@@ -127,46 +131,54 @@ public class MainController
         labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
 
     }
+
     private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel2)
     {
-      for (CoquilleBille cb : lcb)
-      {
-        drawPoint(cb,is_panel2);
-      }
+        for (CoquilleBille cb : lcb)
+        {
+            drawPoint(cb, is_panel2);
+        }
     }
+
     private void drawPoint(CoquilleBille cb, boolean is_panel2)
     {
         String state = cb.getIndividual().healthState();
-       // String color = getColor(state);
         double coordX = cb.getPosition().getX();
         double coordY = cb.getPosition().getY();
         Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
-       // point.setFill(valueOf("#ccb2b4"));
-        if (state.equals("Healthy")) { point.setFill(valueOf("70e000")); }    //light blue
-        if (state.equals("Incubating")) { point.setFill(valueOf("ff1830")); }  //IndianRed
-        if (state.equals("Recovered")) { point.setFill(valueOf("ffd22f")); }  //lilas
-        if (state.equals("Sick")) { point.setFill(valueOf("a80011")); }      // DarkRed
-        if (is_panel2){
-          panel2.getChildren().add(point);
-        }else{
-          panel1.getChildren().add(point);
+        if (state.equals("Healthy")) {point.setFill(valueOf("70e000"));}    //green
+        if (state.equals("Incubating")) {point.setFill(valueOf("ff1830"));}  //red
+        if (state.equals("Recovered")) {point.setFill(valueOf("ffd22f"));}  //yellow
+        if (state.equals("Sick")){point.setFill(valueOf("a80011"));}     // dark red
+        if (is_panel2)
+        {
+            panel2.getChildren().add(point);
+        }
+        else
+        {
+            panel1.getChildren().add(point);
         }
     }
-   /* private String getColor(String state){
-      return switch (state){
-        case "Healthy" :
-        yield "#89FF33";
-        case "Incubating" :
-        yield "#DEF120";
-        case "Sick" :
-        yield "#FF6000";
-        case "Recovered" :
-        yield "#724100";
-        default :
-        yield "#000000";
-      };
-    }*/
 
+    public void stopTimer()
+    {
+        try
+        {
+            if (zone1 != null)
+            {
+                zone1.stopTimer(true);
+                zone1.getPopulation().stopTimer();
+            }
+            if (zone2 != null)
+            {
+                zone2.stopTimer(true);
+                zone2.getPopulation().stopTimer();
+            }
+        } catch (Exception e)
+        {
+            System.out.println("An error append when trying to stop old Pupolations Timers");
+        }
+    }
 
     //========================= Button's functions ====================================================================/
 
@@ -198,15 +210,16 @@ public class MainController
             timeline = null;
         }
 
-        timeline = new Timeline(new KeyFrame(Duration.millis(33), ev -> {
+        timeline = new Timeline(new KeyFrame(Duration.millis(33), ev ->
+        {
 
 
             panel1.getChildren().retainAll();
             panel2.getChildren().retainAll();
 
             // update points
-            drawPopulation(allPoints1,false);
-            drawPopulation(allPoints2,true);
+            drawPopulation(allPoints1, false);
+            drawPopulation(allPoints2, true);
 
             // update statistics
             labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
@@ -214,10 +227,10 @@ public class MainController
             labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
 
             // draw graph
-            /*healthy.getData().add(new XYChart.Data("", model.getNbIndividus()));                    //TODO doesn't work
-            sick.getData().add(new XYChart.Data("", model.getNbSick()));
-            recovered.getData().add(new XYChart.Data("", model.getNbRecovered() + model.getNbSick()));
-            */
+            healthy.getData().add(new XYChart.Data("", model1.getNbIndividus()));                    //TODO doesn't work
+            sick.getData().add(new XYChart.Data("", model1.getNbSick()));
+            recovered.getData().add(new XYChart.Data("", model1.getNbRecovered() + model1.getNbSick()));
+
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
@@ -234,6 +247,23 @@ public class MainController
     @FXML
     private void resetModel()
     {
+
+    }
+
+    //========================= Enother elements's functions ==========================================================/
+
+    @FXML
+    private void showLegend()
+    {
+
+    }
+
+    private void makeLegend()
+    {
+        Pane legend = new Pane();
+        legend.setStyle("-fx-background-color: white;");
+        legend.setPrefSize(200, 100);
+        
 
     }
 }
