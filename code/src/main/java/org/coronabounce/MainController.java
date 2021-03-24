@@ -137,11 +137,11 @@ public class MainController
     private void drawPoint(CoquilleBille cb, boolean coord2)
     {
         String state = cb.getIndividual().healthState();
-        String color = getColor(state);
+       // String color = getColor(state);
         double coordX = cb.getPosition().getX();
         double coordY = cb.getPosition().getY();
         Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
-        point.setFill(valueOf(color));
+        point.setFill(valueOf("#ccb2b4"));
         // if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
         // if (state.equals("Incubating")) { point.setFill(valueOf("#ccb2b4")); }    //rose
         // if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
@@ -152,7 +152,7 @@ public class MainController
           panel1.getChildren().add(point);
         }
     }
-    private String getColor(String state){
+   /* private String getColor(String state){
       return switch (state){
         case "Healthy" :
         yield "#89FF33";
@@ -165,7 +165,7 @@ public class MainController
         default :
         yield "#000000";
       };
-    }
+    }*/
 
     @FXML
     private void closeAction(ActionEvent evt)

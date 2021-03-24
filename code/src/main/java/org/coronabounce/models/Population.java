@@ -13,12 +13,11 @@ public class Population implements Displayable {
 
     private Controllable controller;
     private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();
-    private double contaminationRadius;
     public int nbSick;
     public int nbHeealthy;
     public int nbRecovered;
     Wall mur= new Wall();
-    public Timer timer;
+    private Timer timer;
 
     //========================= Constructors ==========================================================================/
 
