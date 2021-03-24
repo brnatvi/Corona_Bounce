@@ -142,10 +142,10 @@ public class MainController
         double coordY = cb.getPosition().getY();
         Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
        // point.setFill(valueOf("#ccb2b4"));
-        if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
-        if (state.equals("Incubating")) { point.setFill(valueOf("#CD5C5C")); }  //IndianRed
-        if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
-        if (state.equals("Sick")) { point.setFill(valueOf("#8B0000")); }      // DarkRed
+        if (state.equals("Healthy")) { point.setFill(valueOf("70e000")); }    //light blue
+        if (state.equals("Incubating")) { point.setFill(valueOf("ff1830")); }  //IndianRed
+        if (state.equals("Recovered")) { point.setFill(valueOf("ffd22f")); }  //lilas
+        if (state.equals("Sick")) { point.setFill(valueOf("a80011")); }      // DarkRed
         if (is_panel2){
           panel2.getChildren().add(point);
         }else{
