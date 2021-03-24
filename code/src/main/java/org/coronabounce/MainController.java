@@ -141,11 +141,11 @@ public class MainController
         double coordX = cb.getPosition().getX();
         double coordY = cb.getPosition().getY();
         Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
-        point.setFill(valueOf("#ccb2b4"));
-        // if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
-        // if (state.equals("Incubating")) { point.setFill(valueOf("#ccb2b4")); }    //rose
-        // if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
-        // if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
+        //point.setFill(valueOf("#ccb2b4"));
+        if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
+         if (state.equals("Incubating")) { point.setFill(valueOf("#ccb2b4")); }    //rose
+         if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
+         if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
         if (coord2) {
           panel2.getChildren().add(point);
         }else{
