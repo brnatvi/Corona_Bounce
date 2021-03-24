@@ -127,26 +127,26 @@ public class MainController
         labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
 
     }
-    private void drawPopulation(List<CoquilleBille> lcb, boolean coord2)
+    private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel2)
     {
       for (CoquilleBille cb : lcb)
       {
-        drawPoint(cb,coord2);
+        drawPoint(cb,is_panel2);
       }
     }
-    private void drawPoint(CoquilleBille cb, boolean coord2)
+    private void drawPoint(CoquilleBille cb, boolean is_panel2)
     {
         String state = cb.getIndividual().healthState();
        // String color = getColor(state);
         double coordX = cb.getPosition().getX();
         double coordY = cb.getPosition().getY();
         Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
-        //point.setFill(valueOf("#ccb2b4"));
+       // point.setFill(valueOf("#ccb2b4"));
         if (state.equals("Healthy")) { point.setFill(valueOf("#A9E0F4")); }    //light blue
-         if (state.equals("Incubating")) { point.setFill(valueOf("#ccb2b4")); }    //rose
-         if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
-         if (state.equals("Sick")) { point.setFill(valueOf("#830B0B")); }      // red-brown
-        if (coord2) {
+        if (state.equals("Incubating")) { point.setFill(valueOf("#CD5C5C")); }  //IndianRed
+        if (state.equals("Recovered")) { point.setFill(valueOf("#CF7EEE")); }  //lilas
+        if (state.equals("Sick")) { point.setFill(valueOf("#8B0000")); }      // DarkRed
+        if (is_panel2){
           panel2.getChildren().add(point);
         }else{
           panel1.getChildren().add(point);
@@ -167,11 +167,6 @@ public class MainController
       };
     }*/
 
-    @FXML
-    private void closeAction(ActionEvent evt)
-    {
-        System.exit(0);
-    }
 
     //========================= Button's functions ====================================================================/
 
