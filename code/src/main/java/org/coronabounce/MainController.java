@@ -104,10 +104,10 @@ public class MainController
 
 
         // init graphPanel
-        NumberAxis xAxis = new NumberAxis();
+        NumberAxis xAxis = new NumberAxis(0, 160, 1);
         xAxis.setTickLabelsVisible(false);
         xAxis.setTickMarkVisible(false);
-        NumberAxis yAxis = new NumberAxis(0, model1.getNbIndividus(), 1);
+        NumberAxis yAxis = new NumberAxis(0, 100, 1);
         yAxis.setTickLabelsVisible(false);
         yAxis.setTickMarkVisible(false);
         AreaChart graphPanel = new AreaChart(xAxis, yAxis);
@@ -213,7 +213,6 @@ public class MainController
         timeline = new Timeline(new KeyFrame(Duration.millis(33), ev ->
         {
 
-
             panel1.getChildren().retainAll();
             panel2.getChildren().retainAll();
 
@@ -227,9 +226,14 @@ public class MainController
             labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
 
             // draw graph
-            healthy.getData().add(new XYChart.Data("", model1.getNbIndividus()));                    //TODO doesn't work
-            sick.getData().add(new XYChart.Data("", model1.getNbSick()));
-            recovered.getData().add(new XYChart.Data("", model1.getNbRecovered() + model1.getNbSick()));
+            model1.saveStatToData();
+          //  for (int i = 0; i < model1.getData().getNmbr(); i++)
+          //  {
+          //      healthy.getData().add(new XYChart.Data(i, 100));
+          //      sick.getData().add(new XYChart.Data(i, model1.getData().getSick(i)));
+          //      recovered.getData().add(new XYChart.Data(i, model1.getData().getRecovered(i)));
+          //  }
+
 
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
