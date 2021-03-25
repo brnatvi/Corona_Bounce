@@ -1,5 +1,7 @@
 package org.coronabounce.mvcconnectors;
 
+import org.coronabounce.data.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,9 @@ public interface Displayable
      */
     public int getNbRecovered();
 
+    public void saveStatToData();
 
+    public Data getData();
 
     //======================================== Second Priority ========================================================//
 

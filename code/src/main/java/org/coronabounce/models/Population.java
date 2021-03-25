@@ -1,20 +1,18 @@
 package org.coronabounce.models;
 
-import javafx.beans.value.ObservableNumberValue;
+import org.coronabounce.data.Data;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Timer;
+import java.util.*;
 
 public class Population implements Displayable {
 
     private Controllable controller;
     private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();
+    private Data data;
     public int nbSick;
-    public int nbHeealthy;
+    public int nbHealthy;
     public int nbRecovered;
     Wall mur= new Wall();
     private Timer timer;
@@ -23,6 +21,7 @@ public class Population implements Displayable {
 
     public Population(Controllable controller, int nbH, int nbS, int nbR) {
         this.controller = controller;
+        data = new Data();
         timer = new Timer();
         for (int i = 0; i < nbH; i++) {
             CoquilleBille coc = new CoquilleBille(null);
@@ -149,10 +148,6 @@ public class Population implements Displayable {
     }
 
 
-
-
-
-
     //========================= Prints ================================================================================/
 
     public void printPop() {
@@ -181,23 +176,29 @@ public class Population implements Displayable {
 
    public int getNbIndividus() { return getAllPoints().size(); }
 
-   public int[] countStatistique()
-   {
-       int health = 0;
-       int sick = 0;
-       int recover = 0;
-       for(CoquilleBille coc : listCoquille)
-       {
-           if (coc.getIndividual() instanceof Healthy) { health++; }
-           if (coc.getIndividual() instanceof Sick) { sick++; }
-           if (coc.getIndividual() instanceof Recovered) { recover++; }
-       }
-       return new int[] {health, sick, recover};
-   }
-
-   public int getNbHealthy() { return nbHeealthy; }
+   public int getNbHealthy() { return nbHealthy; }
 
    public int getNbSick() { return nbSick; }
 
    public int getNbRecovered() { return nbRecovered; }
+
+    @Override
+    public void saveStatToData()
+    {
+        getT().schedule(new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                data.setData(100, 100 * (nbSick + nbRecovered)/controller.getPersonsCount(), 100 * nbRecovered/controller.getPersonsCount());
+            }
+        }, 0, 900);
+    }
+
+    @Override
+    public Data getData()
+    {
+        return this.data;
+    }
+    
 }

@@ -6,7 +6,7 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #7e5c;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.coronabounce.MainController">
    <children>
-      <HBox layoutY="6.0" prefHeight="32.0" prefWidth="1000.0" AnchorPane.topAnchor="6.0">
+      <HBox layoutY="6.0" prefHeight="32.0" prefWidth="730.0" AnchorPane.topAnchor="6.0">
          <children>
             <Button fx:id="btnStart" mnemonicParsing="false" onMouseClicked="#launchMoving" prefHeight="30.0" prefWidth="159.0" text="Start">
                <font>
