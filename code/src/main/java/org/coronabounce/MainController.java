@@ -6,12 +6,10 @@ import java.util.List;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -52,6 +50,11 @@ public class MainController
     @FXML Label labelHealthy;
     @FXML Label labelSick;
     @FXML Label labelRecovered;
+    @FXML MenuItem scenario_1_1;
+    @FXML MenuItem scenario_1_2;
+    @FXML MenuItem scenario_2_1;
+    @FXML MenuItem scenario_2_2;
+
 
     //========================= Constructors ==========================================================================/
 
@@ -215,6 +218,34 @@ public class MainController
         launchDrawGraph();
         zone1.moving();
         zone2.moving();
+    }
+
+    /**
+     * Functions for scenarios
+     */
+
+    public void performAction(ActionEvent actionEvent) throws IOException {
+
+        MenuItem target  = (MenuItem) actionEvent.getSource();
+        System.out.println("Clicked On Item:"+target.getId());
+
+        Controllable c = new Controller();
+        c.setPersonsCount(99);
+
+        changeController(c);
+        App.setRoot("corona bounce");
+    }
+
+    public void performAction2(ActionEvent actionEvent) throws IOException {
+
+        MenuItem target  = (MenuItem) actionEvent.getSource();
+        System.out.println("Clicked On Item:"+target.getId());
+
+        Controllable c = new Controller();
+        c.setPersonsCount(150);
+
+        changeController(c);
+        App.setRoot("corona bounce");
     }
 
     /**
