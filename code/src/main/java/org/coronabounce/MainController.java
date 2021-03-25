@@ -99,7 +99,7 @@ public class MainController
         Button btnLegend = new Button();
         btnLegend.setMaxSize(42, 42);
         btnLegend.setGraphic(view);
-
+        btnLegend.setLayoutX(940);                      //mainPane.getWidth()
         mainPane.getChildren().add(btnLegend);
 
 
@@ -260,9 +260,6 @@ public class MainController
 
     }
 
-    //========================= Enother elements's functions ==========================================================/
-
-    @FXML
     private void showLegend()
     {
 
