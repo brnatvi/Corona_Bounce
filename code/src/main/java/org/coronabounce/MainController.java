@@ -1,6 +1,7 @@
 package org.coronabounce;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.animation.Animation;
@@ -18,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
+import org.coronabounce.data.Data;
 import org.coronabounce.models.CoquilleBille;
 import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
@@ -207,13 +209,6 @@ public class MainController
     @FXML
     private void launchMoving() throws IOException
     {
-        //System.out.println("Create time line\n");
-        //for (StackTraceElement ste : Thread.currentThread().getStackTrace())
-        //{
-        //    System.out.println(ste);
-        //}
-        //System.out.println("***********************************");
-
         launchPointsAndStat();
         launchDrawGraph();
         zone1.moving();
@@ -301,18 +296,34 @@ public class MainController
         sick.getData().retainAll();
         recovered.getData().retainAll();
 
-        tlGraph = new Timeline(new KeyFrame(Duration.millis(1000), ev ->
+        model1.saveStatToData();
+
+        tlGraph = new Timeline(new KeyFrame(Duration.millis(100), ev ->
         {
+           // long startTime = System.currentTimeMillis();
+
+            healthy.getData().clear();
+            sick.getData().clear();
+            recovered.getData().clear();
+
+            ArrayList<Data.Slice> History = model1.getData().getFifo();
+
             // draw graph
-            for (int i = 0; i < model1.getData().getNmbr(); i++)
+            int x = 0;
+            for (Data.Slice Slice : History)
             {
-                healthy.getData().add(new XYChart.Data(i, 100));
-                sick.getData().add(new XYChart.Data(i, model1.getData().getSick(i)));
-                recovered.getData().add(new XYChart.Data(i, model1.getData().getRecovered(i)));
+                healthy.getData().add(new XYChart.Data(x, 100));
+                sick.getData().add(new XYChart.Data(x, Slice.getPrcSick()));
+                recovered.getData().add(new XYChart.Data(x, Slice.getPrcRecovered()));
+                x++;
             }
-            healthy.getData().retainAll();
-            sick.getData().retainAll();
-            recovered.getData().retainAll();
+
+           // long stopTime = System.currentTimeMillis();
+           // long diff = stopTime - startTime;
+           // System.out.println("Difference: " + diff);
+
+            System.out.println("Graph Thread: " + Thread.currentThread().getId());
+
         }));
         tlGraph.setCycleCount(Animation.INDEFINITE);
         tlGraph.play();
@@ -333,7 +344,6 @@ public class MainController
             // update points
             drawPopulation(points1, false);
             drawPopulation(points2, true);
-            model1.saveStatToData();
 
             // update statistics
             labelHealthy.setText(String.valueOf(model1.getNbHealthy()));

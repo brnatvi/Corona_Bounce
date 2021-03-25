@@ -61,6 +61,7 @@ public class Zone  {
                 p.interaction();
                 p.printMovement();
                // System.out.println("Task hash:" + this.hashCode());
+               //System.out.println("Moving thread: " + Thread.currentThread().getName());
             }
         },0,1*33);
     }
