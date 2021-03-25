@@ -11,11 +11,7 @@ public class Sick extends Individual {
   public Sick(CoquilleBille coc, Population p){
       super(coc,p);
       p.nbSick++;
-      // p.nbHeealthy--;
-      // System.out.println("new timer task for timer : "+p.getT());//@a
-      TimerTask timerTask;
-      //become Recovered after p.getDurationCovid()+p.getDurationHealing()
-      p.getT().schedule(timerTask=new TimerTask() {
+      p.getT().schedule(new TimerTask() {
           @Override
           public void run() {
               coc.setIndividual(new Recovered(coc,p));
@@ -26,7 +22,7 @@ public class Sick extends Individual {
 
     }
 
-    public void contact() {
+    public void contacts() {
         contaminate();
     }
     /**
@@ -41,8 +37,6 @@ public class Sick extends Individual {
         for(CoquilleBille c : p.getListCoquille()){
             if(!coc.equals(c) && p.distance(coc,c)<= p.getContaminationRadius() && c.getIndividual() instanceof Healthy){
                 c.setIndividual(new Incubating(c,p));
-                //p.nbSick++; //c'est actualisé dans population maintenant
-                //Recovered.recover(coc,p.getDurationHealing(),p.getDurationNonContamination());
             }
         }
     }

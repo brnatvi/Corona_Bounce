@@ -68,27 +68,19 @@ public class Population implements Displayable {
     public long getDurationCovid() {
         return controller.getDurationCovid();
     }
-    public void setDurationCovid(long l) {
-        controller.setDurationCovid(l);
-    }
+
     public long getDurationNonContamination() {
         return controller.getDurationNonContamination();
     }
-    public void setDurationNonContamination(long l) {
-        controller.setDurationNonContamination(l);
-    }
+
     public long getDurationHealing() {
         return controller.getDurationHealing();
     }
-    public void setDurationHealing(long l) {
-        controller.setDurationHealing(l);
-    }
+
     public double getContaminationRadius() {
       return controller.getContaminationRadius();
     }
-    public void setContaminationRadius(double d) {
-        controller.setContaminationRadius(d);
-    }
+
     public List<CoquilleBille> getListCoquille() {
         return this.listCoquille;
     }
@@ -107,7 +99,7 @@ public class Population implements Displayable {
 
     public void interaction(){
         for(CoquilleBille coc:listCoquille){
-            coc.getIndividual().contact();
+            coc.getIndividual().contacts();
         }
     }
 
@@ -167,8 +159,7 @@ public class Population implements Displayable {
         for (CoquilleBille coc : listCoquille) {
             coc.move();
         }
-        //printPop();
-       // System.out.println(Zone.getWidth());
+
 
     }
 

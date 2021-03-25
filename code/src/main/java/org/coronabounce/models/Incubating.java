@@ -1,18 +1,12 @@
 package org.coronabounce.models;
-import org.coronabounce.controllers.Controller;
 
-import java.util.Random;
-import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class Incubating extends Individual {
   public Incubating(CoquilleBille coc, Population p){
     super(coc,p);
-
-    TimerTask timerTask;
-
-    p.getT().schedule(timerTask=new TimerTask() {
+    p.getT().schedule(new TimerTask() {
         @Override
         public void run() {
             coc.setIndividual(new Sick(coc,p));

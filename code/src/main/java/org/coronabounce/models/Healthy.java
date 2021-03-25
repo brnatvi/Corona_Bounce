@@ -10,13 +10,4 @@ public class Healthy extends Individual {
       super(coc,p);
       p.nbHealthy++;
     }
-    /*@Override
-    public void contact(CoquilleBille coc, Population p) {
-        healing(coc,p);
-    }
-
-    public  void healing(CoquilleBille coc,Population p)
-    {
-
-    }*/
 }
