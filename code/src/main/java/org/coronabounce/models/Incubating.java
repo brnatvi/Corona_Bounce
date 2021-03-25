@@ -16,7 +16,7 @@ public class Incubating extends Individual {
         @Override
         public void run() {
             coc.setIndividual(new Sick(coc,p));
-           p.nbHeealthy--;
+           p.nbHealthy--;
         }
     },p.getDurationCovid());
   }
