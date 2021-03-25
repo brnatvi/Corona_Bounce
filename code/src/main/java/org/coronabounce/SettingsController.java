@@ -1,12 +1,11 @@
 package org.coronabounce;
 
 import java.io.IOException;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Spinner;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.mvcconnectors.Controllable;
 
@@ -22,6 +21,7 @@ public class SettingsController
     @FXML TextField individualsNumberSettings;
     @FXML Slider sliderCovidDuration;
     @FXML Slider sliderContaminationRadius;
+
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -48,14 +48,16 @@ public class SettingsController
         App.setRoot("corona bounce");
     }
 
-//    @FXML
-//    public int individualsNumberSettings () {
-//        return 0;
-//    }
-//
+    public void performAction(ActionEvent actionEvent) throws IOException {
 
-//    public TextField individualsNumberSettings;
+        MenuItem target  = (MenuItem) actionEvent.getSource();
+        System.out.println("Clicked On Item:"+target.getId());
 
+        Controllable c = new Controller();
+        c.setPersonsCount(99);
 
+        mainController.changeController(c);
+        App.setRoot("corona bounce");
+    }
 
 }

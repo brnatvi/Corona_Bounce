@@ -190,9 +190,13 @@ public class Population implements Displayable {
             @Override
             public void run()
             {
+                long a = System.currentTimeMillis();
+                long b =  scheduledExecutionTime();
                 data.setData(100, 100 * (nbSick + nbRecovered)/controller.getPersonsCount(), 100 * nbRecovered/controller.getPersonsCount());
+
+                System.out.println("SaveHistory thread: " + Thread.currentThread().getName());
             }
-        }, 0, 900);
+        }, 0, 100);
     }
 
     @Override
