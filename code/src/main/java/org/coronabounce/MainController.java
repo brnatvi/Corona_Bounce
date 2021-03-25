@@ -6,9 +6,8 @@ import java.util.List;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -19,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
@@ -35,10 +35,10 @@ public class MainController
     private Zone zone2 = null;
     private Displayable model1;
     private Displayable model2;
-    private List<CoquilleBille> allPoints1;
-    private List<CoquilleBille> allPoints2;
-    private Timeline timeline;
-    private Timeline timelineGr;
+    private List<CoquilleBille> points1;
+    private List<CoquilleBille> points2;
+    private Timeline tlPoints;
+    private Timeline tlGraph;
     private Button btnLegend;
 
     XYChart.Series healthy;
@@ -61,7 +61,7 @@ public class MainController
 
     public MainController()
     {
-        this.timeline = null;
+        this.tlPoints = null;
         System.out.println("New controller\n");
         this.controller = new Controller();
         changeController(this.controller);
@@ -73,14 +73,15 @@ public class MainController
         System.out.println("Change controller\n");
         this.zone1 = new Zone(c);
         this.model1 = zone1.getPopulation();
-        this.allPoints1 = model1.getAllPoints();
+        this.points1 = model1.getAllPoints();
+
         this.healthy = new XYChart.Series();
         this.sick = new XYChart.Series();
         this.recovered = new XYChart.Series();
 
         this.zone2 = new Zone(c);
         this.model2 = zone2.getPopulation();
-        this.allPoints2 = model2.getAllPoints();
+        this.points2 = model2.getAllPoints();
     }
 
 
@@ -107,7 +108,7 @@ public class MainController
 
 
         // init graphPanel
-        NumberAxis xAxis = new NumberAxis(0, 160, 1);
+        NumberAxis xAxis = new NumberAxis(0, model1.getData().getNmbr(), 1);
         xAxis.setTickLabelsVisible(false);
         xAxis.setTickMarkVisible(false);
         NumberAxis yAxis = new NumberAxis(0, 100, 1);
@@ -125,8 +126,8 @@ public class MainController
         graphPanel.setVerticalGridLinesVisible(false);
 
         // init points
-        drawPopulation(allPoints1, false);
-        drawPopulation(allPoints2, true);
+        drawPopulation(points1, false);
+        drawPopulation(points2, true);
 
         // init statistics
         labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
@@ -179,26 +180,11 @@ public class MainController
             }
         } catch (Exception e)
         {
-            System.out.println("An error append when trying to stop old Pupolations Timers");
+            System.out.println("An error occurred when trying to stop old Populations Timers");
         }
     }
 
     //========================= Button's functions ====================================================================/
-
-    /**
-     * Function for button "Settings" - redirect to window settings
-     */
-    @FXML
-    private void switchToSettings() throws IOException
-    {
-        if (null != timeline)
-        {
-            timeline.stop();
-            timeline = null;
-        }
-        stopTimer();
-        App.setRoot("settings");
-    }
 
     /**
      * Function for button "Start" - create Timeline and launch function moving() on zone
@@ -213,57 +199,25 @@ public class MainController
         //}
         //System.out.println("***********************************");
 
-
-        if (null != timeline)
-        {
-            timeline.stop();
-            timeline = null;
-        }
-
-        timeline = new Timeline(new KeyFrame(Duration.millis(33), ev ->
-        {
-
-            panel1.getChildren().retainAll();
-            panel2.getChildren().retainAll();
-
-            // update points
-            drawPopulation(allPoints1, false);
-            drawPopulation(allPoints2, true);
-
-            // update statistics
-            labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
-            labelSick.setText(String.valueOf(model1.getNbSick()));
-            labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
-        }));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
+        launchPointsAndStat();
+        launchDrawGraph();
         zone1.moving();
         zone2.moving();
-
-        launchDrawGraph();
     }
 
-    private void launchDrawGraph()
+    /**
+     * Function for button "Settings" - redirect to window settings
+     */
+    @FXML
+    private void switchToSettings() throws IOException
     {
-        if (null != timelineGr)
+        if (null != tlPoints)
         {
-            timelineGr.stop();
-            timelineGr = null;
+            tlPoints.stop();
+            tlPoints = null;
         }
-        
-        timelineGr = new Timeline(new KeyFrame(Duration.millis(1000), ev ->
-        {
-        // draw graph
-        model1.saveStatToData();
-        for (int i = 0; i < model1.getData().getNmbr(); i++)
-        {
-            healthy.getData().add(new XYChart.Data(i, 100));
-            sick.getData().add(new XYChart.Data(i, model1.getData().getSick(i)));
-            recovered.getData().add(new XYChart.Data(i, model1.getData().getRecovered(i)));
-        }
-        }));
-        timelineGr.setCycleCount(Animation.INDEFINITE);
-        timelineGr.play();
+        stopTimer();
+        App.setRoot("settings");
     }
 
     @FXML
@@ -277,10 +231,77 @@ public class MainController
     {
 
     }
-
+    
     private void showLegend()
     {
 
+    }
+
+    //========================= Button's auxiliary functions ==========================================================/
+
+    /**
+     * Timeline launcher for drawing the graphs in AreaChart
+     */
+    private void launchDrawGraph()
+    {
+        stopTimeLine(tlGraph);
+        healthy.getData().retainAll();
+        sick.getData().retainAll();
+        recovered.getData().retainAll();
+
+        tlGraph = new Timeline(new KeyFrame(Duration.millis(1000), ev ->
+        {
+            // draw graph
+            for (int i = 0; i < model1.getData().getNmbr(); i++)
+            {
+                healthy.getData().add(new XYChart.Data(i, 100));
+                sick.getData().add(new XYChart.Data(i, model1.getData().getSick(i)));
+                recovered.getData().add(new XYChart.Data(i, model1.getData().getRecovered(i)));
+            }
+            healthy.getData().retainAll();
+            sick.getData().retainAll();
+            recovered.getData().retainAll();
+        }));
+        tlGraph.setCycleCount(Animation.INDEFINITE);
+        tlGraph.play();
+    }
+
+    /**
+     * Timeline launcher to draw moving points and update statistics
+     */
+    private void launchPointsAndStat()
+    {
+        stopTimeLine(tlPoints);
+
+        tlPoints = new Timeline(new KeyFrame(Duration.millis(33), ev ->
+        {
+            panel1.getChildren().retainAll();
+            panel2.getChildren().retainAll();
+
+            // update points
+            drawPopulation(points1, false);
+            drawPopulation(points2, true);
+            model1.saveStatToData();
+
+            // update statistics
+            labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
+            labelSick.setText(String.valueOf(model1.getNbSick()));
+            labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
+        }));
+        tlPoints.setCycleCount(Animation.INDEFINITE);
+        tlPoints.play();
+    }
+
+    /**
+     * Timeline interrupter
+     */
+    private void stopTimeLine(Timeline t)
+    {
+        if (null != t)
+        {
+            t.stop();
+            t = null;
+        }
     }
 
     private void makeLegend()
