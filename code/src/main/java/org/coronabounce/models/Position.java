@@ -1,5 +1,7 @@
 package org.coronabounce.models;
 
+import org.coronabounce.controllers.Controller;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,9 +27,9 @@ public class Position {
 
     public void setPos(double x, double y) {
       if(x<0){x=0;}
-      else if(x>Zone.getWidth()){x=Zone.getWidth();}
+      else if(x> Controller.getWidth()){x=Controller.getWidth();}
       if(y<0){y=0;}
-      else if(y>Zone.getHeight()){y=Zone.getHeight();}
+      else if(y>Controller.getHeight()){y=Controller.getHeight();}
       this.posX = x;
       this.posY = y;
         /*if (x >= 10 && x <= Zone.getWidth() && y >= 10 && y <= Zone.getHeight()) {
@@ -40,22 +42,22 @@ public class Position {
     public Position() {
 
         Random r = new Random();
-        this.posX = Math.abs(r.nextInt((int) Zone.getWidth()));
-        this.posY = Math.abs(r.nextInt((int) Zone.getHeight()));
+        this.posX = Math.abs(r.nextInt((int) Controller.getWidth()));
+        this.posY = Math.abs(r.nextInt((int) Controller.getHeight()));
 
 
 
         while( !isEmpty(posX,posY))
         {
 
-            this.posX = Math.abs(r.nextInt((int) Zone.getWidth()));
-            this.posY = Math.abs(r.nextInt((int) Zone.getHeight()));
+            this.posX = Math.abs(r.nextInt((int) Controller.getWidth()));
+            this.posY = Math.abs(r.nextInt((int) Controller.getHeight()));
         }
 
     }
 
     public Position(double PosX, double PosY) {
-        if (PosX <= Zone.getWidth() && PosY <= Zone.getHeight()) {
+        if (PosX <= Controller.getWidth() && PosY <= Controller.getHeight()) {
             this.posX = PosX;
             this.posY = PosY;
         } else {

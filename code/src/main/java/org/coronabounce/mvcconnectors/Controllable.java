@@ -9,7 +9,6 @@ public interface Controllable
      * @param w, h - width, height
      */
     public void setSpaceSize(double w, double h);
-
     /**
      * Get width and height of field from controller
      * @return width, height in simple array

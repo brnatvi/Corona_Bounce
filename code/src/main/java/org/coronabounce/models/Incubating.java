@@ -9,9 +9,9 @@ import java.util.TimerTask;
 public class Incubating extends Individual {
   public Incubating(CoquilleBille coc, Population p){
     super(coc,p);
-    //p.nbHeealthy--;
+
     TimerTask timerTask;
-    //become sick after p.getDurationCovid()
+
     p.getT().schedule(timerTask=new TimerTask() {
         @Override
         public void run() {

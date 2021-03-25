@@ -1,5 +1,6 @@
 package org.coronabounce.models;
 
+import org.coronabounce.controllers.Controller;
 import org.coronabounce.mvcconnectors.Controllable;
 
 import java.util.Timer;
@@ -7,10 +8,8 @@ import java.util.TimerTask;
 
 public class Zone  {
 
-    private Controllable controller;
+    private final Controllable controller;
     private Population p;
-    private static double width=1;
-    private static double height=1;
     private Timer timer=new Timer();
     private TimerTask timerTask = null;
 
@@ -18,8 +17,8 @@ public class Zone  {
     {
         System.out.println("Mew zone");
         this.controller = controller;
-        setWidth(controller.getSpaceSize()[0]);
-        setHeight(controller.getSpaceSize()[1]);
+        //setWidth(controller.getSpaceSize()[0]);
+        //setHeight(controller.getSpaceSize()[1]);
         this.p = new Population(controller, controller.getPersonsCount());
     }
 
@@ -41,10 +40,10 @@ public class Zone  {
         }
     }
 
-    public static double getWidth() { return width; }
-    public static void setWidth(double w){ if(w>=1){width = w;}}
-    public static double getHeight() { return height; }
-    public static void setHeight(double h) { if(h>=1){height = h;}}
+   //public static double getWidth() { return ; }
+    ////public static void setWidth(double w){ if(w>=1){width = w;}}
+    //public static double getHeight() { return height; }
+    //public static void setHeight(double h) { if(h>=1){height = h;}}
     public Population getPopulation() {return p;}
 
 
@@ -67,22 +66,10 @@ public class Zone  {
     }
 
     public void test(){
-
-        //p.printPop();
         this.moving();
     }
     /**
     *{@summary Return true if x coordinate is out the the Zone.}
     */
-    public static boolean outOfX(double x){
-      if(x<=0 || x>=width){return true;}
-      return false;
-    }
-    /**
-    *{@summary Return true if y coordinate is out the the Zone.}
-    */
-    public static boolean outOfY(double y){
-      if(y<=0 || y>=height){return true;}
-      return false;
-    }
+
 }

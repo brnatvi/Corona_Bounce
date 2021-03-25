@@ -6,8 +6,8 @@ public class Controller implements Controllable
 {
     //these constants are initials and will be changed during the changing the settings of program in GUI
 
-    private double WIDTH = 465;                       // population space size (width)
-    private double HEIGTH = 290;                      // population space size (height)
+    private  static double WIDTH = 465;                       // population space size (width)
+    private  static double HEIGTH = 290;                      // population space size (height)
     private int COUNT =50;                           // population size
     private double CONTAMINATION_RADIUS = 10;         // radius of contamination
     private long DURATION_COVID = 3000;               // has contact <-> sick  //TODO compare and converge with parameters in Population
@@ -80,4 +80,13 @@ public class Controller implements Controllable
       return this.RADIUS_DOT;
     }
 
+    public static double getWidth() {
+        return WIDTH;
+    }
+
+    public  static double getHeight() {
+        return HEIGTH;
+    }
+    public static void setHeight(double h) { if(h>=1){HEIGTH = h;}}
+    public static void setWidth(double w){ if(w>=1){WIDTH = w;}}
 }

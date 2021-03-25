@@ -1,5 +1,7 @@
 package org.coronabounce.models;
 
+import org.coronabounce.controllers.Controller;
+
 import java.util.Random;
 import java.util.Timer;
 
@@ -40,17 +42,27 @@ public class CoquilleBille {
       }
       return false;
     }
-
+    public static boolean outOfX(double x){
+        if(x<=0 || x>= Controller.getWidth()){return true;}
+        return false;
+    }
+    /**
+     *{@summary Return true if y coordinate is out the the Zone.}
+     */
+    public static boolean outOfY(double y){
+        if(y<=0 || y>= Controller.getHeight()){return true;}
+        return false;
+    }
 
     /**
     *{@summary The moving funtion.}<br>
     *Speed will be modify if this hurt a limit of the map.
     */
     public void move(){
-        if (Zone.outOfX(p.getX())) {
+        if (outOfX(p.getX())) {
           movingSpeedX*=-1;
         }
-        if (Zone.outOfY(p.getY())) {
+        if (outOfY(p.getY())) {
           movingSpeedY*=-1;
         }
         this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
