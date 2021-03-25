@@ -188,6 +188,12 @@ public class MainController
     @FXML
     private void switchToSettings() throws IOException
     {
+        if (null != timeline)
+        {
+            timeline.stop();
+            timeline = null;
+        }
+        stopTimer();
         App.setRoot("settings");
     }
 
