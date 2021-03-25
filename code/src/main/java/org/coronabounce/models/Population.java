@@ -115,13 +115,13 @@ public class Population implements Displayable {
     {
         /** See what happens if only a part of the population can move
          For instance , 1/4 can move and 3/4 can't **/
-
-
-        int cpt = (3 * this.getNbIndividus()) / 4;
+        Random r = new Random();
+        int prctg=r.nextInt(100);
+        int cpt = (prctg * this.getNbIndividus()) / 100;
 
         while (cpt > 0) {
 
-            Random r = new Random();
+
             int index = r.nextInt(this.getNbIndividus());
             //make sure to get a new coquille(check if the coquille has already been chosen or not)
             while (this.listCoquille.get(index).getMovingSpeed() == 0) index = r.nextInt(this.getNbIndividus());

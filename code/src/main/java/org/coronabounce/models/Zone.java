@@ -17,8 +17,7 @@ public class Zone  {
     {
         System.out.println("Mew zone");
         this.controller = controller;
-        //setWidth(controller.getSpaceSize()[0]);
-        //setHeight(controller.getSpaceSize()[1]);
+
         this.p = new Population(controller, controller.getPersonsCount());
     }
 
@@ -40,10 +39,7 @@ public class Zone  {
         }
     }
 
-   //public static double getWidth() { return ; }
-    ////public static void setWidth(double w){ if(w>=1){width = w;}}
-    //public static double getHeight() { return height; }
-    //public static void setHeight(double h) { if(h>=1){height = h;}}
+
     public Population getPopulation() {return p;}
 
 
@@ -51,7 +47,7 @@ public class Zone  {
         /** if we apply this (p.socialDistancing()) with 100persons for example, it is quiet visible that the contamination rate slows down **/
        // p.lockDown();
         stopTimer(false);
-        this.timer.schedule(this.timerTask=new TimerTask() {
+        this.timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 //p.interaction(controller.getDurationCovid(),10000, controller.getDurationNonContamination()); // ses informations sont sauvegardé dans Population, on n'as pas besoin de les transmettre a chaque fois.
@@ -59,8 +55,7 @@ public class Zone  {
         //Pour le mur        //p.separate();
                 p.interaction();
                 p.printMovement();
-               // System.out.println("Task hash:" + this.hashCode());
-               //System.out.println("Moving thread: " + Thread.currentThread().getName());
+
             }
         },0,1*33);
     }

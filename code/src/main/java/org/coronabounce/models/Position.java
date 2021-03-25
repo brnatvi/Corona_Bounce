@@ -32,10 +32,7 @@ public class Position {
       else if(y>Controller.getHeight()){y=Controller.getHeight();}
       this.posX = x;
       this.posY = y;
-        /*if (x >= 10 && x <= Zone.getWidth() && y >= 10 && y <= Zone.getHeight()) {
-            this.posX = x;
-            this.posY = y;
-        }*/
+
 
     }
 
