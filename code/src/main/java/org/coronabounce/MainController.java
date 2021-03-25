@@ -7,7 +7,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -18,7 +17,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
@@ -55,8 +53,6 @@ public class MainController
     @FXML Label labelSick;
     @FXML Label labelRecovered;
 
-
-
     //========================= Constructors ==========================================================================/
 
     public MainController()
@@ -84,8 +80,6 @@ public class MainController
         this.points2 = model2.getAllPoints();
     }
 
-
-
     //========================= Getters ===============================================================================/
 
     public Controllable getController()
@@ -93,7 +87,7 @@ public class MainController
         return controller;
     }
 
-    //========================= Own functions =========================================================================/
+    //========================= Initialisation ========================================================================/
 
     @FXML
     private void initialize()
@@ -164,6 +158,11 @@ public class MainController
         }
     }
 
+    //=============================== Interrupters ====================================================================/
+
+    /**
+     * Timeline interrupter
+     */
     public void stopTimer()
     {
         try
@@ -183,6 +182,19 @@ public class MainController
             System.out.println("An error occurred when trying to stop old Populations Timers");
         }
     }
+
+    /**
+     * Timeline interrupter
+     */
+    private void stopTimeLine(Timeline t)
+    {
+        if (null != t)
+        {
+            t.stop();
+            t = null;
+        }
+    }
+
 
     //========================= Button's functions ====================================================================/
 
@@ -220,18 +232,27 @@ public class MainController
         App.setRoot("settings");
     }
 
+    /**
+     * Function for button "Pause"
+     */
     @FXML
     private void makePause()
     {
 
     }
 
+    /**
+     * Function for button "Reset"
+     */
     @FXML
     private void resetModel()
     {
 
     }
-    
+
+    /**
+     * Function for button "?"
+     */
     private void showLegend()
     {
 
@@ -290,18 +311,6 @@ public class MainController
         }));
         tlPoints.setCycleCount(Animation.INDEFINITE);
         tlPoints.play();
-    }
-
-    /**
-     * Timeline interrupter
-     */
-    private void stopTimeLine(Timeline t)
-    {
-        if (null != t)
-        {
-            t.stop();
-            t = null;
-        }
     }
 
     private void makeLegend()
