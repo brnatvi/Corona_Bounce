@@ -13,6 +13,7 @@ import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -37,6 +38,8 @@ public class MainController
     private List<CoquilleBille> allPoints1;
     private List<CoquilleBille> allPoints2;
     private Timeline timeline;
+    private Timeline timelineGr;
+    private Button btnLegend;
 
     XYChart.Series healthy;
     XYChart.Series sick;
@@ -51,7 +54,7 @@ public class MainController
     @FXML Label labelHealthy;
     @FXML Label labelSick;
     @FXML Label labelRecovered;
-    @FXML Button btnLegende;
+
 
 
     //========================= Constructors ==========================================================================/
@@ -96,7 +99,7 @@ public class MainController
     {
         Image image = new Image(getClass().getResourceAsStream("images_1.png"));
         ImageView view = new ImageView(image);
-        Button btnLegend = new Button();
+        this.btnLegend = new Button();
         btnLegend.setMaxSize(42, 42);
         btnLegend.setGraphic(view);
         btnLegend.setLayoutX(940);                      //mainPane.getWidth()
@@ -210,6 +213,7 @@ public class MainController
         //}
         //System.out.println("***********************************");
 
+
         if (null != timeline)
         {
             timeline.stop();
@@ -230,22 +234,36 @@ public class MainController
             labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
             labelSick.setText(String.valueOf(model1.getNbSick()));
             labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
-
-            // draw graph
-            model1.saveStatToData();
-          //  for (int i = 0; i < model1.getData().getNmbr(); i++)
-          //  {
-          //      healthy.getData().add(new XYChart.Data(i, 100));
-          //      sick.getData().add(new XYChart.Data(i, model1.getData().getSick(i)));
-          //      recovered.getData().add(new XYChart.Data(i, model1.getData().getRecovered(i)));
-          //  }
-
-
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
         zone1.moving();
         zone2.moving();
+
+        launchDrawGraph();
+    }
+
+    private void launchDrawGraph()
+    {
+        if (null != timelineGr)
+        {
+            timelineGr.stop();
+            timelineGr = null;
+        }
+        
+        timelineGr = new Timeline(new KeyFrame(Duration.millis(1000), ev ->
+        {
+        // draw graph
+        model1.saveStatToData();
+        for (int i = 0; i < model1.getData().getNmbr(); i++)
+        {
+            healthy.getData().add(new XYChart.Data(i, 100));
+            sick.getData().add(new XYChart.Data(i, model1.getData().getSick(i)));
+            recovered.getData().add(new XYChart.Data(i, model1.getData().getRecovered(i)));
+        }
+        }));
+        timelineGr.setCycleCount(Animation.INDEFINITE);
+        timelineGr.play();
     }
 
     @FXML
@@ -270,7 +288,7 @@ public class MainController
         Pane legend = new Pane();
         legend.setStyle("-fx-background-color: white;");
         legend.setPrefSize(200, 100);
-        
+        TextArea desc = new TextArea();
 
     }
 }

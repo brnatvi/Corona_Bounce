@@ -192,7 +192,7 @@ public class Population implements Displayable {
             {
                 data.setData(100, 100 * (nbSick + nbRecovered)/controller.getPersonsCount(), 100 * nbRecovered/controller.getPersonsCount());
             }
-        }, 0, 100);
+        }, 10, 1000);
     }
 
     @Override
