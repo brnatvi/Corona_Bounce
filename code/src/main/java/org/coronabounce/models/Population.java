@@ -88,14 +88,7 @@ public class Population implements Displayable {
 
     //========================= Points Interactions ===================================================================/
 
-    public double distance(CoquilleBille i1, CoquilleBille i2) {
-        double x1 = i1.getPosition().getX();
-        double x2 = i2.getPosition().getX();
-        double y1 = i1.getPosition().getY();
-        double y2 = i2.getPosition().getY();
-        return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
-    }
 
     public void Contacts(){
         for(CoquilleBille coc:listCoquille){
@@ -138,7 +131,14 @@ public class Population implements Displayable {
         timer.cancel();
         timer=null;
     }
+    public double distance(CoquilleBille i1, CoquilleBille i2) {
+        double x1 = i1.getPosition().getX();
+        double x2 = i2.getPosition().getX();
+        double y1 = i1.getPosition().getY();
+        double y2 = i2.getPosition().getY();
+        return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
+    }
 
     //========================= Prints ================================================================================/
 
