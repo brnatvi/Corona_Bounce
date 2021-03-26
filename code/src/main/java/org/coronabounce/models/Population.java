@@ -97,9 +97,9 @@ public class Population implements Displayable {
 
     }
 
-    public void interaction(){
+    public void Contacts(){
         for(CoquilleBille coc:listCoquille){
-            coc.getIndividual().contacts();
+            coc.getIndividual().agitSur();
         }
     }
 

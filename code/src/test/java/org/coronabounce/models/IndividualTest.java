@@ -53,11 +53,11 @@ public class IndividualTest extends Assertions{
     assertTrue(coc1.getIndividual().isSick());
     assertTrue(!coc2.getIndividual().isSick());
     c.setContaminationRadius(0.2);
-    p.interaction();
+    p.Contacts();
     assertTrue(coc1.getIndividual().isSick());
     assertTrue(!coc2.getIndividual().isSick());
     c.setContaminationRadius(10);
-    p.interaction();
+    p.Contacts();
     assertTrue(coc1.getIndividual().isSick());
     assertTrue(coc2.getIndividual().isSick());
   }

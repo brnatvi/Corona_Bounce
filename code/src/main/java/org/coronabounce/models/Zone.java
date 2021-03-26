@@ -1,6 +1,5 @@
 package org.coronabounce.models;
 
-import org.coronabounce.controllers.Controller;
 import org.coronabounce.mvcconnectors.Controllable;
 
 import java.util.Timer;
@@ -53,7 +52,7 @@ public class Zone  {
                 //p.interaction(controller.getDurationCovid(),10000, controller.getDurationNonContamination()); // ses informations sont sauvegardé dans Population, on n'as pas besoin de les transmettre a chaque fois.
 
         //Pour le mur        //p.separate();
-                p.interaction();
+                p.Contacts();
                 p.printMovement();
 
             }

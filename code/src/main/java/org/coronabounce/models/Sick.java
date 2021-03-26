@@ -22,7 +22,7 @@ public class Sick extends Individual {
 
     }
 
-    public void contacts() {
+    public void agitSur() {
         contaminate();
     }
     /**
