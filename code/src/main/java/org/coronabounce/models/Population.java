@@ -104,6 +104,24 @@ public class Population implements Displayable {
 
     }
 
+
+    /**
+    *Close timer to stop using this population.
+    */
+    public void stopTimer(){
+        if(timer==null){return;}
+        timer.purge();
+        timer.cancel();
+        timer=null;
+    }
+    public double distance(CoquilleBille i1, CoquilleBille i2) {
+        double x1 = i1.getPosition().getX();
+        double x2 = i2.getPosition().getX();
+        double y1 = i1.getPosition().getY();
+        double y2 = i2.getPosition().getY();
+        return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+
+    }
     public void  lockDown()
     {
         /** See what happens if only a part of the population can move
@@ -121,23 +139,6 @@ public class Population implements Displayable {
             this.listCoquille.get(index).setMovingSpeed(0, 0);
             cpt--;
         }
-    }
-    /**
-    *Close timer to stop using this population.
-    */
-    public void stopTimer(){
-        if(timer==null){return;}
-        timer.purge();
-        timer.cancel();
-        timer=null;
-    }
-    public double distance(CoquilleBille i1, CoquilleBille i2) {
-        double x1 = i1.getPosition().getX();
-        double x2 = i2.getPosition().getX();
-        double y1 = i1.getPosition().getY();
-        double y2 = i2.getPosition().getY();
-        return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-
     }
 
     //========================= Prints ================================================================================/
