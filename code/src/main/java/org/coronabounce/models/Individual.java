@@ -21,7 +21,7 @@ public  abstract class Individual {
     /**
     *{@summary To Override if we need to have an action in contact.}
     */
-    public void contacts(){}
+    public void agitSur(){}
 
     public boolean isSick(){return false;}
 

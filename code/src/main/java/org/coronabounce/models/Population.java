@@ -88,18 +88,11 @@ public class Population implements Displayable {
 
     //========================= Points Interactions ===================================================================/
 
-    public double distance(CoquilleBille i1, CoquilleBille i2) {
-        double x1 = i1.getPosition().getX();
-        double x2 = i2.getPosition().getX();
-        double y1 = i1.getPosition().getY();
-        double y2 = i2.getPosition().getY();
-        double dist = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-        return dist;
-    }
 
-    public void interaction(){
+
+    public void Contacts(){
         for(CoquilleBille coc:listCoquille){
-            coc.getIndividual().contacts();
+            coc.getIndividual().agitSur();
         }
     }
 
@@ -111,6 +104,24 @@ public class Population implements Displayable {
 
     }
 
+
+    /**
+    *Close timer to stop using this population.
+    */
+    public void stopTimer(){
+        if(timer==null){return;}
+        timer.purge();
+        timer.cancel();
+        timer=null;
+    }
+    public double distance(CoquilleBille i1, CoquilleBille i2) {
+        double x1 = i1.getPosition().getX();
+        double x2 = i2.getPosition().getX();
+        double y1 = i1.getPosition().getY();
+        double y2 = i2.getPosition().getY();
+        return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+
+    }
     public void  lockDown()
     {
         /** See what happens if only a part of the population can move
@@ -129,16 +140,6 @@ public class Population implements Displayable {
             cpt--;
         }
     }
-    /**
-    *Close timer to stop using this population.
-    */
-    public void stopTimer(){
-        if(timer==null){return;}
-        timer.purge();
-        timer.cancel();
-        timer=null;
-    }
-
 
     //========================= Prints ================================================================================/
 
@@ -149,7 +150,6 @@ public class Population implements Displayable {
            i++;
         }
         int count = getNbSick() + getNbRecovered() + getNbHealthy();
-        //System.out.println("le nombre des personnes:" + count);
         System.out.println("le nombre des personnes contaminées:" + getNbSick() + " de personnes guéries :" + getNbRecovered() + " non contaminées :" + getNbHealthy());
         //System.out.println("Pourcentage de contamination: " + this.percentageSick() + " %  Pourcentage de guérison :" + this.percentageRecovered() + "% Pourcentage de non contamination est :" + this.percentageHealthy()+" %");
     }

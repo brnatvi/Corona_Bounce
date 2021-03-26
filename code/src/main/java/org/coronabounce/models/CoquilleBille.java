@@ -20,17 +20,20 @@ public class CoquilleBille {
     private final int id;
     private static int idCpt=0;
     private static Random r = new Random();
-
+    private final Position startingPosition;
 
     public CoquilleBille(double speedX,double speedY, Individual individual){
         this.p=new Position();
+        startingPosition=p;
         this.movingSpeedX=speedX;
         this.movingSpeedY=speedY;
         this.individual=individual;
         id=idCpt++;
     }
 
-
+    public Position getStartingPosition() {
+        return startingPosition;
+    }
 
     public CoquilleBille(Individual individual){
       this(getRandomMovingSpeed(5),getRandomMovingSpeed(5),individual);
