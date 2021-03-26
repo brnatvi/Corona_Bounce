@@ -179,7 +179,7 @@ public class Population implements Displayable {
         getT().schedule(new TimerTask()
         {
             @Override
-            public void run()
+            public synchronized void run()
             {
                 long a = System.currentTimeMillis();
                 long b =  scheduledExecutionTime();
@@ -195,5 +195,5 @@ public class Population implements Displayable {
     {
         return this.data;
     }
-    
+
 }

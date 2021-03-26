@@ -289,7 +289,7 @@ public class MainController
     /**
      * Timeline launcher for drawing the graphs in AreaChart
      */
-    private void launchDrawGraph()
+    private synchronized void launchDrawGraph()
     {
         stopTimeLine(tlGraph);
         healthy.getData().retainAll();

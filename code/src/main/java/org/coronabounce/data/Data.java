@@ -37,8 +37,8 @@ public class Data
     }
 
     public int getNmbr() { return this.nmbr; }
-    
-    public void setData(int healthy, int sick, int rec)
+
+    public synchronized void setData(int healthy, int sick, int rec)
     {
         if (fifo.size() >= nmbr)
         {
