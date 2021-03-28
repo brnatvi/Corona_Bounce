@@ -33,6 +33,13 @@ public class App extends Application {
 
         scene = new Scene(parentMain, 1000, 600);
         stage.setScene(scene);
+
+        stage.setMinHeight(600);
+        stage.setMinWidth(900);
+
+        stage.setMaxHeight(650);
+        stage.setMaxWidth(1000);
+
         stage.show();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
