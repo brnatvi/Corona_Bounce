@@ -16,6 +16,8 @@ public class Population implements Displayable {
     public int nbRecovered;
     Wall mur= new Wall();
     private Timer timer;
+    private boolean hasWall=false;
+
 
     //========================= Constructors ==========================================================================/
 
@@ -49,8 +51,7 @@ public class Population implements Displayable {
     public Population(Controllable controller, int nbIndividus) {
         this(controller, nbIndividus - 5, 5, 0);
     }
-
-
+    public Population(){/*this(null,0,0,0);*/}
     public List<CoquilleBille> getAllPoints() {
         return listCoquille;
     }
@@ -141,6 +142,12 @@ public class Population implements Displayable {
         }
     }
 
+
+
+
+
+
+
     //========================= Prints ================================================================================/
 
     public void printPop() {
@@ -165,6 +172,13 @@ public class Population implements Displayable {
 
     //========================= Population Statistics =================================================================/
 
+
+    public void setWall() {
+        this.hasWall=true;
+
+    }
+
+    public boolean thereisWall(){ return this.hasWall;}
    public int getNbIndividus() { return getAllPoints().size(); }
 
    public int getNbHealthy() { return nbHealthy; }

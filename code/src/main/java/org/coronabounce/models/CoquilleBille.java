@@ -1,6 +1,7 @@
 package org.coronabounce.models;
 
 import org.coronabounce.controllers.Controller;
+import org.coronabounce.mvcconnectors.Controllable;
 
 import java.util.Random;
 import java.util.Timer;
@@ -14,6 +15,7 @@ public class CoquilleBille {
     /**
     * A moving speed in y to move faster or slower.
     */
+
     private double movingSpeedY;
     private Individual individual;
     private Position p;
@@ -22,6 +24,9 @@ public class CoquilleBille {
     private static Random r = new Random();
     private final Position startingPosition;
 
+    private Population pop=new Population();
+
+
     public CoquilleBille(double speedX,double speedY, Individual individual){
         this.p=new Position();
         startingPosition=p;
@@ -29,6 +34,8 @@ public class CoquilleBille {
         this.movingSpeedY=speedY;
         this.individual=individual;
         id=idCpt++;
+
+
     }
 
     public Position getStartingPosition() {
@@ -63,9 +70,13 @@ public class CoquilleBille {
     */
     public void move(){
         bounceIfOutOfZone();
-        bounceIfHitAWall();
-        this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
+       if (pop.thereisWall()) {
+           bounceIfHitAWall();
+           return;
+       }
+       this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
     }
+
     /**
     *{@summary bounce if this hit a wall.}<br>
     */
@@ -75,6 +86,22 @@ public class CoquilleBille {
       double curentY = p.getY();
       double futurY = curentY+movingSpeedY;
       //TODO parcourir la liste des murs et si futurX ou futurY est de l'autre coté d'un mur faire rebondir.
+// Le mur fait rebondir la boule dès qu'elle est à une distance <=1
+        /* Si la boule etait une position inférieure à l'emplacement du mur et que sa futur position est plus grande
+           On l'a fait rebondir*/
+        if(curentX<(Controller.getWidth())/2  && futurX>=Controller.getWidth()/2)
+            p.setPos(Controller.getWidth()/2-1,futurY);
+
+
+        else if(curentX>Controller.getWidth()/2 && futurX<=Controller.getWidth()/2)
+            p.setPos(Controller.getWidth()/2+1,futurY);
+
+
+
+
+        else this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
+
+
     }
 
     /**
