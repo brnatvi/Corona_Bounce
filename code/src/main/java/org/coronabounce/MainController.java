@@ -115,6 +115,7 @@ public class MainController
         yAxis.setTickMarkVisible(false);
         AreaChart graphPanel = new AreaChart(xAxis, yAxis);
         graphPanel.getData().addAll(healthy, sick, recovered);
+        graphPanel.setCreateSymbols(false);
 
         // fil mainGrid by graphPanel
         mainGrid.add(graphPanel, 1, 0);

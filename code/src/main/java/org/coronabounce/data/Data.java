@@ -44,7 +44,7 @@ public class Data
 
     //========================= Own functions =========================================================================/
 
-    public void setData(int healthy, int sick, int rec)
+    public void setData(int sick, int rec)
     {
         this.Lock();
         if (fifo.size() >= nmbr)

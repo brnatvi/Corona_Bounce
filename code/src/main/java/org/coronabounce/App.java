@@ -14,6 +14,7 @@ import org.coronabounce.mvcconnectors.Controllable;
 
 import java.io.IOException;
 
+
 /**
  * JavaFX App
  */
@@ -32,15 +33,17 @@ public class App extends Application {
         ((SettingsController) controllerSettings).setMainController(controllerMain);
 
         scene = new Scene(parentMain, 1000, 600);
+
+        scene.getStylesheets().add(getClass().getResource("style.css").toString());
         stage.setScene(scene);
 
         stage.setMinHeight(600);
         stage.setMinWidth(900);
-
         stage.setMaxHeight(650);
         stage.setMaxWidth(1000);
 
         stage.show();
+
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
