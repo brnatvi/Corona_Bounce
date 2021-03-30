@@ -286,6 +286,15 @@ public class MainController
 
     //========================= Button's auxiliary functions ==========================================================/
 
+    private int choosePeriod()
+    {
+        if (controller.getPersonsCount() <= 100)
+        {
+            return 100;
+        }
+        return 500;
+    }
+
     /**
      * Timeline launcher for drawing the graphs in AreaChart
      */
@@ -298,7 +307,7 @@ public class MainController
 
         model1.saveStatToData();
 
-        tlGraph = new Timeline(new KeyFrame(Duration.millis(100), ev ->
+        tlGraph = new Timeline(new KeyFrame(Duration.millis(choosePeriod()), ev ->
         {
             long startTime = System.currentTimeMillis();
 
