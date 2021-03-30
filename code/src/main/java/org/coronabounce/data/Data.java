@@ -1,18 +1,17 @@
 package org.coronabounce.data;
 
-import java.util.ArrayList;
+import java.util.Vector;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Data
 {
     public class Slice
     {
-        private int prcHealthy;
         private int prcSick;
         private int prcRecovered;
 
-        private Slice(int h, int s, int r)
+        private Slice(int s, int r)
         {
-            this.prcHealthy = h;
             this.prcSick = s;
             this.prcRecovered = r;
         }
@@ -23,27 +22,40 @@ public class Data
     }
 
     private int nmbr;
-    private ArrayList<Slice> fifo;
+    private Vector<Slice> fifo;
+    final ReentrantLock lock = new ReentrantLock();
+
+    //========================== Constructor ==========================================================================/
 
     public Data()
     {
         this.nmbr = 120;
-        this.fifo = new ArrayList<Slice>();
+        this.fifo = new Vector<Slice>();
     }
 
-    public ArrayList<Slice> getFifo()
+    //========================= Getters ===============================================================================/
+
+    public int getNmbr() { return this.nmbr; }
+
+    public Vector<Slice> getFifo()
     {
         return this.fifo;
     }
 
-    public int getNmbr() { return this.nmbr; }
+    //========================= Own functions =========================================================================/
 
-    public synchronized void setData(int healthy, int sick, int rec)
+    public void setData(int healthy, int sick, int rec)
     {
+        this.Lock();
         if (fifo.size() >= nmbr)
         {
             fifo.remove(0);
         }
-        fifo.add(new Slice(healthy, sick, rec));
+        fifo.add(new Slice(sick, rec));
+        this.unLock();
     }
+
+    public void Lock() {lock.lock();}
+
+    public void unLock() {lock.unlock();}
 }

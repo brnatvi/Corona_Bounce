@@ -1,8 +1,8 @@
 package org.coronabounce;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -300,13 +300,15 @@ public class MainController
 
         tlGraph = new Timeline(new KeyFrame(Duration.millis(100), ev ->
         {
-           // long startTime = System.currentTimeMillis();
+            long startTime = System.currentTimeMillis();
 
             healthy.getData().clear();
             sick.getData().clear();
             recovered.getData().clear();
 
-            ArrayList<Data.Slice> History = model1.getData().getFifo();
+            model1.getData().Lock();
+
+            Vector<Data.Slice> History = model1.getData().getFifo();
 
             // draw graph
             int x = 0;
@@ -318,9 +320,11 @@ public class MainController
                 x++;
             }
 
-           // long stopTime = System.currentTimeMillis();
-           // long diff = stopTime - startTime;
-           // System.out.println("Difference: " + diff);
+            model1.getData().unLock();
+
+            long stopTime = System.currentTimeMillis();
+            long diff = stopTime - startTime;
+            System.out.println("Difference: " + diff);
 
             System.out.println("Graph Thread: " + Thread.currentThread().getId());
 
