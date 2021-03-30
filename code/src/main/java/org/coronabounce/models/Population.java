@@ -16,6 +16,7 @@ public class Population implements Displayable {
     public int nbRecovered;
     Wall mur= new Wall();
     private Timer timer;
+    private TimerTask timerTask = null;
     private boolean hasWall=false;
 
 
@@ -109,12 +110,24 @@ public class Population implements Displayable {
     /**
     *Close timer to stop using this population.
     */
-    public void stopTimer(){
-        if(timer==null){return;}
-        timer.purge();
-        timer.cancel();
-        timer=null;
+    public void stopTimer(boolean b_StopTimer)
+    {
+        if (null != this.timerTask)
+        {
+            if (!this.timerTask.cancel())
+            {
+                System.out.println("Can't cancel task!\n");
+            }
+            this.timerTask = null;
+            this.timer.purge();
+        }
+        if (b_StopTimer)
+        {
+            this.timer.cancel();
+            this.timer = null;
+        }
     }
+
     public double distance(CoquilleBille i1, CoquilleBille i2) {
         double x1 = i1.getPosition().getX();
         double x2 = i2.getPosition().getX();
@@ -165,9 +178,10 @@ public class Population implements Displayable {
         //System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
         for (CoquilleBille coc : listCoquille) {
             coc.move();
+
         }
 
-
+        //System.out.println("Population movement thread: " + Thread.currentThread().getName());
     }
 
     //========================= Population Statistics =================================================================/
@@ -190,19 +204,21 @@ public class Population implements Displayable {
     @Override
     public void saveStatToData()
     {
-        getT().schedule(new TimerTask()
+        getT().schedule(this.timerTask = new TimerTask()
         {
             @Override
             public synchronized void run()
             {
                 long a = System.currentTimeMillis();
                 long b =  scheduledExecutionTime();
-                data.setData(100, 100 * (nbSick + nbRecovered)/controller.getPersonsCount(), 100 * nbRecovered/controller.getPersonsCount());
+                data.setData(100 * (nbSick + nbRecovered)/controller.getPersonsCount(), 100 * nbRecovered/controller.getPersonsCount());
 
                 System.out.println("SaveHistory thread: " + Thread.currentThread().getName());
             }
         }, 0, 100);
     }
+
+
 
     @Override
     public Data getData()

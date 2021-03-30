@@ -70,7 +70,7 @@ public class MainController
 
     public void changeController(Controllable c)
     {
-        stopTimer();
+        //stopTimer();
         System.out.println("Change controller\n");
         this.zone1 = new Zone(c);
         this.model1 = zone1.getPopulation();
@@ -92,6 +92,16 @@ public class MainController
         return controller;
     }
 
+    public List<CoquilleBille> getPopulation1()
+    {
+        return points1;
+    }
+    
+    public List<CoquilleBille> getPopulation2()
+    {
+        return points2;
+    }
+
     //========================= Initialisation ========================================================================/
 
     @FXML
@@ -100,14 +110,35 @@ public class MainController
         Image image = new Image(getClass().getResourceAsStream("images_1.png"));
         ImageView view = new ImageView(image);
         this.btnLegend = new Button();
-        btnLegend.setMaxSize(42, 42);
+        btnLegend.setMaxSize(35, 35);
         btnLegend.setGraphic(view);
         btnLegend.setLayoutX(940);                      //mainPane.getWidth()
         mainPane.getChildren().add(btnLegend);
 
+        // init graphPanel and fil mainGrid by graphPanel
+        initGraph();
 
+        // init points
+        drawPopulation(points1, false);
+        drawPopulation(points2, true);
+
+        // init statistics
+        labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
+        labelSick.setText(String.valueOf(model1.getNbSick()));
+        labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
+
+    }
+
+    public void retainPopulations()
+    {
+        panel1.getChildren().retainAll();
+        panel2.getChildren().retainAll();
+    }
+
+    public void initGraph()
+    {
         // init graphPanel
-        NumberAxis xAxis = new NumberAxis(0, model1.getData().getNmbr(), 1);
+        NumberAxis xAxis = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
         xAxis.setTickLabelsVisible(false);
         xAxis.setTickMarkVisible(false);
         NumberAxis yAxis = new NumberAxis(0, 100, 1);
@@ -124,21 +155,11 @@ public class MainController
         graphPanel.setLayoutY(59);
         graphPanel.setHorizontalGridLinesVisible(false);
         graphPanel.setVerticalGridLinesVisible(false);
-
-        // init points
-        drawPopulation(points1, false);
-        drawPopulation(points2, true);
-
-        // init statistics
-        labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
-        labelSick.setText(String.valueOf(model1.getNbSick()));
-        labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
-
     }
 
-    private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel2)
+    public void drawPopulation(List<CoquilleBille> lcb, boolean is_panel2)
     {
-        for (CoquilleBille cb : lcb)
+        for (CoquilleBille cb : points1)
         {
             drawPoint(cb, is_panel2);
         }
@@ -167,21 +188,21 @@ public class MainController
     //=============================== Interrupters ====================================================================/
 
     /**
-     * Timeline interrupter
+     * Timer interrupter
      */
-    public void stopTimer()
+    private void stopTimer()
     {
         try
         {
             if (zone1 != null)
             {
                 zone1.stopTimer(true);
-                zone1.getPopulation().stopTimer();
+                zone1.getPopulation().stopTimer(true);
             }
             if (zone2 != null)
             {
                 zone2.stopTimer(true);
-                zone2.getPopulation().stopTimer();
+                zone2.getPopulation().stopTimer(true);
             }
         } catch (Exception e)
         {
@@ -217,44 +238,13 @@ public class MainController
     }
 
     /**
-     * Functions for scenarios
-     */
-
-    public void performAction(ActionEvent actionEvent) throws IOException {
-
-        MenuItem target  = (MenuItem) actionEvent.getSource();
-        System.out.println("Clicked On Item:"+target.getId());
-
-        Controllable c = new Controller();
-        c.setPersonsCount(99);
-
-        changeController(c);
-        App.setRoot("corona bounce");
-    }
-
-    public void performAction2(ActionEvent actionEvent) throws IOException {
-
-        MenuItem target  = (MenuItem) actionEvent.getSource();
-        System.out.println("Clicked On Item:"+target.getId());
-
-        Controllable c = new Controller();
-        c.setPersonsCount(150);
-
-        changeController(c);
-        App.setRoot("corona bounce");
-    }
-
-    /**
      * Function for button "Settings" - redirect to window settings
      */
     @FXML
     private void switchToSettings() throws IOException
     {
-        if (null != tlPoints)
-        {
-            tlPoints.stop();
-            tlPoints = null;
-        }
+        stopTimeLine(tlPoints);
+        stopTimeLine(tlGraph);
         stopTimer();
         App.setRoot("settings");
     }
@@ -287,6 +277,10 @@ public class MainController
 
     //========================= Button's auxiliary functions ==========================================================/
 
+    /**
+     * Function used to provide graph's Timeline a milliseconds appropriated to population size
+     * @return 100 ms for small populations and 500 for big one
+     */
     private int choosePeriod()
     {
         if (controller.getPersonsCount() <= 100)
@@ -299,7 +293,7 @@ public class MainController
     /**
      * Timeline launcher for drawing the graphs in AreaChart
      */
-    private synchronized void launchDrawGraph()
+    private void launchDrawGraph()
     {
         stopTimeLine(tlGraph);
         healthy.getData().retainAll();
@@ -352,8 +346,7 @@ public class MainController
 
         tlPoints = new Timeline(new KeyFrame(Duration.millis(33), ev ->
         {
-            panel1.getChildren().retainAll();
-            panel2.getChildren().retainAll();
+            retainPopulations();
 
             // update points
             drawPopulation(points1, false);
@@ -375,5 +368,32 @@ public class MainController
         legend.setPrefSize(200, 100);
         TextArea desc = new TextArea();
 
+    }
+
+    /**
+     * Functions for scenarios
+     */
+    public void performAction(ActionEvent actionEvent) throws IOException {
+
+        MenuItem target  = (MenuItem) actionEvent.getSource();
+        System.out.println("Clicked On Item:"+target.getId());
+
+        Controllable c = new Controller();
+        c.setPersonsCount(99);
+
+        changeController(c);
+        App.setRoot("corona bounce");
+    }
+
+    public void performAction2(ActionEvent actionEvent) throws IOException {
+
+        MenuItem target  = (MenuItem) actionEvent.getSource();
+        System.out.println("Clicked On Item:"+target.getId());
+
+        Controllable c = new Controller();
+        c.setPersonsCount(150);
+
+        changeController(c);
+        App.setRoot("corona bounce");
     }
 }

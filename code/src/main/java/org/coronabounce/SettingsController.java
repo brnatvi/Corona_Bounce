@@ -23,11 +23,6 @@ public class SettingsController
     @FXML Slider sliderContaminationRadius;
 
 
-    @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
-    }
-
 //    public void attributeIndividualsNumber() {
 //        int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
 //    }
@@ -45,6 +40,13 @@ public class SettingsController
         c.setContaminationRadius(newContaminationRadius);
 
         mainController.changeController(c);
+
+        // init graphPanel, fil mainGrid by graphPanel and draw new populations
+        mainController.retainPopulations();
+        mainController.initGraph();
+        mainController.drawPopulation(mainController.getPopulation1(), false);
+        mainController.drawPopulation(mainController.getPopulation2(), true);
+
         App.setRoot("corona bounce");
     }
 
@@ -59,5 +61,4 @@ public class SettingsController
         mainController.changeController(c);
         App.setRoot("corona bounce");
     }
-
 }

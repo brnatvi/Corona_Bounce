@@ -94,7 +94,7 @@ public class App extends Application {
 
         launch();
        Zone z=new Zone(cont);
-         z.test();
+       z.test();
 
     }
 

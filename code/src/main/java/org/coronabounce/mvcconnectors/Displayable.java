@@ -2,7 +2,6 @@ package org.coronabounce.mvcconnectors;
 
 import org.coronabounce.data.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface Displayable
@@ -43,6 +42,8 @@ public interface Displayable
     public void saveStatToData();
 
     public Data getData();
+
+    public void stopTimer(boolean b_StopTimer);
 
     //======================================== Second Priority ========================================================//
 
