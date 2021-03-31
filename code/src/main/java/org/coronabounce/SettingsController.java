@@ -42,10 +42,7 @@ public class SettingsController
         mainController.changeController(c);
 
         // init graphPanel, fil mainGrid by graphPanel and draw new populations
-        mainController.retainPopulations();
-        mainController.initGraph();
-        mainController.drawPopulation(mainController.getPopulation1(), false);
-        mainController.drawPopulation(mainController.getPopulation2(), true);
+        mainController.initNewPopulation();
 
         App.setRoot("corona bounce");
     }
