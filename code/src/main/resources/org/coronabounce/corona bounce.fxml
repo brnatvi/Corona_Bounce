@@ -38,9 +38,14 @@
                   <Font name="DejaVu Serif Bold" size="15.0" />
                </font>
             </Button>
+            <Button fx:id="btnLegend" mnemonicParsing="false" onMouseClicked="#showLegend" prefHeight="30.0" prefWidth="40.0" text="?">
+               <font>
+                  <Font name="DejaVu Serif Bold" size="15.0" />
+               </font>
+            </Button>
          </children>
       </HBox>
-      <Pane fx:id="panel1" accessibleRole="NODE" layoutX="27.0" layoutY="263.0" prefHeight="290.0" prefWidth="465.0" HBox.hgrow="ALWAYS" style="-fx-background-color: #ffffff;" />
+      <Pane fx:id="panel1" accessibleRole="NODE" layoutX="27.0" layoutY="263.0" prefHeight="290.0" prefWidth="465.0" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS" />
       <GridPane fx:id="mainGrid" layoutX="36.0" layoutY="57.0" prefHeight="137.0" prefWidth="465.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="102.0" />

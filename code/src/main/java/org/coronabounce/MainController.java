@@ -11,12 +11,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.data.Data;
@@ -37,7 +36,7 @@ public class MainController
     private List<CoquilleBille> points2;
     private Timeline tlPoints;
     private Timeline tlGraph;
-    private Button btnLegend;
+
 
     XYChart.Series healthy;
     XYChart.Series sick;
@@ -56,6 +55,8 @@ public class MainController
     @FXML MenuItem scenario_1_2;
     @FXML MenuItem scenario_2_1;
     @FXML MenuItem scenario_2_2;
+    @FXML Button btnStart;
+    @FXML Button btnLegend;
 
 
     //========================= Constructors ==========================================================================/
@@ -97,15 +98,7 @@ public class MainController
     @FXML
     private void initialize()
     {
-        Image image = new Image(getClass().getResourceAsStream("images_1.png"));
-        ImageView view = new ImageView(image);
-        this.btnLegend = new Button();
-        btnLegend.setMaxSize(35, 35);
-        btnLegend.setGraphic(view);
-        btnLegend.setLayoutX(940);                      //mainPane.getWidth()
-        mainPane.getChildren().add(btnLegend);
-
-
+      
         // init graphPanel and fil mainGrid by graphPanel
         initGraph();
 
@@ -117,6 +110,7 @@ public class MainController
         labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
         labelSick.setText(String.valueOf(model1.getNbSick()));
         labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
+
 
     }
 
@@ -225,6 +219,7 @@ public class MainController
         launchDrawGraph();
         zone1.moving();
         zone2.moving();
+        changeEnableDisable(btnStart);
     }
 
     /**
@@ -258,6 +253,7 @@ public class MainController
     /**
      * Function for button "?"
      */
+    @FXML
     private void showLegend()
     {
 
@@ -284,6 +280,18 @@ public class MainController
         initGraph();
         drawPopulation(points1, false);
         drawPopulation(points2, true);
+    }
+
+    public void changeEnableDisable(Button btn)
+    {
+        if (btn.isDisabled())
+        {
+            btn.setDisable(false);
+        }
+        else
+        {
+            btn.setDisable(true);
+        }
     }
 
     /**
@@ -398,12 +406,11 @@ public class MainController
         tlPoints.play();
     }
 
-    private void makeLegend()
+    private void createLegend()
     {
         Pane legend = new Pane();
-        legend.setStyle("-fx-background-color: white;");
-        legend.setPrefSize(200, 100);
-        TextArea desc = new TextArea();
-
+        legend.setId("legend");
+        Text desc = new Text();
+        desc.setId("textLegend");
     }
 }
