@@ -6,3 +6,21 @@
 .default-color0.chart-series-area-fill { -fx-fill: #70e000; }
 .default-color1.chart-series-area-fill { -fx-fill: #DC143C; }
 .default-color2.chart-series-area-fill { -fx-fill: #ffd22f; }
+
+#legend {
+-fx-background-color: white;
+-fx-text-fill: black;
+}
+
+#textLegend {
+
+
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
