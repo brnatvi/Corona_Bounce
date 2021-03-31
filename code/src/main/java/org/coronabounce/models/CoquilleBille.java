@@ -63,20 +63,11 @@ public class CoquilleBille {
         if(y<=0 || y>= Controller.getHeight()){return true;}
         return false;
     }
-    protected void Rebound(){
-        if (outOfX(this.getPosition().getX())) {
-            this.setMovingSpeed(this.getMovingSpeedX()*-1,this.getMovingSpeedY());
-        }
-        if (outOfY(this.getPosition().getY())) {
-            this.setMovingSpeed(this.getMovingSpeedX(),this.getMovingSpeedY()*-1);
-        }
-        this.getPosition().setPos(this.getPosition().getX()+this.getMovingSpeedX(),this.getPosition().getY()+this.getMovingSpeedY());
-    }
-    protected double distancePos(Position p1,Position p2) {
-        double x1 = p1.getX();
-        double x2 = p2.getX();
-        double y1 = p1.getY();
-        double y2 = p2.getY();
+    protected double distancePos() {
+        double x1 = this.getPosition().getX();
+        double x2 = this.startingPosition.getX();
+        double y1 = this.getPosition().getY();
+        double y2 = this.startingPosition.getY();
         return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }
 
@@ -123,7 +114,7 @@ public class CoquilleBille {
     /**
     *{@summary bounce if this will go out of the zone.}<br>
     */
-    private void bounceIfOutOfZone(){
+    protected void bounceIfOutOfZone(){
       if (outOfX(p.getX()+movingSpeedX)) {
         bounce(true);
       }
@@ -135,7 +126,7 @@ public class CoquilleBille {
     *{@summary bounce.}<br>
     *@param inX True if bounce in x coor.
     */
-    private void bounce(boolean inX){
+    protected void bounce(boolean inX){
       if(inX){ movingSpeedX*=-1; }
       else{ movingSpeedY*=-1; }
     }
