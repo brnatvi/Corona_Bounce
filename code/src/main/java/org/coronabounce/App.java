@@ -4,8 +4,10 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.coronabounce.controllers.Controller;
@@ -32,16 +34,26 @@ public class App extends Application {
         parentSettings = loadSettings();
         ((SettingsController) controllerSettings).setMainController(controllerMain);
 
-        scene = new Scene(parentMain, 1000, 600);
+        double heightRatio = .80;
+        double widthRatio = .80;
+
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+
+        double sceneHeight = primaryScreenBounds.getHeight() * heightRatio;
+        double sceneWidth = primaryScreenBounds.getWidth() * widthRatio;
+
+        scene = new Scene(parentMain, sceneWidth, sceneHeight);
 
         scene.getStylesheets().add(getClass().getResource("style.css").toString());
         stage.setScene(scene);
 
-        stage.setMinHeight(600);
-        stage.setMinWidth(900);
-        stage.setMaxHeight(650);
-        stage.setMaxWidth(1000);
+//        stage.setMinHeight(600);
+//        stage.setMinWidth(900);
+//        stage.setMaxHeight(650);
+//        stage.setMaxWidth(1000);
 
+//        stage.setMaximized(true);
+        stage.sizeToScene();
         stage.show();
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {

@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #7e5c;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.coronabounce.MainController">
    <children>
-      <HBox layoutY="6.0" prefHeight="32.0" prefWidth="730.0" AnchorPane.topAnchor="6.0">
+      <HBox layoutY="6.0" prefHeight="32.0" prefWidth="730.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0" HBox.hgrow="ALWAYS">
          <children>
             <Button fx:id="btnStart" mnemonicParsing="false" onMouseClicked="#launchMoving" prefHeight="30.0" prefWidth="159.0" text="Start">
                <font>
@@ -40,7 +40,7 @@
             </Button>
          </children>
       </HBox>
-      <Pane fx:id="panel1" accessibleRole="NODE" layoutX="27.0" layoutY="263.0" prefHeight="290.0" prefWidth="465.0" style="-fx-background-color: #ffffff;" />
+      <Pane fx:id="panel1" accessibleRole="NODE" layoutX="27.0" layoutY="263.0" prefHeight="290.0" prefWidth="465.0" HBox.hgrow="ALWAYS" style="-fx-background-color: #ffffff;" />
       <GridPane fx:id="mainGrid" layoutX="36.0" layoutY="57.0" prefHeight="137.0" prefWidth="465.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="102.0" />
