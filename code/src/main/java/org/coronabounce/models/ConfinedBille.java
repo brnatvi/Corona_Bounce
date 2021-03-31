@@ -1,5 +1,7 @@
 package org.coronabounce.models;
 
+import org.coronabounce.controllers.Controller;
+
 import java.util.Random;
 
 public class ConfinedBille extends CoquilleBille{
@@ -10,11 +12,17 @@ public class ConfinedBille extends CoquilleBille{
         public void   reduce_speed(double percentage){
            this.setMovingSpeed (this.getMovingSpeedX()-(this.getMovingSpeedX()*percentage)/100,this.getMovingSpeedY()-(this.getMovingSpeedY()*percentage)/100);
         }
-       public void pass_zone(double X){
-        if(distancePos(this.getPosition(),this.getStartingPosition())>X){
-            this.Rebound();
-        }
+       public void pass_zone(double X) {
+           if (distancePos(this.getPosition(), this.getStartingPosition()) > X) {
+               this.Rebound();
+           }
+       }
+        public void move() {
+            reduce_speed(Controller.getPercentage());
+            super.move();
+            pass_zone(Controller.getKilometrage());
+           }
 
-    }
+           }
 
-}
+

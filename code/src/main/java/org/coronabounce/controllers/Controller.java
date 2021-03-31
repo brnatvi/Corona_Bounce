@@ -14,7 +14,8 @@ public class Controller implements Controllable
     private long DURATION_HEALING = 8000;            // sick <-> recovered    //TODO compare and converge with parameters in Population
     private long DURATION_NON_CONTAMINATION = 5000;  // recovered <-> can be contaminate again
     private final int RADIUS_DOT = 4;                 // radius of point in GUI
-
+    private  static double percentage =50;
+    private  static double Kilometrage=20;
 
 
 
@@ -23,6 +24,13 @@ public class Controller implements Controllable
     }
 
 
+    public static double getKilometrage() {
+        return Kilometrage;
+    }
+
+    public static double getPercentage() {
+        return percentage;
+    }
 
     @Override
     public double[] getSpaceSize() { return new double[]{this.WIDTH, this.HEIGTH}; }
