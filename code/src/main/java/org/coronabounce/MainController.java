@@ -105,6 +105,7 @@ public class MainController
         btnLegend.setLayoutX(940);                      //mainPane.getWidth()
         mainPane.getChildren().add(btnLegend);
 
+
         // init graphPanel and fil mainGrid by graphPanel
         initGraph();
 
