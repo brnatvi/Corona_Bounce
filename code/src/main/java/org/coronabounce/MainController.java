@@ -11,11 +11,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.data.Data;
@@ -23,6 +24,7 @@ import org.coronabounce.models.CoquilleBille;
 import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
+
 import static javafx.scene.paint.Paint.valueOf;
 
 public class MainController
@@ -37,10 +39,10 @@ public class MainController
     private Timeline tlPoints;
     private Timeline tlGraph;
 
-
     XYChart.Series healthy;
     XYChart.Series sick;
     XYChart.Series recovered;
+    private AreaChart graphPanel = null;
 
     @FXML AnchorPane mainPane;
     @FXML Pane panel1;                            // field with moving points
@@ -51,13 +53,15 @@ public class MainController
     @FXML Label labelHealthy;
     @FXML Label labelSick;
     @FXML Label labelRecovered;
+    @FXML MenuBar mbScenario1;
+    @FXML MenuBar mbScenario2;
     @FXML MenuItem scenario_1_1;
     @FXML MenuItem scenario_1_2;
     @FXML MenuItem scenario_2_1;
     @FXML MenuItem scenario_2_2;
     @FXML Button btnStart;
+    @FXML Button btnSettings;
     @FXML Button btnLegend;
-
 
     //========================= Constructors ==========================================================================/
 
@@ -98,7 +102,6 @@ public class MainController
     @FXML
     private void initialize()
     {
-      
         // init graphPanel and fil mainGrid by graphPanel
         initGraph();
 
@@ -110,8 +113,6 @@ public class MainController
         labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
         labelSick.setText(String.valueOf(model1.getNbSick()));
         labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
-
-
     }
 
     private void retainPopulations()
@@ -129,7 +130,7 @@ public class MainController
         NumberAxis yAxis = new NumberAxis(0, 100, 1);
         yAxis.setTickLabelsVisible(false);
         yAxis.setTickMarkVisible(false);
-        AreaChart graphPanel = new AreaChart(xAxis, yAxis);
+        this.graphPanel = new AreaChart(xAxis, yAxis);
         graphPanel.getData().addAll(healthy, sick, recovered);
         graphPanel.setCreateSymbols(false);
 
@@ -256,7 +257,31 @@ public class MainController
     @FXML
     private void showLegend()
     {
+        Tooltip tooltip = new Tooltip();
+        Image image = new Image(getClass().getResourceAsStream("color_scheme_0.jpg"));
+        ImageView view = new ImageView(image);
+        tooltip.setGraphic(view);
+        Tooltip.install(panel1, tooltip);
+        Tooltip.install(panel2, tooltip);
 
+        Tooltip tooltip1 = new Tooltip();
+        tooltip1.setText("Press this button to launch animation");
+        Tooltip.install(btnStart, tooltip1);
+
+        Tooltip tooltip2 = new Tooltip();
+        tooltip2.setText("Press this button to change parameters:\nsize of population, duration of sick, radius of contamination etc.");
+        Tooltip.install(btnSettings, tooltip2);
+
+        Tooltip tooltip3 = new Tooltip();
+        tooltip3.setText("Colors are the same as for the dots:\ngreen for healthy, red for sick and yellow for recovered");
+        Tooltip.install(graphPanel, tooltip3);
+
+        Tooltip tooltip4 = new Tooltip();
+        Tooltip tooltip5 = new Tooltip();
+        tooltip4.setText("Chose some scenario for the left population\nDefault without scenario");
+        tooltip5.setText("Chose some scenario for the right population\nDefault without scenario");
+        Tooltip.install(mbScenario1, tooltip4);
+        Tooltip.install(mbScenario2, tooltip5);
     }
 
     //======================== Functions for Settings Controller ======================================================/
@@ -404,13 +429,5 @@ public class MainController
         }));
         tlPoints.setCycleCount(Animation.INDEFINITE);
         tlPoints.play();
-    }
-
-    private void createLegend()
-    {
-        Pane legend = new Pane();
-        legend.setId("legend");
-        Text desc = new Text();
-        desc.setId("textLegend");
     }
 }
