@@ -92,16 +92,6 @@ public class MainController
         return controller;
     }
 
-    public List<CoquilleBille> getPopulation1()
-    {
-        return points1;
-    }
-    
-    public List<CoquilleBille> getPopulation2()
-    {
-        return points2;
-    }
-
     //========================= Initialisation ========================================================================/
 
     @FXML
@@ -129,13 +119,13 @@ public class MainController
 
     }
 
-    public void retainPopulations()
+    private void retainPopulations()
     {
         panel1.getChildren().retainAll();
         panel2.getChildren().retainAll();
     }
 
-    public void initGraph()
+    private void initGraph()
     {
         // init graphPanel
         NumberAxis xAxis = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
@@ -157,7 +147,7 @@ public class MainController
         graphPanel.setVerticalGridLinesVisible(false);
     }
 
-    public void drawPopulation(List<CoquilleBille> lcb, boolean is_panel2)
+    private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel2)
     {
         for (CoquilleBille cb : points1)
         {
@@ -222,7 +212,6 @@ public class MainController
         }
     }
 
-
     //========================= Button's functions ====================================================================/
 
     /**
@@ -243,9 +232,7 @@ public class MainController
     @FXML
     private void switchToSettings() throws IOException
     {
-        stopTimeLine(tlPoints);
-        stopTimeLine(tlGraph);
-        stopTimer();
+        closePreviousTask();
         App.setRoot("settings");
     }
 
@@ -273,6 +260,56 @@ public class MainController
     private void showLegend()
     {
 
+    }
+
+    //======================== Functions for Settings Controller ======================================================/
+
+    /**
+     * Function for correct closing of tasks before changing the settings
+     */
+    public void closePreviousTask()
+    {
+        stopTimeLine(tlPoints);
+        stopTimeLine(tlGraph);
+        stopTimer();
+    }
+
+    /**
+     * Initialize graphPanel, fil mainGrid by graphPanel and draw new populations
+     */
+    public void initNewPopulation()
+    {
+        retainPopulations();
+        initGraph();
+        drawPopulation(points1, false);
+        drawPopulation(points2, true);
+    }
+
+    /**
+     * Functions for scenarios
+     */
+    public void performAction(ActionEvent actionEvent) throws IOException {
+
+        MenuItem target  = (MenuItem) actionEvent.getSource();
+        System.out.println("Clicked On Item:"+target.getId());
+
+        Controllable c = new Controller();
+        c.setPersonsCount(99);
+
+        changeController(c);
+        App.setRoot("corona bounce");
+    }
+
+    public void performAction2(ActionEvent actionEvent) throws IOException {
+
+        MenuItem target  = (MenuItem) actionEvent.getSource();
+        System.out.println("Clicked On Item:"+target.getId());
+
+        Controllable c = new Controller();
+        c.setPersonsCount(150);
+
+        changeController(c);
+        App.setRoot("corona bounce");
     }
 
     //========================= Button's auxiliary functions ==========================================================/
@@ -367,32 +404,5 @@ public class MainController
         legend.setPrefSize(200, 100);
         TextArea desc = new TextArea();
 
-    }
-
-    /**
-     * Functions for scenarios
-     */
-    public void performAction(ActionEvent actionEvent) throws IOException {
-
-        MenuItem target  = (MenuItem) actionEvent.getSource();
-        System.out.println("Clicked On Item:"+target.getId());
-
-        Controllable c = new Controller();
-        c.setPersonsCount(99);
-
-        changeController(c);
-        App.setRoot("corona bounce");
-    }
-
-    public void performAction2(ActionEvent actionEvent) throws IOException {
-
-        MenuItem target  = (MenuItem) actionEvent.getSource();
-        System.out.println("Clicked On Item:"+target.getId());
-
-        Controllable c = new Controller();
-        c.setPersonsCount(150);
-
-        changeController(c);
-        App.setRoot("corona bounce");
     }
 }
