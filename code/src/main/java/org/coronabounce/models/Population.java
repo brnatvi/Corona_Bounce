@@ -207,18 +207,11 @@ public class Population implements Displayable {
         getT().schedule(this.timerTask = new TimerTask()
         {
             @Override
-            public synchronized void run()
-            {
-                long a = System.currentTimeMillis();
-                long b =  scheduledExecutionTime();
+            public synchronized void run(){
                 data.setData(100 * (nbSick + nbRecovered)/controller.getPersonsCount(), 100 * nbRecovered/controller.getPersonsCount());
-
-                System.out.println("SaveHistory thread: " + Thread.currentThread().getName());
             }
         }, 0, 100);
     }
-
-
 
     @Override
     public Data getData()

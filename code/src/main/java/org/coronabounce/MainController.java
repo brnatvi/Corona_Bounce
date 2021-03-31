@@ -304,7 +304,7 @@ public class MainController
 
         tlGraph = new Timeline(new KeyFrame(Duration.millis(choosePeriod()), ev ->
         {
-            long startTime = System.currentTimeMillis();
+            //long startTime = System.currentTimeMillis();                           // code for debug
 
             healthy.getData().clear();
             sick.getData().clear();
@@ -326,11 +326,10 @@ public class MainController
 
             model1.getData().unLock();
 
-            long stopTime = System.currentTimeMillis();
-            long diff = stopTime - startTime;
-            System.out.println("Difference: " + diff);
-
-            System.out.println("Graph Thread: " + Thread.currentThread().getId());
+            //long stopTime = System.currentTimeMillis();                                // code for debug
+            //long diff = stopTime - startTime;
+            //System.out.println("Difference: " + diff);
+            //System.out.println("Graph Thread: " + Thread.currentThread().getId());
 
         }));
         tlGraph.setCycleCount(Animation.INDEFINITE);

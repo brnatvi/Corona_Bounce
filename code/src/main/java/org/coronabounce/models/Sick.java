@@ -1,8 +1,5 @@
 package org.coronabounce.models;
-import org.coronabounce.controllers.Controller;
 
-import java.util.Random;
-import java.util.Timer;
 import java.util.TimerTask;
 
 
@@ -16,10 +13,8 @@ public class Sick extends Individual {
           public void run() {
               coc.setIndividual(new Recovered(coc,p));
               p.nbSick--;
-
           }
       },p.getDurationCovid()+p.getDurationHealing());
-
     }
 
     public void agitSur() {
