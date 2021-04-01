@@ -49,7 +49,6 @@ public class MainController
     @FXML Pane panel2;                            // field with moving points
     @FXML GridPane mainGrid;                     // grid contains statistic's grid (gridStatistic) and graph (graphPanel)
     @FXML GridPane gridStatistic;
-    @FXML ChoiceBox btnScenario;
     @FXML Label labelHealthy;
     @FXML Label labelSick;
     @FXML Label labelRecovered;
