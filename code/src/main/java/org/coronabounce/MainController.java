@@ -264,6 +264,10 @@ public class MainController
         Tooltip.install(panel1, tooltip);
         Tooltip.install(panel2, tooltip);
 
+        Tooltip tooltip0 = new Tooltip();
+        tooltip0.setText("Press this button and enter into elements of application to see theirs legends");
+        Tooltip.install(btnLegend, tooltip0);
+
         Tooltip tooltip1 = new Tooltip();
         tooltip1.setText("Press this button to launch animation");
         Tooltip.install(btnStart, tooltip1);
