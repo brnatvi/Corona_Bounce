@@ -282,8 +282,8 @@ public class MainController
 
         Tooltip tooltip4 = new Tooltip();
         Tooltip tooltip5 = new Tooltip();
-        tooltip4.setText("Chose some scenario for the left population\nDefault without scenario");
-        tooltip5.setText("Chose some scenario for the right population\nDefault without scenario");
+        tooltip4.setText("Choose some scenario for the left population\nDefault without scenario");
+        tooltip5.setText("Choose some scenario for the right population\nDefault without scenario");
         Tooltip.install(mbScenario1, tooltip4);
         Tooltip.install(mbScenario2, tooltip5);
     }
