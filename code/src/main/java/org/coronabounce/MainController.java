@@ -263,6 +263,10 @@ public class MainController
         Tooltip.install(panel1, tooltip);
         Tooltip.install(panel2, tooltip);
 
+        Tooltip tooltip0 = new Tooltip();
+        tooltip0.setText("Press this button and enter into elements of application to see theirs legends");
+        Tooltip.install(btnLegend, tooltip0);
+
         Tooltip tooltip1 = new Tooltip();
         tooltip1.setText("Press this button to launch animation");
         Tooltip.install(btnStart, tooltip1);
@@ -277,8 +281,8 @@ public class MainController
 
         Tooltip tooltip4 = new Tooltip();
         Tooltip tooltip5 = new Tooltip();
-        tooltip4.setText("Chose some scenario for the left population\nDefault without scenario");
-        tooltip5.setText("Chose some scenario for the right population\nDefault without scenario");
+        tooltip4.setText("Choose some scenario for the left population\nDefault without scenario");
+        tooltip5.setText("Choose some scenario for the right population\nDefault without scenario");
         Tooltip.install(mbScenario1, tooltip4);
         Tooltip.install(mbScenario2, tooltip5);
     }
