@@ -76,6 +76,8 @@ public class MainController
     {
         //stopTimer();
         System.out.println("Change controller\n");
+
+
         this.zone1 = new Zone(c);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();

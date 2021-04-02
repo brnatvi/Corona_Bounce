@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.MenuBar?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #47c293;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.coronabounce.MainController">
-    <children>
-      <HBox layoutY="6.0" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0" HBox.hgrow="ALWAYS">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="686.0" spacing="20.0" style="-fx-background-color: DARKCYAN;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.coronabounce.MainController">
+   <children>
+      <HBox alignment="BASELINE_CENTER" spacing="35">
          <children>
             <Button fx:id="btnStart" mnemonicParsing="false" onMouseClicked="#launchMoving" prefHeight="30.0" prefWidth="159.0" text="Start">
                <font>
@@ -28,7 +29,7 @@
                   <Font name="DejaVu Serif Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnSettings" mnemonicParsing="false" onMouseClicked="#switchToSettings" onMousePressed="#switchToSettings" prefHeight="30.0" prefWidth="159.0" text="Settings">
+            <Button fx:id="btnSettings" mnemonicParsing="false" onMouseClicked="#switchToSettings" prefHeight="30.0" prefWidth="159.0" text="Settings">
                <font>
                   <Font name="DejaVu Serif Bold" size="15.0" />
                </font>
@@ -45,26 +46,26 @@
             </Button>
          </children>
       </HBox>
-      <Pane fx:id="panel1" accessibleRole="NODE" layoutX="27.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="290.0" prefWidth="465.0" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS" />
-      <GridPane fx:id="mainGrid" layoutX="36.0" layoutY="57.0" prefHeight="137.0" prefWidth="465.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="102.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="516.0" minWidth="10.0" prefWidth="363.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+
+      <GridPane fx:id="mainGrid" prefHeight="137.0" prefWidth="465.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="102.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="516.0" minWidth="10.0" prefWidth="363.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
             <GridPane fx:id="gridStatistic" prefHeight="137.0" prefWidth="124.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="104.0" minWidth="10.0" prefWidth="58.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="34.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="104.0" minWidth="10.0" prefWidth="58.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="10.0" prefWidth="34.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Healthy" wrappingWidth="67.4150390625">
                      <font>
@@ -80,26 +81,39 @@
             </GridPane>
          </children>
       </GridPane>
-      <Pane fx:id="panel2" accessibleRole="NODE" layoutX="512.0" layoutY="263.0" prefHeight="290.0" prefWidth="465.0" style="-fx-background-color: #ffffff;" />
-      <MenuBar fx:id="mbScenario1" style="-fx-background-color: #ffdb87;"  layoutX="203.0" layoutY="222.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Scenarios">
-            <items>
-              <MenuItem fx:id="scenario_1_1" mnemonicParsing="false" onAction="#performAction" text="scenario 1" />
-                  <MenuItem fx:id="scenario_1_2" mnemonicParsing="false" onAction="#performAction2" text="scenario 2" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <MenuBar fx:id="mbScenario2" style="-fx-background-color: #ffdb87;" layoutX="696.0" layoutY="222.0">
-         <menus>
-            <Menu mnemonicParsing="false" text="Scenarios">
-               <items>
-                  <MenuItem fx:id="scenario_2_1" mnemonicParsing="false" onAction="#performAction" text="scenario 1" />
-                  <MenuItem fx:id="scenario_2_2" mnemonicParsing="false" onAction="#performAction2" text="scenario 2" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
+
+      <HBox alignment="BASELINE_CENTER" spacing="400">
+         <children>
+            <MenuBar fx:id="mbScenario1" style="-fx-background-color: #ffdb87;"  layoutX="203.0" layoutY="222.0">
+               <menus>
+                  <Menu mnemonicParsing="false" text="Scenarios">
+                     <items>
+                        <MenuItem fx:id="scenario_1_1" mnemonicParsing="false" onAction="#performAction" text="scenario 1" />
+                        <MenuItem fx:id="scenario_1_2" mnemonicParsing="false" text="scenario 2" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+            <MenuBar fx:id="mbScenario2" style="-fx-background-color: #ffdb87;" layoutX="696.0" layoutY="222.0">
+               <menus>
+                  <Menu mnemonicParsing="false" text="Scenarios">
+                     <items>
+                        <MenuItem fx:id="scenario_2_1" mnemonicParsing="false" onAction="#performAction" text="scenario 1" />
+                        <MenuItem fx:id="scenario_2_2" mnemonicParsing="false" text="scenario 2" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+         </children>
+      </HBox>
+
+      <HBox prefWidth="600">
+         <Pane fx:id="panel1" accessibleRole="NODE" layoutX="27.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="310.0" prefWidth="500.0" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS" />
+         <Pane accessibleRole="NODE" layoutX="27.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="50.0" prefHeight="310.0" style="-fx-background-color: DARKCYAN;" HBox.hgrow="ALWAYS" />
+         <Pane fx:id="panel2" accessibleRole="NODE" layoutX="512.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="310.0" prefWidth="500.0" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS" />
+      </HBox>
    </children>
-</AnchorPane>
+   <padding>
+      <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+   </padding>
+</VBox>
