@@ -17,7 +17,10 @@ public class Population implements Displayable {
     Wall mur= new Wall();
     private Timer timer;
     private TimerTask timerTask = null;
-    private boolean hasWall=false;
+    private boolean hasWalls=false;
+    /* =3 , temporairement*/
+    /*trouver ou faut l'iniialiser */
+    private int nbZones=3;
 
 
     //========================= Constructors ==========================================================================/
@@ -187,12 +190,22 @@ public class Population implements Displayable {
     //========================= Population Statistics =================================================================/
 
 
-    public void setWall() {
-        this.hasWall=true;
 
+/* Si il y'a un mur, y'a 2 zones |zone1 |MUR| zone2| .... etc*/
+    public void setnbZones(int number)
+    {
+        /*TODO : trouver ou initialiser le nombre de Zones */
+        this.nbZones=number;
+        if (number>0) this.hasWalls=true;
     }
 
-    public boolean thereisWall(){ return this.hasWall;}
+    public int getNbZones()
+    { return this.nbZones;}
+
+
+
+
+    public boolean thereisWall(){ return this.hasWalls;}
    public int getNbIndividus() { return getAllPoints().size(); }
 
    public int getNbHealthy() { return nbHealthy; }

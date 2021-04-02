@@ -77,31 +77,37 @@ public class CoquilleBille {
     */
     public void move(){
         bounceIfOutOfZone();
-       if (pop.thereisWall()) {
-           bounceIfHitAWall();
-           return;
-       }
-       this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
+        /* POur essayer les mur décommenter cela et pop.separtate() dans Zone */
+      /* if (pop.getNbZones() !=1) bounceIfHitWall();*/
+       /*else */ this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
     }
 
     /**
     *{@summary bounce if this hit a wall.}<br>
     */
-    private void bounceIfHitAWall(){
-      double curentX = p.getX();
-      double futurX = curentX+movingSpeedX;
-      double curentY = p.getY();
-      double futurY = curentY+movingSpeedY;
-      //TODO parcourir la liste des murs et si futurX ou futurY est de l'autre coté d'un mur faire rebondir.
+    private void bounceIfHitWall()
+    {
+        //Nombre de zones
+        int number=pop.getNbZones();
+        double curentX = p.getX();
+        double futurX = curentX+movingSpeedX;
+        double curentY = p.getY();
+        double futurY = curentY+movingSpeedY;
+        //TODO parcourir la liste des murs et si futurX ou futurY est de l'autre coté d'un mur faire rebondir.
 // Le mur fait rebondir la boule dès qu'elle est à une distance <=1
         /* Si la boule etait une position inférieure à l'emplacement du mur et que sa futur position est plus grande
            On l'a fait rebondir*/
-        if(curentX<(Controller.getWidth())/2  && futurX>=Controller.getWidth()/2)
-            p.setPos(Controller.getWidth()/2-1,futurY);
+        int currentZone =InwhichZoneItis(curentX,number);
+        int futurZone=InwhichZoneItis(futurX,number);
+        double limitSup =repartInZones(number)[currentZone];
+        double limitInf=repartInZones(number)[currentZone-1];
 
+        if (futurZone!=currentZone) {
 
-        else if(curentX>Controller.getWidth()/2 && futurX<=Controller.getWidth()/2)
-            p.setPos(Controller.getWidth()/2+1,futurY);
+           if(futurZone>currentZone) p.setPos(limitSup-1,futurY);
+           if(futurZone<currentZone) p.setPos(limitInf+1,futurY);
+        }
+
 
 
 
@@ -109,7 +115,39 @@ public class CoquilleBille {
         else this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
 
 
+
+
     }
+
+
+
+    /** Crée nombre Zones **/
+    public double[] repartInZones(int nombre)
+    {
+        //<>
+    /* A table with delimiters */
+    double [] limits = new double[nombre+1];
+    limits[0]=0;
+    for(int i=1;i<=nombre;i++)
+    {
+        limits[i]=  (i*(Controller.getWidth()/nombre));
+    }
+
+
+    return limits;
+
+    }
+  public int InwhichZoneItis(double posX,int nombre)
+  {
+  double [] tab=repartInZones(nombre);
+  for(int i=0;i<nombre;i++)
+  {
+  if(posX>=tab[i] && posX<=tab[i+1]) return i+1 ;
+  }
+  return -1;/* Not in any Zone ! */
+  }
+
+
 
     /**
     *{@summary bounce if this will go out of the zone.}<br>

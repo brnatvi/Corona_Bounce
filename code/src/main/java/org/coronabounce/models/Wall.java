@@ -8,12 +8,18 @@ public class Wall {
     public void separatePop(CoquilleBille coc) {
         double Vx = coc.getMovingSpeedX();
         double Vy = coc.getMovingSpeedY();
-/**To do : changer la répartition de la population de sorte qu'on ait deux (ou plus)Zones(Les individus de peuvent bouger que dans leur zone respective**/
+        double posX=coc.getPosition().getX();
+        Population pop =new Population();
+        int nbzones=pop.getNbZones();
 
-        if (coc.getPosition().getX() < (Controller.getWidth() / 2) && Math.abs(coc.getPosition().getX() - (Controller.getWidth() / 2)) <= 1)
-            coc.setMovingSpeed(-1 * Vx, Vy);
-        if (coc.getPosition().getX() > (Controller.getWidth() / 2) && Math.abs(coc.getPosition().getX() - (Controller.getWidth() / 2)) <= 1)
-            coc.setMovingSpeed(-1 * Vx, Vy);
+        int zone=coc.InwhichZoneItis(posX,nbzones);
+        double limitInf= coc.repartInZones(nbzones)[zone-1];
+        double limitSup=coc.repartInZones(nbzones)[zone];
+
+        if(coc.getPosition().getX()<limitSup && Math.abs(posX-limitSup)<=1)
+            coc.setMovingSpeed(-1*Vx,Vy);
+        else if(coc.getPosition().getX()>limitInf && Math.abs(posX-limitInf)<=1)
+            coc.setMovingSpeed(-1*Vx,Vy);
 
     }
 
