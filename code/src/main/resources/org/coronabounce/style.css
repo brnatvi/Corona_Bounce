@@ -9,10 +9,9 @@
 
 .button {
     -fx-text-fill: white;
-    -fx-font-family: "Arial Narrow";
+    -fx-font-family: "Avenir Book";
     -fx-font-weight: bold;
-    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-background-color: #ffdb87;
 }
 
 .tooltip {
@@ -21,3 +20,15 @@
     -fx-font: 13px Tahoma;
 }
 
+.menu .label
+{
+    -fx-text-fill: white;
+}
+
+.menu {
+}
+
+.jfx-text-field .label
+{
+    -fx-text-inner-color: white;
+}
