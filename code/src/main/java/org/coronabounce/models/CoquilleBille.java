@@ -38,6 +38,10 @@ public class CoquilleBille {
 
     }
 
+    public Population getPop() {
+        return pop;
+    }
+
     public Position getStartingPosition() {
         return startingPosition;
     }
@@ -68,7 +72,7 @@ public class CoquilleBille {
         double x2 = this.startingPosition.getX();
         double y1 = this.getPosition().getY();
         double y2 = this.startingPosition.getY();
-        return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+        return  Math.sqrt((x1 + x2) * (x1 +x2) + (y1 + y2) * (y1 +y2));
     }
 
     /**
@@ -78,14 +82,14 @@ public class CoquilleBille {
     public void move(){
         bounceIfOutOfZone();
         /* POur essayer les mur décommenter cela et pop.separtate() dans Zone */
-      /* if (pop.getNbZones() !=1) bounceIfHitWall();*/
-       /*else */ this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
+       /*if (pop.getNbZones() !=1) bounceIfHitWall();
+      /* else*/  this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
     }
 
     /**
     *{@summary bounce if this hit a wall.}<br>
     */
-    private void bounceIfHitWall()
+    protected void bounceIfHitWall()
     {
         //Nombre de zones
         int number=pop.getNbZones();

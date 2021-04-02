@@ -1,5 +1,6 @@
 package org.coronabounce.models;
 
+import org.coronabounce.controllers.Controller;
 import org.coronabounce.data.Data;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
@@ -30,21 +31,21 @@ public class Population implements Displayable {
         data = new Data();
         timer = new Timer();
         for (int i = 0; i < nbH; i++) {
-            CoquilleBille coc = new CoquilleBille(null);
+            CoquilleBille coc = new ConfinedBille(null);
             Individual in = new Healthy(coc,this);
             coc.setIndividual(in);
             listCoquille.add(coc);
 
         }
         for (int i = 0; i < nbS; i++) {
-            CoquilleBille coc = new CoquilleBille(null);
+            CoquilleBille coc = new ConfinedBille(null);
             Individual in = new Sick(coc,this);
             coc.setIndividual(in);
             listCoquille.add(coc);
 
         }
         for (int i = 0; i < nbR; i++) {
-            CoquilleBille coc = new CoquilleBille(null);
+            CoquilleBille coc = new ConfinedBille(null);
             Individual in = new Recovered(coc,this);
             coc.setIndividual(in);
             listCoquille.add(coc);
@@ -177,12 +178,13 @@ public class Population implements Displayable {
         //System.out.println("Pourcentage de contamination: " + this.percentageSick() + " %  Pourcentage de guérison :" + this.percentageRecovered() + "% Pourcentage de non contamination est :" + this.percentageHealthy()+" %");
     }
 
-    public void printMovement() {
+    public void Moving_Bille() {
         //System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
         for (CoquilleBille coc : listCoquille) {
             coc.move();
 
         }
+      //  printPop();
 
         //System.out.println("Population movement thread: " + Thread.currentThread().getName());
     }
