@@ -74,7 +74,6 @@ public class MainController
 
     public void changeController(Controllable c)
     {
-        //stopTimer();
         System.out.println("Change controller\n");
 
 
@@ -124,6 +123,7 @@ public class MainController
 
     private void initGraph()
     {
+
         // init graphPanel
         NumberAxis xAxis = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
         xAxis.setTickLabelsVisible(false);
@@ -240,7 +240,18 @@ public class MainController
     @FXML
     private void makePause()
     {
-
+        try
+        {
+            model1.pauseThread();
+            zone1.pauseThread();
+            //System.out.println(Thread.currentThread().getId());
+            //System.out.println(Thread.currentThread().getName());
+            //Thread.currentThread().sleep(2000);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -20,6 +20,9 @@
     -fx-font: 13px Tahoma;
 }
 
+.pane {
+    display: flex;
+}
 .menu .label
 {
     -fx-text-fill: white;

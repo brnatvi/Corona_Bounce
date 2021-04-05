@@ -29,6 +29,7 @@ public class App extends Application {
     private static SettingsController controllerSettings;
     private static Parent parentMain, parentSettings;
 
+
     @Override
     public void start(Stage stage) throws IOException {
         parentMain = loadMain();
@@ -55,7 +56,7 @@ public class App extends Application {
 
 //        stage.setMaximized(true);
         stage.sizeToScene();
-//        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -72,7 +73,7 @@ public class App extends Application {
             }
         });
 
-        musique.start();
+       // musique.start();
     }
 
     static void setRoot(String fxml) throws IOException {
