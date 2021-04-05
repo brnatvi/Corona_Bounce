@@ -29,6 +29,7 @@ public class App extends Application {
     private static SettingsController controllerSettings;
     private static Parent parentMain, parentSettings;
 
+
     @Override
     public void start(Stage stage) throws IOException {
         parentMain = loadMain();
@@ -48,14 +49,14 @@ public class App extends Application {
         scene.getStylesheets().add(getClass().getResource("style.css").toString());
         stage.setScene(scene);
 
-//        stage.setMinHeight(600);
-//        stage.setMinWidth(900);
+        stage.setMinHeight(600);
+        stage.setMinWidth(1200);
 //        stage.setMaxHeight(650);
 //        stage.setMaxWidth(1000);
 
 //        stage.setMaximized(true);
         stage.sizeToScene();
-//        stage.setResizable(true);
+        stage.setResizable(true);
         stage.show();
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -72,7 +73,7 @@ public class App extends Application {
             }
         });
 
-        musique.start();
+       // musique.start();
     }
 
     static void setRoot(String fxml) throws IOException {

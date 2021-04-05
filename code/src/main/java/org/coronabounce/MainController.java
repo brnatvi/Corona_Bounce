@@ -74,7 +74,6 @@ public class MainController
 
     public void changeController(Controllable c)
     {
-        //stopTimer();
         System.out.println("Change controller\n");
 
         this.zone1 = new Zone(c);
@@ -127,6 +126,7 @@ public class MainController
 
     private void initGraph()
     {
+
         // init graphPanel
         NumberAxis xAxis = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
         xAxis.setTickLabelsVisible(false);
@@ -158,8 +158,8 @@ public class MainController
     private void drawPoint(CoquilleBille cb, boolean is_panel2)
     {
         String state = cb.getIndividual().healthState();
-        double coordX = cb.getPosition().getX();
-        double coordY = cb.getPosition().getY();
+        double coordX = cb.getPosition().getX() * (panel1.getWidth()/controller.getSpaceSize()[0]);
+        double coordY = cb.getPosition().getY() * (panel1.getHeight()/controller.getSpaceSize()[1]);
         Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
         if (state.equals("Healthy")) {point.setFill(valueOf("70e000"));}    //green
         if (state.equals("Incubating")) {point.setFill(valueOf("ff1830"));}  //red
@@ -243,7 +243,18 @@ public class MainController
     @FXML
     private void makePause()
     {
-
+        try
+        {
+            model1.pauseThread();
+            zone1.pauseThread();
+            //System.out.println(Thread.currentThread().getId());
+            //System.out.println(Thread.currentThread().getName());
+            //Thread.currentThread().sleep(2000);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
