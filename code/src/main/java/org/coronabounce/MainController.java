@@ -155,8 +155,8 @@ public class MainController
     private void drawPoint(CoquilleBille cb, boolean is_panel2)
     {
         String state = cb.getIndividual().healthState();
-        double coordX = cb.getPosition().getX();
-        double coordY = cb.getPosition().getY();
+        double coordX = cb.getPosition().getX() * (panel1.getWidth()/controller.getSpaceSize()[0]);
+        double coordY = cb.getPosition().getY() * (panel1.getHeight()/controller.getSpaceSize()[1]);
         Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
         if (state.equals("Healthy")) {point.setFill(valueOf("70e000"));}    //green
         if (state.equals("Incubating")) {point.setFill(valueOf("ff1830"));}  //red

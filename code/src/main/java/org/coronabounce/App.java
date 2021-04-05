@@ -56,7 +56,7 @@ public class App extends Application {
 
 //        stage.setMaximized(true);
         stage.sizeToScene();
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.show();
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
