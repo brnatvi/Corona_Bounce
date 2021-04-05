@@ -49,8 +49,8 @@ public class App extends Application {
         scene.getStylesheets().add(getClass().getResource("style.css").toString());
         stage.setScene(scene);
 
-//        stage.setMinHeight(600);
-//        stage.setMinWidth(900);
+        stage.setMinHeight(600);
+        stage.setMinWidth(1200);
 //        stage.setMaxHeight(650);
 //        stage.setMaxWidth(1000);
 
