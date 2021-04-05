@@ -15,7 +15,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.MenuBar?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="686.0" spacing="20.0" style="-fx-background-color: DARKCYAN;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.coronabounce.MainController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="686.0" spacing="20.0" style="-fx-background-color: DARKCYAN;" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.coronabounce.MainController">
    <children>
       <HBox alignment="BASELINE_CENTER" spacing="35">
          <children>
@@ -107,10 +107,10 @@
          </children>
       </HBox>
 
-      <HBox prefWidth="600">
-         <Pane fx:id="panel1" accessibleRole="NODE" layoutX="27.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="310.0" prefWidth="500.0" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS" />
-         <Pane accessibleRole="NODE" layoutX="27.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="50.0" prefHeight="310.0" style="-fx-background-color: DARKCYAN;" HBox.hgrow="ALWAYS" />
-         <Pane fx:id="panel2" accessibleRole="NODE" layoutX="512.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="310.0" prefWidth="500.0" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS" />
+      <HBox prefWidth="650">
+         <Pane fx:id="panel1" accessibleRole="NODE" layoutX="27.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="340.0" prefWidth="500.0" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS" />
+         <Pane accessibleRole="NODE" layoutX="27.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="50.0" prefHeight="340.0" style="-fx-background-color: DARKCYAN;" HBox.hgrow="ALWAYS" />
+         <Pane fx:id="panel2" accessibleRole="NODE" layoutX="490.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="340.0" prefWidth="500.0" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS" />
       </HBox>
    </children>
    <padding>

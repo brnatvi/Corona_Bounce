@@ -77,7 +77,6 @@ public class MainController
         //stopTimer();
         System.out.println("Change controller\n");
 
-
         this.zone1 = new Zone(c);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
@@ -96,6 +95,10 @@ public class MainController
     public Controllable getController()
     {
         return controller;
+    }
+
+    public double getPanel1Width () {
+        return panel1.getWidth();
     }
 
     //========================= Initialisation ========================================================================/
