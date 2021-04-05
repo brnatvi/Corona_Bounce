@@ -3,6 +3,7 @@ package org.coronabounce.mvcconnectors;
 import org.coronabounce.data.Data;
 
 import java.util.List;
+import java.util.Timer;
 
 public interface Displayable
 {
@@ -44,6 +45,8 @@ public interface Displayable
     public Data getData();
 
     public void stopTimer(boolean b_StopTimer);
+
+    public void pauseThread() throws InterruptedException;
 
     //======================================== Second Priority ========================================================//
 

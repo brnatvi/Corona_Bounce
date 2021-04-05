@@ -46,6 +46,11 @@ public class Zone  {
     public static double getHeight() { return height; }
     public static void setHeight(double h) { if(h>=1){height = h;}}
     public Population getPopulation() {return p;}
+    public void pauseThread() throws InterruptedException
+    {
+        Thread.currentThread().sleep(2000);
+
+    }
 
 
     public void moving(){
