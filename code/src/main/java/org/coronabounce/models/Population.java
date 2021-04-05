@@ -62,6 +62,10 @@ public class Population implements Displayable {
     }
     public Timer getT() {return timer;}
 
+    public void pauseThread() throws InterruptedException
+    {
+        Thread.currentThread().sleep(2000);
+    }
 
     public void addIndividual(Individual i) {
         CoquilleBille coc = new CoquilleBille(i);
