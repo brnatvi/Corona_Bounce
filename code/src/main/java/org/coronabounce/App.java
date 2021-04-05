@@ -13,6 +13,7 @@ import javafx.stage.WindowEvent;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
+import org.coronabounce.models.musique;
 
 import java.io.IOException;
 
@@ -70,6 +71,8 @@ public class App extends Application {
                 }
             }
         });
+
+        musique.start();
     }
 
     static void setRoot(String fxml) throws IOException {
