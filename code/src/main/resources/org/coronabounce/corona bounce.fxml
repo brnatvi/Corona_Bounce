@@ -129,7 +129,7 @@
             </GridPane>
          </children>
          <VBox.margin>
-            <Insets bottom="20.0" top="20.0" />
+            <Insets bottom="20.0" top="30.0" />
          </VBox.margin>
       </GridPane>
 

@@ -1,11 +1,11 @@
 
-.default-color0.chart-series-area-line { -fx-stroke: #70e000; }
-.default-color1.chart-series-area-line { -fx-stroke: #DC143C; }
-.default-color2.chart-series-area-line { -fx-stroke: #ffd22f; }
+.default-color0.chart-series-area-line { -fx-stroke: #70bd99; }
+.default-color1.chart-series-area-line { -fx-stroke: #e13a44; }
+.default-color2.chart-series-area-line { -fx-stroke: #ffc557; }
 
-.default-color0.chart-series-area-fill { -fx-fill: #70e000; }
-.default-color1.chart-series-area-fill { -fx-fill: #DC143C; }
-.default-color2.chart-series-area-fill { -fx-fill: #ffd22f; }
+.default-color0.chart-series-area-fill { -fx-fill: #70bd99; }
+.default-color1.chart-series-area-fill { -fx-fill: #e13a44; }
+.default-color2.chart-series-area-fill { -fx-fill: #ffc557; }
 
 .button {
     -fx-text-fill: white;
