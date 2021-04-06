@@ -25,6 +25,7 @@ import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
 
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 import static javafx.scene.paint.Paint.valueOf;
 
 public class MainController
@@ -141,12 +142,16 @@ public class MainController
         graphPanel1.setCreateSymbols(false);
 
         // fil gridGraphStat1 by graphPanel1
-        graphPanel1.setPrefSize(371, 160);
-        graphPanel1.setLayoutX(138);
-        graphPanel1.setLayoutY(59);
         graphPanel1.setHorizontalGridLinesVisible(false);
         graphPanel1.setVerticalGridLinesVisible(false);
         gridGraphStat1.add(graphPanel1, 1, 0);
+
+        graphPanel1.setMinWidth(150);
+        graphPanel1.setMinHeight(USE_COMPUTED_SIZE);
+        graphPanel1.setPrefWidth(USE_COMPUTED_SIZE);
+        graphPanel1.setPrefHeight(USE_COMPUTED_SIZE);
+        graphPanel1.setMaxWidth(USE_COMPUTED_SIZE);
+        graphPanel1.setMaxHeight(USE_COMPUTED_SIZE);
 
         // init graphPanel2
       //  NumberAxis xAxis2 = new NumberAxis(0, this.model2.getData().getNmbr(), 1);
@@ -161,11 +166,12 @@ public class MainController
 
 
       //  graphPanel2.setPrefSize(371, 160);
-      //  graphPanel2.setLayoutX(138);
-      //  graphPanel2.setLayoutY(59);
+      //
       //  graphPanel2.setHorizontalGridLinesVisible(false);
       //  graphPanel2.setVerticalGridLinesVisible(false);
       //  gridGraphStat2.add(graphPanel2, 1, 0);
+
+
 
     }
 

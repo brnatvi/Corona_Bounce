@@ -39,7 +39,7 @@
             </Button>
          </children>
          <VBox.margin>
-            <Insets bottom="10.0" top="10.0" />
+            <Insets bottom="10.0" top="15.0" />
          </VBox.margin>
       </HBox>
       <GridPane fx:id="mainGrid" alignment="TOP_CENTER" prefHeight="74.0" prefWidth="1140.0">
@@ -162,6 +162,9 @@
                </HBox.margin>
             </MenuBar>
          </children>
+         <VBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </VBox.margin>
       </HBox>
 
       <HBox prefWidth="600">
