@@ -120,23 +120,9 @@ public class MainController
         drawPopulation(points1, false);
         drawPopulation(points2, true);
 
-        // init statistics1
-        labelHealthy1.setText(String.valueOf(model1.getNbHealthy()));
-        labelSick1.setText(String.valueOf(model1.getNbSick()));
-        labelRecovered1.setText(String.valueOf(model1.getNbRecovered()));
-
-        // init statistics2
-        labelHealthy2.setText(String.valueOf(model2.getNbHealthy()));
-        labelSick2.setText(String.valueOf(model2.getNbSick()));
-        labelRecovered2.setText(String.valueOf(model2.getNbRecovered()));
+        // init statistic
+        updateStatistics();
     }
-
-    private void retainPopulations()
-    {
-        panel1.getChildren().retainAll();
-        panel2.getChildren().retainAll();
-    }
-
 
     /**
      * Initialisation of graphs and filing of mainGrid by graphStatGrid1 and graphStatGrid2
@@ -154,6 +140,14 @@ public class MainController
         graphPanel1.getData().addAll(healthy1, sick1, recovered1);
         graphPanel1.setCreateSymbols(false);
 
+        // fil gridGraphStat1 by graphPanel1
+        graphPanel1.setPrefSize(371, 160);
+        graphPanel1.setLayoutX(138);
+        graphPanel1.setLayoutY(59);
+        graphPanel1.setHorizontalGridLinesVisible(false);
+        graphPanel1.setVerticalGridLinesVisible(false);
+        gridGraphStat1.add(graphPanel1, 1, 0);
+
         // init graphPanel2
       //  NumberAxis xAxis2 = new NumberAxis(0, this.model2.getData().getNmbr(), 1);
       //  xAxis2.setTickLabelsVisible(false);
@@ -165,13 +159,6 @@ public class MainController
       //  graphPanel2.getData().addAll(healthy2, sick2, recovered2);
       //  graphPanel2.setCreateSymbols(false);
 
-        // fil mainGrid by graphPanel1 and graphPanel2
-        graphPanel1.setPrefSize(371, 160);
-        graphPanel1.setLayoutX(138);
-        graphPanel1.setLayoutY(59);
-        graphPanel1.setHorizontalGridLinesVisible(false);
-        graphPanel1.setVerticalGridLinesVisible(false);
-        gridGraphStat1.add(graphPanel1, 1, 0);
 
       //  graphPanel2.setPrefSize(371, 160);
       //  graphPanel2.setLayoutX(138);
@@ -180,43 +167,6 @@ public class MainController
       //  graphPanel2.setVerticalGridLinesVisible(false);
       //  gridGraphStat2.add(graphPanel2, 1, 0);
 
-    }
-
-    /**
-     * Function call drawPoint() for all points of list
-     * @param is_panel2 helps use this function for two populations
-     */
-    private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel2)
-    {
-        for (CoquilleBille cb : points1)
-        {
-            drawPoint(cb, is_panel2);
-        }
-    }
-
-    /**
-     * Function:
-     * 1) adapt position in GUI's Pane relative to position in Model's Zone
-     * 2) draw point according its status (Healthy, Sick, Recovered, Incubating)
-     */
-    private void drawPoint(CoquilleBille cb, boolean is_panel2)
-    {
-        String state = cb.getIndividual().healthState();
-        double coordX = cb.getPosition().getX() * (panel1.getWidth()/controller.getSpaceSize()[0]);
-        double coordY = cb.getPosition().getY() * (panel1.getHeight()/controller.getSpaceSize()[1]);
-        Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
-        if (state.equals("Healthy")) {point.setFill(valueOf("70e000"));}    //green
-        if (state.equals("Incubating")) {point.setFill(valueOf("ff1830"));}  //red
-        if (state.equals("Recovered")) {point.setFill(valueOf("ffd22f"));}  //yellow
-        if (state.equals("Sick")){point.setFill(valueOf("a80011"));}     // dark red
-        if (is_panel2)
-        {
-            panel2.getChildren().add(point);
-        }
-        else
-        {
-            panel1.getChildren().add(point);
-        }
     }
 
     //=============================== Interrupters ====================================================================/
@@ -498,22 +448,78 @@ public class MainController
 
         tlPoints = new Timeline(new KeyFrame(Duration.millis(33), ev ->
         {
+            // clear
             retainPopulations();
 
             // update points
             drawPopulation(points1, false);
             drawPopulation(points2, true);
 
-            // update statistics
-            labelHealthy1.setText(String.valueOf(model1.getNbHealthy()));
-            labelSick1.setText(String.valueOf(model1.getNbSick()));
-            labelRecovered1.setText(String.valueOf(model1.getNbRecovered()));
-
-            labelHealthy2.setText(String.valueOf(model2.getNbHealthy()));
-            labelSick2.setText(String.valueOf(model2.getNbSick()));
-            labelRecovered2.setText(String.valueOf(model2.getNbRecovered()));
+            // update statistic
+            updateStatistics();
+            
         }));
         tlPoints.setCycleCount(Animation.INDEFINITE);
         tlPoints.play();
     }
+
+    //========================= Animation auxiliary functions =========================================================/
+
+    private void updateStatistics()
+    {
+        // statistics1
+        labelHealthy1.setText(String.valueOf(model1.getNbHealthy()));
+        labelSick1.setText(String.valueOf(model1.getNbSick()));
+        labelRecovered1.setText(String.valueOf(model1.getNbRecovered()));
+
+        // statistics2
+        labelHealthy2.setText(String.valueOf(model2.getNbHealthy()));
+        labelSick2.setText(String.valueOf(model2.getNbSick()));
+        labelRecovered2.setText(String.valueOf(model2.getNbRecovered()));
+    }
+
+    private void retainPopulations()
+    {
+        panel1.getChildren().retainAll();
+        panel2.getChildren().retainAll();
+    }
+
+    /**
+     * Function call drawPoint() for all points of list
+     * @param is_panel2 helps use this function for two populations
+     */
+    private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel2)
+    {
+        for (CoquilleBille cb : points1)
+        {
+            drawPoint(cb, is_panel2);
+        }
+    }
+
+    /**
+     * Function:
+     * 1) adapt position in GUI's Pane relative to position in Model's Zone
+     * 2) draw point according its status (Healthy, Sick, Recovered, Incubating)
+     */
+    private void drawPoint(CoquilleBille cb, boolean is_panel2)
+    {
+        String state = cb.getIndividual().healthState();
+        double coordX = cb.getPosition().getX() * (panel1.getWidth()/controller.getSpaceSize()[0]);
+        double coordY = cb.getPosition().getY() * (panel1.getHeight()/controller.getSpaceSize()[1]);
+        Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
+        if (state.equals("Healthy")) {point.setFill(valueOf("70e000"));}    //green
+        if (state.equals("Incubating")) {point.setFill(valueOf("ff1830"));}  //red
+        if (state.equals("Recovered")) {point.setFill(valueOf("ffd22f"));}  //yellow
+        if (state.equals("Sick")){point.setFill(valueOf("a80011"));}     // dark red
+        if (is_panel2)
+        {
+            panel2.getChildren().add(point);
+        }
+        else
+        {
+            panel1.getChildren().add(point);
+        }
+    }
+
+
 }
