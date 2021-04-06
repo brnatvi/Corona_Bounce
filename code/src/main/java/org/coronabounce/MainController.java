@@ -147,11 +147,11 @@ public class MainController
         gridGraphStat1.add(graphPanel1, 1, 0);
 
         graphPanel1.setMinWidth(150);
-        graphPanel1.setMinHeight(USE_COMPUTED_SIZE);
+        graphPanel1.setMinHeight(100);
         graphPanel1.setPrefWidth(USE_COMPUTED_SIZE);
-        graphPanel1.setPrefHeight(USE_COMPUTED_SIZE);
+        graphPanel1.setPrefHeight(100);
         graphPanel1.setMaxWidth(USE_COMPUTED_SIZE);
-        graphPanel1.setMaxHeight(USE_COMPUTED_SIZE);
+        graphPanel1.setMaxHeight(100);
 
         // init graphPanel2
       //  NumberAxis xAxis2 = new NumberAxis(0, this.model2.getData().getNmbr(), 1);
