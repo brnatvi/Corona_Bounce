@@ -30,28 +30,39 @@ import static javafx.scene.paint.Paint.valueOf;
 public class MainController
 {
     private Controllable controller;
-    private Zone zone1 = null;
-    private Zone zone2 = null;
-    private Displayable model1;
-    private Displayable model2;
-    private List<CoquilleBille> points1;
-    private List<CoquilleBille> points2;
-    private Timeline tlPoints;
-    private Timeline tlGraph;
+    private Displayable model1;                   // left population (population1)
+    private Displayable model2;                   // right population (population2)
+    private Zone zone1 = null;                    // left population's (population1) zone
+    private Zone zone2 = null;                    // right population's (population2) zone
+    private List<CoquilleBille> points1;          // list of population1's individuals
+    private List<CoquilleBille> points2;          // list of population2's individuals
+    private Timeline tlPoints;                    // timeline for animation of point's moving
+    private Timeline tlGraph;                     // timeline for animation of graph
 
-    XYChart.Series healthy;
-    XYChart.Series sick;
-    XYChart.Series recovered;
-    private AreaChart graphPanel = null;
+    private XYChart.Series healthy1;              // charts and area chart tor population1's graph
+    private XYChart.Series sick1;
+    private XYChart.Series recovered1;
+    private AreaChart graphPanel1 = null;
+
+    private XYChart.Series healthy2;              // charts and area chart tor population2's graph
+    private XYChart.Series sick2;
+    private XYChart.Series recovered2;
+    private AreaChart graphPanel2 = null;
 
     @FXML AnchorPane mainPane;
-    @FXML Pane panel1;                            // field with moving points
-    @FXML Pane panel2;                            // field with moving points
-    @FXML GridPane mainGrid;                     // grid contains statistic's grid (gridStatistic) and graph (graphPanel)
-    @FXML GridPane gridStatistic;
-    @FXML Label labelHealthy;
-    @FXML Label labelSick;
-    @FXML Label labelRecovered;
+    @FXML Pane panel1;                            // field with moving points of population1
+    @FXML Pane panel2;                            // field with moving points of population2
+    @FXML GridPane mainGrid;
+    @FXML GridPane gridGraphStat1;                     // grid contains statistic's grid (gridStatistic1) and graph (graphPanel1)
+    @FXML GridPane gridGraphStat2;                     // grid contains statistic's grid (gridStatisti2c) and graph (graphPanel2)
+    @FXML GridPane gridStat1;                // grid contains statistics and texts "Healthy", "Sick", "Recovered"
+    @FXML GridPane gridStat2;                // grid contains statistics and texts "Healthy", "Sick", "Recovered"
+    @FXML Label labelHealthy1;                    // labels for gridStatistic1
+    @FXML Label labelSick1;
+    @FXML Label labelRecovered1;
+    @FXML Label labelHealthy2;                    // labels for gridStatistic2
+    @FXML Label labelSick2;
+    @FXML Label labelRecovered2;
     @FXML MenuBar mbScenario1;
     @FXML MenuBar mbScenario2;
     @FXML MenuItem scenario_1_1;
@@ -80,9 +91,9 @@ public class MainController
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
 
-        this.healthy = new XYChart.Series();
-        this.sick = new XYChart.Series();
-        this.recovered = new XYChart.Series();
+        this.healthy1 = new XYChart.Series();
+        this.sick1 = new XYChart.Series();
+        this.recovered1 = new XYChart.Series();
 
         this.zone2 = new Zone(c);
         this.model2 = zone2.getPopulation();
@@ -96,9 +107,6 @@ public class MainController
         return controller;
     }
 
-    public double getPanel1Width () {
-        return panel1.getWidth();
-    }
 
     //========================= Initialisation ========================================================================/
 
@@ -106,16 +114,21 @@ public class MainController
     private void initialize()
     {
         // init graphPanel and fil mainGrid by graphPanel
-        initGraph();
+        initGraphs();
 
         // init points
         drawPopulation(points1, false);
         drawPopulation(points2, true);
 
-        // init statistics
-        labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
-        labelSick.setText(String.valueOf(model1.getNbSick()));
-        labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
+        // init statistics1
+        labelHealthy1.setText(String.valueOf(model1.getNbHealthy()));
+        labelSick1.setText(String.valueOf(model1.getNbSick()));
+        labelRecovered1.setText(String.valueOf(model1.getNbRecovered()));
+
+        // init statistics2
+        labelHealthy2.setText(String.valueOf(model2.getNbHealthy()));
+        labelSick2.setText(String.valueOf(model2.getNbSick()));
+        labelRecovered2.setText(String.valueOf(model2.getNbRecovered()));
     }
 
     private void retainPopulations()
@@ -124,29 +137,55 @@ public class MainController
         panel2.getChildren().retainAll();
     }
 
-    private void initGraph()
+
+    /**
+     * Initialisation of graphs and filing of mainGrid by graphStatGrid1 and graphStatGrid2
+     */
+    private void initGraphs()
     {
+        // init graphPanel1
+        NumberAxis xAxis1 = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
+        xAxis1.setTickLabelsVisible(false);
+        xAxis1.setTickMarkVisible(false);
+        NumberAxis yAxis1 = new NumberAxis(0, 100, 1);
+        yAxis1.setTickLabelsVisible(false);
+        yAxis1.setTickMarkVisible(false);
+        this.graphPanel1 = new AreaChart(xAxis1, yAxis1);
+        graphPanel1.getData().addAll(healthy1, sick1, recovered1);
+        graphPanel1.setCreateSymbols(false);
 
-        // init graphPanel
-        NumberAxis xAxis = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
-        xAxis.setTickLabelsVisible(false);
-        xAxis.setTickMarkVisible(false);
-        NumberAxis yAxis = new NumberAxis(0, 100, 1);
-        yAxis.setTickLabelsVisible(false);
-        yAxis.setTickMarkVisible(false);
-        this.graphPanel = new AreaChart(xAxis, yAxis);
-        graphPanel.getData().addAll(healthy, sick, recovered);
-        graphPanel.setCreateSymbols(false);
+        // init graphPanel2
+      //  NumberAxis xAxis2 = new NumberAxis(0, this.model2.getData().getNmbr(), 1);
+      //  xAxis2.setTickLabelsVisible(false);
+      //  xAxis2.setTickMarkVisible(false);
+      //  NumberAxis yAxis2 = new NumberAxis(0, 100, 1);
+      //  yAxis2.setTickLabelsVisible(false);
+      //  yAxis2.setTickMarkVisible(false);
+      //  this.graphPanel2 = new AreaChart(xAxis2, yAxis2);
+      //  graphPanel2.getData().addAll(healthy2, sick2, recovered2);
+      //  graphPanel2.setCreateSymbols(false);
 
-        // fil mainGrid by graphPanel
-        mainGrid.add(graphPanel, 1, 0);
-        graphPanel.setPrefSize(371, 160);
-        graphPanel.setLayoutX(138);
-        graphPanel.setLayoutY(59);
-        graphPanel.setHorizontalGridLinesVisible(false);
-        graphPanel.setVerticalGridLinesVisible(false);
+        // fil mainGrid by graphPanel1 and graphPanel2
+        graphPanel1.setPrefSize(371, 160);
+        graphPanel1.setLayoutX(138);
+        graphPanel1.setLayoutY(59);
+        graphPanel1.setHorizontalGridLinesVisible(false);
+        graphPanel1.setVerticalGridLinesVisible(false);
+        gridGraphStat1.add(graphPanel1, 1, 0);
+
+      //  graphPanel2.setPrefSize(371, 160);
+      //  graphPanel2.setLayoutX(138);
+      //  graphPanel2.setLayoutY(59);
+      //  graphPanel2.setHorizontalGridLinesVisible(false);
+      //  graphPanel2.setVerticalGridLinesVisible(false);
+      //  gridGraphStat2.add(graphPanel2, 1, 0);
+
     }
 
+    /**
+     * Function call drawPoint() for all points of list
+     * @param is_panel2 helps use this function for two populations
+     */
     private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel2)
     {
         for (CoquilleBille cb : points1)
@@ -155,6 +194,11 @@ public class MainController
         }
     }
 
+    /**
+     * Function:
+     * 1) adapt position in GUI's Pane relative to position in Model's Zone
+     * 2) draw point according its status (Healthy, Sick, Recovered, Incubating)
+     */
     private void drawPoint(CoquilleBille cb, boolean is_panel2)
     {
         String state = cb.getIndividual().healthState();
@@ -293,7 +337,7 @@ public class MainController
 
         Tooltip tooltip3 = new Tooltip();
         tooltip3.setText("Colors are the same as for the dots:\ngreen for healthy, red for sick and yellow for recovered");
-        Tooltip.install(graphPanel, tooltip3);
+        Tooltip.install(graphPanel1, tooltip3);
 
         Tooltip tooltip4 = new Tooltip();
         Tooltip tooltip5 = new Tooltip();
@@ -321,7 +365,7 @@ public class MainController
     public void initNewPopulation()
     {
         retainPopulations();
-        initGraph();
+        initGraphs();
         drawPopulation(points1, false);
         drawPopulation(points2, true);
     }
@@ -386,33 +430,52 @@ public class MainController
     private void launchDrawGraph()
     {
         stopTimeLine(tlGraph);
-        healthy.getData().retainAll();
-        sick.getData().retainAll();
-        recovered.getData().retainAll();
+        healthy1.getData().retainAll();
+        sick1.getData().retainAll();
+        recovered1.getData().retainAll();
+
+      //  healthy2.getData().retainAll();
+      //  sick2.getData().retainAll();
+      //  recovered2.getData().retainAll();
 
         model1.saveStatToData();
+       // model2.saveStatToData();
 
         tlGraph = new Timeline(new KeyFrame(Duration.millis(choosePeriod()), ev ->
         {
             //long startTime = System.currentTimeMillis();                           // code for debug
 
-            healthy.getData().clear();
-            sick.getData().clear();
-            recovered.getData().clear();
+            healthy1.getData().clear();
+            sick1.getData().clear();
+            recovered1.getData().clear();
+
+          //  healthy2.getData().clear();
+          //  sick2.getData().clear();
+          //  recovered2.getData().clear();
 
             model1.getData().Lock();
 
-            Vector<Data.Slice> History = model1.getData().getFifo();
-
+            Vector<Data.Slice> History1 = model1.getData().getFifo();
+          //  Vector<Data.Slice> History2 = model2.getData().getFifo();
+            
             // draw graph
             int x = 0;
-            for (Data.Slice Slice : History)
+            for (Data.Slice Slice : History1)
             {
-                healthy.getData().add(new XYChart.Data(x, 100));
-                sick.getData().add(new XYChart.Data(x, Slice.getPrcSick()));
-                recovered.getData().add(new XYChart.Data(x, Slice.getPrcRecovered()));
+                healthy1.getData().add(new XYChart.Data(x, 100));
+                sick1.getData().add(new XYChart.Data(x, Slice.getPrcSick()));
+                recovered1.getData().add(new XYChart.Data(x, Slice.getPrcRecovered()));
                 x++;
             }
+
+         //   int y = 0;
+         //   for (Data.Slice Slice : History2)
+         //   {
+         //       healthy2.getData().add(new XYChart.Data(x, 100));
+         //       sick2.getData().add(new XYChart.Data(x, Slice.getPrcSick()));
+         //       recovered2.getData().add(new XYChart.Data(x, Slice.getPrcRecovered()));
+         //       y++;
+         //   }
 
             model1.getData().unLock();
 
@@ -442,9 +505,9 @@ public class MainController
             drawPopulation(points2, true);
 
             // update statistics
-            labelHealthy.setText(String.valueOf(model1.getNbHealthy()));
-            labelSick.setText(String.valueOf(model1.getNbSick()));
-            labelRecovered.setText(String.valueOf(model1.getNbRecovered()));
+            labelHealthy1.setText(String.valueOf(model1.getNbHealthy()));
+            labelSick1.setText(String.valueOf(model1.getNbSick()));
+            labelRecovered1.setText(String.valueOf(model1.getNbRecovered()));
         }));
         tlPoints.setCycleCount(Animation.INDEFINITE);
         tlPoints.play();
