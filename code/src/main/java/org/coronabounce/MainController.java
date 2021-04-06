@@ -493,18 +493,20 @@ public class MainController
      */
     private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel1)
     {
+        double koeffW = panel1.getWidth()/controller.getSpaceSize()[0];
+        double koeffH = panel1.getHeight()/controller.getSpaceSize()[1];
         if (is_panel1)
         {
             for (CoquilleBille cb : points1)
             {
-                drawPoint(cb, is_panel1);
+                drawPoint(cb, true, koeffW, koeffH);
             }
         }
         else
         {
             for (CoquilleBille cb : points2)
             {
-                drawPoint(cb, is_panel1);
+                drawPoint(cb, false, koeffW, koeffH);
             }
         }
     }
@@ -514,12 +516,12 @@ public class MainController
      * 1) adapt position in GUI's Pane relative to position in Model's Zone
      * 2) draw point according its status (Healthy, Sick, Recovered, Incubating)
      */
-    private void drawPoint(CoquilleBille cb, boolean is_panel1)
+    private void drawPoint(CoquilleBille cb, boolean is_panel1, double koeffW, double koeffH)
     {
         String state = cb.getIndividual().healthState();
-        double coordX = cb.getPosition().getX() * (panel1.getWidth()/controller.getSpaceSize()[0]);
-        double coordY = cb.getPosition().getY() * (panel1.getHeight()/controller.getSpaceSize()[1]);
-        Circle point = new Circle(coordX, coordY, controller.getRadiusDot() * (panel1.getHeight()/controller.getSpaceSize()[1]));
+        double coordX = cb.getPosition().getX() * koeffW;
+        double coordY = cb.getPosition().getY() * koeffH;
+        Circle point = new Circle(coordX, coordY, controller.getRadiusDot() * koeffH);
         if (state.equals("Healthy")) {point.setFill(valueOf("70e000"));}    //green
         if (state.equals("Incubating")) {point.setFill(valueOf("ff1830"));}  //red
         if (state.equals("Recovered")) {point.setFill(valueOf("ffd22f"));}  //yellow
