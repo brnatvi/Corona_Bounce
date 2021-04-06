@@ -74,7 +74,7 @@ public class MainController
     @FXML Button btnSettings;
     @FXML Button btnLegend;
 
-    //========================= Constructors ==========================================================================/
+    //========================= Constructor ===========================================================================/
 
     public MainController()
     {
@@ -115,7 +115,7 @@ public class MainController
     private void initialize()
     {
         // init graphPanel and fil mainGrid by graphPanel
-        initGraphs();
+        initGraph1();
 
         // init points
         drawPopulation(points1, false);
@@ -128,7 +128,7 @@ public class MainController
     /**
      * Initialisation of graphs and filing of mainGrid by graphStatGrid1 and graphStatGrid2
      */
-    private void initGraphs()
+    private void initGraph1()
     {
         // init graphPanel1
         NumberAxis xAxis1 = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
@@ -170,9 +170,6 @@ public class MainController
       //  graphPanel2.setHorizontalGridLinesVisible(false);
       //  graphPanel2.setVerticalGridLinesVisible(false);
       //  gridGraphStat2.add(graphPanel2, 1, 0);
-
-
-
     }
 
     //=============================== Interrupters ====================================================================/
@@ -321,9 +318,9 @@ public class MainController
     public void initNewPopulation()
     {
         retainPopulations();
-        initGraphs();
-        drawPopulation(points1, false);
-        drawPopulation(points2, true);
+        initGraph1();
+        drawPopulation(points1, true);
+        drawPopulation(points2, false);
     }
 
     public void changeEnableDisable(Button btn)
@@ -458,8 +455,8 @@ public class MainController
             retainPopulations();
 
             // update points
-            drawPopulation(points1, false);
-            drawPopulation(points2, true);
+            drawPopulation(points1, true);
+            drawPopulation(points2, false);
 
             // update statistic
             updateStatistics();
@@ -492,13 +489,23 @@ public class MainController
 
     /**
      * Function call drawPoint() for all points of list
-     * @param is_panel2 helps use this function for two populations
+     * @param is_panel1 helps use this function for two populations
      */
-    private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel2)
+    private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel1)
     {
-        for (CoquilleBille cb : points1)
+        if (is_panel1)
         {
-            drawPoint(cb, is_panel2);
+            for (CoquilleBille cb : points1)
+            {
+                drawPoint(cb, is_panel1);
+            }
+        }
+        else
+        {
+            for (CoquilleBille cb : points2)
+            {
+                drawPoint(cb, is_panel1);
+            }
         }
     }
 
@@ -507,7 +514,7 @@ public class MainController
      * 1) adapt position in GUI's Pane relative to position in Model's Zone
      * 2) draw point according its status (Healthy, Sick, Recovered, Incubating)
      */
-    private void drawPoint(CoquilleBille cb, boolean is_panel2)
+    private void drawPoint(CoquilleBille cb, boolean is_panel1)
     {
         String state = cb.getIndividual().healthState();
         double coordX = cb.getPosition().getX() * (panel1.getWidth()/controller.getSpaceSize()[0]);
@@ -517,13 +524,13 @@ public class MainController
         if (state.equals("Incubating")) {point.setFill(valueOf("ff1830"));}  //red
         if (state.equals("Recovered")) {point.setFill(valueOf("ffd22f"));}  //yellow
         if (state.equals("Sick")){point.setFill(valueOf("a80011"));}     // dark red
-        if (is_panel2)
+        if (is_panel1)
         {
-            panel2.getChildren().add(point);
+            panel1.getChildren().add(point);
         }
         else
         {
-            panel1.getChildren().add(point);
+            panel2.getChildren().add(point);
         }
     }
 
