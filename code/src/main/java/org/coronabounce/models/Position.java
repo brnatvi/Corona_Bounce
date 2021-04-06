@@ -2,13 +2,14 @@ package org.coronabounce.models;
 
 import org.coronabounce.controllers.Controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 
 
-public class Position {
+public class Position   {
     // Pour savoir quelles positions de la Zone sont déjà prises(Il y'a déjà un individu dessus)
 
     private List<Position> listTakenPositions =new ArrayList<>();

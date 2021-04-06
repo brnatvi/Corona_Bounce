@@ -3,6 +3,10 @@ package org.coronabounce.models;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.mvcconnectors.Controllable;
 
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Timer;
 
@@ -22,14 +26,15 @@ public class CoquilleBille {
     private final int id;
     private static int idCpt=0;
     private static Random r = new Random();
-    private final Position startingPosition;
+    private  final Position startingPosition;
 
     private Population pop=new Population();
 
 
     public CoquilleBille(double speedX,double speedY, Individual individual){
+
         this.p=new Position();
-        startingPosition=p;
+        startingPosition=this.p;
         this.movingSpeedX=speedX;
         this.movingSpeedY=speedY;
         this.individual=individual;
@@ -43,7 +48,7 @@ public class CoquilleBille {
     }
 
     public Position getStartingPosition() {
-        return startingPosition;
+       return startingPosition;
     }
 
     public CoquilleBille(Individual individual){
@@ -69,10 +74,12 @@ public class CoquilleBille {
     }
     protected double distancePos() {
         double x1 = this.getPosition().getX();
+        //System.out.println(this.p.getX());
+        System.out.println(this.startingPosition.getX());
         double x2 = this.startingPosition.getX();
         double y1 = this.getPosition().getY();
         double y2 = this.startingPosition.getY();
-        return  Math.sqrt((x1 + x2) * (x1 +x2) + (y1 + y2) * (y1 +y2));
+        return  Math.sqrt((x1 +x2) * (x1 +x2) + (y1 +y2) * (y1 +y2));
     }
 
     /**
@@ -185,7 +192,7 @@ public class CoquilleBille {
     *{@summary Return a random moving speed between -maxSpeed & maxSpeed.}<br>
     *@param maxSpeed The max speed that can be return.
     */
-    private static double getRandomMovingSpeed(int maxSpeed){
+    protected static double getRandomMovingSpeed(int maxSpeed){
       if(maxSpeed<1){maxSpeed=1;}
       if(r.nextBoolean()){maxSpeed=maxSpeed*(-1);}
       return r.nextDouble()*maxSpeed;
