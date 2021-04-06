@@ -508,6 +508,10 @@ public class MainController
             labelHealthy1.setText(String.valueOf(model1.getNbHealthy()));
             labelSick1.setText(String.valueOf(model1.getNbSick()));
             labelRecovered1.setText(String.valueOf(model1.getNbRecovered()));
+
+            labelHealthy2.setText(String.valueOf(model2.getNbHealthy()));
+            labelSick2.setText(String.valueOf(model2.getNbSick()));
+            labelRecovered2.setText(String.valueOf(model2.getNbRecovered()));
         }));
         tlPoints.setCycleCount(Animation.INDEFINITE);
         tlPoints.play();
