@@ -512,7 +512,7 @@ public class MainController
         String state = cb.getIndividual().healthState();
         double coordX = cb.getPosition().getX() * (panel1.getWidth()/controller.getSpaceSize()[0]);
         double coordY = cb.getPosition().getY() * (panel1.getHeight()/controller.getSpaceSize()[1]);
-        Circle point = new Circle(coordX, coordY, controller.getRadiusDot());
+        Circle point = new Circle(coordX, coordY, controller.getRadiusDot() * (panel1.getHeight()/controller.getSpaceSize()[1]));
         if (state.equals("Healthy")) {point.setFill(valueOf("70e000"));}    //green
         if (state.equals("Incubating")) {point.setFill(valueOf("ff1830"));}  //red
         if (state.equals("Recovered")) {point.setFill(valueOf("ffd22f"));}  //yellow

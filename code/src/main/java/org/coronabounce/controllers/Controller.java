@@ -13,7 +13,7 @@ public class Controller implements Controllable
     private long DURATION_COVID = 3000;               // has contact <-> sick  //TODO compare and converge with parameters in Population
     private long DURATION_HEALING = 8000;            // sick <-> recovered    //TODO compare and converge with parameters in Population
     private long DURATION_NON_CONTAMINATION = 5000;  // recovered <-> can be contaminate again
-    private final int RADIUS_DOT = 4;                 // radius of point in GUI
+    private final int RADIUS_DOT = 3;                 // radius of point in GUI
     private  static double percentage =100;
     private  static double Kilometrage=800;
 
