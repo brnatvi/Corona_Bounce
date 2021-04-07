@@ -29,16 +29,18 @@ public class ConfinedBille extends CoquilleBille {
     }
 
     public void reduce_speed() {
-        int percentage = genererInt(90, 100);
+        int percentage = genererInt(60, 100);
 
         Random r = new Random();
 
         if ((this.getMovingSpeedX() * percentage / 100) <= 1 || (this.getMovingSpeedY() * percentage / 100) <= 1) {
             {
-                this.setMovingSpeed(this.getMovingSpeedX(), this.getMovingSpeedY());
+
+                this.setMovingSpeed(this.getMovingSpeedX(), this.getMovingSpeedX());
             }
         } else {
             this.setMovingSpeed((this.getMovingSpeedX() * percentage / 100), (this.getMovingSpeedY() * percentage / 100));
+           // System.out.println("je sui kenza");
         }
 
 
@@ -50,24 +52,40 @@ public class ConfinedBille extends CoquilleBille {
         reduce_speed();
         double b = genererDouble();
         double a = genererDouble() * b;
-        //System.out.println(distancePos());
+        double c;
         if (distancePos() >= Controller.getKilometrage()) {
-            if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()) {
-                this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()));
+            if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()+Controller.getDiametreX()) {
+                c=genererDouble()*b;
+                //System.out.println("je suis la 1");
+                this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()+c));
             }
-            if ((this.getMovingSpeedY() - a) + this.getPosition().getY() > this.getStartingPosition().getY()) {
-                this.setMovingSpeed((this.getMovingSpeedX()), (this.getMovingSpeedY() - a));
+            if ((this.getMovingSpeedY() - a) + this.getPosition().getY() > this.getStartingPosition().getY()+Controller.getDiametreY()) {
+                //System.out.println("je suis la 2");
+                c=genererDouble()*a;
+                this.setMovingSpeed((this.getMovingSpeedX()+c), (this.getMovingSpeedY() - a));
             }
-            if ((this.getMovingSpeedX() + a) + this.getPosition().getX() <= this.getStartingPosition().getX()) {
-                this.setMovingSpeed((this.getMovingSpeedX()) + a, (this.getMovingSpeedY()));
+            if ((this.getMovingSpeedX() + a) + this.getPosition().getX() <= this.getStartingPosition().getX()+Controller.getDiametreX()) {
+                c=genererDouble()*b;
+               // System.out.println("je suis la3 ");
+                this.setMovingSpeed((this.getMovingSpeedX()) + a, (this.getMovingSpeedY()-c));
             }
-            if ((this.getMovingSpeedY() + a) + this.getPosition().getY() <= this.getStartingPosition().getY()) {
-                this.setMovingSpeed((this.getMovingSpeedX()), (this.getMovingSpeedY() + a));
+            if ((this.getMovingSpeedY() + a) + this.getPosition().getY() <= this.getStartingPosition().getY()+Controller.getDiametreY()) {
+                //System.out.println("je suis la4 ");
+                c=genererDouble()*a;
+                this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));
             }
 
         }
-
         this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
+        if (this.getStartingPosition().getX() == this.getPosition().getX() && this.getPosition().getY() == this.getStartingPosition().getY()) {
+            //this.setMovingSpeed(0,0);
+            System.out.println("je suis la 1");
+            //long start1 = System.nanoTime();
+            //while ((System.nanoTime() - start1) < 20000000) ;
+            this.setMovingSpeed(getRandomMovingSpeed(5), getRandomMovingSpeed(5));
+            this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
+
+        }
 
     }
 }
