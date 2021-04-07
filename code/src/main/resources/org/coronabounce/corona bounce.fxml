@@ -52,7 +52,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-      
+
             <GridPane fx:id="gridGraphStat1" prefHeight="260.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="102.0" />
@@ -168,12 +168,12 @@
       </HBox>
 
       <HBox prefWidth="600">
-         <Pane fx:id="panel1" accessibleRole="NODE" pickOnBounds="false" prefHeight="500.0" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS">
+         <Pane fx:id="panel1" accessibleRole="NODE" pickOnBounds="false" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS">
             <HBox.margin>
                <Insets />
             </HBox.margin></Pane>
          <Pane accessibleRole="NODE" layoutX="27.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="50.0" prefHeight="310.0" style="-fx-background-color: DARKCYAN;" HBox.hgrow="ALWAYS" />
-         <Pane fx:id="panel2" accessibleRole="NODE" layoutX="512.0" layoutY="263.0" prefHeight="500.0" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS">
+         <Pane fx:id="panel2" accessibleRole="NODE" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS">
             <HBox.margin>
                <Insets />
             </HBox.margin></Pane>
