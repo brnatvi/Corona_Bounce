@@ -46,12 +46,11 @@ public class ConfinedBille extends CoquilleBille {
 
 
     public void move() {
-        //System.out.println(  "je suis au debut " +this.getPosition().getX());
         bounceIfOutOfZone();
         reduce_speed();
         double b = genererDouble();
         double a = genererDouble() * b;
-        System.out.println(distancePos());
+        //System.out.println(distancePos());
         if (distancePos() >= Controller.getKilometrage()) {
             if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()) {
                 this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()));
@@ -69,8 +68,6 @@ public class ConfinedBille extends CoquilleBille {
         }
 
         this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
-       // System.out.println(  this.getStartingPosition().getX());
-       // System.out.println( "apres setos " +this.getPosition().getX());
 
     }
 }

@@ -190,13 +190,15 @@ public class Population implements Displayable {
             coc.move();
 
         }
-
+        Cycle();
 
 
     }
-    /*public void verify(){
+    public void Cycle(){
         for (CoquilleBille coc : listCoquille) {
             if (coc.getStartingPosition().getX() == coc.getPosition().getX() && coc.getPosition().getY() == coc.getStartingPosition().getY()) {
+                coc.setMovingSpeed(0,0);
+                System.out.println("je suis la ");
                 long start1 = System.nanoTime();
                 while ((System.nanoTime() - start1) < 20000000) ;
                 coc.setMovingSpeed(getRandomMovingSpeed(5), getRandomMovingSpeed(5));
@@ -205,7 +207,7 @@ public class Population implements Displayable {
             }
 
         }
-    }*/
+    }
 
     //========================= Population Statistics =================================================================/
 
