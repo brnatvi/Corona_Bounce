@@ -56,36 +56,28 @@ public class ConfinedBille extends CoquilleBille {
         if (distancePos() >= Controller.getKilometrage()) {
             if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()+Controller.getDiametreX()) {
                 c=genererDouble()*b;
-                //System.out.println("je suis la 1");
+
                 this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()+c));
             }
             if ((this.getMovingSpeedY() - a) + this.getPosition().getY() > this.getStartingPosition().getY()+Controller.getDiametreY()) {
-                //System.out.println("je suis la 2");
+
                 c=genererDouble()*a;
                 this.setMovingSpeed((this.getMovingSpeedX()+c), (this.getMovingSpeedY() - a));
             }
             if ((this.getMovingSpeedX() + a) + this.getPosition().getX() <= this.getStartingPosition().getX()+Controller.getDiametreX()) {
                 c=genererDouble()*b;
-               // System.out.println("je suis la3 ");
+
                 this.setMovingSpeed((this.getMovingSpeedX()) + a, (this.getMovingSpeedY()-c));
             }
             if ((this.getMovingSpeedY() + a) + this.getPosition().getY() <= this.getStartingPosition().getY()+Controller.getDiametreY()) {
-                //System.out.println("je suis la4 ");
+
                 c=genererDouble()*a;
                 this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));
             }
 
         }
         this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
-        if (this.getStartingPosition().getX() == this.getPosition().getX() && this.getPosition().getY() == this.getStartingPosition().getY()) {
-            //this.setMovingSpeed(0,0);
-            System.out.println("je suis la 1");
-            //long start1 = System.nanoTime();
-            //while ((System.nanoTime() - start1) < 20000000) ;
-            this.setMovingSpeed(getRandomMovingSpeed(5), getRandomMovingSpeed(5));
-            this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
 
-        }
 
     }
 }

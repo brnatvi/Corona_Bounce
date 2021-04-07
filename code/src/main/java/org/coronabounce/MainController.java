@@ -88,7 +88,7 @@ public class MainController
     {
         System.out.println("Change controller\n");
 
-        this.zone1 = new Zone(c);
+        this.zone1 = new Zone(c,false);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
 
@@ -96,7 +96,7 @@ public class MainController
         this.sick1 = new XYChart.Series();
         this.recovered1 = new XYChart.Series();
 
-        this.zone2 = new Zone(c);
+        this.zone2 = new Zone(c,true);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
     }

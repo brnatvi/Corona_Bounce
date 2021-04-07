@@ -25,36 +25,63 @@ public class Population implements Displayable {
 
     //========================= Constructors ==========================================================================/
 
-    public Population(Controllable controller, int nbH, int nbS, int nbR) {
+    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean Confinement) {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
-        for (int i = 0; i < nbH; i++) {
-            CoquilleBille coc = new ConfinedBille(null);
-            Individual in = new Healthy(coc,this);
-            coc.setIndividual(in);
-            listCoquille.add(coc);
 
+            if(Confinement){
+            for (int i = 0; i < nbH; i++) {
+                CoquilleBille coc = new ConfinedBille(null);
+                Individual in = new Healthy(coc, this);
+                coc.setIndividual(in);
+                listCoquille.add(coc);
+
+            }
+            for (int i = 0; i < nbS; i++) {
+                CoquilleBille coc = new ConfinedBille(null);
+
+                Individual in = new Sick(coc, this);
+                coc.setIndividual(in);
+                listCoquille.add(coc);
+
+            }
+            for (int i = 0; i < nbR; i++) {
+                CoquilleBille coc = new ConfinedBille(null);
+                Individual in = new Recovered(coc, this);
+                coc.setIndividual(in);
+                listCoquille.add(coc);
+
+            }}else {
+
+                for (int i = 0; i < nbH; i++) {
+                    CoquilleBille coc = new CoquilleBille(null);
+                    Individual in = new Healthy(coc, this);
+                    coc.setIndividual(in);
+                    listCoquille.add(coc);
+
+                }
+                for (int i = 0; i < nbS; i++) {
+                    CoquilleBille coc = new CoquilleBille(null);
+
+                    Individual in = new Sick(coc, this);
+                    coc.setIndividual(in);
+                    listCoquille.add(coc);
+
+                }
+                for (int i = 0; i < nbR; i++) {
+                    CoquilleBille coc = new CoquilleBille(null);
+                    Individual in = new Recovered(coc, this);
+                    coc.setIndividual(in);
+                    listCoquille.add(coc);
+
+                }
+            }
         }
-        for (int i = 0; i < nbS; i++) {
-            CoquilleBille coc = new ConfinedBille(null);
 
-            Individual in = new Sick(coc,this);
-            coc.setIndividual(in);
-            listCoquille.add(coc);
 
-        }
-        for (int i = 0; i < nbR; i++) {
-            CoquilleBille coc = new ConfinedBille(null);
-            Individual in = new Recovered(coc,this);
-            coc.setIndividual(in);
-            listCoquille.add(coc);
-
-        }
-    }
-
-    public Population(Controllable controller, int nbIndividus) {
-        this(controller, nbIndividus - 5, 5, 0);
+    public Population(Controllable controller, int nbIndividus,boolean Confinement) {
+        this(controller, nbIndividus - 5, 5, 0,Confinement);
     }
     public Population(){}
     public List<CoquilleBille> getAllPoints() {
@@ -195,20 +222,6 @@ public class Population implements Displayable {
         //printPop();
 
 
-    }
-    public void Cycle(){
-        for (CoquilleBille coc : listCoquille) {
-            if (coc.getStartingPosition().getX() == coc.getPosition().getX() && coc.getPosition().getY() == coc.getStartingPosition().getY()) {
-                coc.setMovingSpeed(0,0);
-                System.out.println("je suis la ");
-                long start1 = System.nanoTime();
-                while ((System.nanoTime() - start1) < 20000000) ;
-                coc.setMovingSpeed(getRandomMovingSpeed(5), getRandomMovingSpeed(5));
-                coc.getPosition().setPos(coc.getPosition().getX() + coc.getMovingSpeedX(), coc.getPosition().getY() + coc.getMovingSpeedY());
-
-            }
-
-        }
     }
 
     //========================= Population Statistics =================================================================/
