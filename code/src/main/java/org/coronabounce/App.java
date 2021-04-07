@@ -13,7 +13,7 @@ import javafx.stage.WindowEvent;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
-import org.coronabounce.models.musique;
+//import org.coronabounce.models.musique;
 
 import java.io.IOException;
 
@@ -110,7 +110,7 @@ public class App extends Application {
        Controllable cont = new Controller();
 
         launch();
-       Zone z=new Zone(cont);
+       Zone z=new Zone(cont,false);
        z.test();
 
     }

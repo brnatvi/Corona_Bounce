@@ -40,7 +40,7 @@ public class ConfinedBille extends CoquilleBille {
             }
         } else {
             this.setMovingSpeed((this.getMovingSpeedX() * percentage / 100), (this.getMovingSpeedY() * percentage / 100));
-           // System.out.println("je sui kenza");
+
         }
 
 
