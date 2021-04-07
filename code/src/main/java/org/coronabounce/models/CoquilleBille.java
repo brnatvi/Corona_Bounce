@@ -27,18 +27,21 @@ public class CoquilleBille {
     private static int idCpt=0;
     private static Random r = new Random();
     private  final Position startingPosition;
-
     private Population pop=new Population();
 
 
     public CoquilleBille(double speedX,double speedY, Individual individual){
 
         this.p=new Position();
-        startingPosition=this.p;
+        this.startingPosition=new Position(0,0);
+        this.startingPosition.setPosX(this.p.getX());
+        this.startingPosition.setPosY(this.p.getY());
+        //System.out.println(   this.getStartingPosition().getX());
+        id=idCpt++;
         this.movingSpeedX=speedX;
         this.movingSpeedY=speedY;
         this.individual=individual;
-        id=idCpt++;
+
 
 
     }
@@ -50,6 +53,7 @@ public class CoquilleBille {
     public Position getStartingPosition() {
        return startingPosition;
     }
+
 
     public CoquilleBille(Individual individual){
       this(getRandomMovingSpeed(5),getRandomMovingSpeed(5),individual);
@@ -74,12 +78,10 @@ public class CoquilleBille {
     }
     protected double distancePos() {
         double x1 = this.getPosition().getX();
-        //System.out.println(this.p.getX());
-        System.out.println(this.startingPosition.getX());
-        double x2 = this.startingPosition.getX();
+        double x2 = this.getStartingPosition().getX();
         double y1 = this.getPosition().getY();
-        double y2 = this.startingPosition.getY();
-        return  Math.sqrt((x1 +x2) * (x1 +x2) + (y1 +y2) * (y1 +y2));
+        double y2 = this.getStartingPosition().getY();
+        return  Math.sqrt((x1 -x2) * (x1 -x2) + (y1 -y2) * (y1 -y2));
     }
 
     /**
@@ -92,6 +94,7 @@ public class CoquilleBille {
        /*if (pop.getNbZones() !=1) bounceIfHitWall();
       /* else*/  this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
     }
+
 
     /**
     *{@summary bounce if this hit a wall.}<br>
@@ -119,14 +122,7 @@ public class CoquilleBille {
            if(futurZone<currentZone) p.setPos(limitInf+1,futurY);
         }
 
-
-
-
-
         else this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
-
-
-
 
     }
 

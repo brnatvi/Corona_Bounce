@@ -7,6 +7,8 @@ import org.coronabounce.mvcconnectors.Displayable;
 
 import java.util.*;
 
+import static org.coronabounce.models.CoquilleBille.getRandomMovingSpeed;
+
 public class Population implements Displayable {
 
     private Controllable controller;
@@ -19,10 +21,7 @@ public class Population implements Displayable {
     private Timer timer;
     private TimerTask timerTask = null;
     private boolean hasWalls=false;
-    /* =3 , temporairement*/
-    /*trouver ou faut l'iniialiser */
     private int nbZones=3;
-
 
     //========================= Constructors ==========================================================================/
 
@@ -39,6 +38,7 @@ public class Population implements Displayable {
         }
         for (int i = 0; i < nbS; i++) {
             CoquilleBille coc = new ConfinedBille(null);
+
             Individual in = new Sick(coc,this);
             coc.setIndividual(in);
             listCoquille.add(coc);
@@ -56,11 +56,13 @@ public class Population implements Displayable {
     public Population(Controllable controller, int nbIndividus) {
         this(controller, nbIndividus - 5, 5, 0);
     }
-    public Population(){/*this(null,0,0,0);*/}
+    public Population(){}
     public List<CoquilleBille> getAllPoints() {
         return listCoquille;
     }
     public Timer getT() {return timer;}
+
+
 
     public void pauseThread() throws InterruptedException
     {
@@ -188,10 +190,22 @@ public class Population implements Displayable {
             coc.move();
 
         }
-      //  printPop();
 
-        //System.out.println("Population movement thread: " + Thread.currentThread().getName());
+
+
     }
+    /*public void verify(){
+        for (CoquilleBille coc : listCoquille) {
+            if (coc.getStartingPosition().getX() == coc.getPosition().getX() && coc.getPosition().getY() == coc.getStartingPosition().getY()) {
+                long start1 = System.nanoTime();
+                while ((System.nanoTime() - start1) < 20000000) ;
+                coc.setMovingSpeed(getRandomMovingSpeed(5), getRandomMovingSpeed(5));
+                coc.getPosition().setPos(coc.getPosition().getX() + coc.getMovingSpeedX(), coc.getPosition().getY() + coc.getMovingSpeedY());
+
+            }
+
+        }
+    }*/
 
     //========================= Population Statistics =================================================================/
 

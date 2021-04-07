@@ -30,11 +30,9 @@ public class ConfinedBille extends CoquilleBille {
 
     public void reduce_speed() {
         int percentage = genererInt(90, 100);
-        int percentage1 = genererInt(110, 120);
-        double a =/*genererInt(1,10)*/genererDouble();
-        double b =/*genererInt(10,20)*/genererDouble();
+
         Random r = new Random();
-        boolean bool = r.nextBoolean();
+
         if ((this.getMovingSpeedX() * percentage / 100) <= 1 || (this.getMovingSpeedY() * percentage / 100) <= 1) {
             {
                 this.setMovingSpeed(this.getMovingSpeedX(), this.getMovingSpeedY());
@@ -48,15 +46,13 @@ public class ConfinedBille extends CoquilleBille {
 
 
     public void move() {
+        //System.out.println(  "je suis au debut " +this.getPosition().getX());
         bounceIfOutOfZone();
         reduce_speed();
         double b = genererDouble();
         double a = genererDouble() * b;
-        /*long start = System.nanoTime();
-        while ((System.nanoTime() - start) < 20000000) ;*/
-
+        System.out.println(distancePos());
         if (distancePos() >= Controller.getKilometrage()) {
-            //System.out.println("je suis la");
             if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()) {
                 this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()));
             }
@@ -71,18 +67,11 @@ public class ConfinedBille extends CoquilleBille {
             }
 
         }
+
         this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
-        /*
-        if (this.getStartingPosition().getX() == this.getPosition().getX() && this.getPosition().getY() == this.getStartingPosition().getY()) {
-            long start1 = System.nanoTime();
-            while ((System.nanoTime() - start1) < 20000000) ;
+       // System.out.println(  this.getStartingPosition().getX());
+       // System.out.println( "apres setos " +this.getPosition().getX());
 
-            //this.setMovingSpeed(getRandomMovingSpeed(5), getRandomMovingSpeed(5));
-            //this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
-
-        }
-
-*/
     }
 }
 

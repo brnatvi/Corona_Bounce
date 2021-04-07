@@ -35,6 +35,7 @@ public class Position   {
       this.posY = y;
 
 
+
     }
 
     public Position() {
@@ -60,6 +61,22 @@ public class Position   {
             this.posY = PosY;
         } else {
             this.posX = 0;
+            this.posY = 0;
+        }
+    }
+
+    public void setPosX(double posX) {
+        if (posX <= Controller.getWidth() ){
+            this.posX = posX;
+        }else{
+            this.posX = 0;
+        }
+    }
+
+    public void setPosY(double posY) {
+        if(posY <= Controller.getHeight()) {
+            this.posY = posY;
+        }else{
             this.posY = 0;
         }
     }

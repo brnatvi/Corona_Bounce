@@ -8,14 +8,14 @@ public class Controller implements Controllable
 
     private static double WIDTH=465 ;                       // population space size (width)
     private static double HEIGTH=290 ;                      // population space size (height)
-    private int COUNT = 20;                           // population size
+    private int COUNT =6;                           // population size
     private double CONTAMINATION_RADIUS = 10;         // radius of contamination
     private long DURATION_COVID = 3000;               // has contact <-> sick  //TODO compare and converge with parameters in Population
     private long DURATION_HEALING = 8000;            // sick <-> recovered    //TODO compare and converge with parameters in Population
     private long DURATION_NON_CONTAMINATION = 5000;  // recovered <-> can be contaminate again
     private final int RADIUS_DOT = 3;                 // radius of point in GUI
     private static double percentage =100;
-    private static double Kilometrage=800;
+    private static double Kilometrage=100;
 
 
     public Controller(){
