@@ -45,38 +45,42 @@ public class ConfinedBille extends CoquilleBille {
 
     }
 
-
+    @Override
     public void move() {
         bounceIfOutOfZone();
         reduce_speed();
-        double b = genererDouble();
-        double a = genererDouble() * b;
-        double c;
-        if (distancePos() >= Controller.getKilometrage()) {
-            if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()+Controller.getDiametreX()) {
-                c=genererDouble()*b;
+        stayNextToHome();
+    }
+    public void stayNextToHome(){
+      double b = genererDouble();
+      double a = genererDouble() * b;
+      double c;
+      if (distancePos() >= Controller.getKilometrage()) {
+          if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()+Controller.getDiametreX()) {
+              c=genererDouble()*b;
 
-                this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()+c));
-            }
-            if ((this.getMovingSpeedY() - a) + this.getPosition().getY() > this.getStartingPosition().getY()+Controller.getDiametreY()) {
+              this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()+c));
+          }
+          if ((this.getMovingSpeedY() - a) + this.getPosition().getY() > this.getStartingPosition().getY()+Controller.getDiametreY()) {
 
-                c=genererDouble()*a;
-                this.setMovingSpeed((this.getMovingSpeedX()+c), (this.getMovingSpeedY() - a));
-            }
-            if ((this.getMovingSpeedX() + a) + this.getPosition().getX() <= this.getStartingPosition().getX()+Controller.getDiametreX()) {
-                c=genererDouble()*b;
+              c=genererDouble()*a;
+              this.setMovingSpeed((this.getMovingSpeedX()+c), (this.getMovingSpeedY() - a));
+          }
+          if ((this.getMovingSpeedX() + a) + this.getPosition().getX() <= this.getStartingPosition().getX()+Controller.getDiametreX()) {
+              c=genererDouble()*b;
 
-                this.setMovingSpeed((this.getMovingSpeedX()) + a, (this.getMovingSpeedY()-c));
-            }
-            if ((this.getMovingSpeedY() + a) + this.getPosition().getY() <= this.getStartingPosition().getY()+Controller.getDiametreY()) {
+              this.setMovingSpeed((this.getMovingSpeedX()) + a, (this.getMovingSpeedY()-c));
+          }
+          if ((this.getMovingSpeedY() + a) + this.getPosition().getY() <= this.getStartingPosition().getY()+Controller.getDiametreY()) {
 
-                c=genererDouble()*a;
-                this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));
-            }
-
-        }
-        this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
-
-
+              c=genererDouble()*a;
+              this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));
+          }
+          moveABitRandomly();
+      }
+      this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
+    }
+    public void moveABitRandomly(){
+      // setMovingSpeed()
     }
 }
