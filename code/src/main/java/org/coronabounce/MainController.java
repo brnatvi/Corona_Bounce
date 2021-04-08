@@ -71,9 +71,10 @@ public class MainController
     @FXML MenuItem scenario_2_1;
     @FXML MenuItem scenario_2_2;
     @FXML Button btnStart;
+    @FXML Button btnPause;
+    @FXML Button btnReset;
     @FXML Button btnSettings;
     @FXML Button btnLegend;
-    @FXML Button btnPause;
 
     //========================= Constructor ===========================================================================/
 
@@ -305,6 +306,10 @@ public class MainController
         tooltip5.setText("Choose some scenario for the right population\nDefault without scenario");
         Tooltip.install(mbScenario1, tooltip4);
         Tooltip.install(mbScenario2, tooltip5);
+
+        Tooltip tooltip6 = new Tooltip();
+        tooltip6.setText("Press this button to reload model with same settings");
+        Tooltip.install(btnReset, tooltip6);
     }
 
     //======================== Functions for Settings Controller ======================================================/
