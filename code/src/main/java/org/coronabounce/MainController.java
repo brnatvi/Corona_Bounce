@@ -13,7 +13,6 @@ import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -31,7 +30,7 @@ import static javafx.scene.paint.Paint.valueOf;
 public class MainController
 {
     private Controllable controller;
-    private Controllable currentController;
+    private Controllable currentController = null;
     private Displayable model1;                   // left population (population1)
     private Displayable model2;                   // right population (population2)
     private Zone zone1 = null;                    // left population's (population1) zone
@@ -263,8 +262,16 @@ public class MainController
     {
         closePreviousTask();                   //stops Timelines of graph and points, and stop timers of both Populations and Zones
         retainPopulations();
-                                                    
-        changeController(currentController);
+
+        if (this.currentController != null)
+        {
+            changeController(currentController);
+        }
+        else
+        {
+            changeController(controller);
+        }
+
         changeEnableDisable(btnStart);
 
         initialize();

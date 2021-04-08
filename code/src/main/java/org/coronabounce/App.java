@@ -10,9 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import org.coronabounce.controllers.Controller;
-import org.coronabounce.models.Zone;
-import org.coronabounce.mvcconnectors.Controllable;
+
 //import org.coronabounce.models.musique;
 
 import java.io.IOException;
@@ -54,7 +52,6 @@ public class App extends Application {
 //        stage.setMaxHeight(650);
 //        stage.setMaxWidth(1000);
 
-//        stage.setMaximized(true);
         stage.sizeToScene();
         stage.setResizable(true);
         stage.show();
@@ -106,13 +103,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-     //   Displayable model = new Population(13, 4, 3);
-       Controllable cont = new Controller();
 
         launch();
-       Zone z=new Zone(cont,false);
-       z.test();
-
     }
-
 }

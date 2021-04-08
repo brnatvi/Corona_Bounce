@@ -1,10 +1,8 @@
 package org.coronabounce.mvcconnectors;
 
-import org.coronabounce.controllers.Controller;
-
 public interface Controllable
 {
-    //======================================== First Priority ========================================================//
+    //====================================== Space size Settings ======================================================/
 
     /**
      * Set width and height of field to controller
@@ -17,6 +15,8 @@ public interface Controllable
      */
     public double[] getSpaceSize();
 
+    //===================================== Population Settings =======================================================/
+
     /**
      * Set total number of persons in simulation to model
      * @param nmbPersons
@@ -28,6 +28,13 @@ public interface Controllable
      * @return nmbPersons
      */
     public int getPersonsCount();
+
+    /**
+     * Get radius of dot/individual
+     */
+    public double getRadiusDot();
+
+    //========================================= Virus Settings ========================================================/
 
     /**
      * Set radius of contamination around point from GUI to controller
@@ -52,25 +59,25 @@ public interface Controllable
     public long getDurationCovid();
 
     /**
-     * Set time of non-contamination after recovery
+     * Set duration of non-contamination after recovery
      * @param time - number of milliseconds
      */
     public void setDurationNonContamination(long time);
 
     /**
-     * Get time of non-contamination after recovery from GUI's controller
+     * Get duration of non-contamination after recovery from GUI's controller
      */
     public long getDurationNonContamination();
 
-    public long getDurationHealing();
-    public void setDurationHealing(long l);
+    /**
+     * Set duration of recovery
+     */
+    public void setDurationHealing(long time);
 
     /**
-     * Get radius of dot
+     * Get duration of recovery
      */
-    public double getRadiusDot();
-
-    public Controller saveSettings();
+    public long getDurationHealing();
 
     //======================================== Second Priority ========================================================//
 
