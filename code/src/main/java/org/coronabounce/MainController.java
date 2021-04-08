@@ -8,7 +8,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
@@ -55,10 +54,10 @@ public class MainController
     @FXML Pane panel1;                            // field with moving points of population1
     @FXML Pane panel2;                            // field with moving points of population2
     @FXML GridPane mainGrid;
-    @FXML GridPane gridGraphStat1;                     // grid contains statistic's grid (gridStatistic1) and graph (graphPanel1)
-    @FXML GridPane gridGraphStat2;                     // grid contains statistic's grid (gridStatisti2c) and graph (graphPanel2)
-    @FXML GridPane gridStat1;                // grid contains statistics and texts "Healthy", "Sick", "Recovered"
-    @FXML GridPane gridStat2;                // grid contains statistics and texts "Healthy", "Sick", "Recovered"
+    @FXML GridPane gridGraphStat1;                // grid contains statistic's grid (gridStatistic1) and graph (graphPanel1)
+    @FXML GridPane gridGraphStat2;                // grid contains statistic's grid (gridStatisti2c) and graph (graphPanel2)
+    @FXML GridPane gridStat1;                     // grid contains statistics and texts "Healthy", "Sick", "Recovered"
+    @FXML GridPane gridStat2;                     // grid contains statistics and texts "Healthy", "Sick", "Recovered"
     @FXML Label labelHealthy1;                    // labels for gridStatistic1
     @FXML Label labelSick1;
     @FXML Label labelRecovered1;
@@ -88,11 +87,16 @@ public class MainController
 
     public void changeController(Controllable c)
     {
-        System.out.println("Change controller\n");
+        System.out.println("Controller changed\n");
 
         this.zone1 = new Zone(c,false);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
+
+        this.zone2 = new Zone(c,true);
+        this.model2 = zone2.getPopulation();
+        this.points2 = model2.getAllPoints();
+        
 
         this.healthy1 = new XYChart.Series();
         this.sick1 = new XYChart.Series();
@@ -101,10 +105,6 @@ public class MainController
         this.healthy2 = new XYChart.Series();
         this.sick2 = new XYChart.Series();
         this.recovered2 = new XYChart.Series();
-
-        this.zone2 = new Zone(c,true);
-        this.model2 = zone2.getPopulation();
-        this.points2 = model2.getAllPoints();
     }
 
     //========================= Getters ===============================================================================/
@@ -121,7 +121,7 @@ public class MainController
     private void initialize()
     {
         // init graphPanel and fil mainGrid by graphPanel
-        initGraph1();
+        initGraphs();
 
         // init points
         drawPopulation(points1, false);
@@ -134,7 +134,7 @@ public class MainController
     /**
      * Initialisation of graphs and filing of mainGrid by graphStatGrid1 and graphStatGrid2
      */
-    private void initGraph1()
+    private void initGraphs()
     {
         // init graphPanel1
         NumberAxis xAxis1 = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
@@ -171,7 +171,7 @@ public class MainController
         graphPanel2.setCreateSymbols(false);
 
 
-        // fil gridGraphStat1 by graphPanel1
+        // fil gridGraphStat2 by graphPanel2
         graphPanel2.setHorizontalGridLinesVisible(false);
         graphPanel2.setVerticalGridLinesVisible(false);
         gridGraphStat2.add(graphPanel2, 1, 0);
@@ -292,6 +292,7 @@ public class MainController
         Tooltip tooltip3 = new Tooltip();
         tooltip3.setText("Colors are the same as for the dots:\ngreen for healthy, red for sick and yellow for recovered");
         Tooltip.install(graphPanel1, tooltip3);
+        Tooltip.install(graphPanel2, tooltip3);
 
         Tooltip tooltip4 = new Tooltip();
         Tooltip tooltip5 = new Tooltip();
@@ -319,7 +320,7 @@ public class MainController
     public void initNewPopulation()
     {
         retainPopulations();
-        initGraph1();
+        initGraphs();
         drawPopulation(points1, true);
         drawPopulation(points2, false);
     }
@@ -490,60 +491,6 @@ public class MainController
         panel2.getChildren().retainAll();
     }
 
-    private void createChart(Displayable model)
-    {
-        if (model == this.model1)
-        {
-            // init graphPanel1
-            NumberAxis xAxis1 = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
-            xAxis1.setTickLabelsVisible(false);
-            xAxis1.setTickMarkVisible(false);
-            NumberAxis yAxis1 = new NumberAxis(0, 100, 1);
-            yAxis1.setTickLabelsVisible(false);
-            yAxis1.setTickMarkVisible(false);
-            this.graphPanel1 = new AreaChart(xAxis1, yAxis1);
-            graphPanel1.getData().addAll(healthy1, sick1, recovered1);
-            graphPanel1.setCreateSymbols(false);
-
-            // settings of graphPanel1
-            graphPanel1.setHorizontalGridLinesVisible(false);
-            graphPanel1.setVerticalGridLinesVisible(false);
-            graphPanel1.setHorizontalGridLinesVisible(false);
-            graphPanel1.setVerticalGridLinesVisible(false);
-            graphPanel1.setMinWidth(150);
-            graphPanel1.setMinHeight(100);
-            graphPanel1.setPrefWidth(USE_COMPUTED_SIZE);
-            graphPanel1.setPrefHeight(100);
-            graphPanel1.setMaxWidth(USE_COMPUTED_SIZE);
-            graphPanel1.setMaxHeight(100);
-        }
-        else
-        {
-            // init graphPanel2
-            NumberAxis xAxis2 = new NumberAxis(0, this.model2.getData().getNmbr(), 1);
-            xAxis2.setTickLabelsVisible(false);
-            xAxis2.setTickMarkVisible(false);
-            NumberAxis yAxis2 = new NumberAxis(0, 100, 1);
-            yAxis2.setTickLabelsVisible(false);
-            yAxis2.setTickMarkVisible(false);
-            this.graphPanel2 = new AreaChart(xAxis2, yAxis2);
-            graphPanel1.getData().addAll(healthy2, sick2, recovered2);
-            graphPanel1.setCreateSymbols(false);
-
-            // settings of graphPanel2
-            graphPanel1.setHorizontalGridLinesVisible(false);
-            graphPanel1.setVerticalGridLinesVisible(false);
-            graphPanel1.setHorizontalGridLinesVisible(false);
-            graphPanel1.setVerticalGridLinesVisible(false);
-            graphPanel1.setMinWidth(150);
-            graphPanel1.setMinHeight(100);
-            graphPanel1.setPrefWidth(USE_COMPUTED_SIZE);
-            graphPanel1.setPrefHeight(100);
-            graphPanel1.setMaxWidth(USE_COMPUTED_SIZE);
-            graphPanel1.setMaxHeight(100);
-        }
-    }
-
     /**
      * Function call drawPoint() for all points of list
      * @param is_panel1 helps use this function for two populations
@@ -592,6 +539,4 @@ public class MainController
             panel2.getChildren().add(point);
         }
     }
-
-
 }
