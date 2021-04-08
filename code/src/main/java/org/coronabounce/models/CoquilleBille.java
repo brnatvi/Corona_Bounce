@@ -36,7 +36,7 @@ public class CoquilleBille {
         this.startingPosition=new Position(0,0);
         this.startingPosition.setPosX(this.p.getX());
         this.startingPosition.setPosY(this.p.getY());
-        //System.out.println(   this.getStartingPosition().getX());
+
         id=idCpt++;
         this.movingSpeedX=speedX;
         this.movingSpeedY=speedY;
