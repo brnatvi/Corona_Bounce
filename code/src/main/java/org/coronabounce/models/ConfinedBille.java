@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ConfinedBille extends CoquilleBille {
+  private static Random random = new Random();
 
     public ConfinedBille(double speedX, double speedY, Individual individual) {
         super(speedX, speedY, individual);
@@ -17,12 +18,10 @@ public class ConfinedBille extends CoquilleBille {
     }
 
     double genererDouble() {
-        Random random = new Random();
         return random.nextDouble();
     }
 
     int genererInt(int borneInf, int borneSup) {
-        Random random = new Random();
         int nb;
         nb = borneInf + random.nextInt(borneSup - borneInf);
         return nb;
@@ -81,4 +80,3 @@ public class ConfinedBille extends CoquilleBille {
 
     }
 }
-
