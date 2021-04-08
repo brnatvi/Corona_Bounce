@@ -139,7 +139,7 @@
                <menus>
                   <Menu mnemonicParsing="false" text="Scenarios">
                      <items>
-                        <MenuItem fx:id="scenario_1_1" mnemonicParsing="false" onAction="#performAction" text="scenario 1" />
+                        <MenuItem fx:id="scenario_1_1" mnemonicParsing="false"  onAction="#performAction" text="scenario 1" />
                         <MenuItem fx:id="scenario_1_2" mnemonicParsing="false" text="scenario 2" />
                      </items>
                   </Menu>
