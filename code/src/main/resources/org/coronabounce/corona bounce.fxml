@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: DARKCYAN;" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.coronabounce.MainController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: DARKCYAN;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.coronabounce.MainController">
    <children>
       <HBox alignment="TOP_CENTER" spacing="20.0">
          <children>
@@ -83,13 +83,13 @@
                         <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" text="Healthy" wrappingWidth="67.4150390625">
+                        <Text fill="#38ee96" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" text="Healthy" wrappingWidth="67.4150390625">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" text="Sick" wrappingWidth="42.4150390625" GridPane.rowIndex="1" />
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" text="Recovered" wrappingWidth="85.0" GridPane.rowIndex="2" />
+                        <Text fill="#ee677ff7" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" text="Sick" wrappingWidth="42.4150390625" GridPane.rowIndex="1" />
+                        <Text fill="#ffc557" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" text="Recovered" wrappingWidth="85.0" GridPane.rowIndex="2" />
                         <Label fx:id="labelHealthy1" minHeight="30.0" prefHeight="30.0" prefWidth="56.0" style="-fx-text-fill: #ffffff; -fx-font-weight: bold" text="" GridPane.columnIndex="1" />
                         <Label fx:id="labelSick1" minHeight="30.0" prefHeight="30.0" prefWidth="55.0" style="-fx-text-fill: #ffffff; -fx-font-weight: bold" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label fx:id="labelRecovered1" minHeight="10.0" prefHeight="26.0" prefWidth="54.0" style="-fx-text-fill: #ffffff; -fx-font-weight: bold" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -120,13 +120,13 @@
                         <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" text="Healthy" wrappingWidth="67.4150390625">
+                        <Text fill="#38ee96" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" text="Healthy" wrappingWidth="67.4150390625">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" text="Sick" wrappingWidth="42.4150390625" GridPane.rowIndex="1" />
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" text="Recovered" wrappingWidth="85.0" GridPane.rowIndex="2" />
+                        <Text fill="#ee677f" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" text="Sick" wrappingWidth="42.4150390625" GridPane.rowIndex="1" />
+                        <Text fill="#ffc557" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold" text="Recovered" wrappingWidth="85.0" GridPane.rowIndex="2" />
                         <Label fx:id="labelHealthy2" minHeight="30.0" prefHeight="30.0" prefWidth="58.0" style="-fx-text-fill: #ffffff; -fx-font-weight: bold" text="" GridPane.columnIndex="1" />
                         <Label fx:id="labelSick2" minHeight="30.0" prefHeight="30.0" prefWidth="54.0" style="-fx-text-fill: #ffffff; -fx-font-weight: bold" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label fx:id="labelRecovered2" minHeight="10.0" prefHeight="28.0" prefWidth="54.0" style="-fx-text-fill: #ffffff; -fx-font-weight: bold" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
