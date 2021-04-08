@@ -393,7 +393,7 @@ public class MainController
         recovered2.getData().retainAll();
 
         model1.saveStatToData();
-       // model2.saveStatToData();
+        model2.saveStatToData();
 
         tlGraph = new Timeline(new KeyFrame(Duration.millis(choosePeriod()), ev ->
         {
@@ -408,9 +408,10 @@ public class MainController
             recovered2.getData().clear();
 
             model1.getData().Lock();
+            model2.getData().Lock();
 
             Vector<Data.Slice> History1 = model1.getData().getFifo();
-          //  Vector<Data.Slice> History2 = model2.getData().getFifo();
+            Vector<Data.Slice> History2 = model2.getData().getFifo();
             
             // draw graph
             int x = 0;
@@ -419,24 +420,20 @@ public class MainController
                 healthy1.getData().add(new XYChart.Data(x, 100));
                 sick1.getData().add(new XYChart.Data(x, Slice.getPrcSick()));
                 recovered1.getData().add(new XYChart.Data(x, Slice.getPrcRecovered()));
-
-                healthy2.getData().add(new XYChart.Data(x, 100));
-                sick2.getData().add(new XYChart.Data(x, 50));
-                recovered2.getData().add(new XYChart.Data(x, 20));
-
                 x++;
             }
 
-         //   int y = 0;
-         //   for (Data.Slice Slice : History2)
-         //   {
-         //       healthy2.getData().add(new XYChart.Data(x, 100));
-         //       sick2.getData().add(new XYChart.Data(x, Slice.getPrcSick()));
-         //       recovered2.getData().add(new XYChart.Data(x, Slice.getPrcRecovered()));
-         //       y++;
-         //   }
+            int y = 0;
+            for (Data.Slice Slice : History2)
+            {
+                healthy2.getData().add(new XYChart.Data(y, 100));
+                sick2.getData().add(new XYChart.Data(y, Slice.getPrcSick()));
+                recovered2.getData().add(new XYChart.Data(y, Slice.getPrcRecovered()));
+                y++;
+            }
 
             model1.getData().unLock();
+            model2.getData().unLock();
 
             //long stopTime = System.currentTimeMillis();                                // code for debug
             //long diff = stopTime - startTime;
