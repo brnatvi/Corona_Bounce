@@ -70,7 +70,7 @@ public interface Controllable
      */
     public double getRadiusDot();
 
-    public Controller getController();
+    public Controller saveSettings();
 
     //======================================== Second Priority ========================================================//
 

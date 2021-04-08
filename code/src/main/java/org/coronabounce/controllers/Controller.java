@@ -6,17 +6,17 @@ public class Controller implements Controllable
 {
     //these constants are initials and will be changed during the changing the settings of program in GUI
 
-    private static double WIDTH=465 ;                 // population space size (width)
-    private static double HEIGTH=290 ;                // population space size (height)
-    private int COUNT =30;                            // population size
+    private static double WIDTH = 465 ;                 // population space size (width)
+    private static double HEIGTH = 290 ;                // population space size (height)
+    private int COUNT = 30;                            // population size
     private double CONTAMINATION_RADIUS = 10;         // radius of contamination
     private long DURATION_COVID = 3000;               // has contact <-> sick
     private long DURATION_HEALING = 8000;             // sick <-> recovered
     private long DURATION_NON_CONTAMINATION = 5000;   // recovered <-> can be contaminate again
     private final int RADIUS_DOT = 3;                 // radius of point in GUI
-    private static double Kilometrage=50;
-    private  static double diametreX=15;
-    private static double diametreY=10;
+    private static double Kilometrage = 50;
+    private  static double diametreX = 15;
+    private static double diametreY = 10;
 
 
     //====================================== Space size Settings ======================================================/
@@ -88,9 +88,9 @@ public class Controller implements Controllable
     public long getDurationHealing(){ return DURATION_HEALING;}
 
     @Override
-    public void setDurationHealing(long l){ }
+    public void setDurationHealing(long time) { DURATION_HEALING = time; }
 
-    //=========================================== Anothers ============================================================/
+    //=========================================== Another ============================================================/
 
-    public Controller getController() { return this; }
+    public Controller saveSettings() { return this; }
 }

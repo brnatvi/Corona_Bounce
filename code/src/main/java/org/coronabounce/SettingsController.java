@@ -11,8 +11,8 @@ import org.coronabounce.mvcconnectors.Controllable;
 
 public class SettingsController
 {
-
-    MainController mainController;
+    private MainController mainController;
+    private Controllable c = null;
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
@@ -22,14 +22,13 @@ public class SettingsController
     @FXML Slider sliderCovidDuration;
     @FXML Slider sliderContaminationRadius;
 
-
 //    public void attributeIndividualsNumber() {
 //        int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
 //    }
 
     @FXML
     public void passSettingsToController(MouseEvent mouseEvent) throws IOException {
-        Controllable c = new Controller();
+        this.c = new Controller();
 //        int newIndividualsNumber = 20;
         int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
         c.setPersonsCount(newIndividualsNumber);
@@ -39,6 +38,7 @@ public class SettingsController
         double newContaminationRadius = (sliderContaminationRadius.getValue());
         c.setContaminationRadius(newContaminationRadius);
 
+        mainController.setSettingsController(c);        // save new settings in currentController of MainController
         mainController.changeController(c);
 
         // init graphPanel, fil mainGrid by graphPanel and draw new populations

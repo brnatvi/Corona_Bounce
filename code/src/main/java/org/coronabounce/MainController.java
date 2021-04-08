@@ -31,6 +31,7 @@ import static javafx.scene.paint.Paint.valueOf;
 public class MainController
 {
     private Controllable controller;
+    private Controllable currentController;
     private Displayable model1;                   // left population (population1)
     private Displayable model2;                   // right population (population2)
     private Zone zone1 = null;                    // left population's (population1) zone
@@ -50,7 +51,6 @@ public class MainController
     private XYChart.Series recovered2;
     private AreaChart graphPanel2 = null;
 
-    @FXML AnchorPane mainPane;
     @FXML Pane panel1;                            // field with moving points of population1
     @FXML Pane panel2;                            // field with moving points of population2
     @FXML GridPane mainGrid;
@@ -113,7 +113,6 @@ public class MainController
     {
         return controller;
     }
-
 
     //========================= Initialisation ========================================================================/
 
@@ -261,13 +260,10 @@ public class MainController
     @FXML
     private void resetModel()
     {
-        closePreviousTask();
-        stopTimer();
+        closePreviousTask();                   //stops Timelines of graph and points, and stop timers of both Populations and Zones
         retainPopulations();
-
-        Controllable sameController = controller.getController();
-        changeController(sameController);
-
+                                                    
+        changeController(currentController);
         changeEnableDisable(btnStart);
 
         initialize();
@@ -315,6 +311,7 @@ public class MainController
 
     /**
      * Function for correct closing of tasks before changing the settings
+     * stops Timelines of graph and points, and stop timers of both Populations and Zones
      */
     public void closePreviousTask()
     {
@@ -372,6 +369,8 @@ public class MainController
         changeController(c);
         App.setRoot("corona bounce");
     }
+
+    public void setSettingsController(Controllable c) { this.currentController = c; }
 
     //========================= Button's auxiliary functions ==========================================================/
 
