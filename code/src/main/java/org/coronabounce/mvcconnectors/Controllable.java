@@ -1,5 +1,7 @@
 package org.coronabounce.mvcconnectors;
 
+import org.coronabounce.controllers.Controller;
+
 public interface Controllable
 {
     //======================================== First Priority ========================================================//
@@ -67,6 +69,8 @@ public interface Controllable
      * Get radius of dot
      */
     public double getRadiusDot();
+
+    public Controller getController();
 
     //======================================== Second Priority ========================================================//
 
