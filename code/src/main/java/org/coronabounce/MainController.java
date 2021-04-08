@@ -13,7 +13,6 @@ import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -272,6 +271,7 @@ public class MainController
         {
             changeController(controller);
         }
+
         changeEnableDisable(btnStart);
 
         initialize();

@@ -85,12 +85,9 @@ public class Controller implements Controllable
     public void setDurationNonContamination(long time) { DURATION_NON_CONTAMINATION=time; }
 
     @Override
-    public long getDurationHealing(){ return DURATION_HEALING;}
+    public long getDurationHealing() { return DURATION_HEALING;}
 
     @Override
     public void setDurationHealing(long time) { DURATION_HEALING = time; }
 
-    //=========================================== Another ============================================================/
-
-    public Controller saveSettings() { return this; }
 }
