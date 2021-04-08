@@ -38,3 +38,7 @@
     -fx-text-inner-color: #256464;
     -fx-background-color: #ffdb87;
 }
+
+.labelSick1 {
+-fx-text-fill: #ffffff;
+}
