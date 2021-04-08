@@ -8,6 +8,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
@@ -73,6 +74,7 @@ public class MainController
     @FXML Button btnStart;
     @FXML Button btnSettings;
     @FXML Button btnLegend;
+    @FXML Button btnPause;
 
     //========================= Constructor ===========================================================================/
 
@@ -95,6 +97,10 @@ public class MainController
         this.healthy1 = new XYChart.Series();
         this.sick1 = new XYChart.Series();
         this.recovered1 = new XYChart.Series();
+
+        this.healthy2 = new XYChart.Series();
+        this.sick2 = new XYChart.Series();
+        this.recovered2 = new XYChart.Series();
 
         this.zone2 = new Zone(c,true);
         this.model2 = zone2.getPopulation();
@@ -154,22 +160,28 @@ public class MainController
         graphPanel1.setMaxHeight(100);
 
         // init graphPanel2
-      //  NumberAxis xAxis2 = new NumberAxis(0, this.model2.getData().getNmbr(), 1);
-      //  xAxis2.setTickLabelsVisible(false);
-      //  xAxis2.setTickMarkVisible(false);
-      //  NumberAxis yAxis2 = new NumberAxis(0, 100, 1);
-      //  yAxis2.setTickLabelsVisible(false);
-      //  yAxis2.setTickMarkVisible(false);
-      //  this.graphPanel2 = new AreaChart(xAxis2, yAxis2);
-      //  graphPanel2.getData().addAll(healthy2, sick2, recovered2);
-      //  graphPanel2.setCreateSymbols(false);
+        NumberAxis xAxis2 = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
+        xAxis2.setTickLabelsVisible(false);
+        xAxis2.setTickMarkVisible(false);
+        NumberAxis yAxis2 = new NumberAxis(0, 100, 1);
+        yAxis2.setTickLabelsVisible(false);
+        yAxis2.setTickMarkVisible(false);
+        this.graphPanel2 = new AreaChart(xAxis2, yAxis2);
+        graphPanel2.getData().addAll(healthy2, sick2, recovered2);
+        graphPanel2.setCreateSymbols(false);
 
 
-      //  graphPanel2.setPrefSize(371, 160);
-      //
-      //  graphPanel2.setHorizontalGridLinesVisible(false);
-      //  graphPanel2.setVerticalGridLinesVisible(false);
-      //  gridGraphStat2.add(graphPanel2, 1, 0);
+        // fil gridGraphStat1 by graphPanel1
+        graphPanel2.setHorizontalGridLinesVisible(false);
+        graphPanel2.setVerticalGridLinesVisible(false);
+        gridGraphStat2.add(graphPanel2, 1, 0);
+
+        graphPanel2.setMinWidth(150);
+        graphPanel2.setMinHeight(100);
+        graphPanel2.setPrefWidth(USE_COMPUTED_SIZE);
+        graphPanel2.setPrefHeight(100);
+        graphPanel2.setMaxWidth(USE_COMPUTED_SIZE);
+        graphPanel2.setMaxHeight(100);
     }
 
     //=============================== Interrupters ====================================================================/
@@ -240,18 +252,7 @@ public class MainController
     @FXML
     private void makePause()
     {
-        try
-        {
-            model1.pauseThread();
-            zone1.pauseThread();
-            //System.out.println(Thread.currentThread().getId());
-            //System.out.println(Thread.currentThread().getName());
-            //Thread.currentThread().sleep(2000);
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+
     }
 
     /**
@@ -387,9 +388,9 @@ public class MainController
         sick1.getData().retainAll();
         recovered1.getData().retainAll();
 
-      //  healthy2.getData().retainAll();
-      //  sick2.getData().retainAll();
-      //  recovered2.getData().retainAll();
+        healthy2.getData().retainAll();
+        sick2.getData().retainAll();
+        recovered2.getData().retainAll();
 
         model1.saveStatToData();
        // model2.saveStatToData();
@@ -402,9 +403,9 @@ public class MainController
             sick1.getData().clear();
             recovered1.getData().clear();
 
-          //  healthy2.getData().clear();
-          //  sick2.getData().clear();
-          //  recovered2.getData().clear();
+            healthy2.getData().clear();
+            sick2.getData().clear();
+            recovered2.getData().clear();
 
             model1.getData().Lock();
 
@@ -418,6 +419,11 @@ public class MainController
                 healthy1.getData().add(new XYChart.Data(x, 100));
                 sick1.getData().add(new XYChart.Data(x, Slice.getPrcSick()));
                 recovered1.getData().add(new XYChart.Data(x, Slice.getPrcRecovered()));
+
+                healthy2.getData().add(new XYChart.Data(x, 100));
+                sick2.getData().add(new XYChart.Data(x, 50));
+                recovered2.getData().add(new XYChart.Data(x, 20));
+
                 x++;
             }
 
@@ -485,6 +491,60 @@ public class MainController
     {
         panel1.getChildren().retainAll();
         panel2.getChildren().retainAll();
+    }
+
+    private void createChart(Displayable model)
+    {
+        if (model == this.model1)
+        {
+            // init graphPanel1
+            NumberAxis xAxis1 = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
+            xAxis1.setTickLabelsVisible(false);
+            xAxis1.setTickMarkVisible(false);
+            NumberAxis yAxis1 = new NumberAxis(0, 100, 1);
+            yAxis1.setTickLabelsVisible(false);
+            yAxis1.setTickMarkVisible(false);
+            this.graphPanel1 = new AreaChart(xAxis1, yAxis1);
+            graphPanel1.getData().addAll(healthy1, sick1, recovered1);
+            graphPanel1.setCreateSymbols(false);
+
+            // settings of graphPanel1
+            graphPanel1.setHorizontalGridLinesVisible(false);
+            graphPanel1.setVerticalGridLinesVisible(false);
+            graphPanel1.setHorizontalGridLinesVisible(false);
+            graphPanel1.setVerticalGridLinesVisible(false);
+            graphPanel1.setMinWidth(150);
+            graphPanel1.setMinHeight(100);
+            graphPanel1.setPrefWidth(USE_COMPUTED_SIZE);
+            graphPanel1.setPrefHeight(100);
+            graphPanel1.setMaxWidth(USE_COMPUTED_SIZE);
+            graphPanel1.setMaxHeight(100);
+        }
+        else
+        {
+            // init graphPanel2
+            NumberAxis xAxis2 = new NumberAxis(0, this.model2.getData().getNmbr(), 1);
+            xAxis2.setTickLabelsVisible(false);
+            xAxis2.setTickMarkVisible(false);
+            NumberAxis yAxis2 = new NumberAxis(0, 100, 1);
+            yAxis2.setTickLabelsVisible(false);
+            yAxis2.setTickMarkVisible(false);
+            this.graphPanel2 = new AreaChart(xAxis2, yAxis2);
+            graphPanel1.getData().addAll(healthy2, sick2, recovered2);
+            graphPanel1.setCreateSymbols(false);
+
+            // settings of graphPanel2
+            graphPanel1.setHorizontalGridLinesVisible(false);
+            graphPanel1.setVerticalGridLinesVisible(false);
+            graphPanel1.setHorizontalGridLinesVisible(false);
+            graphPanel1.setVerticalGridLinesVisible(false);
+            graphPanel1.setMinWidth(150);
+            graphPanel1.setMinHeight(100);
+            graphPanel1.setPrefWidth(USE_COMPUTED_SIZE);
+            graphPanel1.setPrefHeight(100);
+            graphPanel1.setMaxWidth(USE_COMPUTED_SIZE);
+            graphPanel1.setMaxHeight(100);
+        }
     }
 
     /**
