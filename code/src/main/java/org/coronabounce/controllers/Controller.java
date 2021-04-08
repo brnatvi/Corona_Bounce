@@ -14,7 +14,7 @@ public class Controller implements Controllable
     private long DURATION_HEALING = 8000;            // sick <-> recovered    //TODO compare and converge with parameters in Population
     private long DURATION_NON_CONTAMINATION = 5000;  // recovered <-> can be contaminate again
     private final int RADIUS_DOT = 3;                 // radius of point in GUI
-    private static double Kilometrage=50;
+    private static double Kilometrage=60;
     private  static double diametreX=15;
     private static double diametreY=10;
 

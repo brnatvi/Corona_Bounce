@@ -15,14 +15,13 @@ public class CoquilleBille {
     /**
     * A moving speed in x to move faster or slower.
     */
-    private double movingSpeedX;
+    protected double movingSpeedX;
     /**
     * A moving speed in y to move faster or slower.
     */
-
-    private double movingSpeedY;
+    protected double movingSpeedY;
     private Individual individual;
-    private Position p;
+    protected Position p;
     private final int id;
     private static int idCpt=0;
     private static Random r = new Random();

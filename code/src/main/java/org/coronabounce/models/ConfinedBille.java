@@ -17,17 +17,17 @@ public class ConfinedBille extends CoquilleBille {
         super(i);
     }
 
-    double genererDouble() {
+    private double genererDouble() {
         return random.nextDouble();
     }
 
-    int genererInt(int borneInf, int borneSup) {
+    private int genererInt(int borneInf, int borneSup) {
         int nb;
         nb = borneInf + random.nextInt(borneSup - borneInf);
         return nb;
     }
 
-    public void reduce_speed() {
+    private void reduce_speed() {
         int percentage = genererInt(60, 100);
 
         Random r = new Random();
@@ -48,39 +48,65 @@ public class ConfinedBille extends CoquilleBille {
     @Override
     public void move() {
         bounceIfOutOfZone();
-        reduce_speed();
+        // reduce_speed();
         stayNextToHome();
+        this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
     }
-    public void stayNextToHome(){
-      double b = genererDouble();
-      double a = genererDouble() * b;
+    public void stayNextToHome2(){
+
+      double b = 1.0;//0.9 + genererDouble()/5;
+      double a = 0;//genererDouble() * b;
       double c;
       if (distancePos() >= Controller.getKilometrage()) {
           if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()+Controller.getDiametreX()) {
-              c=genererDouble()*b;
-
-              this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()+c));
+              //c=genererDouble()*b;
+              //this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()+c));
+              bounce(true);
           }
           if ((this.getMovingSpeedY() - a) + this.getPosition().getY() > this.getStartingPosition().getY()+Controller.getDiametreY()) {
-
-              c=genererDouble()*a;
-              this.setMovingSpeed((this.getMovingSpeedX()+c), (this.getMovingSpeedY() - a));
+              // c=genererDouble()*a;
+              // this.setMovingSpeed((this.getMovingSpeedX()+c), (this.getMovingSpeedY() - a));
+              bounce(false);
           }
           if ((this.getMovingSpeedX() + a) + this.getPosition().getX() <= this.getStartingPosition().getX()+Controller.getDiametreX()) {
-              c=genererDouble()*b;
-
-              this.setMovingSpeed((this.getMovingSpeedX()) + a, (this.getMovingSpeedY()-c));
+              //c=genererDouble()*b;
+              //this.setMovingSpeed((this.getMovingSpeedX()) + a, (this.getMovingSpeedY()-c));
+              bounce(true);
           }
           if ((this.getMovingSpeedY() + a) + this.getPosition().getY() <= this.getStartingPosition().getY()+Controller.getDiametreY()) {
-
-              c=genererDouble()*a;
-              this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));
+              //c=genererDouble()*a;
+              //this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));
+              bounce(false);
           }
-          moveABitRandomly();
+          moveABitRandomly(0.2);
       }
-      this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
     }
-    public void moveABitRandomly(){
-      // setMovingSpeed()
+    public void stayNextToHome(){
+      if (distancePos() >= Controller.getKilometrage()) {
+        double curentX = p.getX();
+        double futurX = curentX+movingSpeedX;
+        double curentY = p.getY();
+        double futurY = curentY+movingSpeedY;
+        if((futurX > getStartingPosition().getX()+Controller.getDiametreX()) || (futurX < getStartingPosition().getX()-Controller.getDiametreX())){
+          bounce(true);
+        }
+        if((futurY > getStartingPosition().getY()+Controller.getDiametreY()) || (futurY < getStartingPosition().getY()-Controller.getDiametreY())){
+          bounce(false);
+        }
+        moveABitRandomly(0.6);
+      }
+    }
+    public void moveABitRandomly(double variability){
+      // System.out.println("move a bit");
+      // System.out.println(getMovingSpeedX());
+      // double varX = 1.0;
+      // double varY = 1.0;
+      // double varX = 1 - variability + genererDouble()/5;
+      // double varY = 1 - variability + genererDouble()/5;
+      double var = genererDouble() - 0.5;
+      var*=variability;
+      // var*=(getMovingSpeedX()+getMovingSpeedY());
+      setMovingSpeed(getMovingSpeedX()+var,getMovingSpeedY()-var);
+      // System.out.println(getMovingSpeedX());
     }
 }
