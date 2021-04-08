@@ -262,22 +262,15 @@ public class MainController
     private void resetModel()
     {
         closePreviousTask();
+        stopTimer();
         retainPopulations();
 
         Controllable sameController = controller.getController();
         changeController(sameController);
 
         changeEnableDisable(btnStart);
-        
-        // init graphPanel and fil mainGrid by graphPanel
-        initGraphs();
 
-        // init points
-        drawPopulation(points1, false);
-        drawPopulation(points2, true);
-
-        // init statistic
-        updateStatistics();
+        initialize();
     }
 
     /**
