@@ -17,7 +17,7 @@ public class Population implements Displayable {
     public int nbSick;
     public int nbHealthy;
     public int nbRecovered;
-    Wall mur= new Wall();
+    Wall mur= new Wall(Controller.getThickness(),Controller.getPositionX());
     private Timer timer;
     private TimerTask timerTask = null;
     private boolean hasWalls=false;

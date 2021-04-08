@@ -3,7 +3,13 @@ package org.coronabounce.models;
 import org.coronabounce.controllers.Controller;
 
 public class Wall {
+    private  double thikness;
+    private double PositionX;
+   public Wall(double thickness, double PositionX){
+       this.thikness=thickness;
+       this.PositionX=PositionX;
 
+   }
 
     public void separatePop(CoquilleBille coc) {
         double Vx = coc.getMovingSpeedX();
