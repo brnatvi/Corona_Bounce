@@ -230,8 +230,8 @@ public class MainController
     {
         launchPointsAndStat();
         launchDrawGraph();
-        zone1.moving();
-        zone2.moving();
+        zone1.moving(true);
+        zone2.moving(true);
         changeEnableDisable(btnStart);
     }
 

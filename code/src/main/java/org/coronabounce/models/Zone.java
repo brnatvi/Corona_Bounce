@@ -1,7 +1,9 @@
 package org.coronabounce.models;
 
+import org.coronabounce.controllers.Controller;
 import org.coronabounce.mvcconnectors.Controllable;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,7 +54,7 @@ public class Zone  {
     }
 
 
-    public void moving(){
+    public void moving(boolean withwall){
         /** if we apply this (p.socialDistancing()) with 100persons for example, it is quiet visible that the contamination rate slows down **/
         // p.lockDown();
 
@@ -61,18 +63,20 @@ public class Zone  {
             @Override
             public void run(){
                 //p.interaction(controller.getDurationCovid(),10000, controller.getDurationNonContamination()); // ses informations sont sauvegardé dans Population, on n'as pas besoin de les transmettre a chaque fois.
+                Wall mur = null;
+
 
                 //Pour les murs
                 p.separate();
                 p.Contacts();
-                p.Moving_Bille(true);
+                p.Moving_Bille(withwall);
             }
         },0,1*33);
     }
 
     public void test(){
 
-        this.moving();
+        this.moving(true);
     }
 
     /**

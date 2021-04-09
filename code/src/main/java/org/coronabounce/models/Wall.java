@@ -8,6 +8,7 @@ public class Wall {
     private double positionY;
 
 
+
     public Wall(double thickness,double positionX,double positionY){//ce mur va separer la population en deux populations
        this.thikness=thickness;
        this.positionX=positionX;//je fixe le mur pour qu il soit au milieu de la surafcce de la population
@@ -30,25 +31,25 @@ public class Wall {
     public void setPositionY(double positionY) {
         this.positionY = positionY;
     }
-    public static  void makeWall(int n, Wall mur){
-         final Wall_Simulations w=new Wall_Simulations();
-        switch (n){
-            case 0:
-
-                //Wall mur0=new Wall(Controller.getThickness(),0,Controller.getHeight()/2);
-                w.makeWallX(mur);
-                break;
-
-            case 1:
-               // Wall mur1=new Wall(Controller.getThickness(),Controller.getWidth()/2,0);
-                w.makeWallY(mur);
-                break;
-            case 2:
-                w.makeWallOposite();
-                break;
-            default:break;
+    public   void makeWallY(Wall w){
+        if(w.getPositionY()+1<= Controller.getHeight()) {//le mur va du haut au bas et avance petit a petit
+            long start = System.nanoTime();
+            while ((System.nanoTime() - start) < 3000) ;//chaque 3 secondes le mur avance d un pixel
+            w.setPositionY(w.getPositionY()+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
+            System.out.println("je suis dans Y   "+w.getPositionY());
         }
     }
+    public   void makeWallX(Wall w){
+
+        if(w.getPositionX()+1<= Controller.getWidth()) {//le mur va du haut au bas et avance petit a petit
+            long start = System.nanoTime();
+            while ((System.nanoTime() - start) < 3000) ;//chaque 3 secondes le mur avance d un pixel
+            w.setPositionX(w.getPositionX()+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
+            System.out.println("je suis dans X  "+w.getPositionX());
+        }
+    }
+
+
     /**
     *{@summary Make CoquilleBille bounce if it will hit a wall.}
     *@param coc The CoquilleBille that we may make bounce.
