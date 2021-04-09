@@ -88,6 +88,7 @@ public class Population implements Displayable {
         return listCoquille;
     }
     public Timer getT() {return timer;}
+    public Wall getWall(){return mur;}
 
 
 
@@ -135,8 +136,7 @@ public class Population implements Displayable {
         }
     }
 
-    public void separate()
-    {
+    public void separate(){
        for(CoquilleBille coc : listCoquille) {
           mur.separatePop(coc);
        }

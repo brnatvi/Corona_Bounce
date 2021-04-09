@@ -91,16 +91,19 @@ public class CoquilleBille {
     public void move(){
         bounceIfOutOfZone();
         /* POur essayer les mur décommenter cela et pop.separtate() dans Zone */
-       /*if (pop.getNbZones() !=1) bounceIfHitWall();
-      /* else*/  this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
+        if (pop.getNbZones() !=1) bounceIfHitWall();
+        this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
     }
 
 
     /**
     *{@summary bounce if this hit a wall.}<br>
     */
-    protected void bounceIfHitWall()
-    {
+    protected void bounceIfHitWall(){
+      Wall wall = pop.getWall();
+      if(wall.willCrossWallInX(this) && wall.willCrossWallInY(this)){
+        bounce(true);
+      }
         //Nombre de zones
         int number=pop.getNbZones();
         double curentX = p.getX();
@@ -108,7 +111,7 @@ public class CoquilleBille {
         double curentY = p.getY();
         double futurY = curentY+movingSpeedY;
         //TODO parcourir la liste des murs et si futurX ou futurY est de l'autre coté d'un mur faire rebondir.
-// Le mur fait rebondir la boule dès qu'elle est à une distance <=1
+        // Le mur fait rebondir la boule dès qu'elle est à une distance <=1
         /* Si la boule etait une position inférieure à l'emplacement du mur et que sa futur position est plus grande
            On l'a fait rebondir*/
         int currentZone =InwhichZoneItis(curentX,number);
@@ -117,42 +120,31 @@ public class CoquilleBille {
         double limitInf=repartInZones(number)[currentZone-1];
 
         if (futurZone!=currentZone) {
-
-           if(futurZone>currentZone) p.setPos(limitSup-1,futurY);
-           if(futurZone<currentZone) p.setPos(limitInf+1,futurY);
+           if(futurZone>currentZone) bounce(true);
+           if(futurZone<currentZone) bounce(true);
         }
-
-        else this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
-
     }
 
 
 
     /** Crée nombre Zones **/
-    public double[] repartInZones(int nombre)
-    {
+    public double[] repartInZones(int nombre){
         //<>
-    /* A table with delimiters */
-    double [] limits = new double[nombre+1];
-    limits[0]=0;
-    for(int i=1;i<=nombre;i++)
-    {
+      /* A table with delimiters */
+      double [] limits = new double[nombre+1];
+      limits[0]=0;
+      for(int i=1;i<=nombre;i++){
         limits[i]=  (i*(Controller.getWidth()/nombre));
+      }
+      return limits;
     }
-
-
-    return limits;
-
+    public int InwhichZoneItis(double posX,int nombre){
+      double [] tab=repartInZones(nombre);
+      for(int i=0;i<nombre;i++){
+        if(posX>=tab[i] && posX<=tab[i+1]) return i+1 ;
+      }
+      return -1;/* Not in any Zone ! */
     }
-  public int InwhichZoneItis(double posX,int nombre)
-  {
-  double [] tab=repartInZones(nombre);
-  for(int i=0;i<nombre;i++)
-  {
-  if(posX>=tab[i] && posX<=tab[i+1]) return i+1 ;
-  }
-  return -1;/* Not in any Zone ! */
-  }
 
 
 

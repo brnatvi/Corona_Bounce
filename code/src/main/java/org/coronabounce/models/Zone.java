@@ -64,7 +64,7 @@ public class Zone  {
                 //p.interaction(controller.getDurationCovid(),10000, controller.getDurationNonContamination()); // ses informations sont sauvegardé dans Population, on n'as pas besoin de les transmettre a chaque fois.
 
                 //Pour les murs
-               // p.separate();
+                p.separate();
                 p.Contacts();
                 p.Moving_Bille();
             }

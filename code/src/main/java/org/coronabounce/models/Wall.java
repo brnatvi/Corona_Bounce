@@ -3,46 +3,60 @@ package org.coronabounce.models;
 import org.coronabounce.controllers.Controller;
 
 public class Wall {
-    private  double thikness;
-    private double PositionX;
-    private  double PositionY;
-   public Wall(double thickness, double PositionX){//ce mur va separer la population en deux populations
-       this.thikness=thickness;
-       this.PositionX=PositionX;//je fixe le mur pour qu il soit au milieu de la surafcce de la population
-       this.PositionY=0;
+    private double thikness;
+    private double positionX;
+    private double positionY;
 
-   }
+    public Wall(double thickness, double positionX){//ce mur va separer la population en deux populations
+       this.thikness=thickness;
+       this.positionX=positionX;//je fixe le mur pour qu il soit au milieu de la surafcce de la population
+       this.positionY=0;
+    }
 
     public void setPositionY(double positionY) {
-        PositionY = positionY;
+        positionY = positionY;
     }
     public void makeWall(){
-       if(this.PositionY+1<Controller.getHeight()) {//le mur va du haut au bas et avance petit a petit
+       if(this.positionY+1<Controller.getHeight()) {//le mur va du haut au bas et avance petit a petit
            long start = System.nanoTime();
            while ((System.nanoTime() - start) < 3000) ;//chaque 3 secondes le mur avance d un pixel
-            setPositionY(this.PositionY+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
+            setPositionY(this.positionY+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
        }
     }
-
+    /**
+    *{@summary Make CoquilleBille bounce if it will hit a wall.}
+    *@param coc The CoquilleBille that we may make bounce.
+    */
     public void separatePop(CoquilleBille coc) {
-        double Vx = coc.getMovingSpeedX();
-        double Vy = coc.getMovingSpeedY();
-        double posX=coc.getPosition().getX();
-        Population pop =new Population();
-        int nbzones=pop.getNbZones();
-
-        int zone=coc.InwhichZoneItis(posX,nbzones);
-        double limitInf= coc.repartInZones(nbzones)[zone-1];
-        double limitSup=coc.repartInZones(nbzones)[zone];
-
-        if(coc.getPosition().getX()<limitSup && Math.abs(posX-limitSup)<=1)
-            coc.setMovingSpeed(-1*Vx,Vy);
-        else if(coc.getPosition().getX()>limitInf && Math.abs(posX-limitInf)<=1)
-            coc.setMovingSpeed(-1*Vx,Vy);
-
+        // if(willCrossWallInX(coc) && willCrossWallInY(coc)){
+        //   coc.bounce(true);
+        // }
     }
-
-
-
+    /**
+    *{@summary Return true if it will cross the wall in x.}<br>
+    *@param coc The CoquilleBille that we may make bounce.
+    */
+    public boolean willCrossWallInX(CoquilleBille coc){
+      Population pop=new Population(); //on devrait pas avoir besoin de recréer une population.
+      int nbzones=pop.getNbZones();
+      double posX=coc.getPosition().getX();
+      int zone=coc.InwhichZoneItis(posX,nbzones);
+      double limitInf=coc.repartInZones(nbzones)[zone-1];
+      double limitSup=coc.repartInZones(nbzones)[zone];
+      if(coc.getPosition().getX()<limitSup && Math.abs(posX-limitSup)<=1){return true;}
+      else if(coc.getPosition().getX()>limitInf && Math.abs(posX-limitInf)<=1){return true;}
+      return false;
+    }
+    /**
+    *{@summary Return true if it will cross the wall in y.}<br>
+    *It will hit in Y only if wall is enoth low.<br>
+    *@param coc The CoquilleBille that we may make bounce.
+    */
+    public boolean willCrossWallInY(CoquilleBille coc){
+      if(positionY > coc.getPosition().getY()){
+        System.out.println("true 2");return true;
+      }
+      return true;//@a
+    }
 
 }
