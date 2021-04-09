@@ -48,8 +48,8 @@ public class Wall {
       // else if(coc.getPosition().getX()>limitInf && Math.abs(posX-limitInf)<=1){return true;}
       double curentX = coc.getPosition().getX();
       double futurX = curentX+coc.getMovingSpeedX();
-      if(curentX < positionX && futurX > positionX){ return true;}
-      if(curentX > positionX && futurX < positionX){ return true;}
+      if(curentX < positionX-thikness/2 && futurX > positionX-thikness/2){ return true;}
+      if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
       return false;
     }
     /**
