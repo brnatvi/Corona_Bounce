@@ -2,28 +2,52 @@ package org.coronabounce.models;
 
 import org.coronabounce.controllers.Controller;
 
-import java.util.*;
-
 public class Wall {
     private double thikness;
     private double positionX;
     private double positionY;
 
-    public Wall(double thickness, double positionX){//ce mur va separer la population en deux populations
+
+    public Wall(double thickness,double positionX,double positionY){//ce mur va separer la population en deux populations
        this.thikness=thickness;
        this.positionX=positionX;//je fixe le mur pour qu il soit au milieu de la surafcce de la population
-       this.positionY=0;
-       System.out.println("new wall in "+positionX);
+       this.positionY=positionY;
+
+    }
+
+    public void setPositionX(double positionX) {
+        this.positionX = positionX;
+    }
+
+    public double getPositionX() {
+        return positionX;
+    }
+
+    public double getPositionY() {
+        return positionY;
     }
 
     public void setPositionY(double positionY) {
         this.positionY = positionY;
     }
-    public double getPositionY(){return positionY;}
+    public static  void makeWall(int n, Wall mur){
+         final Wall_Simulations w=new Wall_Simulations();
+        switch (n){
+            case 0:
 
-    public void makeWallGoDown(Population pop){
-        TimerTask tt = null;
-        pop.getT().schedule(tt = new TimerTaskWall(this), 0, 100);
+                //Wall mur0=new Wall(Controller.getThickness(),0,Controller.getHeight()/2);
+                w.makeWallX(mur);
+                break;
+
+            case 1:
+               // Wall mur1=new Wall(Controller.getThickness(),Controller.getWidth()/2,0);
+                w.makeWallY(mur);
+                break;
+            case 2:
+                w.makeWallOposite();
+                break;
+            default:break;
+        }
     }
     /**
     *{@summary Make CoquilleBille bounce if it will hit a wall.}
@@ -49,8 +73,8 @@ public class Wall {
       // else if(coc.getPosition().getX()>limitInf && Math.abs(posX-limitInf)<=1){return true;}
       double curentX = coc.getPosition().getX();
       double futurX = curentX+coc.getMovingSpeedX();
-      if(curentX < positionX-thikness/2 && futurX > positionX-thikness/2){ return true;}
-      if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
+      if(curentX < positionX && futurX > positionX){ return true;}
+      if(curentX > positionX && futurX < positionX){ return true;}
       return false;
     }
     /**
@@ -64,18 +88,5 @@ public class Wall {
       }
       return false;
     }
-}
-class TimerTaskWall extends TimerTask{
-  public TimerTaskWall(Wall w){
-    this.w=w;
-  }
-  private Wall w;
-  @Override
-  public synchronized void run(){
-    w.setPositionY(w.getPositionY()+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
-    System.out.println(w.getPositionY());
-    if(w.getPositionY()>Controller.getHeight()){
-      cancel();
-    }
-  }
+
 }
