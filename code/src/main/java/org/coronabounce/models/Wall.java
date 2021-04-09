@@ -21,13 +21,9 @@ public class Wall {
     }
     public double getPositionY(){return positionY;}
 
-    public void makeWall(Population pop){
-       if(this.positionY+1<=Controller.getHeight()) {//le mur va du haut au bas et avance petit a petit
-         TimerTask tt = null;
-         pop.getT().schedule(tt = new TimerTaskWall(this), 0, 1000);
-           // long start = System.nanoTime();
-           // while ((System.nanoTime() - start) < 3000) ;//chaque 3 secondes le mur avance d un pixel
-       }
+    public void makeWallGoDown(Population pop){
+        TimerTask tt = null;
+        pop.getT().schedule(tt = new TimerTaskWall(this), 0, 100);
     }
     /**
     *{@summary Make CoquilleBille bounce if it will hit a wall.}
@@ -76,8 +72,10 @@ class TimerTaskWall extends TimerTask{
   private Wall w;
   @Override
   public synchronized void run(){
-    System.out.println("makeWall");
-    w.setPositionY(w.getPositionY()+20);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
+    w.setPositionY(w.getPositionY()+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
     System.out.println(w.getPositionY());
+    if(w.getPositionY()>Controller.getHeight()){
+      cancel();
+    }
   }
 }
