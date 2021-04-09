@@ -20,7 +20,6 @@ public class Population implements Displayable {
     private List<Wall> listWall = new ArrayList<Wall>();
     private Timer timer;
     private TimerTask timerTask = null;
-    private Wall mur;
 
     //========================= Constructors ==========================================================================/
 
@@ -28,8 +27,6 @@ public class Population implements Displayable {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
-
-            this.mur=new Wall(Controller.getThickness(),Controller.getPositionX());
 
             if(Confinement){
             for (int i = 0; i < nbH; i++) {
@@ -229,9 +226,10 @@ public class Population implements Displayable {
     public void Moving_Bille() {
         //System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
         for (CoquilleBille coc : listCoquille) {
-            this.mur.makeWall();
-            coc.move();
-
+          // for (Wall wall : getListWall() ) {
+          //   wall.makeWall();
+          // }
+          coc.move();
         }
 
 
