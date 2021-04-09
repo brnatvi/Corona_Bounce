@@ -43,8 +43,7 @@ public class ConfinedBille extends CoquilleBille {
     public void move() {
         reduceSpeed();
         stayNextToHome();
-        bounceIfOutOfZone();
-        this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
+        super.move();
     }
     public void stayNextToHome(){
       double b = genererDouble();
