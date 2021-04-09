@@ -26,5 +26,6 @@ public  abstract class Individual {
     public boolean isSick(){return false;}
 
     public void setCoc(CoquilleBille coc){this.coc=coc;}
+    public Population getPop(){return p;}
 
 }

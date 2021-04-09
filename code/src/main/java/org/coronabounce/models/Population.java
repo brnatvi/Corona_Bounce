@@ -17,7 +17,7 @@ public class Population implements Displayable {
     public int nbSick;
     public int nbHealthy;
     public int nbRecovered;
-    Wall mur= new Wall(Controller.getThickness(),Controller.getPositionX());
+    private List<Wall> listWall = new ArrayList<Wall>();
     private Timer timer;
     private TimerTask timerTask = null;
     private boolean hasWalls=false;
@@ -29,6 +29,8 @@ public class Population implements Displayable {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
+        //listWall.add(new Wall(Controller.getThickness(),Controller.getPositionX()));
+        listWall.add(new Wall(Controller.getThickness(),100));
 
             if(Confinement){
             for (int i = 0; i < nbH; i++) {
@@ -81,14 +83,14 @@ public class Population implements Displayable {
 
 
     public Population(Controllable controller, int nbIndividus,boolean Confinement) {
-        this(controller, nbIndividus - 5, 5, 0,Confinement);
+        this(controller, nbIndividus - 1, 1, 0,Confinement);
     }
     public Population(){}
     public List<CoquilleBille> getAllPoints() {
         return listCoquille;
     }
     public Timer getT() {return timer;}
-    public Wall getWall(){return mur;}
+    public List<Wall> getListWall(){return listWall;}
 
 
 
@@ -137,10 +139,9 @@ public class Population implements Displayable {
     }
 
     public void separate(){
-       for(CoquilleBille coc : listCoquille) {
-          mur.separatePop(coc);
-       }
-
+       // for(CoquilleBille coc : listCoquille) {
+       //    mur.separatePop(coc);
+       // }
     }
 
 
@@ -242,7 +243,7 @@ public class Population implements Displayable {
 
 
 
-    public boolean thereisWall(){ return this.hasWalls;}
+   public boolean thereisWall(){ return this.hasWalls;}
    public int getNbIndividus() { return getAllPoints().size(); }
 
    public int getNbHealthy() { return nbHealthy; }

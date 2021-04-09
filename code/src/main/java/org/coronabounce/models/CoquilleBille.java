@@ -26,8 +26,7 @@ public class CoquilleBille {
     private final int id;
     private static int idCpt=0;
     private static Random r = new Random();
-    private  final Position startingPosition;
-    private Population pop=new Population();
+    private final Position startingPosition;
 
 
     public CoquilleBille(double speedX,double speedY, Individual individual){
@@ -42,12 +41,10 @@ public class CoquilleBille {
         this.movingSpeedY=speedY;
         this.individual=individual;
 
-
-
     }
 
     public Population getPop() {
-        return pop;
+        return individual.getPop();
     }
 
     public Position getStartingPosition() {
@@ -91,7 +88,7 @@ public class CoquilleBille {
     public void move(){
         bounceIfOutOfZone();
         /* POur essayer les mur décommenter cela et pop.separtate() dans Zone */
-        if (pop.getNbZones() !=1) bounceIfHitWall();
+        if (getPop().getNbZones() !=1) bounceIfHitWall();
         this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
     }
 
@@ -100,12 +97,13 @@ public class CoquilleBille {
     *{@summary bounce if this hit a wall.}<br>
     */
     protected void bounceIfHitWall(){
-      Wall wall = pop.getWall();
-      if(wall.willCrossWallInX(this) && wall.willCrossWallInY(this)){
-        bounce(true);
+      for (Wall wall : getPop().getListWall() ) {
+        if(wall.willCrossWallInX(this) && wall.willCrossWallInY(this)){
+          bounce(true);
+        }
       }
         //Nombre de zones
-        int number=pop.getNbZones();
+        int number=getPop().getNbZones();
         double curentX = p.getX();
         double futurX = curentX+movingSpeedX;
         double curentY = p.getY();

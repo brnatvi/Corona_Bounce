@@ -11,6 +11,7 @@ public class Wall {
        this.thikness=thickness;
        this.positionX=positionX;//je fixe le mur pour qu il soit au milieu de la surafcce de la population
        this.positionY=0;
+       System.out.println("new wall in "+positionX);
     }
 
     public void setPositionY(double positionY) {
