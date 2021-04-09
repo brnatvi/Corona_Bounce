@@ -17,29 +17,23 @@ public class ConfinedBille extends CoquilleBille {
         super(i);
     }
 
-    double genererDouble() {
+    private double genererDouble() {
         return random.nextDouble();
     }
 
-    int genererInt(int borneInf, int borneSup) {
+    private int genererInt(int borneInf, int borneSup) {
         int nb;
         nb = borneInf + random.nextInt(borneSup - borneInf);
         return nb;
     }
 
-    public void reduce_speed() {
+    private void reduceSpeed() {
         int percentage = genererInt(60, 100);
 
-        Random r = new Random();
-
         if ((this.getMovingSpeedX() * percentage / 100) <= 1 || (this.getMovingSpeedY() * percentage / 100) <= 1) {
-            {
-
                 this.setMovingSpeed(this.getMovingSpeedX(), this.getMovingSpeedX());
-            }
         } else {
             this.setMovingSpeed((this.getMovingSpeedX() * percentage / 100), (this.getMovingSpeedY() * percentage / 100));
-
         }
 
 
@@ -47,9 +41,10 @@ public class ConfinedBille extends CoquilleBille {
 
     @Override
     public void move() {
-        bounceIfOutOfZone();
-        reduce_speed();
+        reduceSpeed();
         stayNextToHome();
+        bounceIfOutOfZone();
+        this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
     }
     public void stayNextToHome(){
       double b = genererDouble();
@@ -76,11 +71,6 @@ public class ConfinedBille extends CoquilleBille {
               c=genererDouble()*a;
               this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));
           }
-          moveABitRandomly();
       }
-      this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
-    }
-    public void moveABitRandomly(){
-      // setMovingSpeed()
     }
 }
