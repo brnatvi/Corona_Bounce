@@ -31,6 +31,11 @@ public class Population implements Displayable {
         timer = new Timer();
         //listWall.add(new Wall(Controller.getThickness(),Controller.getPositionX()));
         listWall.add(new Wall(Controller.getThickness(),100));
+        listWall.add(new Wall(Controller.getThickness(),200));
+        listWall.add(new Wall(Controller.getThickness(),300));
+        listWall.add(new Wall(Controller.getThickness(),400));
+        listWall.add(new Wall(Controller.getThickness(),500));
+        listWall.add(new Wall(Controller.getThickness(),600));
 
             if(Confinement){
             for (int i = 0; i < nbH; i++) {

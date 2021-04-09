@@ -102,25 +102,23 @@ public class CoquilleBille {
           bounce(true);
         }
       }
-        //Nombre de zones
-        int number=getPop().getNbZones();
-        double curentX = p.getX();
-        double futurX = curentX+movingSpeedX;
-        double curentY = p.getY();
-        double futurY = curentY+movingSpeedY;
-        //TODO parcourir la liste des murs et si futurX ou futurY est de l'autre coté d'un mur faire rebondir.
-        // Le mur fait rebondir la boule dès qu'elle est à une distance <=1
-        /* Si la boule etait une position inférieure à l'emplacement du mur et que sa futur position est plus grande
-           On l'a fait rebondir*/
-        int currentZone =InwhichZoneItis(curentX,number);
-        int futurZone=InwhichZoneItis(futurX,number);
-        double limitSup =repartInZones(number)[currentZone];
-        double limitInf=repartInZones(number)[currentZone-1];
-
-        if (futurZone!=currentZone) {
-           if(futurZone>currentZone) bounce(true);
-           if(futurZone<currentZone) bounce(true);
-        }
+        // //Nombre de zones
+        // int number=getPop().getNbZones();
+        // double curentX = p.getX();
+        // double futurX = curentX+movingSpeedX;
+        // double curentY = p.getY();
+        // double futurY = curentY+movingSpeedY;
+        // /* Si la boule etait une position inférieure à l'emplacement du mur et que sa futur position est plus grande
+        //    On l'a fait rebondir*/
+        // int currentZone =InwhichZoneItis(curentX,number);
+        // int futurZone=InwhichZoneItis(futurX,number);
+        // double limitSup =repartInZones(number)[currentZone];
+        // double limitInf=repartInZones(number)[currentZone-1];
+        //
+        // if (futurZone!=currentZone) {
+        //    if(futurZone>currentZone) bounce(true);
+        //    if(futurZone<currentZone) bounce(true);
+        // }
     }
 
 

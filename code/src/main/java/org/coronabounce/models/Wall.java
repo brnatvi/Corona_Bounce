@@ -10,7 +10,7 @@ public class Wall {
     public Wall(double thickness, double positionX){//ce mur va separer la population en deux populations
        this.thikness=thickness;
        this.positionX=positionX;//je fixe le mur pour qu il soit au milieu de la surafcce de la population
-       this.positionY=0;
+       this.positionY=200;
        System.out.println("new wall in "+positionX);
     }
 
@@ -38,14 +38,18 @@ public class Wall {
     *@param coc The CoquilleBille that we may make bounce.
     */
     public boolean willCrossWallInX(CoquilleBille coc){
-      Population pop=new Population(); //on devrait pas avoir besoin de recréer une population.
-      int nbzones=pop.getNbZones();
-      double posX=coc.getPosition().getX();
-      int zone=coc.InwhichZoneItis(posX,nbzones);
-      double limitInf=coc.repartInZones(nbzones)[zone-1];
-      double limitSup=coc.repartInZones(nbzones)[zone];
-      if(coc.getPosition().getX()<limitSup && Math.abs(posX-limitSup)<=1){return true;}
-      else if(coc.getPosition().getX()>limitInf && Math.abs(posX-limitInf)<=1){return true;}
+      // Population pop=new Population(); //on devrait pas avoir besoin de recréer une population.
+      // double posX=coc.getPosition().getX();
+      // int nbzones=pop.getNbZones();
+      // int zone=coc.InwhichZoneItis(posX,nbzones);
+      // double limitInf=coc.repartInZones(nbzones)[zone-1];
+      // double limitSup=coc.repartInZones(nbzones)[zone];
+      // if(coc.getPosition().getX()<limitSup && Math.abs(posX-limitSup)<=1){return true;}
+      // else if(coc.getPosition().getX()>limitInf && Math.abs(posX-limitInf)<=1){return true;}
+      double curentX = coc.getPosition().getX();
+      double futurX = curentX+coc.getMovingSpeedX();
+      if(curentX < positionX && futurX > positionX){ return true;}
+      if(curentX > positionX && futurX < positionX){ return true;}
       return false;
     }
     /**
@@ -55,9 +59,9 @@ public class Wall {
     */
     public boolean willCrossWallInY(CoquilleBille coc){
       if(positionY > coc.getPosition().getY()){
-        System.out.println("true 2");return true;
+        return true;
       }
-      return true;//@a
+      return false;
     }
 
 }
