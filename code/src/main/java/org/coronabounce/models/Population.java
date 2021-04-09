@@ -77,7 +77,10 @@ public class Population implements Displayable {
 
                 }
             }
-            createWalls(2);
+            createWalls(1);
+            for (Wall wall : listWall ) {
+              wall.makeWall(this);
+            }
         }
         /**
         *{@summary Create the walls.}<br>

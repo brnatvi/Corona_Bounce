@@ -2,6 +2,8 @@ package org.coronabounce.models;
 
 import org.coronabounce.controllers.Controller;
 
+import java.util.*;
+
 public class Wall {
     private double thikness;
     private double positionX;
@@ -17,12 +19,14 @@ public class Wall {
     public void setPositionY(double positionY) {
         this.positionY = positionY;
     }
-    public void makeWall(){
+    public double getPositionY(){return positionY;}
+
+    public void makeWall(Population pop){
        if(this.positionY+1<=Controller.getHeight()) {//le mur va du haut au bas et avance petit a petit
-           long start = System.nanoTime();
-           while ((System.nanoTime() - start) < 3000) ;//chaque 3 secondes le mur avance d un pixel
-            setPositionY(this.positionY+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
-           System.out.println(this.positionY);
+         TimerTask tt = null;
+         pop.getT().schedule(tt = new TimerTaskWall(this), 0, 1000);
+           // long start = System.nanoTime();
+           // while ((System.nanoTime() - start) < 3000) ;//chaque 3 secondes le mur avance d un pixel
        }
     }
     /**
@@ -49,8 +53,8 @@ public class Wall {
       // else if(coc.getPosition().getX()>limitInf && Math.abs(posX-limitInf)<=1){return true;}
       double curentX = coc.getPosition().getX();
       double futurX = curentX+coc.getMovingSpeedX();
-      if(curentX < positionX && futurX > positionX){ return true;}
-      if(curentX > positionX && futurX < positionX){ return true;}
+      if(curentX < positionX-thikness/2 && futurX > positionX-thikness/2){ return true;}
+      if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
       return false;
     }
     /**
@@ -64,5 +68,16 @@ public class Wall {
       }
       return false;
     }
-
+}
+class TimerTaskWall extends TimerTask{
+  public TimerTaskWall(Wall w){
+    this.w=w;
+  }
+  private Wall w;
+  @Override
+  public synchronized void run(){
+    System.out.println("makeWall");
+    w.setPositionY(w.getPositionY()+20);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
+    System.out.println(w.getPositionY());
+  }
 }
