@@ -20,6 +20,7 @@ public class Population implements Displayable {
     private List<Wall> listWall = new ArrayList<Wall>();
     private Timer timer;
     private TimerTask timerTask = null;
+    private static Random random = new Random();
 
     //========================= Constructors ==========================================================================/
 
@@ -28,7 +29,7 @@ public class Population implements Displayable {
         data = new Data();
         timer = new Timer();
 
-            if(Confinement){
+        if(Confinement){
             for (int i = 0; i < nbH; i++) {
                 CoquilleBille coc = new ConfinedBille(null);
                 Individual in = new Healthy(coc, this);
@@ -51,7 +52,7 @@ public class Population implements Displayable {
                 listCoquille.add(coc);
 
               }
-            }else {
+          }else {
 
                 for (int i = 0; i < nbH; i++) {
                     CoquilleBille coc = new CoquilleBille(null);
@@ -188,16 +189,13 @@ public class Population implements Displayable {
     {
         /** See what happens if only a part of the population can move
          For instance , 1/4 can move and 3/4 can't **/
-        Random r = new Random();
-        int prctg=r.nextInt(100);
+        int prctg=random.nextInt(100);
         int cpt = (prctg * this.getNbIndividus()) / 100;
 
         while (cpt > 0) {
-
-
-            int index = r.nextInt(this.getNbIndividus());
+            int index = random.nextInt(this.getNbIndividus());
             //make sure to get a new coquille(check if the coquille has already been chosen or not)
-            while (this.listCoquille.get(index).getMovingSpeed() == 0) index = r.nextInt(this.getNbIndividus());
+            while (this.listCoquille.get(index).getMovingSpeed() == 0) index = random.nextInt(this.getNbIndividus());
             this.listCoquille.get(index).setMovingSpeed(0, 0);
             cpt--;
         }
