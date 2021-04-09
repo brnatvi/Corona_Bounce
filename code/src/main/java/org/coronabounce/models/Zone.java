@@ -65,7 +65,7 @@ public class Zone  {
                 //Pour les murs
                 p.separate();
                 p.Contacts();
-                p.Moving_Bille(true);
+                p.Moving_Bille();
             }
         },0,1*33);
     }

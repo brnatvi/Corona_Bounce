@@ -87,6 +87,7 @@ public class CoquilleBille {
     */
     public void move(){
         bounceIfOutOfZone();
+
         /* POur essayer les mur décommenter cela et pop.separtate() dans Zone */
         if (getPop().getNbZones() !=1) bounceIfHitWall();
         this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);

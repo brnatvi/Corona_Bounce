@@ -20,9 +20,7 @@ public class Population implements Displayable {
     private List<Wall> listWall = new ArrayList<Wall>();
     private Timer timer;
     private TimerTask timerTask = null;
-    private boolean hasWalls=false;
-    private int nbZones=3;
-
+    private static Random random = new Random();
 
     //========================= Constructors ==========================================================================/
 
@@ -30,16 +28,8 @@ public class Population implements Displayable {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
-        /*listWall.add(new Wall(Controller.getThickness(),Controller.getPositionX()));
-       listWall.add(new Wall(Controller.getThickness(),100));
-        listWall.add(new Wall(Controller.getThickness(),200));
-        listWall.add(new Wall(Controller.getThickness(),300));
-        listWall.add(new Wall(Controller.getThickness(),400));
-        listWall.add(new Wall(Controller.getThickness(),500));
-        listWall.add(new Wall(Controller.getThickness(),600));*/
 
-
-            if(Confinement){
+        if(Confinement){
             for (int i = 0; i < nbH; i++) {
                 CoquilleBille coc = new ConfinedBille(null);
                 Individual in = new Healthy(coc, this);
@@ -61,7 +51,8 @@ public class Population implements Displayable {
                 coc.setIndividual(in);
                 listCoquille.add(coc);
 
-            }}else {
+              }
+          }else {
 
                 for (int i = 0; i < nbH; i++) {
                     CoquilleBille coc = new CoquilleBille(null);
@@ -86,6 +77,22 @@ public class Population implements Displayable {
 
                 }
             }
+            createWalls(3);
+            for (Wall wall : listWall ) {
+              wall.makeWallGoDown(this);
+            }
+        }
+        /**
+        *{@summary Create the walls.}<br>
+        *All the wall will be create at equals distance from eatch other.<br>
+        *@param numberOfWall the number of wall that will be add.
+        */
+        private void createWalls(int numberOfWall){
+          double maxX = Controller.getWidth();
+          for (int i=1; i<=numberOfWall; i++) {
+            double posX = (maxX*i)/(numberOfWall+1);
+            listWall.add(new Wall(Controller.getThickness(),posX));
+          }
         }
 
 
@@ -185,16 +192,13 @@ public class Population implements Displayable {
     {
         /** See what happens if only a part of the population can move
          For instance , 1/4 can move and 3/4 can't **/
-        Random r = new Random();
-        int prctg=r.nextInt(100);
+        int prctg=random.nextInt(100);
         int cpt = (prctg * this.getNbIndividus()) / 100;
 
         while (cpt > 0) {
-
-
-            int index = r.nextInt(this.getNbIndividus());
+            int index = random.nextInt(this.getNbIndividus());
             //make sure to get a new coquille(check if the coquille has already been chosen or not)
-            while (this.listCoquille.get(index).getMovingSpeed() == 0) index = r.nextInt(this.getNbIndividus());
+            while (this.listCoquille.get(index).getMovingSpeed() == 0) index = random.nextInt(this.getNbIndividus());
             this.listCoquille.get(index).setMovingSpeed(0, 0);
             cpt--;
         }
@@ -220,41 +224,13 @@ public class Population implements Displayable {
         //System.out.println("Pourcentage de contamination: " + this.percentageSick() + " %  Pourcentage de guérison :" + this.percentageRecovered() + "% Pourcentage de non contamination est :" + this.percentageHealthy()+" %");
     }
 
-    public void Moving_Bille(boolean withWall) {
-
-          //System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
-
-        if(withWall){
-            Wall mur=null;
-            //Random r=new Random();
-            //int n= r.nextInt(2);
-            int n=1;
-            switch (n){
-                case 0:
-
-                     mur=new Wall(Controller.getThickness(),0,Controller.getHeight()/2);
-
-                    break;
-
-                case 1:
-                    mur=new Wall(Controller.getThickness(),Controller.getWidth()/2,0);
-
-                    break;
-                case 2:
-
-                    break;
-                default:break;
-            }
-            for (CoquilleBille coc : listCoquille) {
-                Wall.makeWall(n,mur);
-                coc.move();
-
-            }
-        }else {
-            for (CoquilleBille coc : listCoquille) {
-                coc.move();
-
-            }
+    public void Moving_Bille() {
+        //System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
+        for (CoquilleBille coc : listCoquille) {
+          // for (Wall wall : getListWall() ) {
+          //   wall.makeWall();
+          // }
+          coc.move();
         }
 
 
@@ -264,21 +240,18 @@ public class Population implements Displayable {
 
 
 
-/* Si il y'a un mur, y'a 2 zones |zone1 |MUR| zone2| .... etc*/
-    public void setnbZones(int number)
-    {
-        /*TODO : trouver ou initialiser le nombre de Zones */
-        this.nbZones=number;
-        if (number>0) this.hasWalls=true;
-    }
-
-    public int getNbZones()
-    { return this.nbZones;}
-
-
-
-
-   public boolean thereisWall(){ return this.hasWalls;}
+    /**
+    *{@summary Return how much zone there is.}
+    */
+    public int getNbZones(){ return getNbWall()+1;}
+    /**
+    *{@summary Return how much wall there is.}
+    */
+    public int getNbWall(){ return listWall.size();}
+    /**
+    *{@summary Return true if there is 1 or more wall.}
+    */
+   public boolean thereisWall(){ return getNbWall()!=0;}
    public int getNbIndividus() { return getAllPoints().size(); }
 
    public int getNbHealthy() { return nbHealthy; }
