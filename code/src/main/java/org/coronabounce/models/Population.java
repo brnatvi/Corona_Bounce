@@ -22,7 +22,6 @@ public class Population implements Displayable {
     private TimerTask timerTask = null;
     private boolean hasWalls=false;
     private int nbZones=3;
-    private Wall w=null;
 
 
     //========================= Constructors ==========================================================================/
@@ -31,22 +30,6 @@ public class Population implements Displayable {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
-        Random r= new Random();
-        int n=r.nextInt(2);
-        //System.out.println(n);
-            switch (n) {
-                case 0:
-
-                    this.w= new Wall(Controller.getThickness(), 0, Controller.getHeight() / 2);
-
-                    break;
-
-                case 1:
-                    this.w= new Wall(Controller.getThickness(), Controller.getWidth() / 2, 0);
-
-                    break;
-            }
-
         /*listWall.add(new Wall(Controller.getThickness(),Controller.getPositionX()));
        listWall.add(new Wall(Controller.getThickness(),100));
         listWall.add(new Wall(Controller.getThickness(),200));
@@ -242,13 +225,28 @@ public class Population implements Displayable {
           //System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
 
         if(withWall){
+            Wall mur=null;
+            //Random r=new Random();
+            //int n= r.nextInt(2);
+            int n=1;
+            switch (n){
+                case 0:
+
+                     mur=new Wall(Controller.getThickness(),0,Controller.getHeight()/2);
+
+                    break;
+
+                case 1:
+                    mur=new Wall(Controller.getThickness(),Controller.getWidth()/2,0);
+
+                    break;
+                case 2:
+
+                    break;
+                default:break;
+            }
             for (CoquilleBille coc : listCoquille) {
-                if(this.w.getPositionY()==Controller.getHeight()/2) {
-                    w.makeWallX(w);
-                }
-                if(this.w.getPositionX()==Controller.getWidth()/2) {
-                    w.makeWallY(w);
-                }
+                Wall.makeWall(n,mur);
                 coc.move();
 
             }
