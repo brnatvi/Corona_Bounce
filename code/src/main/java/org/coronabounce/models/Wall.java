@@ -10,7 +10,7 @@ public class Wall {
     public Wall(double thickness, double positionX){//ce mur va separer la population en deux populations
        this.thikness=thickness;
        this.positionX=positionX;//je fixe le mur pour qu il soit au milieu de la surafcce de la population
-       this.positionY=0;
+       this.positionY=290;
        System.out.println("new wall in "+positionX);
     }
 

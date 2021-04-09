@@ -20,8 +20,6 @@ public class Population implements Displayable {
     private List<Wall> listWall = new ArrayList<Wall>();
     private Timer timer;
     private TimerTask timerTask = null;
-    private boolean hasWalls=false;
-    private int nbZones=3;
     private Wall mur;
 
     //========================= Constructors ==========================================================================/
@@ -30,13 +28,7 @@ public class Population implements Displayable {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
-        /*listWall.add(new Wall(Controller.getThickness(),Controller.getPositionX()));
-       listWall.add(new Wall(Controller.getThickness(),100));
-        listWall.add(new Wall(Controller.getThickness(),200));
-        listWall.add(new Wall(Controller.getThickness(),300));
-        listWall.add(new Wall(Controller.getThickness(),400));
-        listWall.add(new Wall(Controller.getThickness(),500));
-        listWall.add(new Wall(Controller.getThickness(),600));*/
+
             this.mur=new Wall(Controller.getThickness(),Controller.getPositionX());
 
             if(Confinement){
@@ -61,7 +53,8 @@ public class Population implements Displayable {
                 coc.setIndividual(in);
                 listCoquille.add(coc);
 
-            }}else {
+              }
+            }else {
 
                 for (int i = 0; i < nbH; i++) {
                     CoquilleBille coc = new CoquilleBille(null);
@@ -86,6 +79,19 @@ public class Population implements Displayable {
 
                 }
             }
+            createWalls(2);
+        }
+        /**
+        *{@summary Create the walls.}<br>
+        *All the wall will be create at equals distance from eatch other.<br>
+        *@param numberOfWall the number of wall that will be add.
+        */
+        private void createWalls(int numberOfWall){
+          double maxX = Controller.getWidth();
+          for (int i=1; i<=numberOfWall; i++) {
+            double posX = (maxX*i)/(numberOfWall+1);
+            listWall.add(new Wall(Controller.getThickness(),posX));
+          }
         }
 
 
@@ -235,21 +241,18 @@ public class Population implements Displayable {
 
 
 
-/* Si il y'a un mur, y'a 2 zones |zone1 |MUR| zone2| .... etc*/
-    public void setnbZones(int number)
-    {
-        /*TODO : trouver ou initialiser le nombre de Zones */
-        this.nbZones=number;
-        if (number>0) this.hasWalls=true;
-    }
-
-    public int getNbZones()
-    { return this.nbZones;}
-
-
-
-
-   public boolean thereisWall(){ return this.hasWalls;}
+    /**
+    *{@summary Return how much zone there is.}
+    */
+    public int getNbZones(){ return getNbWall()+1;}
+    /**
+    *{@summary Return how much wall there is.}
+    */
+    public int getNbWall(){ return listWall.size();}
+    /**
+    *{@summary Return true if there is 1 or more wall.}
+    */
+   public boolean thereisWall(){ return getNbWall()!=0;}
    public int getNbIndividus() { return getAllPoints().size(); }
 
    public int getNbHealthy() { return nbHealthy; }
