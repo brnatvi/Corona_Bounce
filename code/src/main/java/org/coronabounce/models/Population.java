@@ -22,6 +22,7 @@ public class Population implements Displayable {
     private TimerTask timerTask = null;
     private boolean hasWalls=false;
     private int nbZones=3;
+    private Wall mur;
 
     //========================= Constructors ==========================================================================/
 
@@ -29,13 +30,14 @@ public class Population implements Displayable {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
-        //listWall.add(new Wall(Controller.getThickness(),Controller.getPositionX()));
-        listWall.add(new Wall(Controller.getThickness(),100));
+        /*listWall.add(new Wall(Controller.getThickness(),Controller.getPositionX()));
+       listWall.add(new Wall(Controller.getThickness(),100));
         listWall.add(new Wall(Controller.getThickness(),200));
         listWall.add(new Wall(Controller.getThickness(),300));
         listWall.add(new Wall(Controller.getThickness(),400));
         listWall.add(new Wall(Controller.getThickness(),500));
-        listWall.add(new Wall(Controller.getThickness(),600));
+        listWall.add(new Wall(Controller.getThickness(),600));*/
+            this.mur=new Wall(Controller.getThickness(),Controller.getPositionX());
 
             if(Confinement){
             for (int i = 0; i < nbH; i++) {
@@ -221,11 +223,10 @@ public class Population implements Displayable {
     public void Moving_Bille() {
         //System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
         for (CoquilleBille coc : listCoquille) {
+            this.mur.makeWall();
             coc.move();
 
         }
-        //Cycle();
-        //printPop();
 
 
     }

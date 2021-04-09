@@ -16,7 +16,6 @@ public class Zone  {
 
     public Zone (Controllable controller,boolean Confinement)
     {
-       // System.out.println("New zone");
         this.controller = controller;
         setWidth(controller.getSpaceSize()[0]);
         setHeight(controller.getSpaceSize()[1]);
