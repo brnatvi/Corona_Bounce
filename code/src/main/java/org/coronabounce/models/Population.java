@@ -29,62 +29,56 @@ public class Population implements Displayable {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
-        //listWall.add(new Wall(Controller.getThickness(),Controller.getPositionX()));
-        listWall.add(new Wall(Controller.getThickness(),100));
-        listWall.add(new Wall(Controller.getThickness(),200));
-        listWall.add(new Wall(Controller.getThickness(),300));
-        listWall.add(new Wall(Controller.getThickness(),400));
-        listWall.add(new Wall(Controller.getThickness(),500));
-        listWall.add(new Wall(Controller.getThickness(),600));
 
-            if(Confinement){
-            for (int i = 0; i < nbH; i++) {
-                CoquilleBille coc = new ConfinedBille(null);
-                Individual in = new Healthy(coc, this);
-                coc.setIndividual(in);
-                listCoquille.add(coc);
+          if(Confinement){
+              for (int i = 0; i < nbH; i++) {
+                  CoquilleBille coc = new ConfinedBille(null);
+                  Individual in = new Healthy(coc, this);
+                  coc.setIndividual(in);
+                  listCoquille.add(coc);
 
-            }
-            for (int i = 0; i < nbS; i++) {
-                CoquilleBille coc = new ConfinedBille(null);
+              }
+              for (int i = 0; i < nbS; i++) {
+                  CoquilleBille coc = new ConfinedBille(null);
 
-                Individual in = new Sick(coc, this);
-                coc.setIndividual(in);
-                listCoquille.add(coc);
+                  Individual in = new Sick(coc, this);
+                  coc.setIndividual(in);
+                  listCoquille.add(coc);
 
-            }
-            for (int i = 0; i < nbR; i++) {
-                CoquilleBille coc = new ConfinedBille(null);
-                Individual in = new Recovered(coc, this);
-                coc.setIndividual(in);
-                listCoquille.add(coc);
+              }
+              for (int i = 0; i < nbR; i++) {
+                  CoquilleBille coc = new ConfinedBille(null);
+                  Individual in = new Recovered(coc, this);
+                  coc.setIndividual(in);
+                  listCoquille.add(coc);
+              }
+          }else {
 
-            }}else {
+              for (int i = 0; i < nbH; i++) {
+                  CoquilleBille coc = new CoquilleBille(null);
+                  Individual in = new Healthy(coc, this);
+                  coc.setIndividual(in);
+                  listCoquille.add(coc);
 
-                for (int i = 0; i < nbH; i++) {
-                    CoquilleBille coc = new CoquilleBille(null);
-                    Individual in = new Healthy(coc, this);
-                    coc.setIndividual(in);
-                    listCoquille.add(coc);
+              }
+              for (int i = 0; i < nbS; i++) {
+                  CoquilleBille coc = new CoquilleBille(null);
 
-                }
-                for (int i = 0; i < nbS; i++) {
-                    CoquilleBille coc = new CoquilleBille(null);
+                  Individual in = new Sick(coc, this);
+                  coc.setIndividual(in);
+                  listCoquille.add(coc);
 
-                    Individual in = new Sick(coc, this);
-                    coc.setIndividual(in);
-                    listCoquille.add(coc);
+              }
+              for (int i = 0; i < nbR; i++) {
+                  CoquilleBille coc = new CoquilleBille(null);
+                  Individual in = new Recovered(coc, this);
+                  coc.setIndividual(in);
+                  listCoquille.add(coc);
 
-                }
-                for (int i = 0; i < nbR; i++) {
-                    CoquilleBille coc = new CoquilleBille(null);
-                    Individual in = new Recovered(coc, this);
-                    coc.setIndividual(in);
-                    listCoquille.add(coc);
-
-                }
-            }
-        }
+              }
+          }
+          createWalls(5);
+    }
 
 
     public Population(Controllable controller, int nbIndividus,boolean Confinement) {
@@ -107,6 +101,18 @@ public class Population implements Displayable {
     public void addIndividual(Individual i) {
         CoquilleBille coc = new CoquilleBille(i);
         listCoquille.add(coc);
+    }
+    /**
+    *{@summary Create the walls.}<br>
+    *All the wall will be create at equals distance from eatch other.<br>
+    *@param numberOfWall the number of wall that will be add.
+    */
+    private void createWalls(int numberOfWall){
+      double maxX = Controller.getWidth();
+      for (int i=1; i<=numberOfWall; i++) {
+        double posX = (maxX*i)/(numberOfWall+1);
+        listWall.add(new Wall(Controller.getThickness(),posX));
+      }
     }
 
 
