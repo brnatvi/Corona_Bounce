@@ -8,7 +8,7 @@ public class IndividualTest extends Assertions{
   @Test
   public void testHealthState(){
     Controller c = new Controller();
-    Population p = new Population(c, 0, 0, 0,false);
+    Population p = new Population(c, 0, 0, 0,false,false);
     Individual i = new Sick(new CoquilleBille(null),p);
     assertEquals("Sick",i.healthState());
     i = new Recovered(new CoquilleBille(null),p);
@@ -19,7 +19,7 @@ public class IndividualTest extends Assertions{
   @Test
   public void testIsSick(){
     Controller c = new Controller();
-    Population p = new Population(c, 0, 0, 0,false);
+    Population p = new Population(c, 0, 0, 0,false,false);
     Individual i = new Sick(new CoquilleBille(null),p);
     assertTrue(i.isSick());
     i = new Recovered(new CoquilleBille(null),p);
@@ -30,7 +30,7 @@ public class IndividualTest extends Assertions{
   @Test
   public void testContact(){
     Controller c = new Controller();
-    Population p = new Population(c, 0, 0, 0,false);
+    Population p = new Population(c, 0, 0, 0,false,false);
     Individual i1 = new Sick(new CoquilleBille(null),p);
     Individual i2 = new Healthy(new CoquilleBille(null),p);
     p.addIndividual(i1);

@@ -24,10 +24,11 @@ public class Population implements Displayable {
 
     //========================= Constructors ==========================================================================/
 
-    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean Confinement) {
+    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean Confinement,boolean RestrictionMouvement) {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
+
 
         if(Confinement){
             for (int i = 0; i < nbH; i++) {
@@ -76,7 +77,12 @@ public class Population implements Displayable {
                     listCoquille.add(coc);
 
                 }
-            }
+
+
+                if(RestrictionMouvement) this.RestrictMouvement();
+
+
+        }
             createWalls(3);
             for (Wall wall : listWall ) {
               wall.makeWallGoDown(this);
@@ -96,8 +102,8 @@ public class Population implements Displayable {
         }
 
 
-    public Population(Controllable controller, int nbIndividus,boolean Confinement) {
-        this(controller, nbIndividus - 1, 1, 0,Confinement);
+    public Population(Controllable controller, int nbIndividus,boolean Confinement,boolean RestrictionMouvement) {
+        this(controller, nbIndividus - 1, 1, 0,Confinement,RestrictionMouvement);
     }
     public Population(){}
     public List<CoquilleBille> getAllPoints() {
@@ -188,11 +194,16 @@ public class Population implements Displayable {
         return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
     }
-    public void  lockDown()
+
+    /** @summary
+     *
+     * RestrictMouvement() prevent a big part of the population from moving
+     olny(doctors, cops ..) go to work and people go out rarely and just out of necessity **/
+
+    public void  RestrictMouvement()
     {
-        /** See what happens if only a part of the population can move
-         For instance , 1/4 can move and 3/4 can't **/
-        int prctg=random.nextInt(100);
+
+        int prctg=random.nextInt(10)+70;
         int cpt = (prctg * this.getNbIndividus()) / 100;
 
         while (cpt > 0) {

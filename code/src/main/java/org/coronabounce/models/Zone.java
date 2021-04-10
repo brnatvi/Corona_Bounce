@@ -14,12 +14,12 @@ public class Zone  {
     private Timer timer=new Timer();
     private TimerTask timerTask = null;
 
-    public Zone (Controllable controller,boolean Confinement)
+    public Zone (Controllable controller,boolean Confinement,boolean RestrictionMouvement)
     {
         this.controller = controller;
         setWidth(controller.getSpaceSize()[0]);
         setHeight(controller.getSpaceSize()[1]);
-        this.p = new Population(controller, controller.getPersonsCount(),Confinement);
+        this.p = new Population(controller, controller.getPersonsCount(),Confinement,RestrictionMouvement);
     }
 
     public void stopTimer(boolean b_StopTimer)

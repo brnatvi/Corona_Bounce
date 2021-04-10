@@ -89,11 +89,11 @@ public class MainController
     {
         System.out.println("Controller changed\n");
 
-        this.zone1 = new Zone(c,false);
+        this.zone1 = new Zone(c,false,false);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
 
-        this.zone2 = new Zone(c,true);
+        this.zone2 = new Zone(c,true,false);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
         
