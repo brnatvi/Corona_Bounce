@@ -95,30 +95,7 @@ public class CoquilleBille {
     /**
     *{@summary bounce if this hit a wall.}<br>
     */
-    /*protected void bounceIfHitWall(){
-      for (Wall wall : getPop().getListWall() ) {
-        if(wall.willCrossWallInX(this) && wall.willCrossWallInY(this)){
-          bounce(true);
-        }
-      }*/
-        // //Nombre de zones
-        // int number=getPop().getNbZones();
-        // double curentX = p.getX();
-        // double futurX = curentX+movingSpeedX;
-        // double curentY = p.getY();
-        // double futurY = curentY+movingSpeedY;
-        // /* Si la boule etait une position inférieure à l'emplacement du mur et que sa futur position est plus grande
-        //    On l'a fait rebondir*/
-        // int currentZone =InwhichZoneItis(curentX,number);
-        // int futurZone=InwhichZoneItis(futurX,number);
-        // double limitSup =repartInZones(number)[currentZone];
-        // double limitInf=repartInZones(number)[currentZone-1];
-        //
-        // if (futurZone!=currentZone) {
-        //    if(futurZone>currentZone) bounce(true);
-        //    if(futurZone<currentZone) bounce(true);
-        // }
-    //}
+
 
 
 

@@ -18,7 +18,7 @@ public class Controller implements Controllable
     private  static double diametreX = 15;
     private static double diametreY = 10;
     private static double thickness=20;
-    private static  double PositionX=getWidth()/2;
+
 
     //====================================== Space size Settings ======================================================/
 
@@ -36,9 +36,6 @@ public class Controller implements Controllable
         return thickness;
     }
 
-    public static double getPositionX() {
-        return PositionX;
-    }
 
     public static double getWidth() { return WIDTH; }
 

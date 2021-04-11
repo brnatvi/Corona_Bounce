@@ -3,8 +3,7 @@ package org.coronabounce.models;
 import org.coronabounce.controllers.Controller;
 
 import java.util.*;
-
-public class Wall {
+public class Wall  {
     private double thikness;
     private double positionX;
     private double positionY;
@@ -24,9 +23,7 @@ public class Wall {
         return this.positionX;
     }
 
-    public double getThikness() {
-        return thikness;
-    }
+
 
     public void makeWallGoDown(Population pop){
         TimerTask tt = null;
@@ -36,11 +33,7 @@ public class Wall {
     *{@summary Make CoquilleBille bounce if it will hit a wall.}
     *@param coc The CoquilleBille that we may make bounce.
     */
-   // public void separatePop(CoquilleBille coc) {
-        // if(willCrossWallInX(coc) && willCrossWallInY(coc)){
-        //   coc.bounce(true);
-        // }
-    //}
+
     public void separatePop1(CoquilleBille coc,int nbzones) {
 
         //this.HitWallInX(coc);
@@ -67,14 +60,7 @@ public class Wall {
     *@param coc The CoquilleBille that we may make bounce.
     */
     public boolean willCrossWallInX(CoquilleBille coc){
-      // Population pop=new Population(); //on devrait pas avoir besoin de recréer une population.
-      // double posX=coc.getPosition().getX();
-      // int nbzones=pop.getNbZones();
-      // int zone=coc.InwhichZoneItis(posX,nbzones);
-      // double limitInf=coc.repartInZones(nbzones)[zone-1];
-      // double limitSup=coc.repartInZones(nbzones)[zone];
-      // if(coc.getPosition().getX()<limitSup && Math.abs(posX-limitSup)<=1){return true;}
-      // else if(coc.getPosition().getX()>limitInf && Math.abs(posX-limitInf)<=1){return true;}
+
       double curentX = coc.getPosition().getX();
       double futurX = curentX+coc.getMovingSpeedX();
       if(curentX < (positionX-thikness)/2 && futurX > (positionX-thikness)/2){ return true;}
