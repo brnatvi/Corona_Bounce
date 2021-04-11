@@ -21,7 +21,7 @@ public class Population implements Displayable {
     private Timer timer;
     private TimerTask timerTask = null;
     private static Random random = new Random();
-    Wall mur =new Wall(0,0);
+    Wall mur =new Wall();
     private int nbZones;
 
     //========================= Constructors ==========================================================================/
@@ -104,7 +104,7 @@ public class Population implements Displayable {
           double maxX = Controller.getWidth();
           for (int i=1; i<=numberOfWall; i++) {
             double posX = (maxX*i)/(numberOfWall+1);
-            listWall.add(new Wall(Controller.getThickness(),posX));
+            listWall.add(new Wall());
           }
         }
 

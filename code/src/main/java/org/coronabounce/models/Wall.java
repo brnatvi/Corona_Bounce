@@ -9,17 +9,24 @@ public class Wall {
     private double positionX;
     private double positionY;
 
-    public Wall(double thickness, double positionX){//ce mur va separer la population en deux populations
-       this.thikness=thickness;
-       this.positionX=positionX;//je fixe le mur pour qu il soit au milieu de la surafcce de la population
+    public Wall(){//ce mur va separer la population en deux populations
+        double[] limits=repartInZones(1,Controller.getThickness());
+       this.thikness=Controller.getThickness();
+       this.positionX=limits[1]-Controller.getThickness();//je fixe le mur pour qu il soit au milieu de la surafcce de la population
        this.positionY=0;
-       System.out.println("new wall in "+positionX);
     }
 
     public void setPositionY(double positionY) {
         this.positionY = positionY;
     }
     public double getPositionY(){return positionY;}
+    public double getPositionX(){
+        return this.positionX;
+    }
+
+    public double getThikness() {
+        return thikness;
+    }
 
     public void makeWallGoDown(Population pop){
         TimerTask tt = null;
@@ -158,7 +165,8 @@ class TimerTaskWall extends TimerTask{
   @Override
   public synchronized void run(){
     w.setPositionY(w.getPositionY()+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
-    //System.out.println(w.getPositionY());
+    System.out.println(w.getPositionY());
+    System.out.println(w.getPositionX());
     if(w.getPositionY()>Controller.getHeight()){
       cancel();
     }

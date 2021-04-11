@@ -88,9 +88,6 @@ public class CoquilleBille {
 
     public void move(){
         bounceIfOutOfZone();
-
-
-
         this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
     }
 

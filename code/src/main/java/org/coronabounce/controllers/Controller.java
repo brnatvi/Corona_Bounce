@@ -20,7 +20,6 @@ public class Controller implements Controllable
     private static double thickness=20;
     private static  double PositionX=getWidth()/2;
 
-
     //====================================== Space size Settings ======================================================/
 
     @Override
