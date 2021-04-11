@@ -3,7 +3,6 @@ package org.coronabounce;
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -92,6 +91,7 @@ public class MainController
         this.zone1 = new Zone(c,false,false,1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
+
 
         this.zone2 = new Zone(c,true,false,1);
         this.model2 = zone2.getPopulation();
@@ -226,7 +226,7 @@ public class MainController
      * Function for button "Start" - create Timeline and launch function moving() on zone
      */
     @FXML
-    private void launchMoving() throws IOException
+    private void launchMoving()
     {
         launchPointsAndStat();
         launchDrawGraph();

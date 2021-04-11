@@ -1,6 +1,7 @@
 package org.coronabounce.mvcconnectors;
 
 import org.coronabounce.data.Data;
+import org.coronabounce.models.Wall;
 
 import java.util.List;
 import java.util.Timer;
@@ -50,9 +51,9 @@ public interface Displayable
 
     //======================================== Second Priority ========================================================//
 
- //   /**
- //    * @return
- //    */
- //   public int[] getBorder();
+    /**
+     * @return
+     */
+    public List<Wall> getListWall();
 
 }
