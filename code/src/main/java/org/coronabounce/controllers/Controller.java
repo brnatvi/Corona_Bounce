@@ -14,7 +14,6 @@ public class Controller implements Controllable
     private long DURATION_HEALING = 8000;             // sick <-> recovered
     private long DURATION_NON_CONTAMINATION = 5000;   // recovered <-> can be contaminate again
     private final int RADIUS_DOT = 3;                 // radius of point in GUI
-    private final int SICKNESS_WALL = 10;
     private static double Kilometrage = 50;
     private  static double diametreX = 15;
     private static double diametreY = 10;
@@ -45,8 +44,6 @@ public class Controller implements Controllable
     public static void setHeight(double h) { if(h>=1){HEIGTH = h;}}
 
     public static void setWidth(double w) { if(w>=1){WIDTH = w;}}
-
-    public int getSicknessWall() { return SICKNESS_WALL; }
 
 
     //====================================== Scenarios Settings =======================================================/

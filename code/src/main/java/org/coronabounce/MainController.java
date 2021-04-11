@@ -15,10 +15,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.data.Data;
 import org.coronabounce.models.CoquilleBille;
+import org.coronabounce.models.Wall;
 import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
@@ -36,6 +38,8 @@ public class MainController
     private Zone zone2 = null;                    // right population's (population2) zone
     private List<CoquilleBille> points1;          // list of population1's individuals
     private List<CoquilleBille> points2;          // list of population2's individuals
+    private List<Wall> walls1;
+    private List<Wall> walls2;
     private Timeline tlPoints;                    // timeline for animation of point's moving
     private Timeline tlGraph;                     // timeline for animation of graph
 
@@ -91,12 +95,13 @@ public class MainController
         this.zone1 = new Zone(c,false,false,1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
+        this.walls1 = model1.getListWall();
 
 
         this.zone2 = new Zone(c,true,false,1);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
-        
+        this.walls2 = model2.getListWall();
 
         this.healthy1 = new XYChart.Series();
         this.sick1 = new XYChart.Series();
@@ -557,6 +562,30 @@ public class MainController
         else
         {
             panel2.getChildren().add(point);
+        }
+    }
+
+    /**
+     * Function drawing les walls
+     */
+    private void drawWalls()
+    {
+        if (walls1.size() != 0)
+        {
+            for (int i = 0; i < this.walls1.size(); i++)
+            {
+                Rectangle wall = new Rectangle();
+
+            }
+        }
+
+        if (walls2.size() != 0)
+        {
+            for (int j = 0; j < this.walls2.size(); j++)
+            {
+                Rectangle wall = new Rectangle();
+
+            }
         }
     }
 }

@@ -4,7 +4,6 @@ import org.coronabounce.data.Data;
 import org.coronabounce.models.Wall;
 
 import java.util.List;
-import java.util.Timer;
 
 public interface Displayable
 {
