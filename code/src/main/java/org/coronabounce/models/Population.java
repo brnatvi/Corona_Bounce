@@ -21,10 +21,13 @@ public class Population implements Displayable {
     private Timer timer;
     private TimerTask timerTask = null;
     private static Random random = new Random();
+    Wall mur =new Wall(0,0);
+    private int nbZones;
 
     //========================= Constructors ==========================================================================/
 
-    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean Confinement,boolean RestrictionMouvement) {
+    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean Confinement,boolean RestrictionMouvement,int nbZones) {
+        //this.nbZones=nbZones;
         this.controller = controller;
         data = new Data();
         timer = new Timer();
@@ -83,10 +86,14 @@ public class Population implements Displayable {
 
 
         }
+
+
             createWalls(3);
             for (Wall wall : listWall ) {
               wall.makeWallGoDown(this);
             }
+
+
         }
         /**
         *{@summary Create the walls.}<br>
@@ -102,8 +109,8 @@ public class Population implements Displayable {
         }
 
 
-    public Population(Controllable controller, int nbIndividus,boolean Confinement,boolean RestrictionMouvement) {
-        this(controller, nbIndividus - 1, 1, 0,Confinement,RestrictionMouvement);
+    public Population(Controllable controller, int nbIndividus,boolean Confinement,boolean RestrictionMouvement,int nbZones) {
+        this(controller, nbIndividus - 1, 1, 0,Confinement,RestrictionMouvement,nbZones);
     }
     public Population(){}
     public List<CoquilleBille> getAllPoints() {
@@ -157,12 +164,17 @@ public class Population implements Displayable {
             coc.getIndividual().agitSur();
         }
     }
-
-    public void separate(){
-       // for(CoquilleBille coc : listCoquille) {
-       //    mur.separatePop(coc);
-       // }
+public void separate(int nbZones)
+{
+    for(CoquilleBille coc : listCoquille) {
+        mur.HitWallInX(coc,nbZones);
+        mur.separatePop1(coc,nbZones);
     }
+}
+
+
+
+
 
 
     /**
@@ -254,7 +266,7 @@ public class Population implements Displayable {
     /**
     *{@summary Return how much zone there is.}
     */
-    public int getNbZones(){ return getNbWall()+1;}
+    public int getNbZones(){ return this.getNbWall()+1;}
     /**
     *{@summary Return how much wall there is.}
     */
