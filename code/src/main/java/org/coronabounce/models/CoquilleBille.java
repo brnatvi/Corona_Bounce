@@ -85,11 +85,12 @@ public class CoquilleBille {
     *{@summary The moving funtion.}<br>
     *Speed will be modify if this hurt a limit of the zone.
     */
+
     public void move(){
         bounceIfOutOfZone();
 
-        /* POur essayer les mur décommenter cela et pop.separtate() dans Zone */
-        if (getPop().getNbZones() !=1) bounceIfHitWall();
+
+
         this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
     }
 
@@ -97,12 +98,12 @@ public class CoquilleBille {
     /**
     *{@summary bounce if this hit a wall.}<br>
     */
-    protected void bounceIfHitWall(){
+    /*protected void bounceIfHitWall(){
       for (Wall wall : getPop().getListWall() ) {
         if(wall.willCrossWallInX(this) && wall.willCrossWallInY(this)){
           bounce(true);
         }
-      }
+      }*/
         // //Nombre de zones
         // int number=getPop().getNbZones();
         // double curentX = p.getX();
@@ -120,28 +121,11 @@ public class CoquilleBille {
         //    if(futurZone>currentZone) bounce(true);
         //    if(futurZone<currentZone) bounce(true);
         // }
-    }
+    //}
 
 
 
-    /** Crée nombre Zones **/
-    public double[] repartInZones(int nombre){
-        //<>
-      /* A table with delimiters */
-      double [] limits = new double[nombre+1];
-      limits[0]=0;
-      for(int i=1;i<=nombre;i++){
-        limits[i]=  (i*(Controller.getWidth()/nombre));
-      }
-      return limits;
-    }
-    public int InwhichZoneItis(double posX,int nombre){
-      double [] tab=repartInZones(nombre);
-      for(int i=0;i<nombre;i++){
-        if(posX>=tab[i] && posX<=tab[i+1]) return i+1 ;
-      }
-      return -1;/* Not in any Zone ! */
-    }
+
 
 
 

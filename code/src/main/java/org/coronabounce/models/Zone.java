@@ -13,13 +13,15 @@ public class Zone  {
     private static double height=1;
     private Timer timer=new Timer();
     private TimerTask timerTask = null;
+    private int nbZones;
 
-    public Zone (Controllable controller,boolean Confinement,boolean RestrictionMouvement)
+    public Zone (Controllable controller,boolean Confinement,boolean RestrictionMouvement,int nbZones)
     {
+        this.nbZones=nbZones;
         this.controller = controller;
         setWidth(controller.getSpaceSize()[0]);
         setHeight(controller.getSpaceSize()[1]);
-        this.p = new Population(controller, controller.getPersonsCount(),Confinement,RestrictionMouvement);
+        this.p = new Population(controller, controller.getPersonsCount(),Confinement,RestrictionMouvement,nbZones);
     }
 
     public void stopTimer(boolean b_StopTimer)
@@ -63,7 +65,7 @@ public class Zone  {
                 //p.interaction(controller.getDurationCovid(),10000, controller.getDurationNonContamination()); // ses informations sont sauvegardé dans Population, on n'as pas besoin de les transmettre a chaque fois.
 
                 //Pour les murs
-                p.separate();
+                p.separate(nbZones);
                 p.Contacts();
                 p.Moving_Bille();
             }
