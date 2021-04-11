@@ -114,13 +114,17 @@ public class MainController
         this.recovered2 = new XYChart.Series();
     }
 
-    //========================= Getters ===============================================================================/
+    //========================= Getters / Setters =====================================================================/
 
     public Controllable getController() { return this.controller; }
 
     public boolean getIsLockdown() { return this.isLockDown; }
 
     public boolean getIsWalls() { return this.isWalls; }
+
+    public void setIsLockdown(boolean isIt) { this.isLockDown = isIt; }
+
+    public void setIsWalls(boolean isIt) { this.isWalls = isIt; }
 
     //========================= Initialisation ========================================================================/
 
