@@ -16,7 +16,8 @@ public class Zone  {
     private int nbZones;
 
     public Zone (Controllable controller,boolean Confinement,boolean RestrictionMouvement,int nbZones)
-    {
+    {   /*** nbZones c'est le nombre de petites zones, si on a 2 zones ca veut dire qu'on a un mur
+    c'est à dire  nbmurs=nbZones-1 **/
         this.nbZones=nbZones;
         this.controller = controller;
         setWidth(controller.getSpaceSize()[0]);
