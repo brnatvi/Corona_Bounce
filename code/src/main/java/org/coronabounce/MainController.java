@@ -42,6 +42,8 @@ public class MainController
     private List<Wall> walls2;
     private Timeline tlPoints;                    // timeline for animation of point's moving
     private Timeline tlGraph;                     // timeline for animation of graph
+    private boolean isLockDown = false;
+    private boolean isWalls = false;
 
     private XYChart.Series healthy1;              // charts and area chart tor population1's graph
     private XYChart.Series sick1;
@@ -92,13 +94,13 @@ public class MainController
     {
         System.out.println("Controller changed\n");
 
-        this.zone1 = new Zone(c,false,false,1);
+        this.zone1 = new Zone(c,isLockDown,isWalls,1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
         this.walls1 = model1.getListWall();
 
 
-        this.zone2 = new Zone(c,true,false,1);
+        this.zone2 = new Zone(c,isLockDown,isWalls,1);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
         this.walls2 = model2.getListWall();
@@ -114,10 +116,11 @@ public class MainController
 
     //========================= Getters ===============================================================================/
 
-    public Controllable getController()
-    {
-        return controller;
-    }
+    public Controllable getController() { return this.controller; }
+
+    public boolean getIsLockdown() { return this.isLockDown; }
+
+    public boolean getIsWalls() { return this.isWalls; }
 
     //========================= Initialisation ========================================================================/
 
