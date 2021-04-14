@@ -69,6 +69,8 @@ public class Wall  {
       if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
       if(curentX+radius < positionX-thikness/2 && futurX-radius > positionX-thikness/2){ return true;}
       if(curentX-radius > positionX+thikness/2 && futurX+radius < positionX+thikness/2){ return true;}
+      if(curentX-radius < positionX-thikness/2 && futurX+radius > positionX+thikness/2){ return true;}
+      if(curentX+radius > positionX+thikness/2 && futurX-radius < positionX+thikness/2){ return true;}
       return false;
     }
 
