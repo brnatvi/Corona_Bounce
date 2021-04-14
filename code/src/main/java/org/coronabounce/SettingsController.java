@@ -41,6 +41,7 @@ public class SettingsController
         mainController.setSettingsController(c);        // save new settings in currentController of MainController
         mainController.changeController(c);
 
+
         // init graphPanel, fil mainGrid by graphPanel and draw new populations
         mainController.initNewPopulation();
         mainController.changeEnableDisable(mainController.btnStart);

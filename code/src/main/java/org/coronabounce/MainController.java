@@ -594,6 +594,9 @@ public class MainController
     {
         if (isWalls)
         {
+            double koeffW = panel1.getWidth()/controller.getSpaceSize()[0];
+            double koeffH = panel1.getHeight()/controller.getSpaceSize()[1];
+
             ArrayList<Double> positionX1 = model1.getPositionsOfWalls();
             ArrayList<Double> heightOfWalls1 = model1.getHeigthsOfWalls();
             ArrayList<Double> thicknesses1 = model1.getThicknessesOfWalls();
@@ -606,8 +609,8 @@ public class MainController
             {
                 // System.out.println("Wall " + i + "is on position = " + positionX1.get(i));
 
-                Rectangle wall1 = new Rectangle(positionX1.get(i), 0, thicknesses1.get(i), heightOfWalls1.get(i));
-                Rectangle wall2 = new Rectangle(positionX2.get(i), 0, thicknesses2.get(i), heightOfWalls2.get(i));
+                Rectangle wall1 = new Rectangle(positionX1.get(i) * koeffW, 0, thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
+                Rectangle wall2 = new Rectangle(positionX2.get(i) * koeffW, 0, thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
                 wall1.setFill(valueOf("008B8B"));
                 wall2.setFill(valueOf("008B8B"));
 
