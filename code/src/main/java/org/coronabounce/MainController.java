@@ -435,11 +435,11 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void rigth_Scenario_3_WithoutScenario(ActionEvent actionEvent) throws IOException, InterruptedException
+    public void right_Scenario_3_WithoutScenario(ActionEvent actionEvent) throws IOException, InterruptedException
     {
         setSettingsController(currentController);
-        this.isLockDown1 = false;
-        this.isWalls1 = false;
+        this.isLockDown2 = false;
+        this.isWalls2 = false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();

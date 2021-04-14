@@ -155,7 +155,7 @@
                      <items>
                         <MenuItem fx:id="scenario_2_1" mnemonicParsing="false" onAction="#right_Scenario_1_Lockdown" text="Population under Lockdown" />
                         <MenuItem fx:id="scenario_2_2" mnemonicParsing="false" onAction="#right_Scenario_2_Wall" text="Place the Bounds" />
-                        <MenuItem fx:id="scenario_2_3" mnemonicParsing="false" onAction="#rigth_Scenario_3_WithoutScenario" text="Without scenario" />
+                        <MenuItem fx:id="scenario_2_3" mnemonicParsing="false" onAction="#right_Scenario_3_WithoutScenario" text="Without scenario" />
                      </items>
                   </Menu>
                </menus>
