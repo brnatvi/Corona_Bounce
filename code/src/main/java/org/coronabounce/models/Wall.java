@@ -65,12 +65,17 @@ public class Wall  {
       double curentX = coc.getPosition().getX();
       double futurX = curentX+coc.getMovingSpeedX();
       double radius = coc.getPop().getContaminationRadius();
+      radius/=2;
       if(curentX < positionX-thikness/2 && futurX > positionX-thikness/2){ return true;}
       if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
-      if(curentX+radius < positionX-thikness/2 && futurX-radius > positionX-thikness/2){ return true;}
-      if(curentX-radius > positionX+thikness/2 && futurX+radius < positionX+thikness/2){ return true;}
+      // if(curentX+radius/2 < positionX-thikness/2 && futurX-radius/2 > positionX-thikness/2){ return true;}
+      // if(curentX-radius/2 > positionX+thikness/2 && futurX+radius/2 < positionX+thikness/2){ return true;}
       if(curentX-radius < positionX-thikness/2 && futurX+radius > positionX+thikness/2){ return true;}
       if(curentX+radius > positionX+thikness/2 && futurX-radius < positionX+thikness/2){ return true;}
+      // if(curentX+radius < positionX-thikness/2 && futurX+radius > positionX+thikness/2){ return true;}
+      // if(curentX-radius > positionX+thikness/2 && futurX-radius < positionX+thikness/2){ return true;}
+      // if(curentX-radius < positionX-thikness/2 && futurX-radius > positionX+thikness/2){ return true;}
+      // if(curentX+radius > positionX+thikness/2 && futurX+radius < positionX+thikness/2){ return true;}
       return false;
     }
 
