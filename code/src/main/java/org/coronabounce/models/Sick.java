@@ -1,5 +1,7 @@
 package org.coronabounce.models;
 
+import org.coronabounce.mvcconnectors.Controllable;
+
 import java.util.TimerTask;
 
 
@@ -13,9 +15,12 @@ public class Sick extends Individual {
           @Override
           public void run()
           {
-             // System.out.println("Sick Thread run " + Thread.currentThread().getId());
-              coc.setIndividual(new Recovered(coc,p));
-              p.nbSick--;
+              if (p.getController().getState() == Controllable.eState.Working)
+              {
+                  // System.out.println("Sick Thread run " + Thread.currentThread().getId());
+                  coc.setIndividual(new Recovered(coc, p));
+                  p.nbSick--;
+              }
           }
       },p.getDurationCovid()+p.getDurationHealing());
   }

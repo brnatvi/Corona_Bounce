@@ -57,13 +57,13 @@ public class Zone  {
         this.timer.schedule(this.timerTask=new TimerTask() {
             @Override
             public void run(){
-                //p.interaction(controller.getDurationCovid(),10000, controller.getDurationNonContamination()); // ses informations sont sauvegardé dans Population, on n'as pas besoin de les transmettre a chaque fois.
-
-                //Pour les murs
-                // p.separate(nbZones);
-                p.Contacts();
-                p.Moving_Bille();
-               // System.out.println("Zone Thread run " + Thread.currentThread().getId());
+                if (controller.getState() == Controllable.eState.Working){
+                    //p.interaction(controller.getDurationCovid(),10000, controller.getDurationNonContamination()); // ses informations sont sauvegardé dans Population, on n'as pas besoin de les transmettre a chaque fois.
+                    //Pour les murs: p.separate(nbZones);
+                    p.Contacts();
+                    p.Moving_Bille();
+                    // System.out.println("Zone Thread run " + Thread.currentThread().getId());
+                }
             }
         },0,1*33);
     }

@@ -1,6 +1,7 @@
 package org.coronabounce.models;
 
 import org.coronabounce.controllers.Controller;
+import org.coronabounce.mvcconnectors.Controllable;
 
 import java.util.*;
 public class Wall  {
@@ -9,11 +10,13 @@ public class Wall  {
     private double thikness;
     private double positionX;
     private double positionY;
+    private Controllable controller;
 
-    public Wall(double posX){//ce mur va separer la population en deux populations
+    public Wall(Controllable iController, double posX){//ce mur va separer la population en deux populations
        this.thikness=Controller.getThickness();
        this.positionX=posX;
        this.positionY=0;
+       this.controller = iController;
        id=cpt++;
        System.out.println("new wall "+id+" from "+(positionX-thikness)+" to "+(positionX+thikness));//@a
     }
@@ -28,7 +31,7 @@ public class Wall  {
 
     public void makeWallGoDown(Population pop){
         TimerTask tt = null;
-        pop.getT().schedule(tt = new TimerTaskWall(this), 0, 100);
+        pop.getT().schedule(tt = new TimerTaskWall(this.controller,this), 0, 100);
     }
     /**
     *{@summary Make CoquilleBille bounce if it will hit a wall.}
@@ -155,17 +158,22 @@ public class Wall  {
 
 }
 class TimerTaskWall extends TimerTask{
-  public TimerTaskWall(Wall w){
-    this.w=w;
-  }
-  private Wall w;
-  @Override
-  public synchronized void run(){
-    w.setPositionY(w.getPositionY()+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
-   // System.out.println(w.getPositionY());
-   // System.out.println(w.getPositionX());
-    if(w.getPositionY()>Controller.getHeight()){
-      cancel();
+    private Wall w;
+    private Controllable controller;
+
+    public TimerTaskWall(Controllable iController, Wall w){
+        this.w = w;
+        this.controller = iController;
     }
-  }
+    @Override
+    public synchronized void run(){
+        if (this.controller.getState() == Controllable.eState.Working){
+            w.setPositionY(w.getPositionY()+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
+            // System.out.println(w.getPositionY());
+            // System.out.println(w.getPositionX());
+            if(w.getPositionY()>Controller.getHeight()){
+                cancel();
+            }
+        }
+    }
 }

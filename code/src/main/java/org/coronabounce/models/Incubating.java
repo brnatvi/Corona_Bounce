@@ -1,5 +1,7 @@
 package org.coronabounce.models;
 
+import org.coronabounce.mvcconnectors.Controllable;
+
 import java.util.TimerTask;
 
 
@@ -9,8 +11,10 @@ public class Incubating extends Individual{
     p.getT().schedule(new TimerTask() {
         @Override
         public void run() {
-            coc.setIndividual(new Sick(coc,p));
-            p.nbHealthy--;
+            if (Incubating.super.p.getController().getState() == Controllable.eState.Working){
+                coc.setIndividual(new Sick(coc, p));
+                p.nbHealthy--;
+            }
         }
     }, p.getDurationCovid());
   }

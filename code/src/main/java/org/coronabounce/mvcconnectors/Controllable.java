@@ -2,6 +2,24 @@ package org.coronabounce.mvcconnectors;
 
 public interface Controllable
 {
+    enum eState
+    {
+        Idle,
+        Working,
+        Paused
+    }
+
+    /**
+     * Returns state of the controller, has to be checked in each thread/timer
+     */
+    public Controllable.eState getState();
+
+    /**
+     * Set new state
+     * @param newState - new controller state
+     */
+    public void setState(Controllable.eState newState);
+
     //====================================== Space size Settings ======================================================/
 
     /**
@@ -18,7 +36,7 @@ public interface Controllable
     //===================================== Population Settings =======================================================/
 
     /**
-     * Set total number of persons in simulation to model
+     * Set total number of persons in simulation to controller
      * @param nmbPersons
      */
     public void setPersonsCount(int nmbPersons);
@@ -37,18 +55,18 @@ public interface Controllable
     //========================================= Virus Settings ========================================================/
 
     /**
-     * Set radius of contamination around point from GUI to controller
+     * Set radius of contamination around point
      * @param pxls number of pixels
      */
     public void setContaminationRadius(double pxls);
 
     /**
-     * Get radius of contamination around point trom comtroller
+     * Get radius of contamination around point
      */
     public double getContaminationRadius();
 
     /**
-     * Set duration of sickness from GUI's to controller
+     * Set duration of sickness to controller
      * @param time - number of milliseconds
      */
     public void setDurationCovid(long time);
@@ -65,7 +83,7 @@ public interface Controllable
     public void setDurationNonContamination(long time);
 
     /**
-     * Get duration of non-contamination after recovery from GUI's controller
+     * Get duration of non-contamination after recovery
      */
     public long getDurationNonContamination();
 
@@ -79,41 +97,4 @@ public interface Controllable
      */
     public long getDurationHealing();
 
-    //======================================== Second Priority ========================================================//
-
-  //  /**
-  //   * Set point's speed to model
-  //   * @param speed
-  //   */
-  //  public void setSpeedPoints(int speed);
-  //
-  //  /**
-  //   * Get point's speed from GUI's controller
-  //   */
-  //  public int getSpeedPoints();
-  //
-  //
-  //
-  //  /**
-  //   * Set state border to model
-  //   * @param
-  //   */
-  //  public void setBorder(boolean isBordered);
-  //
-  //  /**
-  //   * Get state border from GUI - is scenario with borders selected or not
-  //   * @param
-  //   */
-  //  public boolean getBorder();
-  //
-  //  /**
-  //   * Set door/gap in state border during opening of state border.
-  //   * This gap opened automatically and gradually, so doesn't need take int from GUI, it depends of controller's timer
-  //   * @param pxls number of pixels
-  //   */
-  //  public void setOpening(int pxls);
-  //
-  //  //percentage of active persons
-  //  //percentage of isolated
-  //  //percentage of students
 }

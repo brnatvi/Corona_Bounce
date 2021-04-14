@@ -2,6 +2,8 @@ package org.coronabounce.controllers;
 
 import org.coronabounce.mvcconnectors.Controllable;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Controller implements Controllable
 {
     //these constants are initials and will be changed during the changing the settings of program in GUI
@@ -17,8 +19,28 @@ public class Controller implements Controllable
     private static double Kilometrage = 50;
     private static double diametreX = 15;
     private static double diametreY = 10;
-    private static double thickness=2;
+    private static double thickness = 4;
+    private Controllable.eState state = Controllable.eState.Idle;
+    ReentrantLock statLock = new ReentrantLock();
 
+    //==================================== Timer Management ===========================================================/
+    
+    @Override
+    public Controllable.eState getState()
+    {
+        statLock.lock();
+        Controllable.eState st = state;
+        statLock.unlock();
+        return st;
+    }
+
+    @Override
+    public void setState(Controllable.eState newState)
+    {
+        statLock.lock();
+        state = newState;
+        statLock.unlock();
+    }
 
     //====================================== Space Settings ===========================================================/
 
@@ -70,6 +92,7 @@ public class Controller implements Controllable
 
     @Override
     public double getRadiusDot() { return this.RADIUS_DOT; }
+
     public void setRadiusDot(double x){RADIUS_DOT=x;}
 
     //========================================= Virus Settings ========================================================/

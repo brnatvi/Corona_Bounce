@@ -1,5 +1,7 @@
 package org.coronabounce.models;
 
+import org.coronabounce.mvcconnectors.Controllable;
+
 import java.util.TimerTask;
 
 
@@ -11,8 +13,10 @@ public class Recovered extends Individual{
        p.getT().schedule(new TimerTask() {
           @Override
           public void run() {
-              coc.setIndividual(new Healthy(coc,p));
-              p.nbRecovered --;
+              if (p.getController().getState() == Controllable.eState.Working) {
+                  coc.setIndividual(new Healthy(coc, p));
+                  p.nbRecovered--;
+              }
           }
        },p.getDurationNonContamination());
 

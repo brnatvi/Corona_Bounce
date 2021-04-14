@@ -7,8 +7,6 @@ import org.coronabounce.mvcconnectors.Displayable;
 
 import java.util.*;
 
-import static org.coronabounce.models.CoquilleBille.getRandomMovingSpeed;
-
 public class Population implements Displayable {
 
     private Controllable controller;
@@ -90,7 +88,7 @@ public class Population implements Displayable {
       double maxX = Controller.getWidth();
       for (int i=1; i<=numberOfWall; i++) {
         double posX = (maxX*i)/(numberOfWall+1);
-        listWall.add(new Wall(posX));
+        listWall.add(new Wall(this.controller, posX));
       }
     }
 
@@ -297,8 +295,10 @@ public class Population implements Displayable {
             @Override
             public void run()
             {
-                data.setData(100 * (nbSick + nbRecovered)/controller.getPersonsCount(), 100 * nbRecovered/controller.getPersonsCount());
-                //System.out.println("Statistic Thread run " + Thread.currentThread().getId());
+                if (controller.getState() == Controllable.eState.Working){
+                    data.setData(100 * (nbSick + nbRecovered) / controller.getPersonsCount(), 100 * nbRecovered / controller.getPersonsCount());
+                    //System.out.println("Statistic Thread run " + Thread.currentThread().getId());
+                }
             }
         }, 0, 100);
     }
@@ -333,5 +333,12 @@ public class Population implements Displayable {
         }
     }
 
+    /**
+     *Share controller
+     */
+    public Controllable getController()
+    {
+        return controller;
+    }
 
 }

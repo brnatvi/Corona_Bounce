@@ -244,6 +244,7 @@ public class MainController
     @FXML
     private void launchMoving()
     {
+        this.controller.setState(Controllable.eState.Working);
         launchPointsAndStat();
         launchDrawGraph();
         zone1.moving();
@@ -262,12 +263,19 @@ public class MainController
     }
 
     /**
-     * @summary Function for button "Pause"
+     * @summary Function for button "Pause/Resume"
      */
     @FXML
-    private void makePause()
+    private void makePauseResume()
     {
-
+        if (this.controller.getState() == Controllable.eState.Working)
+        {
+            this.controller.setState(Controllable.eState.Paused);
+        }
+        else if (this.controller.getState() == Controllable.eState.Paused)
+        {
+            this.controller.setState(Controllable.eState.Working);
+        }
     }
 
     /**
@@ -278,7 +286,6 @@ public class MainController
     {
         closePreviousTask();                   //stops Timelines of graph and points, and stop timers of both Populations and Zones
         retainPopulationsAndWalls();
-
 
         if (this.currentController != null)
         {
@@ -378,66 +385,64 @@ public class MainController
     /**
      * @summary Functions for scenarios
      */
-    public void performActionWallBtn1(ActionEvent actionEvent) throws IOException, InterruptedException
-    {
-//        MenuItem target  = (MenuItem) actionEvent.getSource();
-//        System.out.println("Clicked On Item:"+target.getId());
 
-        setSettingsController(currentController);
-        this.isLockDown1 = false;
-        this.isWalls1 = true;
-        this.isLockDown2 = false;
-        this.isWalls2 = false;
-        changeController(currentController);
-        changeEnableDisable(btnStart);
-
-        App.setRoot("corona bounce");
-    }
-
-    public void performActionWallBtn2(ActionEvent actionEvent) throws IOException, InterruptedException
-    {
-        setSettingsController(currentController);
-        this.isWalls1 = false;
-        this.isLockDown1 = false;
-        this.isLockDown2 = false;
-        this.isWalls2 = true;
-        changeController(currentController);
-        changeEnableDisable(btnStart);
-
-        App.setRoot("corona bounce");
-    }
-
-    public void performActionLockdownBtn1(ActionEvent actionEvent) throws IOException, InterruptedException
+    public void left_Scenario_1_Lockdown(ActionEvent actionEvent) throws IOException, InterruptedException
     {
         setSettingsController(currentController);
         this.isLockDown1 = true;
         this.isWalls1 = false;
         changeController(currentController);
         changeEnableDisable(btnStart);
-
         App.setRoot("corona bounce");
     }
 
-    public void performActionLockdownBtn2(ActionEvent actionEvent) throws IOException, InterruptedException
+    public void left_Scenario_2_Wall(ActionEvent actionEvent) throws IOException, InterruptedException
     {
         setSettingsController(currentController);
-        this.isLockDown2 = true;
-        this.isWalls2 = false;
+        this.isLockDown1 = false;
+        this.isWalls1 = true;
         changeController(currentController);
         changeEnableDisable(btnStart);
-
         App.setRoot("corona bounce");
     }
 
-    public void performActionNoScenario(ActionEvent actionEvent) throws IOException, InterruptedException
+    public void left_Scenario_3_WithoutScenario(ActionEvent actionEvent) throws IOException, InterruptedException
     {
         setSettingsController(currentController);
         this.isLockDown1 = false;
         this.isWalls1 = false;
         changeController(currentController);
         changeEnableDisable(btnStart);
+        App.setRoot("corona bounce");
+    }
 
+    public void right_Scenario_1_Lockdown(ActionEvent actionEvent) throws IOException, InterruptedException
+    {
+        setSettingsController(currentController);
+        this.isLockDown2 = true;
+        this.isWalls2 = false;
+        changeController(currentController);
+        changeEnableDisable(btnStart);
+        App.setRoot("corona bounce");
+    }
 
+    public void right_Scenario_2_Wall(ActionEvent actionEvent) throws IOException, InterruptedException
+    {
+        setSettingsController(currentController);
+        this.isLockDown2 = false;
+        this.isWalls2 = true;
+        changeController(currentController);
+        changeEnableDisable(btnStart);
+        App.setRoot("corona bounce");
+    }
+
+    public void rigth_Scenario_3_WithoutScenario(ActionEvent actionEvent) throws IOException, InterruptedException
+    {
+        setSettingsController(currentController);
+        this.isLockDown1 = false;
+        this.isWalls1 = false;
+        changeController(currentController);
+        changeEnableDisable(btnStart);
         App.setRoot("corona bounce");
     }
 
