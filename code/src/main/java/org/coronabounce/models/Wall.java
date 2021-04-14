@@ -13,7 +13,7 @@ public class Wall  {
     public Wall(double posX){//ce mur va separer la population en deux populations
        this.thikness=Controller.getThickness();
        this.positionX=posX;
-       this.positionY=200;
+       this.positionY=0;
        id=cpt++;
        System.out.println("new wall "+id+" from "+(positionX-thikness)+" to "+(positionX+thikness));//@a
     }
@@ -64,8 +64,11 @@ public class Wall  {
 
       double curentX = coc.getPosition().getX();
       double futurX = curentX+coc.getMovingSpeedX();
+      double radius = coc.getPop().getContaminationRadius();
       if(curentX < positionX-thikness/2 && futurX > positionX-thikness/2){ return true;}
       if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
+      if(curentX+radius < positionX-thikness/2 && futurX-radius > positionX-thikness/2){ return true;}
+      if(curentX-radius > positionX+thikness/2 && futurX+radius < positionX+thikness/2){ return true;}
       return false;
     }
 

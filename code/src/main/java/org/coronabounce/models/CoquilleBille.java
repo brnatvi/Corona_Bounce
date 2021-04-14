@@ -62,15 +62,15 @@ public class CoquilleBille {
       }
       return false;
     }
-    public static boolean outOfX(double x){
-        if(x<=0 || x>= Controller.getWidth()){return true;}
+    public boolean outOfX(double x){
+        if(x<=getPop().getContaminationRadius() || x>= Controller.getWidth()-getPop().getContaminationRadius()){return true;}
         return false;
     }
     /**
      *{@summary Return true if y coordinate is out the the Zone.}
      */
-    public static boolean outOfY(double y){
-        if(y<=0 || y>= Controller.getHeight()){return true;}
+    public boolean outOfY(double y){
+        if(y<=getPop().getContaminationRadius() || y>= Controller.getHeight()-getPop().getContaminationRadius()){return true;}
         return false;
     }
     protected double distancePos() {
@@ -122,7 +122,7 @@ public class CoquilleBille {
     */
     protected void bounce(boolean inX){
       if(inX){ movingSpeedX*=-1;
-        // System.out.println("bounce in x : "+(int)(p.getX()+movingSpeedX)+"from"+(int)p.getX());//@a
+        // System.out.println(id+" bounce in x : "+(int)(p.getX()+movingSpeedX)+"from"+(int)p.getX());//@a
       }
       else{ movingSpeedY*=-1; }
     }
