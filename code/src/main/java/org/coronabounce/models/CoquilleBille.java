@@ -122,7 +122,7 @@ public class CoquilleBille {
     */
     protected void bounce(boolean inX){
       if(inX){ movingSpeedX*=-1;
-        System.out.println("bounce in x : "+(int)(p.getX()+movingSpeedX));//@a
+        System.out.println("bounce in x : "+(int)(p.getX()+movingSpeedX)+"from"+(int)p.getX());//@a
       }
       else{ movingSpeedY*=-1; }
     }

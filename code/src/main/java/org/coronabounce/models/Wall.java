@@ -4,6 +4,8 @@ import org.coronabounce.controllers.Controller;
 
 import java.util.*;
 public class Wall  {
+    private final int id;
+    private static int cpt=0;
     private double thikness;
     private double positionX;
     private double positionY;
@@ -12,8 +14,10 @@ public class Wall  {
        this.thikness=Controller.getThickness();
        this.positionX=posX;
        this.positionY=200;
-       System.out.println("new wall from "+(positionX-thikness)+" to "+(positionX+thikness));//@a
+       id=cpt++;
+       System.out.println("new wall "+id+"from "+(positionX-thikness)+" to "+(positionX+thikness));//@a
     }
+    public String toString(){return id+" x="+positionX+" y="+positionY+" th="+thikness;}
 
     public void setPositionY(double positionY) { this.positionY = positionY; }
 
@@ -60,7 +64,7 @@ public class Wall  {
 
       double curentX = coc.getPosition().getX();
       double futurX = curentX+coc.getMovingSpeedX();
-      if(curentX < (positionX-thikness)/2 && futurX > (positionX-thikness)/2){ return true;}
+      if(curentX < positionX-thikness/2 && futurX > positionX-thikness/2){ return true;}
       if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
       return false;
     }
