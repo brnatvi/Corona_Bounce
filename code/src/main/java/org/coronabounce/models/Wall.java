@@ -64,7 +64,7 @@ public class Wall  {
 
       double curentX = coc.getPosition().getX();
       double futurX = curentX+coc.getMovingSpeedX();
-      double radius = coc.getPop().getContaminationRadius();
+      double radius = coc.getPop().getRadiusDot();
       radius/=2;
       if(curentX < positionX-thikness/2 && futurX > positionX-thikness/2){ return true;}
       if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
