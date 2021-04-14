@@ -7,13 +7,48 @@ public class Wall  {
     private double thikness;
     private double positionX;
     private double positionY;
+    private double[] PosXWalls ;
+    private ArrayList<Double> PosxWalls = new ArrayList<Double>();
+    /*public Wall(){//ce mur va separer la population en deux populations
+        //double[] limits=repartInZones(3,Controller.getThickness());
 
-    public Wall(){//ce mur va separer la population en deux populations
-        double[] limits=repartInZones(1,Controller.getThickness());
        this.thikness=Controller.getThickness();
-       this.positionX=limits[1]-Controller.getThickness();//je fixe le mur pour qu il soit au milieu de la surafcce de la population
+       //this.positionX=limits[1]-Controller.getThickness();
        this.positionY=0;
+    }*/
+
+public Wall()
+{}
+  public Wall(int nbZones)
+  {
+  setWallsPositions(nbZones);
+  }
+
+    public Wall(int nbZones,double posX)
+    {
+       //setWallsPositions(nbZones);
+        this.thikness=Controller.getThickness();
+        this.positionY=0;
+        this.positionX=posX;
     }
+
+
+    private void setWallsPositions(int nbZones)
+    {//<>
+        double limits [] =repartInZones(nbZones,Controller.getThickness());
+       // PosXWalls = new double[nbZones];$$
+        for(int i=1;i<nbZones  ;i++)
+        {
+            //this.PosXWalls[i]=limits[i];
+            this.PosxWalls.add(limits[i]);
+
+        }
+
+    }
+   public ArrayList<Double> getWallsPositions()
+   {
+       return this.PosxWalls;
+   }
 
     public void setPositionY(double positionY) {
         this.positionY = positionY;
@@ -131,17 +166,9 @@ public class Wall  {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
+    public Double getThickness() {
+        return this.thikness;
+    }
 }
 class TimerTaskWall extends TimerTask{
   public TimerTaskWall(Wall w){

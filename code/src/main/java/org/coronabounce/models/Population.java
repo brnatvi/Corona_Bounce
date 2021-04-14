@@ -75,7 +75,7 @@ public class Population implements Displayable {
 
             if(RestrictionMouvement) this.RestrictMouvement();
         }
-        createWalls(3);
+        createWalls(nbZones);
 
         for (Wall wall : listWall ) {
             wall.makeWallGoDown(this);
@@ -86,12 +86,23 @@ public class Population implements Displayable {
         *All the wall will be create at equals distance from eatch other.<br>
         *@param numberOfWall the number of wall that will be add.
         */
-        private void createWalls(int numberOfWall){
-          double maxX = Controller.getWidth();
-          for (int i=1; i<=numberOfWall; i++) {
-            double posX = (maxX*i)/(numberOfWall+1);
-            listWall.add(new Wall());
+        private void createWalls(int nbZones){
+         // double maxX = Controller.getWidth();
+            Wall m = new Wall(nbZones);
+            //double[] l= m.getWallsPositions();
+            ArrayList<Double> l=m.getWallsPositions();
+
+
+          for (int i=0; i<nbZones-1; i++) {
+              double pos=l.get(i);
+              System.out.println("la taille est " +l.size());
+              System.out.println("Voila  "+ pos);
+            listWall.add(new Wall(nbZones,pos));
+           /* double posX = (maxX*i)/(numberOfWall+1);
+            listWall.add(new Wall(nbZones));*/
           }
+
+
         }
 
 
@@ -222,12 +233,13 @@ public class Population implements Displayable {
      */
     public ArrayList<Double> getPositionsOfWalls()
     {
-        ArrayList<Double> rez = new ArrayList();
+        /*ArrayList<Double> rez = new ArrayList();
         for (int i = 0; i < listWall.size(); i++)
         {
             rez.add(listWall.get(i).getPositionX());
         }
-        return rez;
+        return rez;*/
+        return mur.getWallsPositions();
     }
 
     /**
@@ -252,6 +264,7 @@ public class Population implements Displayable {
         for (int i = 0; i < listWall.size(); i++)
         {
             rez.add(listWall.get(i).getThickness());
+
         }
         return rez;
     }
