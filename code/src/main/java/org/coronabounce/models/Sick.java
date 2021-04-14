@@ -13,7 +13,7 @@ public class Sick extends Individual {
           @Override
           public void run()
           {
-              System.out.println("Sick Thread run " + Thread.currentThread().getId());
+             // System.out.println("Sick Thread run " + Thread.currentThread().getId());
               coc.setIndividual(new Recovered(coc,p));
               p.nbSick--;
           }

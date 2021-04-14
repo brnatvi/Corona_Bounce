@@ -15,14 +15,11 @@ public class Wall  {
        this.positionY=0;
     }
 
-    public void setPositionY(double positionY) {
-        this.positionY = positionY;
-    }
-    public double getPositionY(){return positionY;}
-    public double getPositionX(){
-        return this.positionX;
-    }
+    public void setPositionY(double positionY) { this.positionY = positionY; }
 
+    public double getPositionX() { return this.positionX; }
+    public double getPositionY() { return positionY; }
+    public double getThickness() { return this.thikness; }
 
 
     public void makeWallGoDown(Population pop){
@@ -151,8 +148,8 @@ class TimerTaskWall extends TimerTask{
   @Override
   public synchronized void run(){
     w.setPositionY(w.getPositionY()+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
-    System.out.println(w.getPositionY());
-    System.out.println(w.getPositionX());
+   // System.out.println(w.getPositionY());
+   // System.out.println(w.getPositionX());
     if(w.getPositionY()>Controller.getHeight()){
       cancel();
     }

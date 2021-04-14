@@ -88,7 +88,6 @@ public class MainController
         System.out.println("New controller\n");
         this.controller = new Controller();
         changeController(this.controller);
-                                                      
     }
 
     public void changeController(Controllable c)
@@ -504,7 +503,7 @@ public class MainController
             drawPopulation(points2, false);
 
             
-            System.out.println("Number of walls = " + walls.size());
+            //System.out.println("Number of walls = " + walls.size());
 
             // update walls
             drawWalls();
@@ -605,6 +604,8 @@ public class MainController
 
             for (int i = 0; i < this.walls.size(); i++)
             {
+                System.out.println("Wall " + i + "is on position = " + positionX1.get(i));
+                
                 Rectangle wall1 = new Rectangle(positionX1.get(i), 0, thicknesses1.get(i), heightOfWalls1.get(i));
                 Rectangle wall2 = new Rectangle(positionX2.get(i), 0, thicknesses2.get(i), heightOfWalls2.get(i));
                 wall1.setFill(valueOf("008B8B"));
