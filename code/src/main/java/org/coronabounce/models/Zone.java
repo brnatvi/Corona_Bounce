@@ -48,12 +48,6 @@ public class Zone  {
     public static double getHeight() { return height; }
     public static void setHeight(double h) { if(h>=1){height = h;}}
     public Population getPopulation() {return p;}
-    public void pauseThread() throws InterruptedException
-    {
-        Thread.currentThread().sleep(2000);
-
-    }
-
 
     public void moving(){
         /** if we apply this (p.socialDistancing()) with 100persons for example, it is quiet visible that the contamination rate slows down **/
@@ -69,6 +63,7 @@ public class Zone  {
                 p.separate(nbZones);
                 p.Contacts();
                 p.Moving_Bille();
+               // System.out.println("Zone Thread run " + Thread.currentThread().getId());
             }
         },0,1*33);
     }

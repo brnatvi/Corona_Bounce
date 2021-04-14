@@ -3,11 +3,12 @@ package org.coronabounce.mvcconnectors;
 import org.coronabounce.data.Data;
 import org.coronabounce.models.Wall;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Displayable
 {
-    //======================================== First Priority ========================================================//
+    //======================================= Population =============================================================//
 
     /**
      * Get list of points
@@ -17,42 +18,64 @@ public interface Displayable
     public List getAllPoints();
 
     /**
-     * Get total number of points / number od Individu.
-     * @return
+     * Get total number of points / number of Individuals.
      */
     public int getNbIndividus();
 
     /**
      * Get number of healthy
-     * @return
      */
     public int getNbHealthy();
 
     /**
      * Get number of contagious / sick people.
-     * @return
      */
     public int getNbSick();
 
     /**
      * Get number of recovered
-     * @return
      */
     public int getNbRecovered();
 
+    /**
+     * @summary Transfers NbSick and NbRecovered to Data to save them to draw AreaChart.
+     * To show the layers of AreaChart correctly with superposition we take
+     * NbRecovered = NbRecovered,
+     * nbSick = nbSick + nbRecovered,
+     * all the rest: NbHealthy + NbIncubating takes like 100%
+     */
     public void saveStatToData();
 
+    /**
+     * Get saved statistics (history)
+     * @return Data - history
+     */
     public Data getData();
+
+    //=========================================== Timers =============================================================//
 
     public void stopTimer(boolean b_StopTimer);
 
-    public void pauseThread() throws InterruptedException;
-
-    //======================================== Second Priority ========================================================//
+    //============================================ Walls =============================================================//
 
     /**
-     * @return
+     * @return List of walls
      */
     public List<Wall> getListWall();
+
+    /**
+     * @summary Return list of positions on axis of abscissas of all walls
+     */
+    public ArrayList<Double> getPositionsOfWalls();
+
+    /**
+     * @summary Return list of heights of all walls
+     */
+    public ArrayList<Double> getHeigthsOfWalls();
+
+    /**
+     * @summary Return list of thicknesses of all walls
+     */
+    public ArrayList<Double> getThicknessesOfWalls();
 
 }

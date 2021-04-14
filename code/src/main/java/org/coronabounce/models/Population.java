@@ -32,14 +32,12 @@ public class Population implements Displayable {
         data = new Data();
         timer = new Timer();
 
-
         if(Confinement){
             for (int i = 0; i < nbH; i++) {
                 CoquilleBille coc = new ConfinedBille(null);
                 Individual in = new Healthy(coc, this);
                 coc.setIndividual(in);
                 listCoquille.add(coc);
-
             }
             for (int i = 0; i < nbS; i++) {
                 CoquilleBille coc = new ConfinedBille(null);
@@ -47,54 +45,42 @@ public class Population implements Displayable {
                 Individual in = new Sick(coc, this);
                 coc.setIndividual(in);
                 listCoquille.add(coc);
-
             }
             for (int i = 0; i < nbR; i++) {
                 CoquilleBille coc = new ConfinedBille(null);
                 Individual in = new Recovered(coc, this);
                 coc.setIndividual(in);
                 listCoquille.add(coc);
-
-              }
-          }else {
-
-                for (int i = 0; i < nbH; i++) {
-                    CoquilleBille coc = new CoquilleBille(null);
-                    Individual in = new Healthy(coc, this);
-                    coc.setIndividual(in);
-                    listCoquille.add(coc);
-
-                }
-                for (int i = 0; i < nbS; i++) {
-                    CoquilleBille coc = new CoquilleBille(null);
-
-                    Individual in = new Sick(coc, this);
-                    coc.setIndividual(in);
-                    listCoquille.add(coc);
-
-                }
-                for (int i = 0; i < nbR; i++) {
-                    CoquilleBille coc = new CoquilleBille(null);
-                    Individual in = new Recovered(coc, this);
-                    coc.setIndividual(in);
-                    listCoquille.add(coc);
-
-                }
-
-
-                if(RestrictionMouvement) this.RestrictMouvement();
-
-
+            }
         }
-
-
-            createWalls(3);
-            for (Wall wall : listWall ) {
-              wall.makeWallGoDown(this);
+        else {
+            for (int i = 0; i < nbH; i++) {
+                CoquilleBille coc = new CoquilleBille(null);
+                Individual in = new Healthy(coc, this);
+                coc.setIndividual(in);
+                listCoquille.add(coc);
+            }
+            for (int i = 0; i < nbS; i++) {
+                CoquilleBille coc = new CoquilleBille(null);
+                Individual in = new Sick(coc, this);
+                coc.setIndividual(in);
+                listCoquille.add(coc);
+            }
+            for (int i = 0; i < nbR; i++) {
+                CoquilleBille coc = new CoquilleBille(null);
+                Individual in = new Recovered(coc, this);
+                coc.setIndividual(in);
+                listCoquille.add(coc);
             }
 
-
+            if(RestrictionMouvement) this.RestrictMouvement();
         }
+        createWalls(3);
+
+        for (Wall wall : listWall ) {
+            wall.makeWallGoDown(this);
+        }
+    }
         /**
         *{@summary Create the walls.}<br>
         *All the wall will be create at equals distance from eatch other.<br>
@@ -117,14 +103,7 @@ public class Population implements Displayable {
         return listCoquille;
     }
     public Timer getT() {return timer;}
-    public List<Wall> getListWall(){return listWall;}
-
-
-
-    public void pauseThread() throws InterruptedException
-    {
-        Thread.currentThread().sleep(2000);
-    }
+    public List<Wall> getListWall() { return listWall; }
 
     public void addIndividual(Individual i) {
         CoquilleBille coc = new CoquilleBille(i);
@@ -157,44 +136,17 @@ public class Population implements Displayable {
 
     //========================= Points Interactions ===================================================================/
 
-
-
     public void Contacts(){
         for(CoquilleBille coc:listCoquille){
             coc.getIndividual().agitSur();
         }
     }
-public void separate(int nbZones)
-{
-    for(CoquilleBille coc : listCoquille) {
-        mur.HitWallInX(coc,nbZones);
-        mur.separatePop1(coc,nbZones);
-    }
-}
 
-
-
-
-
-
-    /**
-    *Close timer to stop using this population.
-    */
-    public void stopTimer(boolean b_StopTimer)
+    public void separate(int nbZones)
     {
-        if (null != this.timerTask)
-        {
-            if (!this.timerTask.cancel())
-            {
-                System.out.println("Can't cancel task!\n");
-            }
-            this.timerTask = null;
-            this.timer.purge();
-        }
-        if (b_StopTimer)
-        {
-            this.timer.cancel();
-            this.timer = null;
+        for(CoquilleBille coc : listCoquille) {
+            mur.HitWallInX(coc,nbZones);
+            mur.separatePop1(coc,nbZones);
         }
     }
 
@@ -204,7 +156,6 @@ public void separate(int nbZones)
         double y1 = i1.getPosition().getY();
         double y2 = i2.getPosition().getY();
         return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-
     }
 
     /** @summary
@@ -226,11 +177,6 @@ public void separate(int nbZones)
             cpt--;
         }
     }
-
-
-
-
-
 
 
     //========================= Prints ================================================================================/
@@ -255,14 +201,9 @@ public void separate(int nbZones)
           // }
           coc.move();
         }
-
-
     }
 
-    //========================= Population Statistics =================================================================/
-
-
-
+    //================================ Walls ==========================================================================/
     /**
     *{@summary Return how much zone there is.}
     */
@@ -274,31 +215,120 @@ public void separate(int nbZones)
     /**
     *{@summary Return true if there is 1 or more wall.}
     */
-   public boolean thereisWall(){ return getNbWall()!=0;}
-   public int getNbIndividus() { return getAllPoints().size(); }
+    public boolean thereisWall(){ return getNbWall()!=0;}
 
-   public int getNbHealthy() { return nbHealthy; }
+    /**
+     * Return list of positions on axis of abscissas of all walls
+     */
+    public ArrayList<Double> getPositionsOfWalls()
+    {
+        ArrayList<Double> rez = new ArrayList();
+        for (int i = 0; i < listWall.size(); i++)
+        {
+            rez.add(listWall.get(i).getPositionX());
+        }
+        return rez;
+    }
 
-   public int getNbSick() { return nbSick; }
+    /**
+     * Return list of heights of all walls
+     */
+    public ArrayList<Double> getHeigthsOfWalls()
+    {
+        ArrayList<Double> rez = new ArrayList();
+        for (int i = 0; i < listWall.size(); i++)
+        {
+            rez.add(listWall.get(i).getPositionY());
+        }
+        return rez;
+    }
 
-   public int getNbRecovered() { return nbRecovered; }
+    /**
+     * Return list of thicknesses of all walls
+     */
+    public ArrayList<Double> getThicknessesOfWalls()
+    {
+        ArrayList<Double> rez = new ArrayList();
+        for (int i = 0; i < listWall.size(); i++)
+        {
+            rez.add(listWall.get(i).getThickness());
+        }
+        return rez;
+    }
 
+
+    //========================= Population Statistics =================================================================/
+
+    /**
+     * Get total number of points / number of Individuals.
+     */
+    public int getNbIndividus() { return getAllPoints().size(); }
+
+    /**
+     * Get number of healthy
+     */
+    public int getNbHealthy() { return nbHealthy; }
+
+    /**
+     * Get number of sick people.
+     */
+    public int getNbSick() { return nbSick; }
+
+    /**
+     * Get number of recovered
+     */
+    public int getNbRecovered() { return nbRecovered; }
+
+    /**
+     * @summary Transfers NbSick and NbRecovered to Data to save them to draw AreaChart.
+     * To show the layers of AreaChart correctly with superposition we take
+     * NbRecovered = NbRecovered,
+     * nbSick = nbSick + nbRecovered,
+     * all the rest: NbHealthy + NbIncubating takes like 100%
+     */
     @Override
     public void saveStatToData()
     {
-        getT().schedule(this.timerTask = new TimerTask()
+        getT().schedule(new TimerTask()
         {
             @Override
-            public synchronized void run(){
+            public void run()
+            {
                 data.setData(100 * (nbSick + nbRecovered)/controller.getPersonsCount(), 100 * nbRecovered/controller.getPersonsCount());
+                //System.out.println("Statistic Thread run " + Thread.currentThread().getId());
             }
         }, 0, 100);
     }
 
+    /**
+     * Get saved statistics (history)
+     * @return Data - history
+     */
     @Override
-    public Data getData()
+    public Data getData() { return this.data; }
+
+    //============================= Time Management ===================================================================/
+
+    /**
+     *Close timer to stop using this population.
+     */
+    public void stopTimer(boolean b_StopTimer)
     {
-        return this.data;
+        if (null != this.timerTask)
+        {
+            if (!this.timerTask.cancel())
+            {
+                System.out.println("Can't cancel task!\n");
+            }
+            this.timerTask = null;
+            this.timer.purge();
+        }
+        if (b_StopTimer)
+        {
+            this.timer.cancel();
+            this.timer = null;
+        }
     }
+
 
 }

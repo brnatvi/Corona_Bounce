@@ -8,14 +8,22 @@ public class Sick extends Individual {
   public Sick(CoquilleBille coc, Population p){
       super(coc,p);
       p.nbSick++;
-      p.getT().schedule(new TimerTask() {
+      p.getT().schedule(new TimerTask()
+      {
           @Override
-          public void run() {
+          public void run()
+          {
+              System.out.println("Sick Thread run " + Thread.currentThread().getId());
               coc.setIndividual(new Recovered(coc,p));
               p.nbSick--;
           }
       },p.getDurationCovid()+p.getDurationHealing());
+  }
+
+    public void run() {
+        
     }
+
 
     public void agitSur() {
         contaminate();
