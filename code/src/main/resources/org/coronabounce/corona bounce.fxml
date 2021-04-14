@@ -149,8 +149,8 @@
                <menus>
                   <Menu mnemonicParsing="false" text="Scenarios">
                      <items>
-                        <MenuItem fx:id="scenario_1_1" mnemonicParsing="false" onAction="#performActionLockdown" text="scenario : Lockdown" />
-                        <MenuItem fx:id="scenario_1_2" mnemonicParsing="false" onAction="#performActionWall"  text="scenario : Wall" />
+                        <MenuItem fx:id="scenario_1_1" mnemonicParsing="false" onAction="#performActionLockdownBtn1" text="scenario : Lockdown" />
+                        <MenuItem fx:id="scenario_1_2" mnemonicParsing="false" onAction="#performActionWallBtn1"  text="scenario : Wall" />
                         <MenuItem fx:id="scenario_1_3" mnemonicParsing="false" onAction="#performActionNoScenario"  text="scenario : No scenario" />
                      </items>
                   </Menu>
@@ -164,7 +164,7 @@
                   <Menu mnemonicParsing="false" text="Scenarios">
                      <items>
                         <MenuItem fx:id="scenario_2_1" mnemonicParsing="false" onAction="#performActionLockdownBtn2" text="scenario : Lockdown" />
-                        <MenuItem fx:id="scenario_2_2" mnemonicParsing="false" onAction="#performActionWall"  text="scenario : Wall" />
+                        <MenuItem fx:id="scenario_2_2" mnemonicParsing="false" onAction="#performActionWallBtn2"  text="scenario : Wall" />
                         <MenuItem fx:id="scenario_2_3" mnemonicParsing="false" onAction="#performActionNoScenario"  text="scenario : No scenario" />
                      </items>
                   </Menu>

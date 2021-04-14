@@ -42,8 +42,10 @@ public class MainController
     private List<Wall> walls;
     private Timeline tlPoints;                    // timeline for animation of point's moving
     private Timeline tlGraph;                     // timeline for animation of graph
-    private boolean isLockDown = false;
-    private boolean isWalls = false;
+    private boolean isLockDown1 = false;
+    private boolean isLockDown2 = false;
+    private boolean isWalls1 = false;
+    private boolean isWalls2 = false;
 
     private XYChart.Series healthy1;              // charts and area chart tor population1's graph
     private XYChart.Series sick1;
@@ -97,13 +99,13 @@ public class MainController
     {
         System.out.println("Controller changed\n");
 
-        this.zone1 = new Zone(c,isLockDown,isWalls,1);
+        this.zone1 = new Zone(c,isLockDown1,isWalls1,1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
 
         this.walls = model1.getListWall();
 
-        this.zone2 = new Zone(c,isLockDown,isWalls,1);
+        this.zone2 = new Zone(c,isLockDown2,isWalls2,1);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
 
@@ -120,13 +122,13 @@ public class MainController
 
     public Controllable getController() { return this.controller; }
 
-    public boolean getIsLockdown() { return this.isLockDown; }
-
-    public boolean getIsWalls() { return this.isWalls; }
-
-    public void setIsLockdown(boolean isIt) { this.isLockDown = isIt; }
-
-    public void setIsWalls(boolean isIt) { this.isWalls = isIt; }
+//    public boolean getIsLockdown() { return this.isLockDown; }
+//
+//    public boolean getIsWalls() { return this.isWalls; }
+//
+//    public void setIsLockdown(boolean isIt) { this.isLockDown = isIt; }
+//
+//    public void setIsWalls(boolean isIt) { this.isWalls = isIt; }
 
     //========================= Initialisation ========================================================================/
 
@@ -376,7 +378,7 @@ public class MainController
     /**
      * @summary Functions for scenarios
      */
-    public void performActionWall(ActionEvent actionEvent) throws IOException, InterruptedException
+    public void performActionWallBtn1(ActionEvent actionEvent) throws IOException, InterruptedException
     {
 
         MenuItem target  = (MenuItem) actionEvent.getSource();
@@ -388,15 +390,39 @@ public class MainController
 //        changeController(c);
 
         setSettingsController(currentController);
-        this.isLockDown = false;
-        this.isWalls = true;
+        this.isLockDown1 = false;
+        this.isWalls1 = true;
+        this.isLockDown2 = false;
+        this.isWalls2 = false;
         changeController(currentController);
         changeEnableDisable(btnStart);
 
         App.setRoot("corona bounce");
     }
 
-    public void performActionLockdown(ActionEvent actionEvent) throws IOException, InterruptedException
+    public void performActionWallBtn2(ActionEvent actionEvent) throws IOException, InterruptedException
+    {
+
+        MenuItem target  = (MenuItem) actionEvent.getSource();
+        System.out.println("Clicked On Item:"+target.getId());
+
+//        Controllable c = new Controller();
+//        c.setPersonsCount(99);
+//
+//        changeController(c);
+
+        setSettingsController(currentController);
+        this.isWalls1 = false;
+        this.isLockDown1 = false;
+        this.isLockDown2 = false;
+        this.isWalls2 = true;
+        changeController(currentController);
+        changeEnableDisable(btnStart);
+
+        App.setRoot("corona bounce");
+    }
+
+    public void performActionLockdownBtn1(ActionEvent actionEvent) throws IOException, InterruptedException
     {
 
         MenuItem target  = (MenuItem) actionEvent.getSource();
@@ -407,8 +433,8 @@ public class MainController
 //
 //        changeController(c);
         setSettingsController(currentController);
-        this.isLockDown = true;
-        this.isWalls = false;
+        this.isLockDown1 = true;
+        this.isWalls1 = false;
         changeController(currentController);
         changeEnableDisable(btnStart);
 
@@ -426,8 +452,8 @@ public class MainController
 //
 //        changeController(c);
         setSettingsController(currentController);
-        this.isLockDown = true;
-        this.isWalls = false;
+        this.isLockDown2 = true;
+        this.isWalls2 = false;
         changeController(currentController);
         changeEnableDisable(btnStart);
 
@@ -445,8 +471,8 @@ public class MainController
 //
 //        changeController(c);
         setSettingsController(currentController);
-        this.isLockDown = false;
-        this.isWalls = false;
+        this.isLockDown1 = false;
+        this.isWalls1 = false;
         changeController(currentController);
         changeEnableDisable(btnStart);
 
@@ -648,7 +674,7 @@ public class MainController
      */
     private void drawWalls()
     {
-        if (isWalls)
+        if (isWalls1)
         {
             double koeffW = panel1.getWidth()/controller.getSpaceSize()[0];
             double koeffH = panel1.getHeight()/controller.getSpaceSize()[1];
@@ -672,7 +698,7 @@ public class MainController
 
                 // put into panel1 and panel2
                 panel1.getChildren().add(wall1);
-                panel2.getChildren().add(wall2);
+//                panel2.getChildren().add(wall2);
             }
         }
     }
