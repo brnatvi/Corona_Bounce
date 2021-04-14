@@ -91,7 +91,7 @@ public class MainController
         this.tlPoints = null;
         System.out.println("New controller\n");
         this.controller = new Controller();
-//        this.currentController = controller;
+        this.currentController = controller;
         changeController(this.controller);
     }
 
@@ -698,7 +698,7 @@ public class MainController
 
                 // put into panel1 and panel2
                 panel1.getChildren().add(wall1);
-//                panel2.getChildren().add(wall2);
+                panel2.getChildren().add(wall2);
             }
         }
     }
