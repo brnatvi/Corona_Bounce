@@ -15,7 +15,7 @@ public class Wall  {
        this.positionX=posX;
        this.positionY=200;
        id=cpt++;
-       System.out.println("new wall "+id+"from "+(positionX-thikness)+" to "+(positionX+thikness));//@a
+       System.out.println("new wall "+id+" from "+(positionX-thikness)+" to "+(positionX+thikness));//@a
     }
     public String toString(){return id+" x="+positionX+" y="+positionY+" th="+thikness;}
 

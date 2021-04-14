@@ -17,7 +17,7 @@ public class Controller implements Controllable
     private static double Kilometrage = 50;
     private  static double diametreX = 15;
     private static double diametreY = 10;
-    private static double thickness=1;
+    private static double thickness=20;
 
 
     //====================================== Space Settings ===========================================================/

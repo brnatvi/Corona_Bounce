@@ -21,7 +21,7 @@ public class Population implements Displayable {
     private Timer timer;
     private TimerTask timerTask = null;
     private static Random random = new Random();
-    // Wall mur =new Wall();
+    // Wall mur =new Wall(); //si vous voulez 1 seul mur ajouter en 1 seul lors de l'appel a createWalls();
     private int nbZones;
 
     //========================= Constructors ==========================================================================/
@@ -75,7 +75,7 @@ public class Population implements Displayable {
 
             if(RestrictionMouvement) this.RestrictMouvement();
         }
-        createWalls(3);
+        createWalls(4);
 
         for (Wall wall : listWall ) {
             wall.makeWallGoDown(this);

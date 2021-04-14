@@ -99,7 +99,7 @@ public class CoquilleBille {
     protected void bounceIfHitWall(){
       for (Wall wall : getPop().getListWall() ) {
         if(wall.willCrossWallInX(this) && wall.willCrossWallInY(this)){
-          System.out.print("from wall "+wall+" ");//@a
+          // System.out.print("from wall "+wall+" ");//@a
           bounce(true);
         }
       }
@@ -122,7 +122,7 @@ public class CoquilleBille {
     */
     protected void bounce(boolean inX){
       if(inX){ movingSpeedX*=-1;
-        System.out.println("bounce in x : "+(int)(p.getX()+movingSpeedX)+"from"+(int)p.getX());//@a
+        // System.out.println("bounce in x : "+(int)(p.getX()+movingSpeedX)+"from"+(int)p.getX());//@a
       }
       else{ movingSpeedY*=-1; }
     }
