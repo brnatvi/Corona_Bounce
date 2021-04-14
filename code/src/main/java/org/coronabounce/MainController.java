@@ -453,7 +453,7 @@ public class MainController
 
             Vector<Data.Slice> History1 = model1.getData().getFifo();
             Vector<Data.Slice> History2 = model2.getData().getFifo();
-            
+
             // draw graph
             int x = 0;
             for (Data.Slice Slice : History1)
@@ -502,7 +502,7 @@ public class MainController
             drawPopulation(points1, true);
             drawPopulation(points2, false);
 
-            
+
             //System.out.println("Number of walls = " + walls.size());
 
             // update walls
@@ -510,7 +510,7 @@ public class MainController
 
             // update statistic
             updateStatistics();
-            
+
         }));
         tlPoints.setCycleCount(Animation.INDEFINITE);
         tlPoints.play();
@@ -604,8 +604,8 @@ public class MainController
 
             for (int i = 0; i < this.walls.size(); i++)
             {
-                System.out.println("Wall " + i + "is on position = " + positionX1.get(i));
-                
+                // System.out.println("Wall " + i + "is on position = " + positionX1.get(i));
+
                 Rectangle wall1 = new Rectangle(positionX1.get(i), 0, thicknesses1.get(i), heightOfWalls1.get(i));
                 Rectangle wall2 = new Rectangle(positionX2.get(i), 0, thicknesses2.get(i), heightOfWalls2.get(i));
                 wall1.setFill(valueOf("008B8B"));

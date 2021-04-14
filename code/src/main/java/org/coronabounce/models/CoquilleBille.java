@@ -88,6 +88,7 @@ public class CoquilleBille {
 
     public void move(){
         bounceIfOutOfZone();
+        if (getPop().getNbZones() !=1) bounceIfHitWall();
         this.p.setPos(this.p.getX()+this.movingSpeedX,this.p.getY()+this.movingSpeedY);
     }
 
@@ -95,13 +96,14 @@ public class CoquilleBille {
     /**
     *{@summary bounce if this hit a wall.}<br>
     */
-
-
-
-
-
-
-
+    protected void bounceIfHitWall(){
+      for (Wall wall : getPop().getListWall() ) {
+        if(wall.willCrossWallInX(this) && wall.willCrossWallInY(this)){
+          System.out.print("from wall "+wall+" ");//@a
+          bounce(true);
+        }
+      }
+    }
 
     /**
     *{@summary bounce if this will go out of the zone.}<br>
@@ -119,7 +121,9 @@ public class CoquilleBille {
     *@param inX True if bounce in x coor.
     */
     protected void bounce(boolean inX){
-      if(inX){ movingSpeedX*=-1; }
+      if(inX){ movingSpeedX*=-1;
+        System.out.println("bounce in x : "+(int)(p.getX()+movingSpeedX));//@a
+      }
       else{ movingSpeedY*=-1; }
     }
 

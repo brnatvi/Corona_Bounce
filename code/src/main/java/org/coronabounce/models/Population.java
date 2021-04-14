@@ -21,7 +21,7 @@ public class Population implements Displayable {
     private Timer timer;
     private TimerTask timerTask = null;
     private static Random random = new Random();
-    Wall mur =new Wall();
+    // Wall mur =new Wall();
     private int nbZones;
 
     //========================= Constructors ==========================================================================/
@@ -81,18 +81,18 @@ public class Population implements Displayable {
             wall.makeWallGoDown(this);
         }
     }
-        /**
-        *{@summary Create the walls.}<br>
-        *All the wall will be create at equals distance from eatch other.<br>
-        *@param numberOfWall the number of wall that will be add.
-        */
-        private void createWalls(int numberOfWall){
-          double maxX = Controller.getWidth();
-          for (int i=1; i<=numberOfWall; i++) {
-            double posX = (maxX*i)/(numberOfWall+1);
-            listWall.add(new Wall());
-          }
-        }
+    /**
+    *{@summary Create the walls.}<br>
+    *All the wall will be create at equals distance from eatch other.<br>
+    *@param numberOfWall the number of wall that will be add.
+    */
+    private void createWalls(int numberOfWall){
+      double maxX = Controller.getWidth();
+      for (int i=1; i<=numberOfWall; i++) {
+        double posX = (maxX*i)/(numberOfWall+1);
+        listWall.add(new Wall(posX));
+      }
+    }
 
 
     public Population(Controllable controller, int nbIndividus,boolean Confinement,boolean RestrictionMouvement,int nbZones) {
@@ -145,8 +145,8 @@ public class Population implements Displayable {
     public void separate(int nbZones)
     {
         for(CoquilleBille coc : listCoquille) {
-            mur.HitWallInX(coc,nbZones);
-            mur.separatePop1(coc,nbZones);
+            // mur.HitWallInX(coc,nbZones);
+            // mur.separatePop1(coc,nbZones);
         }
     }
 
