@@ -43,7 +43,7 @@ public class MainController
     private Timeline tlPoints;                    // timeline for animation of point's moving
     private Timeline tlGraph;                     // timeline for animation of graph
     private boolean isLockDown = false;
-    private boolean isWalls = true;
+    private boolean isWalls = false;
 
     private XYChart.Series healthy1;              // charts and area chart tor population1's graph
     private XYChart.Series sick1;
@@ -72,8 +72,10 @@ public class MainController
     @FXML MenuBar mbScenario2;
     @FXML MenuItem scenario_1_1;
     @FXML MenuItem scenario_1_2;
+    @FXML MenuItem scenario_1_3;
     @FXML MenuItem scenario_2_1;
     @FXML MenuItem scenario_2_2;
+    @FXML MenuItem scenario_2_3;
     @FXML Button btnStart;
     @FXML Button btnPause;
     @FXML Button btnReset;
@@ -87,6 +89,7 @@ public class MainController
         this.tlPoints = null;
         System.out.println("New controller\n");
         this.controller = new Controller();
+//        this.currentController = controller;
         changeController(this.controller);
     }
 
@@ -274,6 +277,7 @@ public class MainController
         closePreviousTask();                   //stops Timelines of graph and points, and stop timers of both Populations and Zones
         retainPopulationsAndWalls();
 
+
         if (this.currentController != null)
         {
             changeController(currentController);
@@ -372,29 +376,81 @@ public class MainController
     /**
      * @summary Functions for scenarios
      */
-    public void performAction(ActionEvent actionEvent) throws IOException, InterruptedException
+    public void performActionWall(ActionEvent actionEvent) throws IOException, InterruptedException
     {
 
         MenuItem target  = (MenuItem) actionEvent.getSource();
         System.out.println("Clicked On Item:"+target.getId());
 
-        Controllable c = new Controller();
-        c.setPersonsCount(99);
+//        Controllable c = new Controller();
+//        c.setPersonsCount(99);
+//
+//        changeController(c);
 
-        changeController(c);
+        setSettingsController(currentController);
+        this.isLockDown = false;
+        this.isWalls = true;
+        changeController(currentController);
+        changeEnableDisable(btnStart);
+
         App.setRoot("corona bounce");
     }
 
-    public void performAction2(ActionEvent actionEvent) throws IOException, InterruptedException
+    public void performActionLockdown(ActionEvent actionEvent) throws IOException, InterruptedException
     {
 
         MenuItem target  = (MenuItem) actionEvent.getSource();
         System.out.println("Clicked On Item:"+target.getId());
 
-        Controllable c = new Controller();
-        c.setPersonsCount(150);
+//        Controllable c = new Controller();
+//        c.setPersonsCount(150);
+//
+//        changeController(c);
+        setSettingsController(currentController);
+        this.isLockDown = true;
+        this.isWalls = false;
+        changeController(currentController);
+        changeEnableDisable(btnStart);
 
-        changeController(c);
+        App.setRoot("corona bounce");
+    }
+
+    public void performActionLockdownBtn2(ActionEvent actionEvent) throws IOException, InterruptedException
+    {
+
+        MenuItem target  = (MenuItem) actionEvent.getSource();
+        System.out.println("Clicked On Item:"+target.getId());
+
+//        Controllable c = new Controller();
+//        c.setPersonsCount(150);
+//
+//        changeController(c);
+        setSettingsController(currentController);
+        this.isLockDown = true;
+        this.isWalls = false;
+        changeController(currentController);
+        changeEnableDisable(btnStart);
+
+        App.setRoot("corona bounce");
+    }
+
+    public void performActionNoScenario(ActionEvent actionEvent) throws IOException, InterruptedException
+    {
+
+        MenuItem target  = (MenuItem) actionEvent.getSource();
+        System.out.println("Clicked On Item:"+target.getId());
+
+//        Controllable c = new Controller();
+//        c.setPersonsCount(150);
+//
+//        changeController(c);
+        setSettingsController(currentController);
+        this.isLockDown = false;
+        this.isWalls = false;
+        changeController(currentController);
+        changeEnableDisable(btnStart);
+
+
         App.setRoot("corona bounce");
     }
 
