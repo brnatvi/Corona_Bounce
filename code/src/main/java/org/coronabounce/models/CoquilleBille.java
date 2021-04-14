@@ -63,14 +63,14 @@ public class CoquilleBille {
       return false;
     }
     public boolean outOfX(double x){
-        if(x<=getPop().getContaminationRadius() || x>= Controller.getWidth()-getPop().getContaminationRadius()){return true;}
+        if(x<=getPop().getRadiusDot() || x>= Controller.getWidth()-getPop().getRadiusDot()){return true;}
         return false;
     }
     /**
      *{@summary Return true if y coordinate is out the the Zone.}
      */
     public boolean outOfY(double y){
-        if(y<=getPop().getContaminationRadius() || y>= Controller.getHeight()-getPop().getContaminationRadius()){return true;}
+        if(y<=getPop().getRadiusDot() || y>= Controller.getHeight()-getPop().getRadiusDot()){return true;}
         return false;
     }
     protected double distancePos() {

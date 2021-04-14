@@ -128,6 +128,9 @@ public class Population implements Displayable {
     public double getContaminationRadius() {
       return controller.getContaminationRadius();
     }
+    public double getRadiusDot() {
+      return controller.getRadiusDot();
+    }
 
     public List<CoquilleBille> getListCoquille() {
         return this.listCoquille;
