@@ -29,7 +29,8 @@ import org.coronabounce.mvcconnectors.Displayable;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 import static javafx.scene.paint.Paint.valueOf;
 
-public class MainController {
+public class MainController
+{
     private Controllable controller;
     private Controllable currentController = null;
     private Displayable model1;                   // left population (population1)
@@ -56,79 +57,55 @@ public class MainController {
     private XYChart.Series recovered2;
     private AreaChart graphPanel2 = null;
 
-    @FXML
-    Pane panel1;                            // field with moving points of population1
-    @FXML
-    Pane panel2;                            // field with moving points of population2
-    @FXML
-    GridPane mainGrid;
-    @FXML
-    GridPane gridGraphStat1;                // grid contains statistic's grid (gridStatistic1) and graph (graphPanel1)
-    @FXML
-    GridPane gridGraphStat2;                // grid contains statistic's grid (gridStatisti2c) and graph (graphPanel2)
-    @FXML
-    GridPane gridStat1;                     // grid contains statistics and texts "Healthy", "Sick", "Recovered"
-    @FXML
-    GridPane gridStat2;                     // grid contains statistics and texts "Healthy", "Sick", "Recovered"
-    @FXML
-    Label labelHealthy1;                    // labels for gridStatistic1
-    @FXML
-    Label labelSick1;
-    @FXML
-    Label labelRecovered1;
-    @FXML
-    Label labelHealthy2;                    // labels for gridStatistic2
-    @FXML
-    Label labelSick2;
-    @FXML
-    Label labelRecovered2;
-    @FXML
-    MenuBar mbScenario1;
-    @FXML
-    MenuBar mbScenario2;
-    @FXML
-    MenuItem scenario_1_1;
-    @FXML
-    MenuItem scenario_1_2;
-    @FXML
-    MenuItem scenario_1_3;
-    @FXML
-    MenuItem scenario_2_1;
-    @FXML
-    MenuItem scenario_2_2;
-    @FXML
-    MenuItem scenario_2_3;
-    @FXML
-    Button btnStart;
-    @FXML
-    Button btnPause;
-    @FXML
-    Button btnReset;
-    @FXML
-    Button btnSettings;
-    @FXML
-    Button btnLegend;
+    @FXML Pane panel1;                            // field with moving points of population1
+    @FXML Pane panel2;                            // field with moving points of population2
+    @FXML GridPane mainGrid;
+    @FXML GridPane gridGraphStat1;                // grid contains statistic's grid (gridStatistic1) and graph (graphPanel1)
+    @FXML GridPane gridGraphStat2;                // grid contains statistic's grid (gridStatisti2c) and graph (graphPanel2)
+    @FXML GridPane gridStat1;                     // grid contains statistics and texts "Healthy", "Sick", "Recovered"
+    @FXML GridPane gridStat2;                     // grid contains statistics and texts "Healthy", "Sick", "Recovered"
+    @FXML Label labelHealthy1;                    // labels for gridStatistic1
+    @FXML Label labelSick1;
+    @FXML Label labelRecovered1;
+    @FXML Label labelHealthy2;                    // labels for gridStatistic2
+    @FXML Label labelSick2;
+    @FXML Label labelRecovered2;
+    @FXML MenuBar mbScenario1;
+    @FXML MenuBar mbScenario2;
+    @FXML MenuItem scenario_1_1;
+    @FXML MenuItem scenario_1_2;
+    @FXML MenuItem scenario_1_3;
+    @FXML MenuItem scenario_2_1;
+    @FXML MenuItem scenario_2_2;
+    @FXML MenuItem scenario_2_3;
+    @FXML Button btnStart;
+    @FXML Button btnPause;
+    @FXML Button btnReset;
+    @FXML Button btnSettings;
+    @FXML Button btnLegend;
 
     //========================= Constructor ===========================================================================/
 
-    public MainController() throws InterruptedException {
+    public MainController() throws InterruptedException
+    {
         this.tlPoints = null;
         System.out.println("New controller\n");
         this.controller = new Controller();
-//        this.currentController = controller;
+        this.currentController = controller;
         changeController(this.controller);
     }
 
-    public void changeController(Controllable c) {
+    public void changeController(Controllable c)
+    {
         System.out.println("Controller changed\n");
 
-        this.zone1 = new Zone(c, isLockDown1, isWalls1, 1);
+        this.zone1 = new Zone(c,isLockDown1,isWalls1,1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
 
         this.walls = model1.getListWall();
 
-        this.zone2 = new Zone(c, isLockDown2, isWalls2, 1);
+        this.zone2 = new Zone(c,isLockDown2,isWalls2,1);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
 
@@ -143,9 +120,7 @@ public class MainController {
 
     //========================= Getters / Setters =====================================================================/
 
-    public Controllable getController() {
-        return this.controller;
-    }
+    public Controllable getController() { return this.controller; }
 
 //    public boolean getIsLockdown() { return this.isLockDown; }
 //
@@ -158,7 +133,8 @@ public class MainController {
     //========================= Initialisation ========================================================================/
 
     @FXML
-    private void initialize() {
+    private void initialize()
+    {
         // init graphPanel and fil mainGrid by graphPanel
         initGraphs();
 
@@ -173,7 +149,8 @@ public class MainController {
     /**
      * @summary Initialisation of graphs and filing of mainGrid by graphStatGrid1 and graphStatGrid2
      */
-    private void initGraphs() {
+    private void initGraphs()
+    {
         // init graphPanel1
         NumberAxis xAxis1 = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
         xAxis1.setTickLabelsVisible(false);
@@ -227,17 +204,22 @@ public class MainController {
     /**
      * @summary Timer interrupter
      */
-    private void stopTimer() {
-        try {
-            if (zone1 != null) {
+    private void stopTimer()
+    {
+        try
+        {
+            if (zone1 != null)
+            {
                 zone1.stopTimer(true);
                 zone1.getPopulation().stopTimer(true);
             }
-            if (zone2 != null) {
+            if (zone2 != null)
+            {
                 zone2.stopTimer(true);
                 zone2.getPopulation().stopTimer(true);
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.out.println("An error occurred when trying to stop old Populations Timers");
         }
     }
@@ -245,8 +227,10 @@ public class MainController {
     /**
      * @summary Timeline interrupter
      */
-    private void stopTimeLine(Timeline t) {
-        if (null != t) {
+    private void stopTimeLine(Timeline t)
+    {
+        if (null != t)
+        {
             t.stop();
             t = null;
         }
@@ -258,7 +242,8 @@ public class MainController {
      * @summary Function for button "Start" - create Timeline and launch function moving() on zone
      */
     @FXML
-    private void launchMoving() {
+    private void launchMoving()
+    {
         launchPointsAndStat();
         launchDrawGraph();
         zone1.moving();
@@ -270,7 +255,8 @@ public class MainController {
      * @summary Function for button "Settings" - redirect to window settings
      */
     @FXML
-    private void switchToSettings() throws IOException {
+    private void switchToSettings() throws IOException
+    {
         closePreviousTask();
         App.setRoot("settings");
     }
@@ -279,7 +265,8 @@ public class MainController {
      * @summary Function for button "Pause"
      */
     @FXML
-    private void makePause() {
+    private void makePause()
+    {
 
     }
 
@@ -287,14 +274,18 @@ public class MainController {
      * @summary Function for button "Reset"
      */
     @FXML
-    private void resetModel() throws InterruptedException {
+    private void resetModel() throws InterruptedException
+    {
         closePreviousTask();                   //stops Timelines of graph and points, and stop timers of both Populations and Zones
         retainPopulationsAndWalls();
 
 
-        if (this.currentController != null) {
+        if (this.currentController != null)
+        {
             changeController(currentController);
-        } else {
+        }
+        else
+        {
             changeController(controller);
         }
 
@@ -307,7 +298,8 @@ public class MainController {
      * @summary Function for button "?"
      */
     @FXML
-    private void showLegend() {
+    private void showLegend()
+    {
         Tooltip tooltip = new Tooltip();
         Image image = new Image(getClass().getResourceAsStream("color_scheme_0.jpg"));
         ImageView view = new ImageView(image);
@@ -350,7 +342,8 @@ public class MainController {
      * @summary Function for correct closing tasks before changing the settings.
      * It stops Timelines of graph and points, and stop timers of both Populations and Zones.
      */
-    public void closePreviousTask() {
+    public void closePreviousTask()
+    {
         stopTimeLine(tlPoints);
         stopTimeLine(tlGraph);
         stopTimer();
@@ -359,7 +352,8 @@ public class MainController {
     /**
      * @summary Initialize graphPanel, fil mainGrid by graphPanel and draw new populations
      */
-    public void initNewPopulation() {
+    public void initNewPopulation()
+    {
         retainPopulationsAndWalls();
         initGraphs();
         drawPopulation(points1, true);
@@ -369,10 +363,14 @@ public class MainController {
     /**
      * @summary Change enable/disable the button btn
      */
-    public void changeEnableDisable(Button btn) {
-        if (btn.isDisabled()) {
+    public void changeEnableDisable(Button btn)
+    {
+        if (btn.isDisabled())
+        {
             btn.setDisable(false);
-        } else {
+        }
+        else
+        {
             btn.setDisable(true);
         }
     }
@@ -380,25 +378,27 @@ public class MainController {
     /**
      * @summary Functions for scenarios
      */
-    public void performActionWallBtn1(ActionEvent actionEvent) throws IOException, InterruptedException {
+    public void performActionWallBtn1(ActionEvent actionEvent) throws IOException, InterruptedException
+    {
 //        MenuItem target  = (MenuItem) actionEvent.getSource();
 //        System.out.println("Clicked On Item:"+target.getId());
 
         setSettingsController(currentController);
         this.isLockDown1 = false;
         this.isWalls1 = true;
-//        this.isLockDown2 = false;
-//        this.isWalls2 = false;
+        this.isLockDown2 = false;
+        this.isWalls2 = false;
         changeController(currentController);
         changeEnableDisable(btnStart);
 
         App.setRoot("corona bounce");
     }
 
-    public void performActionWallBtn2(ActionEvent actionEvent) throws IOException, InterruptedException {
+    public void performActionWallBtn2(ActionEvent actionEvent) throws IOException, InterruptedException
+    {
         setSettingsController(currentController);
-//        this.isWalls1 = false;
-//        this.isLockDown1 = false;
+        this.isWalls1 = false;
+        this.isLockDown1 = false;
         this.isLockDown2 = false;
         this.isWalls2 = true;
         changeController(currentController);
@@ -407,7 +407,8 @@ public class MainController {
         App.setRoot("corona bounce");
     }
 
-    public void performActionLockdownBtn1(ActionEvent actionEvent) throws IOException, InterruptedException {
+    public void performActionLockdownBtn1(ActionEvent actionEvent) throws IOException, InterruptedException
+    {
         setSettingsController(currentController);
         this.isLockDown1 = true;
         this.isWalls1 = false;
@@ -417,7 +418,8 @@ public class MainController {
         App.setRoot("corona bounce");
     }
 
-    public void performActionLockdownBtn2(ActionEvent actionEvent) throws IOException, InterruptedException {
+    public void performActionLockdownBtn2(ActionEvent actionEvent) throws IOException, InterruptedException
+    {
         setSettingsController(currentController);
         this.isLockDown2 = true;
         this.isWalls2 = false;
@@ -427,7 +429,8 @@ public class MainController {
         App.setRoot("corona bounce");
     }
 
-    public void performActionNoScenario(ActionEvent actionEvent) throws IOException, InterruptedException {
+    public void performActionNoScenario(ActionEvent actionEvent) throws IOException, InterruptedException
+    {
         setSettingsController(currentController);
         this.isLockDown1 = false;
         this.isWalls1 = false;
@@ -438,18 +441,18 @@ public class MainController {
         App.setRoot("corona bounce");
     }
 
-    public void setSettingsController(Controllable c) {
-        this.currentController = c;
-    }
+    public void setSettingsController(Controllable c) { this.currentController = c; }
 
     //========================= Button's auxiliary functions ==========================================================/
 
     /**
-     * @return 100 ms for small populations and 500 for big one
      * @summary Function used to provide graph's Timeline a milliseconds appropriated to population size
+     * @return 100 ms for small populations and 500 for big one
      */
-    private int choosePeriod() {
-        if (controller.getPersonsCount() <= 100) {
+    private int choosePeriod()
+    {
+        if (controller.getPersonsCount() <= 100)
+        {
             return 100;
         }
         return 500;
@@ -458,11 +461,12 @@ public class MainController {
     /**
      * @summary Timeline launcher for drawing the graphs in AreaChart
      * To show the layers of AreaChart correctly with superposition we take:
-     * NbRecovered = NbRecovered,
-     * nbSick = nbSick + nbRecovered,
-     * all the rest: NbHealthy + NbIncubating takes like 100%
+     *      NbRecovered = NbRecovered,
+     *      nbSick = nbSick + nbRecovered,
+     *      all the rest: NbHealthy + NbIncubating takes like 100%
      */
-    private void launchDrawGraph() {
+    private void launchDrawGraph()
+    {
         stopTimeLine(tlGraph);
         healthy1.getData().retainAll();
         sick1.getData().retainAll();
@@ -495,7 +499,8 @@ public class MainController {
 
             // draw graph
             int x = 0;
-            for (Data.Slice Slice : History1) {
+            for (Data.Slice Slice : History1)
+            {
                 healthy1.getData().add(new XYChart.Data(x, 100));
                 sick1.getData().add(new XYChart.Data(x, Slice.getPrcSick()));
                 recovered1.getData().add(new XYChart.Data(x, Slice.getPrcRecovered()));
@@ -503,7 +508,8 @@ public class MainController {
             }
 
             int y = 0;
-            for (Data.Slice Slice : History2) {
+            for (Data.Slice Slice : History2)
+            {
                 healthy2.getData().add(new XYChart.Data(y, 100));
                 sick2.getData().add(new XYChart.Data(y, Slice.getPrcSick()));
                 recovered2.getData().add(new XYChart.Data(y, Slice.getPrcRecovered()));
@@ -526,7 +532,8 @@ public class MainController {
     /**
      * @summary Timeline launcher to draw moving points and update statistics
      */
-    private void launchPointsAndStat() {
+    private void launchPointsAndStat()
+    {
         stopTimeLine(tlPoints);
 
         tlPoints = new Timeline(new KeyFrame(Duration.millis(33), ev ->
@@ -555,7 +562,8 @@ public class MainController {
 
     //========================= Animation auxiliary functions =========================================================/
 
-    private void updateStatistics() {
+    private void updateStatistics()
+    {
         // statistics1
         labelHealthy1.setText(String.valueOf(model1.getNbHealthy()));
         labelSick1.setText(String.valueOf(model1.getNbSick()));
@@ -567,24 +575,31 @@ public class MainController {
         labelRecovered2.setText(String.valueOf(model2.getNbRecovered()));
     }
 
-    private void retainPopulationsAndWalls() {
+    private void retainPopulationsAndWalls()
+    {
         panel1.getChildren().retainAll();
         panel2.getChildren().retainAll();
     }
 
     /**
-     * @param is_panel1 helps to use this function for both populations
      * @summary Function call drawPoint() for all points of list
+     * @param is_panel1 helps to use this function for both populations
      */
-    private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel1) {
-        double koeffW = panel1.getWidth() / controller.getSpaceSize()[0];
-        double koeffH = panel1.getHeight() / controller.getSpaceSize()[1];
-        if (is_panel1) {
-            for (CoquilleBille cb : points1) {
+    private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel1)
+    {
+        double koeffW = panel1.getWidth()/controller.getSpaceSize()[0];
+        double koeffH = panel1.getHeight()/controller.getSpaceSize()[1];
+        if (is_panel1)
+        {
+            for (CoquilleBille cb : points1)
+            {
                 drawPoint(cb, true, koeffW, koeffH);
             }
-        } else {
-            for (CoquilleBille cb : points2) {
+        }
+        else
+        {
+            for (CoquilleBille cb : points2)
+            {
                 drawPoint(cb, false, koeffW, koeffH);
             }
         }
@@ -595,26 +610,22 @@ public class MainController {
      * 1) adapt position in GUI's Pane relative to position in Model's Zone
      * 2) draw point according its status (Healthy, Sick, Recovered, Incubating)
      */
-    private void drawPoint(CoquilleBille cb, boolean is_panel1, double koeffW, double koeffH) {
+    private void drawPoint(CoquilleBille cb, boolean is_panel1, double koeffW, double koeffH)
+    {
         String state = cb.getIndividual().healthState();
         double coordX = cb.getPosition().getX() * koeffW;
         double coordY = cb.getPosition().getY() * koeffH;
         Circle point = new Circle(coordX, coordY, controller.getRadiusDot() * koeffH);
-        if (state.equals("Healthy")) {
-            point.setFill(valueOf("70e000"));
-        }    //green
-        if (state.equals("Incubating")) {
-            point.setFill(valueOf("ff1830"));
-        }  //red
-        if (state.equals("Recovered")) {
-            point.setFill(valueOf("ffd22f"));
-        }  //yellow
-        if (state.equals("Sick")) {
-            point.setFill(valueOf("a80011"));
-        }     // dark red
-        if (is_panel1) {
+        if (state.equals("Healthy")) {point.setFill(valueOf("70e000"));}    //green
+        if (state.equals("Incubating")) {point.setFill(valueOf("ff1830"));}  //red
+        if (state.equals("Recovered")) {point.setFill(valueOf("ffd22f"));}  //yellow
+        if (state.equals("Sick")){point.setFill(valueOf("a80011"));}     // dark red
+        if (is_panel1)
+        {
             panel1.getChildren().add(point);
-        } else {
+        }
+        else
+        {
             panel2.getChildren().add(point);
         }
     }
@@ -622,10 +633,12 @@ public class MainController {
     /**
      * @summary Function of drawing the walls
      */
-    private void drawWalls() {
-        if (isWalls1) {
-            double koeffW = panel1.getWidth() / controller.getSpaceSize()[0];
-            double koeffH = panel1.getHeight() / controller.getSpaceSize()[1];
+    private void drawWalls()
+    {
+        if (isWalls1)
+        {
+            double koeffW = panel1.getWidth()/controller.getSpaceSize()[0];
+            double koeffH = panel1.getHeight()/controller.getSpaceSize()[1];
 
             ArrayList<Double> positionX1 = model1.getPositionsOfWalls();
             ArrayList<Double> heightOfWalls1 = model1.getHeigthsOfWalls();
@@ -635,39 +648,17 @@ public class MainController {
             ArrayList<Double> heightOfWalls2 = model2.getHeigthsOfWalls();
             ArrayList<Double> thicknesses2 = model2.getThicknessesOfWalls();
 
-            for (int i = 0; i < this.walls.size(); i++) {
+            for (int i = 0; i < this.walls.size(); i++)
+            {
                 // System.out.println("Wall " + i + "is on position = " + positionX1.get(i));
 
-                Rectangle wall1 = new Rectangle((positionX1.get(i) - thicknesses1.get(i) / 4) * koeffW, 0, thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
-                Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 4) * koeffW, 0, thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
+                Rectangle wall1 = new Rectangle((positionX1.get(i)-thicknesses1.get(i)/4) * koeffW, 0, thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
+                Rectangle wall2 = new Rectangle((positionX2.get(i)-thicknesses2.get(i)/4) * koeffW, 0, thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
                 wall1.setFill(valueOf("008B8B"));
                 wall2.setFill(valueOf("008B8B"));
 
                 // put into panel1 and panel2
                 panel1.getChildren().add(wall1);
-            }
-        }
-        if (isWalls2) {
-            double koeffW = panel1.getWidth() / controller.getSpaceSize()[0];
-            double koeffH = panel1.getHeight() / controller.getSpaceSize()[1];
-
-            ArrayList<Double> positionX1 = model1.getPositionsOfWalls();
-            ArrayList<Double> heightOfWalls1 = model1.getHeigthsOfWalls();
-            ArrayList<Double> thicknesses1 = model1.getThicknessesOfWalls();
-
-            ArrayList<Double> positionX2 = model2.getPositionsOfWalls();
-            ArrayList<Double> heightOfWalls2 = model2.getHeigthsOfWalls();
-            ArrayList<Double> thicknesses2 = model2.getThicknessesOfWalls();
-
-            for (int i = 0; i < this.walls.size(); i++) {
-                // System.out.println("Wall " + i + "is on position = " + positionX1.get(i));
-
-                Rectangle wall1 = new Rectangle((positionX1.get(i) - thicknesses1.get(i) / 4) * koeffW, 0, thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
-                Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 4) * koeffW, 0, thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
-                wall1.setFill(valueOf("008B8B"));
-                wall2.setFill(valueOf("008B8B"));
-
-                // put into panel1 and panel2
                 panel2.getChildren().add(wall2);
             }
         }
