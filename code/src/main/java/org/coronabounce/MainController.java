@@ -691,8 +691,8 @@ public class MainController
             {
                 // System.out.println("Wall " + i + "is on position = " + positionX1.get(i));
 
-                Rectangle wall1 = new Rectangle(positionX1.get(i) * koeffW, 0, thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
-                Rectangle wall2 = new Rectangle(positionX2.get(i) * koeffW, 0, thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
+                Rectangle wall1 = new Rectangle((positionX1.get(i)-thicknesses1.get(i)/4) * koeffW, 0, thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
+                Rectangle wall2 = new Rectangle((positionX2.get(i)-thicknesses2.get(i)/4) * koeffW, 0, thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
                 wall1.setFill(valueOf("008B8B"));
                 wall2.setFill(valueOf("008B8B"));
 
