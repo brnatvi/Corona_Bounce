@@ -380,14 +380,8 @@ public class MainController
      */
     public void performActionWallBtn1(ActionEvent actionEvent) throws IOException, InterruptedException
     {
-
-        MenuItem target  = (MenuItem) actionEvent.getSource();
-        System.out.println("Clicked On Item:"+target.getId());
-
-//        Controllable c = new Controller();
-//        c.setPersonsCount(99);
-//
-//        changeController(c);
+//        MenuItem target  = (MenuItem) actionEvent.getSource();
+//        System.out.println("Clicked On Item:"+target.getId());
 
         setSettingsController(currentController);
         this.isLockDown1 = false;
@@ -402,15 +396,6 @@ public class MainController
 
     public void performActionWallBtn2(ActionEvent actionEvent) throws IOException, InterruptedException
     {
-
-        MenuItem target  = (MenuItem) actionEvent.getSource();
-        System.out.println("Clicked On Item:"+target.getId());
-
-//        Controllable c = new Controller();
-//        c.setPersonsCount(99);
-//
-//        changeController(c);
-
         setSettingsController(currentController);
         this.isWalls1 = false;
         this.isLockDown1 = false;
@@ -424,14 +409,6 @@ public class MainController
 
     public void performActionLockdownBtn1(ActionEvent actionEvent) throws IOException, InterruptedException
     {
-
-        MenuItem target  = (MenuItem) actionEvent.getSource();
-        System.out.println("Clicked On Item:"+target.getId());
-
-//        Controllable c = new Controller();
-//        c.setPersonsCount(150);
-//
-//        changeController(c);
         setSettingsController(currentController);
         this.isLockDown1 = true;
         this.isWalls1 = false;
@@ -443,14 +420,6 @@ public class MainController
 
     public void performActionLockdownBtn2(ActionEvent actionEvent) throws IOException, InterruptedException
     {
-
-        MenuItem target  = (MenuItem) actionEvent.getSource();
-        System.out.println("Clicked On Item:"+target.getId());
-
-//        Controllable c = new Controller();
-//        c.setPersonsCount(150);
-//
-//        changeController(c);
         setSettingsController(currentController);
         this.isLockDown2 = true;
         this.isWalls2 = false;
@@ -462,14 +431,6 @@ public class MainController
 
     public void performActionNoScenario(ActionEvent actionEvent) throws IOException, InterruptedException
     {
-
-        MenuItem target  = (MenuItem) actionEvent.getSource();
-        System.out.println("Clicked On Item:"+target.getId());
-
-//        Controllable c = new Controller();
-//        c.setPersonsCount(150);
-//
-//        changeController(c);
         setSettingsController(currentController);
         this.isLockDown1 = false;
         this.isWalls1 = false;
