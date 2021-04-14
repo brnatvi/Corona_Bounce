@@ -386,8 +386,8 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown1 = false;
         this.isWalls1 = true;
-        this.isLockDown2 = false;
-        this.isWalls2 = false;
+//        this.isLockDown2 = false;
+//        this.isWalls2 = false;
         changeController(currentController);
         changeEnableDisable(btnStart);
 
@@ -397,8 +397,8 @@ public class MainController
     public void performActionWallBtn2(ActionEvent actionEvent) throws IOException, InterruptedException
     {
         setSettingsController(currentController);
-        this.isWalls1 = false;
-        this.isLockDown1 = false;
+//        this.isWalls1 = false;
+//        this.isLockDown1 = false;
         this.isLockDown2 = false;
         this.isWalls2 = true;
         changeController(currentController);
@@ -659,6 +659,31 @@ public class MainController
 
                 // put into panel1 and panel2
                 panel1.getChildren().add(wall1);
+            }
+        }
+        if (isWalls2)
+        {
+            double koeffW = panel1.getWidth()/controller.getSpaceSize()[0];
+            double koeffH = panel1.getHeight()/controller.getSpaceSize()[1];
+
+            ArrayList<Double> positionX1 = model1.getPositionsOfWalls();
+            ArrayList<Double> heightOfWalls1 = model1.getHeigthsOfWalls();
+            ArrayList<Double> thicknesses1 = model1.getThicknessesOfWalls();
+
+            ArrayList<Double> positionX2 = model2.getPositionsOfWalls();
+            ArrayList<Double> heightOfWalls2 = model2.getHeigthsOfWalls();
+            ArrayList<Double> thicknesses2 = model2.getThicknessesOfWalls();
+
+            for (int i = 0; i < this.walls.size(); i++)
+            {
+                // System.out.println("Wall " + i + "is on position = " + positionX1.get(i));
+
+                Rectangle wall1 = new Rectangle((positionX1.get(i)-thicknesses1.get(i)/4) * koeffW, 0, thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
+                Rectangle wall2 = new Rectangle((positionX2.get(i)-thicknesses2.get(i)/4) * koeffW, 0, thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
+                wall1.setFill(valueOf("008B8B"));
+                wall2.setFill(valueOf("008B8B"));
+
+                // put into panel1 and panel2
                 panel2.getChildren().add(wall2);
             }
         }
