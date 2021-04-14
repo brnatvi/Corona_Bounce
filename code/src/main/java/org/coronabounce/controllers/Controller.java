@@ -13,7 +13,7 @@ public class Controller implements Controllable
     private long DURATION_COVID = 3000;               // has contact <-> sick
     private long DURATION_HEALING = 8000;             // sick <-> recovered
     private long DURATION_NON_CONTAMINATION = 5000;   // recovered <-> can be contaminate again
-    private double RADIUS_DOT = 6;                 // radius of point in GUI
+    private double RADIUS_DOT = 3;                 // radius of point in GUI
     private static double Kilometrage = 50;
     private static double diametreX = 15;
     private static double diametreY = 10;
