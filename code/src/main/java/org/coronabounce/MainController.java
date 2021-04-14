@@ -31,7 +31,7 @@ import static javafx.scene.paint.Paint.valueOf;
 
 public class MainController
 {
-    private Controllable controller;
+    private Controllable controller = null;
     private Controllable currentController = null;
     private Displayable model1;                   // left population (population1)
     private Displayable model2;                   // right population (population2)
@@ -89,10 +89,12 @@ public class MainController
     public MainController() throws InterruptedException
     {
         this.tlPoints = null;
+        this.tlGraph = null;
         System.out.println("New controller\n");
         this.controller = new Controller();
-        this.currentController = controller;
         changeController(this.controller);
+        this.currentController = controller;
+        this.walls = model1.getListWall();
     }
 
     public void changeController(Controllable c)
@@ -102,8 +104,6 @@ public class MainController
         this.zone1 = new Zone(c,isLockDown1,isWalls1,1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
-
-        this.walls = model1.getListWall();
 
         this.zone2 = new Zone(c,isLockDown2,isWalls2,1);
         this.model2 = zone2.getPopulation();
@@ -120,15 +120,7 @@ public class MainController
 
     //========================= Getters / Setters =====================================================================/
 
-    public Controllable getController() { return this.controller; }
-
-//    public boolean getIsLockdown() { return this.isLockDown; }
-//
-//    public boolean getIsWalls() { return this.isWalls; }
-//
-//    public void setIsLockdown(boolean isIt) { this.isLockDown = isIt; }
-//
-//    public void setIsWalls(boolean isIt) { this.isWalls = isIt; }
+    public Controllable getController() { return this.currentController; }
 
     //========================= Initialisation ========================================================================/
 
@@ -244,7 +236,7 @@ public class MainController
     @FXML
     private void launchMoving()
     {
-        this.controller.setState(Controllable.eState.Working);
+        this.currentController.setState(Controllable.eState.Working);
         launchPointsAndStat();
         launchDrawGraph();
         zone1.moving();
@@ -268,13 +260,13 @@ public class MainController
     @FXML
     private void makePauseResume()
     {
-        if (this.controller.getState() == Controllable.eState.Working)
+        if (this.currentController.getState() == Controllable.eState.Working)
         {
-            this.controller.setState(Controllable.eState.Paused);
+            this.currentController.setState(Controllable.eState.Paused);
         }
-        else if (this.controller.getState() == Controllable.eState.Paused)
+        else if (this.currentController.getState() == Controllable.eState.Paused)
         {
-            this.controller.setState(Controllable.eState.Working);
+            this.currentController.setState(Controllable.eState.Working);
         }
     }
 
@@ -287,14 +279,7 @@ public class MainController
         closePreviousTask();                   //stops Timelines of graph and points, and stop timers of both Populations and Zones
         retainPopulationsAndWalls();
 
-        if (this.currentController != null)
-        {
-            changeController(currentController);
-        }
-        else
-        {
-            changeController(controller);
-        }
+        changeController(currentController);
 
         changeEnableDisable(btnStart);
 
@@ -391,8 +376,10 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown1 = true;
         this.isWalls1 = false;
+        closePreviousTask();
         changeController(currentController);
-        changeEnableDisable(btnStart);
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -401,8 +388,11 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown1 = false;
         this.isWalls1 = true;
+        closePreviousTask();
         changeController(currentController);
-        changeEnableDisable(btnStart);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -411,8 +401,11 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown1 = false;
         this.isWalls1 = false;
+        closePreviousTask();
         changeController(currentController);
-        changeEnableDisable(btnStart);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -421,8 +414,11 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown2 = true;
         this.isWalls2 = false;
+        closePreviousTask();
         changeController(currentController);
-        changeEnableDisable(btnStart);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -431,8 +427,11 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown2 = false;
         this.isWalls2 = true;
+        closePreviousTask();
         changeController(currentController);
-        changeEnableDisable(btnStart);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -441,8 +440,11 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown1 = false;
         this.isWalls1 = false;
+        closePreviousTask();
         changeController(currentController);
-        changeEnableDisable(btnStart);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -487,7 +489,7 @@ public class MainController
         tlGraph = new Timeline(new KeyFrame(Duration.millis(choosePeriod()), ev ->
         {
             //long startTime = System.currentTimeMillis();                           // code for debug
-
+            
             healthy1.getData().clear();
             sick1.getData().clear();
             recovered1.getData().clear();
@@ -551,10 +553,9 @@ public class MainController
             drawPopulation(points2, false);
 
 
-            //System.out.println("Number of walls = " + walls.size());
-
             // update walls
-            drawWalls();
+            drawWalls(true);
+            drawWalls(false);
 
             // update statistic
             updateStatistics();
@@ -638,33 +639,48 @@ public class MainController
     /**
      * @summary Function of drawing the walls
      */
-    private void drawWalls()
+    private void drawWalls(boolean is_panel1)
     {
-        if (isWalls1)
+        double koeffW = panel1.getWidth() / controller.getSpaceSize()[0];
+        double koeffH = panel1.getHeight() / controller.getSpaceSize()[1];
+
+        if (is_panel1)
         {
-            double koeffW = panel1.getWidth()/controller.getSpaceSize()[0];
-            double koeffH = panel1.getHeight()/controller.getSpaceSize()[1];
-
-            ArrayList<Double> positionX1 = model1.getPositionsOfWalls();
-            ArrayList<Double> heightOfWalls1 = model1.getHeigthsOfWalls();
-            ArrayList<Double> thicknesses1 = model1.getThicknessesOfWalls();
-
-            ArrayList<Double> positionX2 = model2.getPositionsOfWalls();
-            ArrayList<Double> heightOfWalls2 = model2.getHeigthsOfWalls();
-            ArrayList<Double> thicknesses2 = model2.getThicknessesOfWalls();
-
-            for (int i = 0; i < this.walls.size(); i++)
+            if (isWalls1)
             {
-                // System.out.println("Wall " + i + "is on position = " + positionX1.get(i));
+                ArrayList<Double> positionX1 = model1.getPositionsOfWalls();
+                ArrayList<Double> heightOfWalls1 = model1.getHeigthsOfWalls();
+                ArrayList<Double> thicknesses1 = model1.getThicknessesOfWalls();
 
-                Rectangle wall1 = new Rectangle((positionX1.get(i)-thicknesses1.get(i)/4) * koeffW, 0, thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
-                Rectangle wall2 = new Rectangle((positionX2.get(i)-thicknesses2.get(i)/4) * koeffW, 0, thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
-                wall1.setFill(valueOf("008B8B"));
-                wall2.setFill(valueOf("008B8B"));
+                for (int i = 0; i < this.walls.size(); i++)
+                {
+                    Rectangle wall1 = new Rectangle((positionX1.get(i) - thicknesses1.get(i) / 4) * koeffW, 0,
+                                                    thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
+                    wall1.setFill(valueOf("008B8B"));
 
-                // put into panel1 and panel2
-                panel1.getChildren().add(wall1);
-                panel2.getChildren().add(wall2);
+                    // put into panel1
+                    panel1.getChildren().add(wall1);
+                }
+            }
+        }
+        else
+        {
+            if (isWalls2)
+            {
+                ArrayList<Double> positionX2 = model2.getPositionsOfWalls();
+                ArrayList<Double> heightOfWalls2 = model2.getHeigthsOfWalls();
+                ArrayList<Double> thicknesses2 = model2.getThicknessesOfWalls();
+
+                for (int i = 0; i < this.walls.size(); i++)
+                {
+                    Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 4) * koeffW, 0,
+                                                    thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
+
+                    wall2.setFill(valueOf("008B8B"));
+
+                    // put into panel2
+                    panel2.getChildren().add(wall2);
+                }
             }
         }
     }

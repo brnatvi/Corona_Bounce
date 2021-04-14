@@ -38,7 +38,8 @@ public class SettingsController
         double newContaminationRadius = (sliderContaminationRadius.getValue());
         c.setContaminationRadius(newContaminationRadius);
 
-        mainController.setSettingsController(c);        // save new settings in currentController of MainController
+        // save new settings in currentController of MainController
+        mainController.setSettingsController(c);
         mainController.changeController(c);
 
 
