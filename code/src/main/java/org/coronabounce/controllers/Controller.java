@@ -21,11 +21,15 @@ public class Controller implements Controllable
     private static double diametreY = 10;
     private static double thickness = 4;              // thickness of the walls
 
-    private Controllable.eState state = Controllable.eState.Idle;   // enum variable to control all our timers at the same time
-    ReentrantLock statLock = new ReentrantLock();                   // static variable to make lock/unlock the threads
+    private Controllable.eState state = Controllable.eState.Paused;   // enum variable to control all our timers at the same time
+    ReentrantLock statLock = new ReentrantLock();                   // variable to make lock/unlock the threads
 
     //==================================== Timer Management ===========================================================/
-    
+
+    /**
+     * @summary Get value of enum state.
+     * Made thread-saved because state is shared by many processes.
+     */
     @Override
     public Controllable.eState getState()
     {
@@ -35,6 +39,10 @@ public class Controller implements Controllable
         return st;
     }
 
+    /**
+     * @summary Change value of enum state.
+     * Made thread-saved because state is shared by many processes.
+     */
     @Override
     public void setState(Controllable.eState newState)
     {
@@ -62,8 +70,6 @@ public class Controller implements Controllable
     public static double getWidth() { return WIDTH; }
 
     public static double getHeight() { return HEIGTH; }
-
-    public static void setHeight(double h) { if (h >= 1) { HEIGTH = h; }}
 
     public static void setWidth(double w) { if (w >= 1) { WIDTH = w; }}
 
@@ -107,13 +113,13 @@ public class Controller implements Controllable
     public long getDurationCovid() { return DURATION_COVID; }
 
     @Override
-    public void setDurationCovid(long time) { DURATION_COVID=time; }
+    public void setDurationCovid(long time) { DURATION_COVID = time; }
 
     @Override
     public long getDurationNonContamination() { return DURATION_NON_CONTAMINATION; }
 
     @Override
-    public void setDurationNonContamination(long time) { DURATION_NON_CONTAMINATION=time; }
+    public void setDurationNonContamination(long time) { DURATION_NON_CONTAMINATION = time; }
 
     @Override
     public long getDurationHealing() { return DURATION_HEALING;}

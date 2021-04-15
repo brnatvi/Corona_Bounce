@@ -4,7 +4,6 @@ public interface Controllable
 {
     enum eState
     {
-        Idle,
         Working,
         Paused
     }

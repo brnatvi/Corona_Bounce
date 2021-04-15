@@ -71,12 +71,14 @@ public class MainController
     @FXML Label labelRecovered2;
     @FXML MenuBar mbScenario1;
     @FXML MenuBar mbScenario2;
-    @FXML MenuItem scenario_1_1;
+    @FXML MenuItem scenario_1_1;                  //TODO delete them if will not use them in java
     @FXML MenuItem scenario_1_2;
     @FXML MenuItem scenario_1_3;
+    @FXML MenuItem scenario_1_4;
     @FXML MenuItem scenario_2_1;
     @FXML MenuItem scenario_2_2;
     @FXML MenuItem scenario_2_3;
+    @FXML MenuItem scenario_2_4;
     @FXML Button btnStart;
     @FXML Button btnPause;
     @FXML Button btnReset;
@@ -89,7 +91,6 @@ public class MainController
     {
         this.tlPoints = null;
         this.tlGraph = null;
-        //System.out.println("New controller\n");                                    // code for debug
         this.controller = new Controller();
         changeController(this.controller);
         this.currentController = controller;
@@ -101,8 +102,6 @@ public class MainController
      */
     public void changeController(Controllable c)
     {
-        //System.out.println("Controller changed\n");                                // code for debug
-
         this.zone1 = new Zone(c,isLockDown1,isWalls1,1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
@@ -283,7 +282,7 @@ public class MainController
     @FXML
     private void resetModel()
     {
-        closePreviousTask();                   //stops Timelines of graph and points, and stop timers of both Populations and Zones
+        closePreviousTask();          //stops Timelines of graph and points, and stop timers of both Populations and Zones
         retainPopulationsAndWalls();
 
         changeController(currentController);
@@ -327,7 +326,7 @@ public class MainController
         Tooltip.install(btnPause, tooltip4);
 
         Tooltip tooltip5 = new Tooltip();
-        tooltip5.setText("Colors are the same as for the dots:\ngreen for healthy, red for sick and yellow for recovered");
+        tooltip5.setText("Colors are almost the same as for the dots:\ngreen for healthy, red for incubating/sick and yellow for recovered");
         Tooltip.install(graphPanel1, tooltip5);
         Tooltip.install(graphPanel2, tooltip5);
 
