@@ -7,7 +7,6 @@ import java.util.Vector;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
@@ -31,21 +30,21 @@ import static javafx.scene.paint.Paint.valueOf;
 
 public class MainController
 {
-    private Controllable controller = null;
-    private Controllable currentController = null;
+    private Controllable controller;              // controller with initial settings
+    private Controllable currentController;       // controller with modified settings
     private Displayable model1;                   // left population (population1)
     private Displayable model2;                   // right population (population2)
     private Zone zone1 = null;                    // left population's (population1) zone
     private Zone zone2 = null;                    // right population's (population2) zone
     private List<CoquilleBille> points1;          // list of population1's individuals
     private List<CoquilleBille> points2;          // list of population2's individuals
-    private List<Wall> walls;
     private Timeline tlPoints;                    // timeline for animation of point's moving
     private Timeline tlGraph;                     // timeline for animation of graph
-    private boolean isLockDown1 = false;
-    private boolean isLockDown2 = false;
-    private boolean isWalls1 = false;
-    private boolean isWalls2 = false;
+    private boolean isLockDown1 = false;          // has left population (population1) lockdown
+    private boolean isLockDown2 = false;          // has right population (population2) lockdown
+    private boolean isWalls1 = false;             // has left population (population1) mobile bounds
+    private boolean isWalls2 = false;             // has right population (population2) mobile bounds
+    private List<Wall> walls;                     // list of mobile bounds
 
     private XYChart.Series healthy1;              // charts and area chart tor population1's graph
     private XYChart.Series sick1;
@@ -90,7 +89,7 @@ public class MainController
     {
         this.tlPoints = null;
         this.tlGraph = null;
-        System.out.println("New controller\n");
+        //System.out.println("New controller\n");                                    // code for debug
         this.controller = new Controller();
         changeController(this.controller);
         this.currentController = controller;
@@ -98,11 +97,11 @@ public class MainController
     }
 
     /**
-     * @summary Reinitialise Zones (and all key variable of class MainController) with new controller (= new settings)
+     * @summary Reinitialise Zones (and all key variables of class MainController) with new controller (= new settings)
      */
     public void changeController(Controllable c)
     {
-        System.out.println("Controller changed\n");
+        //System.out.println("Controller changed\n");                                // code for debug
 
         this.zone1 = new Zone(c,isLockDown1,isWalls1,1);
         this.model1 = zone1.getPopulation();
