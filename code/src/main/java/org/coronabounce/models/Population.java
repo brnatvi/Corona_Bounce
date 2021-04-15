@@ -142,6 +142,14 @@ public class Population implements Displayable {
             coc.getIndividual().agitSur();
         }
     }
+    public void Rebound (CoquilleBille c){
+        for(CoquilleBille coc:listCoquille){
+            if(coc != c && this.distance(coc,c)<5){
+               coc.bounce();
+               c.bounce();
+            }
+        }
+    }
 
     public void separate(int nbZones)
     {
@@ -201,6 +209,7 @@ public class Population implements Displayable {
           //   wall.makeWall();
           // }
           coc.move();
+          Rebound(coc);
         }
     }
 
