@@ -380,6 +380,19 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
+    public void left_Scenario_4_WallAndLockdown() throws IOException
+    {
+        setSettingsController(currentController);
+        this.isLockDown1 = true;
+        this.isWalls1 = true;
+        closePreviousTask();
+        changeController(currentController);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
+        App.setRoot("corona bounce");
+    }
+
     public void right_Scenario_1_Lockdown() throws IOException
     {
         setSettingsController(currentController);
@@ -411,6 +424,19 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown2 = false;
         this.isWalls2 = false;
+        closePreviousTask();
+        changeController(currentController);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
+        App.setRoot("corona bounce");
+    }
+
+    public void right_Scenario_4_WallAndLockdown() throws IOException
+    {
+        setSettingsController(currentController);
+        this.isLockDown2 = true;
+        this.isWalls2 = true;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();

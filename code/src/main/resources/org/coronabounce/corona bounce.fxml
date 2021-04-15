@@ -142,6 +142,7 @@
                         <MenuItem fx:id="scenario_1_1" mnemonicParsing="false" onAction="#left_Scenario_1_Lockdown" text="scenario : Lockdown" />
                         <MenuItem fx:id="scenario_1_2" mnemonicParsing="false" onAction="#left_Scenario_2_Wall" text="scenario : Wall" />
                         <MenuItem fx:id="scenario_1_3" mnemonicParsing="false" onAction="#left_Scenario_3_WithoutScenario" text="scenario : No scenario" />
+                        <MenuItem fx:id="scenario_1_4" mnemonicParsing="false" onAction="#left_Scenario_4_WallAndLockdown" text="scenario : Wall + Lockdown" />
                      </items>
                   </Menu>
                </menus>
@@ -156,6 +157,7 @@
                         <MenuItem fx:id="scenario_2_1" mnemonicParsing="false" onAction="#right_Scenario_1_Lockdown" text="Population under Lockdown" />
                         <MenuItem fx:id="scenario_2_2" mnemonicParsing="false" onAction="#right_Scenario_2_Wall" text="Place the Bounds" />
                         <MenuItem fx:id="scenario_2_3" mnemonicParsing="false" onAction="#right_Scenario_3_WithoutScenario" text="Without scenario" />
+                        <MenuItem fx:id="scenario_2_4" mnemonicParsing="false" onAction="#right_Scenario_4_WallAndLockdown" text="Bounds and Lockdown" />
                      </items>
                   </Menu>
                </menus>
