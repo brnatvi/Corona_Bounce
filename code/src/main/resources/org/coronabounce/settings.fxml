@@ -36,7 +36,7 @@
       </Text>
       <Accordion layoutX="53.0" layoutY="235.0" />
       <Slider fx:id="sliderContaminationRadius" layoutX="53.0" layoutY="265.0" majorTickUnit="10.0" max="30.0" min="10.0" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
-      <Slider fx:id="sliderCovidDuration1" blockIncrement="1.0" layoutX="432.0" layoutY="154.0" majorTickUnit="1.0" max="6.0" min="2.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
+      <Slider fx:id="sliderHealingDuration" blockIncrement="1.0" layoutX="432.0" layoutY="154.0" majorTickUnit="1.0" max="10.0" min="6.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
       <Text layoutX="440.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Healing duration (in seconds)" wrappingWidth="360.0">
          <font>
             <Font size="18.0" />
@@ -47,6 +47,6 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Slider fx:id="sliderCovidDuration11" blockIncrement="1.0" layoutX="432.0" layoutY="265.0" majorTickUnit="1.0" max="6.0" min="2.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
+      <Slider fx:id="sliderNonContaminationDuration" blockIncrement="1.0" layoutX="432.0" layoutY="265.0" majorTickUnit="1.0" max="7.0" min="3.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
    </children>
 </AnchorPane>

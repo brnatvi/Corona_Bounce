@@ -21,6 +21,8 @@ public class SettingsController
     @FXML TextField individualsNumberSettings;
     @FXML Slider sliderCovidDuration;
     @FXML Slider sliderContaminationRadius;
+    @FXML Slider sliderHealingDuration;
+    @FXML Slider sliderNonContaminationDuration;
 
 //    public void attributeIndividualsNumber() {
 //        int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
@@ -33,10 +35,13 @@ public class SettingsController
         int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
         c.setPersonsCount(newIndividualsNumber);
         double newCovidDuration = (sliderCovidDuration.getValue())*1000;
-//        c.setPersonsCount(8);
         c.setDurationCovid((long)newCovidDuration);
         double newContaminationRadius = (sliderContaminationRadius.getValue());
         c.setContaminationRadius(newContaminationRadius);
+        double newHealingDuration = (sliderCovidDuration.getValue())*1000;
+        c.setDurationHealing((long)newHealingDuration);
+        double newNonContaminationDuration = (sliderNonContaminationDuration.getValue())*1000;
+        c.setDurationNonContamination((long)newNonContaminationDuration);
 
         // save new settings in currentController of MainController
         mainController.setSettingsController(c);
