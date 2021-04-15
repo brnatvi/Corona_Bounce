@@ -142,14 +142,32 @@ public class Population implements Displayable {
             coc.getIndividual().agitSur();
         }
     }
+    public double dist(Wall w,CoquilleBille coc){
+        double x1 = coc.getPosition().getX();
+        double x2 = w.getPositionX();
+        double y1 = coc.getPosition().getY();
+        double y2 = w.getPositionY();
+        return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+
+    }
+
     public void Rebound (CoquilleBille c){
         for(CoquilleBille coc:listCoquille){
             if(coc != c && this.distance(coc,c)<5){
                coc.bounce();
                c.bounce();
             }
+            if(listWall.size()>0 ){
+                for(Wall wall:listWall){
+                    if(dist(wall,coc)<5){
+                        coc.bounce();
+                    }
+                }
+
+            }
         }
     }
+
 
     public void separate(int nbZones)
     {
