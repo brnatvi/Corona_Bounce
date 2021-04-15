@@ -86,7 +86,7 @@ public class MainController
 
     //========================= Constructor ===========================================================================/
 
-    public MainController() throws InterruptedException
+    public MainController()
     {
         this.tlPoints = null;
         this.tlGraph = null;
@@ -97,6 +97,9 @@ public class MainController
         this.walls = model1.getListWall();
     }
 
+    /**
+     * @summary Reinitialise Zones (and all key variable of class MainController) with new controller (= new settings)
+     */
     public void changeController(Controllable c)
     {
         System.out.println("Controller changed\n");
@@ -122,8 +125,13 @@ public class MainController
 
     public Controllable getController() { return this.currentController; }
 
+    public void setSettingsController(Controllable c) { this.currentController = c; }
+
     //========================= Initialisation ========================================================================/
 
+    /**
+     * @summary Initialise Graphs, Panels and StatisticGrids
+     */
     @FXML
     private void initialize()
     {
@@ -131,8 +139,8 @@ public class MainController
         initGraphs();
 
         // init points
-        drawPopulation(points1, false);
-        drawPopulation(points2, true);
+        drawPopulation(false);
+        drawPopulation(true);
 
         // init statistic
         updateStatistics();
@@ -274,7 +282,7 @@ public class MainController
      * @summary Function for button "Reset"
      */
     @FXML
-    private void resetModel() throws InterruptedException
+    private void resetModel()
     {
         closePreviousTask();                   //stops Timelines of graph and points, and stop timers of both Populations and Zones
         retainPopulationsAndWalls();
@@ -312,23 +320,107 @@ public class MainController
         Tooltip.install(btnSettings, tooltip2);
 
         Tooltip tooltip3 = new Tooltip();
-        tooltip3.setText("Colors are the same as for the dots:\ngreen for healthy, red for sick and yellow for recovered");
-        Tooltip.install(graphPanel1, tooltip3);
-        Tooltip.install(graphPanel2, tooltip3);
+        tooltip3.setText("Press this button to reload model with same settings");
+        Tooltip.install(btnReset, tooltip3);
 
         Tooltip tooltip4 = new Tooltip();
+        tooltip4.setText("Press this button to stop and resume animation");
+        Tooltip.install(btnPause, tooltip4);
+
         Tooltip tooltip5 = new Tooltip();
-        tooltip4.setText("Choose some scenario for the left population\nDefault without scenario");
-        tooltip5.setText("Choose some scenario for the right population\nDefault without scenario");
-        Tooltip.install(mbScenario1, tooltip4);
-        Tooltip.install(mbScenario2, tooltip5);
+        tooltip5.setText("Colors are the same as for the dots:\ngreen for healthy, red for sick and yellow for recovered");
+        Tooltip.install(graphPanel1, tooltip5);
+        Tooltip.install(graphPanel2, tooltip5);
 
         Tooltip tooltip6 = new Tooltip();
-        tooltip6.setText("Press this button to reload model with same settings");
-        Tooltip.install(btnReset, tooltip6);
+        Tooltip tooltip7 = new Tooltip();
+        tooltip6.setText("Choose some scenario for the left population\nDefault without scenario");
+        tooltip7.setText("Choose some scenario for the right population\nDefault without scenario");
+        Tooltip.install(mbScenario1, tooltip6);
+        Tooltip.install(mbScenario2, tooltip7);
+
     }
 
-    //======================== Functions for Settings Controller ======================================================/
+    //========================= MenuBar's functions ====================================================================/
+
+    public void left_Scenario_1_Lockdown() throws IOException
+    {
+        setSettingsController(currentController);
+        this.isLockDown1 = true;
+        this.isWalls1 = false;
+        closePreviousTask();
+        changeController(currentController);
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
+        App.setRoot("corona bounce");
+    }
+
+    public void left_Scenario_2_Wall() throws IOException
+    {
+        setSettingsController(currentController);
+        this.isLockDown1 = false;
+        this.isWalls1 = true;
+        closePreviousTask();
+        changeController(currentController);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
+        App.setRoot("corona bounce");
+    }
+
+    public void left_Scenario_3_WithoutScenario() throws IOException
+    {
+        setSettingsController(currentController);
+        this.isLockDown1 = false;
+        this.isWalls1 = false;
+        closePreviousTask();
+        changeController(currentController);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
+        App.setRoot("corona bounce");
+    }
+
+    public void right_Scenario_1_Lockdown() throws IOException
+    {
+        setSettingsController(currentController);
+        this.isLockDown2 = true;
+        this.isWalls2 = false;
+        closePreviousTask();
+        changeController(currentController);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
+        App.setRoot("corona bounce");
+    }
+
+    public void right_Scenario_2_Wall() throws IOException
+    {
+        setSettingsController(currentController);
+        this.isLockDown2 = false;
+        this.isWalls2 = true;
+        closePreviousTask();
+        changeController(currentController);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
+        App.setRoot("corona bounce");
+    }
+
+    public void right_Scenario_3_WithoutScenario() throws IOException
+    {
+        setSettingsController(currentController);
+        this.isLockDown2 = false;
+        this.isWalls2 = false;
+        closePreviousTask();
+        changeController(currentController);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
+        App.setRoot("corona bounce");
+    }
+
+    //===================== Functions to use in Settings Controller ===================================================/
 
     /**
      * @summary Function for correct closing tasks before changing the settings.
@@ -348,8 +440,8 @@ public class MainController
     {
         retainPopulationsAndWalls();
         initGraphs();
-        drawPopulation(points1, true);
-        drawPopulation(points2, false);
+        drawPopulation(true);
+        drawPopulation(false);
     }
 
     /**
@@ -366,89 +458,6 @@ public class MainController
             btn.setDisable(true);
         }
     }
-
-    /**
-     * @summary Functions for scenarios
-     */
-
-    public void left_Scenario_1_Lockdown(ActionEvent actionEvent) throws IOException, InterruptedException
-    {
-        setSettingsController(currentController);
-        this.isLockDown1 = true;
-        this.isWalls1 = false;
-        closePreviousTask();
-        changeController(currentController);
-        btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
-        App.setRoot("corona bounce");
-    }
-
-    public void left_Scenario_2_Wall(ActionEvent actionEvent) throws IOException, InterruptedException
-    {
-        setSettingsController(currentController);
-        this.isLockDown1 = false;
-        this.isWalls1 = true;
-        closePreviousTask();
-        changeController(currentController);
-        initNewPopulation();
-        btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
-        App.setRoot("corona bounce");
-    }
-
-    public void left_Scenario_3_WithoutScenario(ActionEvent actionEvent) throws IOException, InterruptedException
-    {
-        setSettingsController(currentController);
-        this.isLockDown1 = false;
-        this.isWalls1 = false;
-        closePreviousTask();
-        changeController(currentController);
-        initNewPopulation();
-        btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
-        App.setRoot("corona bounce");
-    }
-
-    public void right_Scenario_1_Lockdown(ActionEvent actionEvent) throws IOException, InterruptedException
-    {
-        setSettingsController(currentController);
-        this.isLockDown2 = true;
-        this.isWalls2 = false;
-        closePreviousTask();
-        changeController(currentController);
-        initNewPopulation();
-        btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
-        App.setRoot("corona bounce");
-    }
-
-    public void right_Scenario_2_Wall(ActionEvent actionEvent) throws IOException, InterruptedException
-    {
-        setSettingsController(currentController);
-        this.isLockDown2 = false;
-        this.isWalls2 = true;
-        closePreviousTask();
-        changeController(currentController);
-        initNewPopulation();
-        btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
-        App.setRoot("corona bounce");
-    }
-
-    public void right_Scenario_3_WithoutScenario(ActionEvent actionEvent) throws IOException, InterruptedException
-    {
-        setSettingsController(currentController);
-        this.isLockDown2 = false;
-        this.isWalls2 = false;
-        closePreviousTask();
-        changeController(currentController);
-        initNewPopulation();
-        btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
-        App.setRoot("corona bounce");
-    }
-
-    public void setSettingsController(Controllable c) { this.currentController = c; }
 
     //========================= Button's auxiliary functions ==========================================================/
 
@@ -545,13 +554,12 @@ public class MainController
 
         tlPoints = new Timeline(new KeyFrame(Duration.millis(33), ev ->
         {
-            // clear
+            // clean the panels
             retainPopulationsAndWalls();
 
             // update points
-            drawPopulation(points1, true);
-            drawPopulation(points2, false);
-
+            drawPopulation(true);
+            drawPopulation(false);
 
             // update walls
             drawWalls(true);
@@ -563,11 +571,13 @@ public class MainController
         }));
         tlPoints.setCycleCount(Animation.INDEFINITE);
         tlPoints.play();
-
     }
 
     //========================= Animation auxiliary functions =========================================================/
 
+    /**
+     * @summary Takes fresh numbers of healthy, sick, recovered to labels in gridStat
+     */
     private void updateStatistics()
     {
         // statistics1
@@ -581,6 +591,9 @@ public class MainController
         labelRecovered2.setText(String.valueOf(model2.getNbRecovered()));
     }
 
+    /**
+     * @summary Clean panels from all theirs children
+     */
     private void retainPopulationsAndWalls()
     {
         panel1.getChildren().retainAll();
@@ -591,7 +604,7 @@ public class MainController
      * @summary Function call drawPoint() for all points of list
      * @param is_panel1 helps to use this function for both populations
      */
-    private void drawPopulation(List<CoquilleBille> lcb, boolean is_panel1)
+    private void drawPopulation(boolean is_panel1)
     {
         double koeffW = panel1.getWidth()/controller.getSpaceSize()[0];
         double koeffH = panel1.getHeight()/controller.getSpaceSize()[1];
@@ -612,7 +625,7 @@ public class MainController
     }
 
     /**
-     * @summary Function:
+     * @summary Function which:
      * 1) adapt position in GUI's Pane relative to position in Model's Zone
      * 2) draw point according its status (Healthy, Sick, Recovered, Incubating)
      */
@@ -638,6 +651,7 @@ public class MainController
 
     /**
      * @summary Function of drawing the walls
+     * (koeffW and koeffH serve to adapt dimensions the walls during changing dimensions the scene)
      */
     private void drawWalls(boolean is_panel1)
     {

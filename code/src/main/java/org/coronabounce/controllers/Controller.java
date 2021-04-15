@@ -15,13 +15,14 @@ public class Controller implements Controllable
     private long DURATION_COVID = 3000;               // has contact <-> sick
     private long DURATION_HEALING = 8000;             // sick <-> recovered
     private long DURATION_NON_CONTAMINATION = 5000;   // recovered <-> can be contaminate again
-    private double RADIUS_DOT = 3;                 // radius of point in GUI
+    private double RADIUS_DOT = 3;                    // radius of point in GUI
     private static double Kilometrage = 50;
     private static double diametreX = 15;
     private static double diametreY = 10;
-    private static double thickness = 4;
-    private Controllable.eState state = Controllable.eState.Idle;
-    ReentrantLock statLock = new ReentrantLock();
+    private static double thickness = 4;              // thickness of the walls
+
+    private Controllable.eState state = Controllable.eState.Idle;   // enum variable to control all our timers at the same time
+    ReentrantLock statLock = new ReentrantLock();                   // static variable to make lock/unlock the threads
 
     //==================================== Timer Management ===========================================================/
     
@@ -50,22 +51,21 @@ public class Controller implements Controllable
     @Override
     public void setSpaceSize(double w, double h)
     {
-        WIDTH=w;
-        HEIGTH=h;
+        WIDTH = w;
+        HEIGTH = h;
     }
 
     public static double getThickness() {
         return thickness;
     }
 
-
     public static double getWidth() { return WIDTH; }
 
     public static double getHeight() { return HEIGTH; }
 
-    public static void setHeight(double h) { if(h>=1){HEIGTH = h;}}
+    public static void setHeight(double h) { if (h >= 1) { HEIGTH = h; }}
 
-    public static void setWidth(double w) { if(w>=1){WIDTH = w;}}
+    public static void setWidth(double w) { if (w >= 1) { WIDTH = w; }}
 
 
     //====================================== Scenarios Settings =======================================================/
@@ -85,32 +85,32 @@ public class Controller implements Controllable
     //===================================== Population Settings =======================================================/
 
     @Override
-    public int getPersonsCount() { return this.COUNT; }
+    public int getPersonsCount() { return COUNT; }
 
     @Override
-    public void setPersonsCount(int nmbPersons) { this.COUNT = nmbPersons;}
+    public void setPersonsCount(int nmbPersons) { COUNT = nmbPersons;}
 
     @Override
-    public double getRadiusDot() { return this.RADIUS_DOT; }
+    public double getRadiusDot() { return RADIUS_DOT; }
 
-    public void setRadiusDot(double x){RADIUS_DOT=x;}
+    public void setRadiusDot(double x) { RADIUS_DOT = x; }
 
     //========================================= Virus Settings ========================================================/
 
     @Override
-    public double getContaminationRadius() { return this.CONTAMINATION_RADIUS; }
+    public double getContaminationRadius() { return CONTAMINATION_RADIUS; }
 
     @Override
-    public void setContaminationRadius(double pxls) { CONTAMINATION_RADIUS=pxls; }
+    public void setContaminationRadius(double pxls) { CONTAMINATION_RADIUS = pxls; }
 
     @Override
-    public long getDurationCovid() { return this.DURATION_COVID; }
+    public long getDurationCovid() { return DURATION_COVID; }
 
     @Override
     public void setDurationCovid(long time) { DURATION_COVID=time; }
 
     @Override
-    public long getDurationNonContamination() { return this.DURATION_NON_CONTAMINATION; }
+    public long getDurationNonContamination() { return DURATION_NON_CONTAMINATION; }
 
     @Override
     public void setDurationNonContamination(long time) { DURATION_NON_CONTAMINATION=time; }
