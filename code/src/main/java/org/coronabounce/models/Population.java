@@ -24,7 +24,7 @@ public class Population implements Displayable {
 
     //========================= Constructors ==========================================================================/
 
-    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean isLockDown, boolean isWall, boolean isRestrictionMouvement,int nbZones) {
+    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean isLockDown, boolean isWall, boolean isRestrictionMovement,int nbZones) {
         //this.nbZones=nbZones;
         this.controller = controller;
         data = new Data();
@@ -72,7 +72,7 @@ public class Population implements Displayable {
             }
 
         }
-        if(isRestrictionMouvement) {this.RestrictMouvement();}
+        if(isRestrictionMovement) {this.RestrictMovement();}
         if(isWall){
           createWalls(4);
           for (Wall wall : listWall ) {
@@ -95,8 +95,8 @@ public class Population implements Displayable {
     }
 
 
-    public Population(Controllable controller, int nbIndividus,boolean isLockDown, boolean isWall, boolean isRestrictionMouvement,int nbZones) {
-        this(controller, nbIndividus - 1, 1, 0,isLockDown,isWall,isRestrictionMouvement,nbZones);
+    public Population(Controllable controller, int nbIndividus,boolean isLockDown, boolean isWall, boolean isRestrictionMovement,int nbZones) {
+        this(controller, nbIndividus - 1, 1, 0,isLockDown,isWall,isRestrictionMovement,nbZones);
     }
     public Population(){}
     public List<CoquilleBille> getAllPoints() {
@@ -189,10 +189,10 @@ public class Population implements Displayable {
 
     /** @summary
      *
-     * RestrictMouvement() prevent a big part of the population from moving
+     * RestrictMovement() prevent a big part of the population from moving
      olny(doctors, cops ..) go to work and people go out rarely and just out of necessity **/
 
-    public void  RestrictMouvement()
+    public void  RestrictMovement()
     {
 
         int prctg=random.nextInt(10)+70;
