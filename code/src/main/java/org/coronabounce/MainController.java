@@ -684,7 +684,6 @@ public class MainController
 
         if (is_panel1)
         {
-          System.out.println(isWalls1);//@a
             if (isWalls1)
             {
                 ArrayList<Double> positionX1 = model1.getPositionsOfWalls();
