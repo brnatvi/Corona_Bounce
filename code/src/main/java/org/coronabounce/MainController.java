@@ -77,10 +77,12 @@ public class MainController
     @FXML MenuItem scenario_1_2;
     @FXML MenuItem scenario_1_3;
     @FXML MenuItem scenario_1_4;
+    @FXML MenuItem scenario_1_5;
     @FXML MenuItem scenario_2_1;
     @FXML MenuItem scenario_2_2;
     @FXML MenuItem scenario_2_3;
     @FXML MenuItem scenario_2_4;
+    @FXML MenuItem scenario_2_5;
     @FXML Button btnStart;
     @FXML Button btnPause;
     @FXML Button btnReset;
@@ -355,6 +357,18 @@ public class MainController
         this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
+    public void left_Scenario_5_RestrictMovment() throws IOException
+    {
+        setSettingsController(currentController);
+        this.isLockDown1 = false;
+        this.isWalls1 = false;
+        this.isRestrictionMovement1 =true;
+        closePreviousTask();
+        changeController(currentController);
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
+        App.setRoot("corona bounce");
+    }
 
     public void left_Scenario_2_Wall() throws IOException
     {
@@ -398,6 +412,19 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
+    public void right_Scenario_5_RestrictMovment() throws IOException
+    {
+        setSettingsController(currentController);
+        this.isLockDown2 = false;
+        this.isWalls2 = false;
+        this.isRestrictionMovement2 =true;
+        closePreviousTask();
+        changeController(currentController);
+        initNewPopulation();
+        btnStart.setDisable(false);
+        this.currentController.setState(Controllable.eState.Paused);
+        App.setRoot("corona bounce");
+    }
     public void right_Scenario_1_Lockdown() throws IOException
     {
         setSettingsController(currentController);
@@ -411,7 +438,6 @@ public class MainController
         this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
-
     public void right_Scenario_2_Wall() throws IOException
     {
         setSettingsController(currentController);
