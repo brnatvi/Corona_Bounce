@@ -44,6 +44,8 @@ public class MainController
     private boolean isLockDown2 = false;          // has right population (population2) lockdown
     private boolean isWalls1 = false;             // has left population (population1) mobile bounds
     private boolean isWalls2 = false;             // has right population (population2) mobile bounds
+    private boolean isRestrictionMouvement1 = false;
+    private boolean isRestrictionMouvement2 = false;
     // private List<Wall> walls;                     // list of mobile bounds
 
     private XYChart.Series healthy1;              // charts and area chart tor population1's graph
@@ -102,11 +104,11 @@ public class MainController
      */
     public void changeController(Controllable c)
     {
-        this.zone1 = new Zone(c,isLockDown1,isWalls1,false,1);
+        this.zone1 = new Zone(c,isLockDown1,isWalls1,isRestrictionMouvement1,1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
 
-        this.zone2 = new Zone(c,isLockDown2,isWalls2,false,1);
+        this.zone2 = new Zone(c,isLockDown2,isWalls2,isRestrictionMouvement2,1);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
 
@@ -346,6 +348,7 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown1 = true;
         this.isWalls1 = false;
+        this.isRestrictionMouvement1 = false;
         closePreviousTask();
         changeController(currentController);
         btnStart.setDisable(false);
@@ -358,6 +361,7 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown1 = false;
         this.isWalls1 = true;
+        this.isRestrictionMouvement1 = false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -371,6 +375,7 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown1 = false;
         this.isWalls1 = false;
+        this.isRestrictionMouvement1 = false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -384,6 +389,7 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown1 = true;
         this.isWalls1 = true;
+        this.isRestrictionMouvement1 = false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -397,6 +403,7 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown2 = true;
         this.isWalls2 = false;
+        this.isRestrictionMouvement2 = false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -410,6 +417,7 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown2 = false;
         this.isWalls2 = true;
+        this.isRestrictionMouvement2 = false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -423,6 +431,7 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown2 = false;
         this.isWalls2 = false;
+        this.isRestrictionMouvement2 = false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -436,6 +445,7 @@ public class MainController
         setSettingsController(currentController);
         this.isLockDown2 = true;
         this.isWalls2 = true;
+        this.isRestrictionMouvement2 = false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();

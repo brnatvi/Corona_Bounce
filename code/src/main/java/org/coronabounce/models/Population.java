@@ -24,13 +24,13 @@ public class Population implements Displayable {
 
     //========================= Constructors ==========================================================================/
 
-    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean Confinement, boolean isWall, boolean RestrictionMouvement,int nbZones) {
+    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean isLockDown, boolean isWall, boolean isRestrictionMouvement,int nbZones) {
         //this.nbZones=nbZones;
         this.controller = controller;
         data = new Data();
         timer = new Timer();
 
-        if(Confinement){
+        if(isLockDown){
             for (int i = 0; i < nbH; i++) {
                 CoquilleBille coc = new ConfinedBille(null);
                 Individual in = new Healthy(coc, this);
@@ -72,7 +72,7 @@ public class Population implements Displayable {
             }
 
         }
-        if(RestrictionMouvement) {this.RestrictMouvement();}
+        if(isRestrictionMouvement) {this.RestrictMouvement();}
         if(isWall){
           createWalls(4);
           for (Wall wall : listWall ) {
@@ -95,8 +95,8 @@ public class Population implements Displayable {
     }
 
 
-    public Population(Controllable controller, int nbIndividus,boolean Confinement, boolean isWall, boolean RestrictionMouvement,int nbZones) {
-        this(controller, nbIndividus - 1, 1, 0,Confinement,isWall,RestrictionMouvement,nbZones);
+    public Population(Controllable controller, int nbIndividus,boolean isLockDown, boolean isWall, boolean isRestrictionMouvement,int nbZones) {
+        this(controller, nbIndividus - 1, 1, 0,isLockDown,isWall,isRestrictionMouvement,nbZones);
     }
     public Population(){}
     public List<CoquilleBille> getAllPoints() {
@@ -155,7 +155,7 @@ public class Population implements Displayable {
 
     public void Rebound (CoquilleBille c){
         for(CoquilleBille coc:listCoquille){
-            if(coc != c && this.distance(coc,c)<7){
+            if(coc != c && this.distance(coc,c)<5){
                coc.bounce();
                c.bounce();
             }
@@ -171,7 +171,13 @@ public class Population implements Displayable {
     }
 
 
-
+    public void separate(int nbZones)
+    {
+        for(CoquilleBille coc : listCoquille) {
+            // mur.HitWallInX(coc,nbZones);
+            // mur.separatePop1(coc,nbZones);
+        }
+    }
 
     public double distance(CoquilleBille i1, CoquilleBille i2) {
         double x1 = i1.getPosition().getX();
@@ -222,10 +228,8 @@ public class Population implements Displayable {
           // for (Wall wall : getListWall() ) {
           //   wall.makeWall();
           // }
-
           coc.move();
           Rebound(coc);
-
         }
     }
 
