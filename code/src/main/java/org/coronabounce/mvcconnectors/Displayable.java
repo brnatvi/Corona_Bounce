@@ -77,5 +77,4 @@ public interface Displayable
      * @summary Return list of thicknesses of all walls
      */
     public ArrayList<Double> getThicknessesOfWalls();
-
 }

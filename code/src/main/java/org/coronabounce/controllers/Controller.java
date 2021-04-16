@@ -20,6 +20,7 @@ public class Controller implements Controllable
     private static double diametreX = 15;
     private static double diametreY = 10;
     private static double thickness = 4;              // thickness of the walls
+    private int WALLS_COUNT = 4;
 
     private Controllable.eState state = Controllable.eState.Paused;   // enum variable to control all our timers at the same time
     ReentrantLock statLock = new ReentrantLock();                   // variable to make lock/unlock the threads
@@ -28,7 +29,7 @@ public class Controller implements Controllable
 
     /**
      * @summary Get value of enum state.
-     * Made thread-saved because state is shared by many processes.
+     * Made thread-save because state is shared by many processes.
      */
     @Override
     public Controllable.eState getState()
@@ -41,7 +42,7 @@ public class Controller implements Controllable
 
     /**
      * @summary Change value of enum state.
-     * Made thread-saved because state is shared by many processes.
+     * Made thread-save because state is shared by many processes.
      */
     @Override
     public void setState(Controllable.eState newState)
@@ -127,4 +128,11 @@ public class Controller implements Controllable
     @Override
     public void setDurationHealing(long time) { DURATION_HEALING = time; }
 
+    //====================================== Walls Settings ===========================================================/
+
+    @Override
+    public int getWallsCount() { return WALLS_COUNT;}
+
+    @Override
+    public void setWallsCount(int count) { WALLS_COUNT = count;}
 }

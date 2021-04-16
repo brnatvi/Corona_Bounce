@@ -74,7 +74,7 @@ public class Population implements Displayable {
         }
         if(isRestrictionMovement) {this.RestrictMovement();}
         if(isWall){
-          createWalls(4);
+          createWalls(controller.getWallsCount());
           for (Wall wall : listWall ) {
             wall.makeWallGoDown(this);
           }
