@@ -24,7 +24,7 @@ public class Population implements Displayable {
 
     //========================= Constructors ==========================================================================/
 
-    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean Confinement,boolean RestrictionMouvement,int nbZones) {
+    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean Confinement, boolean isWall, boolean RestrictionMouvement,int nbZones) {
         //this.nbZones=nbZones;
         this.controller = controller;
         data = new Data();
@@ -73,7 +73,10 @@ public class Population implements Displayable {
 
             if(RestrictionMouvement) this.RestrictMouvement();
         }
-        createWalls(4);
+        if(isWall){
+          System.out.println("true");//@a
+          createWalls(4);
+        }
 
         for (Wall wall : listWall ) {
             wall.makeWallGoDown(this);
@@ -93,8 +96,8 @@ public class Population implements Displayable {
     }
 
 
-    public Population(Controllable controller, int nbIndividus,boolean Confinement,boolean RestrictionMouvement,int nbZones) {
-        this(controller, nbIndividus - 1, 1, 0,Confinement,RestrictionMouvement,nbZones);
+    public Population(Controllable controller, int nbIndividus,boolean Confinement, boolean isWall, boolean RestrictionMouvement,int nbZones) {
+        this(controller, nbIndividus - 1, 1, 0,Confinement,isWall,RestrictionMouvement,nbZones);
     }
     public Population(){}
     public List<CoquilleBille> getAllPoints() {

@@ -102,11 +102,11 @@ public class MainController
      */
     public void changeController(Controllable c)
     {
-        this.zone1 = new Zone(c,isLockDown1,isWalls1,1);
+        this.zone1 = new Zone(c,isLockDown1,isWalls1,false,1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
 
-        this.zone2 = new Zone(c,isLockDown2,isWalls2,1);
+        this.zone2 = new Zone(c,isLockDown2,isWalls2,false,1);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
 
@@ -522,7 +522,7 @@ public class MainController
         tlGraph = new Timeline(new KeyFrame(Duration.millis(choosePeriod()), ev ->
         {
             //long startTime = System.currentTimeMillis();                           // code for debug
-            
+
             healthy1.getData().clear();
             sick1.getData().clear();
             recovered1.getData().clear();
