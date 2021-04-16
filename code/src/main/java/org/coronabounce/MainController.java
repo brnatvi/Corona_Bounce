@@ -40,12 +40,12 @@ public class MainController
     private List<CoquilleBille> points2;          // list of population2's individuals
     private Timeline tlPoints;                    // timeline for animation of point's moving
     private Timeline tlGraph;                     // timeline for animation of graph
-    private boolean isLockDown1 = false;          // has left population (population1) lockdown
-    private boolean isLockDown2 = false;          // has right population (population2) lockdown
-    private boolean isWalls1 = false;             // has left population (population1) mobile bounds
-    private boolean isWalls2 = false;             // has right population (population2) mobile bounds
-    private boolean isRestrictionMovement1 = false;
-    private boolean isRestrictionMovement2 = false;
+    private boolean isLockDown1;          // has left population (population1) lockdown
+    private boolean isLockDown2;          // has right population (population2) lockdown
+    private boolean isWalls1;             // has left population (population1) mobile bounds
+    private boolean isWalls2;             // has right population (population2) mobile bounds
+    private boolean isRestrictionMovement1;
+    private boolean isRestrictionMovement2;
     // private List<Wall> walls;                     // list of mobile bounds
 
     private XYChart.Series healthy1;              // charts and area chart tor population1's graph
@@ -88,6 +88,12 @@ public class MainController
         this.controller = new Controller();
         changeController(this.controller);
         this.currentController = controller;
+        isLockDown1 = false;
+        isLockDown2 = false;
+        isWalls1 = false;
+        isWalls2 = false;
+        isRestrictionMovement1 = false;
+        isRestrictionMovement2 = false;
         // this.walls = model1.getListWall();
     }
 
@@ -343,6 +349,7 @@ public class MainController
         this.isRestrictionMovement1 = false;
         closePreviousTask();
         changeController(currentController);
+        initNewPopulation();
         btnStart.setDisable(false);
         this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
@@ -398,6 +405,7 @@ public class MainController
         this.isRestrictionMovement1 =true;
         closePreviousTask();
         changeController(currentController);
+        initNewPopulation();
         btnStart.setDisable(false);
         this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
@@ -740,7 +748,7 @@ public class MainController
                 ArrayList<Double> heightOfWalls2 = model2.getHeigthsOfWalls();
                 ArrayList<Double> thicknesses2 = model2.getThicknessesOfWalls();
 
-                for (int i = 0; i < this.model1.getListWall().size(); i++)
+                for (int i = 0; i < this.model2.getListWall().size(); i++)
                 {
                     System.out.println("Draw walls in panel 2 = " + positionX2.get(i));              // code for debug
                     Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 4) * koeffW, 0,
