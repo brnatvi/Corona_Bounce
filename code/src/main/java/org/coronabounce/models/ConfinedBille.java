@@ -55,9 +55,9 @@ public class ConfinedBille extends CoquilleBille {
 
         reduceSpeed();
         stayNextToHome();
-        bounceIfOutOfZone();
-        this.getPosition().setPos(this.getPosition().getX()+this.getMovingSpeedX(),this.getPosition().getY()+this.getMovingSpeedY());
-
+       // bounceIfOutOfZone();
+       // this.getPosition().setPos(this.getPosition().getX()+this.getMovingSpeedX(),this.getPosition().getY()+this.getMovingSpeedY());
+     super.move();
 
 
     }
@@ -88,7 +88,7 @@ public class ConfinedBille extends CoquilleBille {
             }
            // moveABitRandomly();
         }
-        this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
+        //this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
     }
 
 }
