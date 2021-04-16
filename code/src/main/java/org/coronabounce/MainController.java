@@ -73,16 +73,6 @@ public class MainController
     @FXML Label labelRecovered2;
     @FXML MenuBar mbScenario1;
     @FXML MenuBar mbScenario2;
-    @FXML MenuItem scenario_1_1;                  //TODO delete them if will not use them in java
-    @FXML MenuItem scenario_1_2;
-    @FXML MenuItem scenario_1_3;
-    @FXML MenuItem scenario_1_4;
-    @FXML MenuItem scenario_1_5;
-    @FXML MenuItem scenario_2_1;
-    @FXML MenuItem scenario_2_2;
-    @FXML MenuItem scenario_2_3;
-    @FXML MenuItem scenario_2_4;
-    @FXML MenuItem scenario_2_5;
     @FXML Button btnStart;
     @FXML Button btnPause;
     @FXML Button btnReset;
@@ -539,10 +529,11 @@ public class MainController
 
     /**
      * @summary Timeline launcher for drawing the graphs in AreaChart
-     * To show the layers of AreaChart correctly with superposition we take:
-     *      NbRecovered = NbRecovered,
-     *      nbSick = nbSick + nbRecovered,
-     *      all the rest: NbHealthy + NbIncubating takes like 100%
+     * To show correctly superposed layers in AreaChart we take:
+     *      - NbHealthy taken as 100% (bottom layer)
+     *      - nbSick = nbSick + NbIncubating + nbRecovered (middle layer)
+     *      - NbRecovered = NbRecovered (top layer)
+     * Superposed they present ratio of these tree values (nbHealthy, nbSick/Incubating and nbRecovered) in 100%
      */
     private void launchDrawGraph()
     {
@@ -609,7 +600,7 @@ public class MainController
     }
 
     /**
-     * @summary Timeline launcher to draw moving points and update statistics
+     * @summary Timeline launcher to draw moving points, walls and update statistics
      */
     private void launchPointsAndStat()
     {

@@ -62,7 +62,7 @@ public class Zone  {
                     //Pour les murs: p.separate(nbZones);
                     p.Contacts();
                     p.Moving_Bille();
-                    // System.out.println("Zone Thread run " + Thread.currentThread().getId());
+                    //System.out.println("Zone Thread run " + Thread.currentThread().getId());
                 }
             }
         },0,1*33);

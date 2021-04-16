@@ -8,6 +8,7 @@ import java.util.TimerTask;
 public class Incubating extends Individual{
   public Incubating(CoquilleBille coc, Population p){
     super(coc,p);
+    p.nbIncubating++;
     p.getT().schedule(new TimerTask() {
         @Override
         public void run() {

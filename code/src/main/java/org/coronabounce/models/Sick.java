@@ -10,6 +10,7 @@ public class Sick extends Individual {
   public Sick(CoquilleBille coc, Population p){
       super(coc,p);
       p.nbSick++;
+      p.nbIncubating--;
       p.getT().schedule(new TimerTask()
       {
           @Override
@@ -17,9 +18,9 @@ public class Sick extends Individual {
           {
               if (p.getController().getState() == Controllable.eState.Working)
               {
-                  // System.out.println("Sick Thread run " + Thread.currentThread().getId());
                   coc.setIndividual(new Recovered(coc, p));
                   p.nbSick--;
+                  //System.out.println("Population Thread run " + Thread.currentThread().getId());
               }
           }
       },p.getDurationCovid()+p.getDurationHealing());

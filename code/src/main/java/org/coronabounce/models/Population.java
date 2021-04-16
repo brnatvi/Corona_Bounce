@@ -15,6 +15,7 @@ public class Population implements Displayable {
     public int nbSick;
     public int nbHealthy;
     public int nbRecovered;
+    public int nbIncubating;
     private List<Wall> listWall = new ArrayList<Wall>();
     private Timer timer;
     private TimerTask timerTask = null;
@@ -311,10 +312,11 @@ public class Population implements Displayable {
 
     /**
      * @summary Transfers NbSick and NbRecovered to Data to save them to draw AreaChart.
-     * To show the layers of AreaChart correctly with superposition we take
-     * NbRecovered = NbRecovered,
-     * nbSick = nbSick + nbRecovered,
-     * all the rest: NbHealthy + NbIncubating takes like 100%
+     * To show correctly superposed layers in AreaChart we take:
+     *      - NbHealthy taken as 100% (bottom layer)
+     *      - nbSick = nbSick + NbIncubating + nbRecovered (middle layer)
+     *      - NbRecovered = NbRecovered (top layer)
+     * Superposed they present ratio of these tree values (nbHealthy, nbSick/Incubating and nbRecovered) in 100%
      */
     @Override
     public void saveStatToData()
@@ -325,7 +327,7 @@ public class Population implements Displayable {
             public void run()
             {
                 if (controller.getState() == Controllable.eState.Working){
-                    data.setData(100 * (nbSick + nbRecovered) / controller.getPersonsCount(), 100 * nbRecovered / controller.getPersonsCount());
+                    data.setData(100 * (nbSick + nbIncubating + nbRecovered) / controller.getPersonsCount(), 100 * nbRecovered / controller.getPersonsCount());
                     //System.out.println("Statistic Thread run " + Thread.currentThread().getId());
                 }
             }
