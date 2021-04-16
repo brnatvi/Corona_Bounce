@@ -71,16 +71,15 @@ public class Population implements Displayable {
                 listCoquille.add(coc);
             }
 
-            if(RestrictionMouvement) this.RestrictMouvement();
         }
+        if(RestrictionMouvement) {this.RestrictMouvement();}
         if(isWall){
-          System.out.println("true");//@a
           createWalls(4);
+          for (Wall wall : listWall ) {
+            wall.makeWallGoDown(this);
+          }
         }
 
-        for (Wall wall : listWall ) {
-            wall.makeWallGoDown(this);
-        }
     }
     /**
     *{@summary Create the walls.}<br>

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class ZoneTest extends Assertions{
   @Test
   public void testSetWidth(){
-    Zone zone = new Zone(new Controller(),false,false,1);
+    Zone zone = new Zone(new Controller(),false,false,false,1);
     double w=Controller.getWidth();
     Controller.setWidth(-100);
     assertEquals(w,Controller.getWidth());
@@ -22,11 +22,11 @@ public class ZoneTest extends Assertions{
   }
   @Test
   public void testOutOfX(){
-    Zone zone = new Zone(new Controller(),false,false,1);
+    Zone zone = new Zone(new Controller(),false,false,false,1);
     Controller.setWidth(1);
     Controller c = new Controller();
     c.setRadiusDot(0);
-    Population p = new Population(c, 0, 0, 0,false,false,1);
+    Population p = new Population(c, 0, 0, 0,false,false,false,1);
     Individual in = new Sick(new CoquilleBille(null),p);
     CoquilleBille coc = new CoquilleBille(in);
     assertTrue(coc.outOfX(-1));
