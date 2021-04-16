@@ -731,7 +731,7 @@ public class MainController
 
                 for (int i = 0; i < this.model1.getListWall().size(); i++)
                 {
-                    System.out.println("Walls in panel 1 = " + positionX1.get(i));                   // code for debug
+                    System.out.println("Draw walls in panel 1 = " + positionX1.get(i));                   // code for debug
                     Rectangle wall1 = new Rectangle((positionX1.get(i) - thicknesses1.get(i) / 4) * koeffW, 0,
                                                     thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
                     wall1.setFill(valueOf("008B8B"));
@@ -751,7 +751,7 @@ public class MainController
 
                 for (int i = 0; i < this.model1.getListWall().size(); i++)
                 {
-                    System.out.println("Walls in panel 2" + positionX2.get(i));              // code for debug
+                    System.out.println("Draw walls in panel 2 = " + positionX2.get(i));              // code for debug
                     Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 4) * koeffW, 0,
                                                     thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
 
