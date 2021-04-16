@@ -44,7 +44,7 @@ public class MainController
     private boolean isLockDown2 = false;          // has right population (population2) lockdown
     private boolean isWalls1 = false;             // has left population (population1) mobile bounds
     private boolean isWalls2 = false;             // has right population (population2) mobile bounds
-    private List<Wall> walls;                     // list of mobile bounds
+    // private List<Wall> walls;                     // list of mobile bounds
 
     private XYChart.Series healthy1;              // charts and area chart tor population1's graph
     private XYChart.Series sick1;
@@ -94,7 +94,7 @@ public class MainController
         this.controller = new Controller();
         changeController(this.controller);
         this.currentController = controller;
-        this.walls = model1.getListWall();
+        // this.walls = model1.getListWall();
     }
 
     /**
@@ -684,13 +684,14 @@ public class MainController
 
         if (is_panel1)
         {
+          System.out.println(isWalls1);//@a
             if (isWalls1)
             {
                 ArrayList<Double> positionX1 = model1.getPositionsOfWalls();
                 ArrayList<Double> heightOfWalls1 = model1.getHeigthsOfWalls();
                 ArrayList<Double> thicknesses1 = model1.getThicknessesOfWalls();
 
-                for (int i = 0; i < this.walls.size(); i++)
+                for (int i = 0; i < this.model1.getListWall().size(); i++)
                 {
                     Rectangle wall1 = new Rectangle((positionX1.get(i) - thicknesses1.get(i) / 4) * koeffW, 0,
                                                     thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
@@ -709,8 +710,9 @@ public class MainController
                 ArrayList<Double> heightOfWalls2 = model2.getHeigthsOfWalls();
                 ArrayList<Double> thicknesses2 = model2.getThicknessesOfWalls();
 
-                for (int i = 0; i < this.walls.size(); i++)
+                for (int i = 0; i < this.model1.getListWall().size(); i++)
                 {
+                  System.out.println();
                     Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 4) * koeffW, 0,
                                                     thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
 
