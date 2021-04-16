@@ -35,28 +35,12 @@ public class ConfinedBille extends CoquilleBille {
 
 
     }
-    /**
-     *{@summary bounce.}<br>
-     *@param inX True if bounce in x coor.
-     */
-    protected void bounce(boolean inX){
-        double a=genererDouble();
-        double b=genererDouble();
-        double c= genererInt(5,10)*a;
-        double d= genererInt(6,12)*b;
-        if(inX){this.setMovingSpeed(this.getMovingSpeedX()-b,this.getMovingSpeedY()-c); }
-        else{ this.setMovingSpeed(this.getMovingSpeedX()+b,this.getMovingSpeedY()-c);}
-        /*if(inX){ this.getPosition().setPosX(this.getStartingPosition().getX()); }
-        else{ this.getPosition().setPosY(this.getStartingPosition().getX());*/}
-
 
     @Override
     public void move() {
 
         reduceSpeed();
         stayNextToHome();
-       // bounceIfOutOfZone();
-       // this.getPosition().setPos(this.getPosition().getX()+this.getMovingSpeedX(),this.getPosition().getY()+this.getMovingSpeedY());
      super.move();
 
 
