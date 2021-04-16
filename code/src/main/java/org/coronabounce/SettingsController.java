@@ -31,7 +31,6 @@ public class SettingsController
     @FXML
     public void passSettingsToController(MouseEvent mouseEvent) throws IOException {
         this.c = new Controller();
-//        int newIndividualsNumber = 20;
         int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
         c.setPersonsCount(newIndividualsNumber);
         double newCovidDuration = (sliderCovidDuration.getValue())*1000;
