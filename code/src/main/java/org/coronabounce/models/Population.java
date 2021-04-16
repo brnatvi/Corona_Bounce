@@ -155,7 +155,7 @@ public class Population implements Displayable {
 
     public void Rebound (CoquilleBille c){
         for(CoquilleBille coc:listCoquille){
-            if(coc != c && this.distance(coc,c)<5){
+            if(coc != c && this.distance(coc,c)<7){
                coc.bounce();
                c.bounce();
             }
@@ -171,13 +171,7 @@ public class Population implements Displayable {
     }
 
 
-    public void separate(int nbZones)
-    {
-        for(CoquilleBille coc : listCoquille) {
-            // mur.HitWallInX(coc,nbZones);
-            // mur.separatePop1(coc,nbZones);
-        }
-    }
+
 
     public double distance(CoquilleBille i1, CoquilleBille i2) {
         double x1 = i1.getPosition().getX();
@@ -228,8 +222,10 @@ public class Population implements Displayable {
           // for (Wall wall : getListWall() ) {
           //   wall.makeWall();
           // }
+
           coc.move();
           Rebound(coc);
+
         }
     }
 
