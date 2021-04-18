@@ -39,7 +39,7 @@
             </VBox>
             <VBox>
                 <Slider fx:id="sliderHealingDuration" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0"
-                        max="6.0" min="2.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true"/>
+                        max="10.0" min="6.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true"/>
                 <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Healing duration (in seconds)"
                       wrappingWidth="360.0">
                     <font>
@@ -50,8 +50,8 @@
         </HBox>
         <HBox alignment="TOP_CENTER" spacing="50.0" style="-fx-padding: 20 0 20 0;">
             <VBox>
-                <Slider fx:id="sliderContaminationRadius" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0"
-                        max="6.0" min="2.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true"/>
+                <Slider fx:id="sliderContaminationRadius" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="10.0" max="30.0"
+                        min="10.0" prefHeight="16.0" prefWidth="308.0" showTickLabels="true"/>
                 <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contamination radius (in pixels)"
                       wrappingWidth="360.0">
                     <font>
@@ -61,7 +61,7 @@
             </VBox>
             <VBox>
                 <Slider fx:id="sliderNonContaminationDuration" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0"
-                        max="6.0" min="2.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true"/>
+                        max="7.0" min="3.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true"/>
                 <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Immunity duration (in seconds)"
                       wrappingWidth="360.0">
                     <font>
