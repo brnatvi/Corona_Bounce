@@ -139,11 +139,11 @@
                <menus>
                   <Menu mnemonicParsing="false" text="Scenarios">
                      <items>
-                        <MenuItem fx:id="scenario_1_1" mnemonicParsing="false" onAction="#left_Scenario_1_Lockdown" text="scenario : Lockdown" />
-                        <MenuItem fx:id="scenario_1_2" mnemonicParsing="false" onAction="#left_Scenario_2_Wall" text="scenario : Wall" />
-                        <MenuItem fx:id="scenario_1_3" mnemonicParsing="false" onAction="#left_Scenario_3_WithoutScenario" text="scenario : No scenario" />
-                        <MenuItem fx:id="scenario_1_4" mnemonicParsing="false" onAction="#left_Scenario_4_WallAndLockdown" text="scenario : Wall + Lockdown" />
-                        <MenuItem fx:id="scenario_1_5" mnemonicParsing="false" onAction="#left_Scenario_5_RestrictMovement" text="scenario : Restrict Movement" />
+                        <MenuItem fx:id="scenario_1_1" mnemonicParsing="false" onAction="#left_Scenario_1_Lockdown" text=" Lockdown" />
+                        <MenuItem fx:id="scenario_1_2" mnemonicParsing="false" onAction="#left_Scenario_2_Wall" text=" Wall" />
+                        <MenuItem fx:id="scenario_1_3" mnemonicParsing="false" onAction="#left_Scenario_3_WithoutScenario" text=" No scenario" />
+                        <MenuItem fx:id="scenario_1_4" mnemonicParsing="false" onAction="#left_Scenario_4_WallAndLockdown" text=" Wall + Lockdown" />
+                        <MenuItem fx:id="scenario_1_5" mnemonicParsing="false" onAction="#left_Scenario_5_RestrictMovement" text=" Restrict Movement" />
                      </items>
                   </Menu>
                </menus>
