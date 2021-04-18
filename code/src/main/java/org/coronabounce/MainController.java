@@ -94,7 +94,6 @@ public class MainController
         isWalls2 = false;
         isRestrictionMovement1 = false;
         isRestrictionMovement2 = false;
-        // this.walls = model1.getListWall();
     }
 
     /**
@@ -371,10 +370,11 @@ public class MainController
 
     public void left_Scenario_3_WithoutScenario() throws IOException
     {
+        
         setSettingsController(currentController);
-        this.isLockDown1 = false;
-        this.isWalls1 = false;
-        this.isRestrictionMovement1 = false;
+        isLockDown1=false;
+        this.isWalls1 =false;
+        this.isRestrictionMovement1 =false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -559,7 +559,6 @@ public class MainController
 
         tlGraph = new Timeline(new KeyFrame(Duration.millis(choosePeriod()), ev ->
         {
-            //long startTime = System.currentTimeMillis();                           // code for debug
 
             healthy1.getData().clear();
             sick1.getData().clear();
@@ -596,11 +595,7 @@ public class MainController
 
             model1.getData().unLock();
             model2.getData().unLock();
-
-            //long stopTime = System.currentTimeMillis();                                // code for debug
-            //long diff = stopTime - startTime;
-            //System.out.println("Difference: " + diff);
-            //System.out.println("Graph Thread: " + Thread.currentThread().getId());
+            
 
         }));
         tlGraph.setCycleCount(Animation.INDEFINITE);
@@ -675,7 +670,6 @@ public class MainController
             for (CoquilleBille cb : points1)
             {
                 drawPoint(cb, true, koeffW, koeffH);
-                //System.out.println("Draw point = " + cb.getPosition().getX());         // code for debug
             }
         }
         else
@@ -731,12 +725,9 @@ public class MainController
 
                 for (int i = 0; i < controller.getWallsCount(); i++)
                 {
-                    //System.out.println("Draw walls in panel 1 = " + positionX1.get(i));                   // code for debug
                     Rectangle wall1 = new Rectangle((positionX1.get(i) - thicknesses1.get(i) / 4) * koeffW, 0,
                                                     thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
                     wall1.setFill(valueOf("008B8B"));
-
-                    // put into panel1
                     panel1.getChildren().add(wall1);
                 }
             }
@@ -751,13 +742,11 @@ public class MainController
 
                 for (int i = 0; i < controller.getWallsCount(); i++)
                 {
-                    //System.out.println("Draw walls in panel 2 = " + positionX2.get(i));              // code for debug
                     Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 4) * koeffW, 0,
                                                     thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
 
                     wall2.setFill(valueOf("008B8B"));
-
-                    // put into panel2
+                    
                     panel2.getChildren().add(wall2);
                 }
             }

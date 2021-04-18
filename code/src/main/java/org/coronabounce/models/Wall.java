@@ -46,10 +46,6 @@ public class Wall  {
       if(curentX+radius > positionX+thikness/2 && futurX-radius < positionX+thikness/2){ return true;}
       return false;
     }
-
-
-
-
     /**
     *{@summary Return true if it will cross the wall in y.}<br>
     *It will hit in Y only if wall is enoth low.<br>

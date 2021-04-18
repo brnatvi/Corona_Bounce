@@ -20,7 +20,6 @@ public class Sick extends Individual {
               {
                   coc.setIndividual(new Recovered(coc, p));
                   p.nbSick--;
-                  //System.out.println("Population Thread run " + Thread.currentThread().getId());
               }
           }
       },p.getDurationCovid()+p.getDurationHealing());
