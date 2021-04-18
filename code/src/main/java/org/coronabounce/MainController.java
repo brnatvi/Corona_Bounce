@@ -20,7 +20,6 @@ import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.data.Data;
 import org.coronabounce.models.CoquilleBille;
-import org.coronabounce.models.Wall;
 import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
@@ -46,7 +45,6 @@ public class MainController
     private boolean isWalls2;             // has right population (population2) mobile bounds
     private boolean isRestrictionMovement1;
     private boolean isRestrictionMovement2;
-    // private List<Wall> walls;                     // list of mobile bounds
 
     private XYChart.Series healthy1;              // charts and area chart tor population1's graph
     private XYChart.Series sick1;
@@ -94,7 +92,6 @@ public class MainController
         isWalls2 = false;
         isRestrictionMovement1 = false;
         isRestrictionMovement2 = false;
-        // this.walls = model1.getListWall();
     }
 
     /**
@@ -528,7 +525,7 @@ public class MainController
      */
     private int choosePeriod()
     {
-        if (controller.getPersonsCount() <= 100)
+        if (currentController.getPersonsCount() <= 100)
         {
             return 100;
         }
@@ -668,8 +665,8 @@ public class MainController
      */
     private void drawPopulation(boolean is_panel1)
     {
-        double koeffW = panel1.getWidth()/controller.getSpaceSize()[0];
-        double koeffH = panel1.getHeight()/controller.getSpaceSize()[1];
+        double koeffW = panel1.getWidth()/currentController.getSpaceSize()[0];
+        double koeffH = panel1.getHeight()/currentController.getSpaceSize()[1];
         if (is_panel1)
         {
             for (CoquilleBille cb : points1)
@@ -697,7 +694,7 @@ public class MainController
         String state = cb.getIndividual().healthState();
         double coordX = cb.getPosition().getX() * koeffW;
         double coordY = cb.getPosition().getY() * koeffH;
-        Circle point = new Circle(coordX, coordY, controller.getRadiusDot() * koeffH);
+        Circle point = new Circle(coordX, coordY, currentController.getRadiusDot() * koeffH);
         if (state.equals("Healthy")) {point.setFill(valueOf("70e000"));}    //green
         if (state.equals("Incubating")) {point.setFill(valueOf("ff1830"));}  //red
         if (state.equals("Recovered")) {point.setFill(valueOf("ffd22f"));}  //yellow
@@ -718,8 +715,8 @@ public class MainController
      */
     private void drawWalls(boolean is_panel1)
     {
-        double koeffW = panel1.getWidth() / controller.getSpaceSize()[0];
-        double koeffH = panel1.getHeight() / controller.getSpaceSize()[1];
+        double koeffW = panel1.getWidth() / currentController.getSpaceSize()[0];
+        double koeffH = panel1.getHeight() / currentController.getSpaceSize()[1];
 
         if (is_panel1)
         {
@@ -729,7 +726,7 @@ public class MainController
                 ArrayList<Double> heightOfWalls1 = model1.getHeigthsOfWalls();
                 ArrayList<Double> thicknesses1 = model1.getThicknessesOfWalls();
 
-                for (int i = 0; i < controller.getWallsCount(); i++)
+                for (int i = 0; i < currentController.getWallsCount(); i++)
                 {
                     //System.out.println("Draw walls in panel 1 = " + positionX1.get(i));                   // code for debug
                     Rectangle wall1 = new Rectangle((positionX1.get(i) - thicknesses1.get(i) / 4) * koeffW, 0,
@@ -749,7 +746,7 @@ public class MainController
                 ArrayList<Double> heightOfWalls2 = model2.getHeigthsOfWalls();
                 ArrayList<Double> thicknesses2 = model2.getThicknessesOfWalls();
 
-                for (int i = 0; i < controller.getWallsCount(); i++)
+                for (int i = 0; i < currentController.getWallsCount(); i++)
                 {
                     //System.out.println("Draw walls in panel 2 = " + positionX2.get(i));              // code for debug
                     Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 4) * koeffW, 0,
