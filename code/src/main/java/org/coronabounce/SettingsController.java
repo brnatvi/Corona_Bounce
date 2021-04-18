@@ -23,6 +23,7 @@ public class SettingsController
     @FXML Slider sliderContaminationRadius;
     @FXML Slider sliderHealingDuration;
     @FXML Slider sliderNonContaminationDuration;
+    @FXML Slider sliderWallsNumber;
 
 //    public void attributeIndividualsNumber() {
 //        int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
@@ -41,8 +42,8 @@ public class SettingsController
         c.setDurationHealing((long)newHealingDuration);
         double newNonContaminationDuration = (sliderNonContaminationDuration.getValue())*1000;
         c.setDurationNonContamination((long)newNonContaminationDuration);
-//        int newWallssNumber = Integer.parseInt(individualsNumberSettings.getText());
-//        c.setWallsCount(newWallssNumber);
+        double newWallsNumber = (sliderWallsNumber.getValue())*1000;
+        c.setWallsCount((int)newWallsNumber);
 
         // save new settings in currentController of MainController
         mainController.setSettingsController(c);
