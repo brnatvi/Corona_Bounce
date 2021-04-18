@@ -139,11 +139,11 @@
                <menus>
                   <Menu mnemonicParsing="false" text="Scenarios">
                      <items>
-                        <MenuItem fx:id="scenario_1_1" mnemonicParsing="false" onAction="#left_Scenario_1_Lockdown" text=" Lockdown" />
-                        <MenuItem fx:id="scenario_1_2" mnemonicParsing="false" onAction="#left_Scenario_2_Wall" text=" Wall" />
-                        <MenuItem fx:id="scenario_1_3" mnemonicParsing="false" onAction="#left_Scenario_3_WithoutScenario" text=" No scenario" />
-                        <MenuItem fx:id="scenario_1_4" mnemonicParsing="false" onAction="#left_Scenario_4_WallAndLockdown" text=" Wall + Lockdown" />
-                        <MenuItem fx:id="scenario_1_5" mnemonicParsing="false" onAction="#left_Scenario_5_RestrictMovement" text=" Restrict Movement" />
+                        <MenuItem fx:id="scenario_1_1" mnemonicParsing="false" onAction="#left_Scenario_1_SoftLockdown" text=" Soft lockdown " />
+                        <MenuItem fx:id="scenario_1_2" mnemonicParsing="false" onAction="#left_Scenario_2_StrictLockdown" text=" Strict lockdown " />
+                        <MenuItem fx:id="scenario_1_3" mnemonicParsing="false" onAction="#left_Scenario_3_Wall" text=" Boundaries " />
+                        <MenuItem fx:id="scenario_1_4" mnemonicParsing="false" onAction="#left_Scenario_4_WallAndLockdown" text=" Boundaries + Soft lockdown " />
+                        <MenuItem fx:id="scenario_1_5" mnemonicParsing="false" onAction="#left_Scenario_5_WithoutScenario" text=" No scenario " />
                      </items>
                   </Menu>
                </menus>
@@ -155,11 +155,11 @@
                <menus>
                   <Menu mnemonicParsing="false" text="Scenarios">
                      <items>
-                        <MenuItem fx:id="scenario_2_1" mnemonicParsing="false" onAction="#right_Scenario_1_Lockdown" text="Population under Lockdown" />
-                        <MenuItem fx:id="scenario_2_2" mnemonicParsing="false" onAction="#right_Scenario_2_Wall" text="Place the Bounds" />
-                        <MenuItem fx:id="scenario_2_3" mnemonicParsing="false" onAction="#right_Scenario_3_WithoutScenario" text="Without scenario" />
-                        <MenuItem fx:id="scenario_2_4" mnemonicParsing="false" onAction="#right_Scenario_4_WallAndLockdown" text="Bounds and Lockdown" />
-                        <MenuItem fx:id="scenario_2_5" mnemonicParsing="false" onAction="#right_Scenario_5_RestrictMovement" text="Restrict Movement" />
+                        <MenuItem fx:id="scenario_2_1" mnemonicParsing="false" onAction="#right_Scenario_1_SoftLockdown" text=" Soft lockdown " />
+                        <MenuItem fx:id="scenario_2_2" mnemonicParsing="false" onAction="#right_Scenario_2_StrictLockdown" text=" Strict lockdown " />
+                        <MenuItem fx:id="scenario_2_3" mnemonicParsing="false" onAction="#right_Scenario_3_Wall" text=" Boundaries " />
+                        <MenuItem fx:id="scenario_2_4" mnemonicParsing="false" onAction="#right_Scenario_4_WallAndLockdown" text=" Boundaries + Soft lockdown " />
+                        <MenuItem fx:id="scenario_2_5" mnemonicParsing="false" onAction="#right_Scenario_5_WithoutScenario" text=" No scenario " />
                      </items>
                   </Menu>
                </menus>

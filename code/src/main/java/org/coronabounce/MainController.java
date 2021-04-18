@@ -338,7 +338,7 @@ public class MainController
 
     //========================= MenuBar's functions ====================================================================/
 
-    public void left_Scenario_1_Lockdown() throws IOException
+    public void left_Scenario_1_SoftLockdown() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown1 = true;
@@ -352,12 +352,12 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void left_Scenario_2_Wall() throws IOException
+    public void left_Scenario_2_StrictLockdown() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown1 = false;
-        this.isWalls1 = true;
-        this.isRestrictionMovement1 = false;
+        this.isWalls1 = false;
+        this.isRestrictionMovement1 =true;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -366,11 +366,11 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void left_Scenario_3_WithoutScenario() throws IOException
+    public void left_Scenario_3_Wall() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown1 = false;
-        this.isWalls1 = false;
+        this.isWalls1 = true;
         this.isRestrictionMovement1 = false;
         closePreviousTask();
         changeController(currentController);
@@ -394,12 +394,12 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void left_Scenario_5_RestrictMovement() throws IOException
+    public void left_Scenario_5_WithoutScenario() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown1 = false;
         this.isWalls1 = false;
-        this.isRestrictionMovement1 =true;
+        this.isRestrictionMovement1 = false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -408,7 +408,7 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_1_Lockdown() throws IOException
+    public void right_Scenario_1_SoftLockdown() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown2 = true;
@@ -422,12 +422,12 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_2_Wall() throws IOException
+    public void right_Scenario_2_StrictLockdown() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown2 = false;
-        this.isWalls2 = true;
-        this.isRestrictionMovement2 = false;
+        this.isWalls2 = false;
+        this.isRestrictionMovement2 =true;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -436,12 +436,12 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_3_WithoutScenario() throws IOException
+    public void right_Scenario_3_Wall() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown2 = false;
-        this.isWalls2 = false;
-        this.isRestrictionMovement2 = false;
+        this.isWalls2 = true;
+        this.isRestrictionMovement2 =false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -464,12 +464,12 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_5_RestrictMovement() throws IOException
+    public void right_Scenario_5_WithoutScenario() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown2 = false;
         this.isWalls2 = false;
-        this.isRestrictionMovement2 =true;
+        this.isRestrictionMovement2 = false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -503,7 +503,7 @@ public class MainController
     }
 
     /**
-     * @summary Change enable/disable the button btn
+     * @summary Make enable/disable the button btn
      */
     public void makeEnable(Button btn)
     {
