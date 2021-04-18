@@ -11,10 +11,10 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #60b3ff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.coronabounce.SettingsController">
    <children>
       <Slider fx:id="sliderCovidDuration" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0" max="6.0" min="2.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
-      <Button fx:id="btnApplySettings" layoutX="356.0" layoutY="366.0" mnemonicParsing="false" onMouseClicked="#passSettingsToController" onMousePressed="#passSettingsToController" prefHeight="26.0" prefWidth="84.0" text="Apply" />
+      <Button fx:id="btnApplySettings" layoutX="536.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#passSettingsToController" onMousePressed="#passSettingsToController" prefHeight="26.0" prefWidth="84.0" text="Apply" />
       <TextField fx:id="individualsNumberSettings" layoutX="287.0" layoutY="84.0" prefHeight="36.0" prefWidth="53.0" text="0" />
       <Accordion layoutX="36.0" layoutY="45.0" />
-      <Text layoutX="57.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Persons number" wrappingWidth="197.0">
+      <Text layoutX="61.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Persons number" wrappingWidth="197.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -24,12 +24,12 @@
             <Font name="Avenir Book" size="24.0" />
          </font>
       </Text>
-      <Text layoutX="57.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Illness duration (in seconds)" wrappingWidth="360.0">
+      <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Illness duration (in seconds)" wrappingWidth="360.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="53.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contamination radius (in pixels)" wrappingWidth="453.0">
+      <Text layoutX="61.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contamination radius (in pixels)" wrappingWidth="453.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -48,5 +48,11 @@
          </font>
       </Text>
       <Slider fx:id="sliderNonContaminationDuration" blockIncrement="1.0" layoutX="432.0" layoutY="265.0" majorTickUnit="1.0" max="7.0" min="3.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
+      <TextField fx:id="individualsNumberSettings1" layoutX="287.0" layoutY="383.0" prefHeight="36.0" prefWidth="53.0" text="0" />
+      <Text layoutX="61.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Walls number" wrappingWidth="197.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

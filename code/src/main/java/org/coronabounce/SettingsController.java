@@ -41,6 +41,8 @@ public class SettingsController
         c.setDurationHealing((long)newHealingDuration);
         double newNonContaminationDuration = (sliderNonContaminationDuration.getValue())*1000;
         c.setDurationNonContamination((long)newNonContaminationDuration);
+//        int newWallssNumber = Integer.parseInt(individualsNumberSettings.getText());
+//        c.setWallsCount(newWallssNumber);
 
         // save new settings in currentController of MainController
         mainController.setSettingsController(c);
