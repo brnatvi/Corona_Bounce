@@ -156,9 +156,11 @@ public class Population implements Displayable {
 
     public void Rebound (CoquilleBille c){
         for(CoquilleBille coc:listCoquille){
-            if(coc != c && this.distance(coc,c)<5){
-               coc.bounce();
-               c.bounce();
+            if(coc != c && this.distance(coc,c)<5 ){
+               //coc.bounce();
+              // c.bounce();
+               coc.bounce1(true,coc);
+               coc.bounce1(false,c);
             }
             if(listWall.size()>0 ){
                 for(Wall wall:listWall){

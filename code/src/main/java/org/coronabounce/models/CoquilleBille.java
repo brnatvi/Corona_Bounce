@@ -132,6 +132,29 @@ public class CoquilleBille {
         movingSpeedY*=-1;
     }
 
+    protected void bounce1(boolean haut, CoquilleBille coc)
+
+
+    {
+        if(coc.getMovingSpeed()!=0) {
+            if (haut) {
+
+                {
+                    movingSpeedX += 0.5;
+                    movingSpeedY += 0.5;
+
+                }
+            } else {
+
+                {
+                    movingSpeedX -= 0.5;
+                    movingSpeedY -= 0.5;
+                }
+            }
+        }}
+
+
+
 
     public double getMovingSpeed() {return Math.sqrt( (this.movingSpeedX*this.movingSpeedX)+(this.movingSpeedY*this.movingSpeedY));}
     public Individual getIndividual(){return individual;}
