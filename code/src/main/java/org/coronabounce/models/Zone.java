@@ -15,14 +15,14 @@ public class Zone  {
     private TimerTask timerTask = null;
     private int nbZones;
 
-    public Zone (Controllable controller,boolean isLockDown, boolean isWall, boolean isRestrictionMovement,int nbZones)
+    public Zone (Controllable controller,boolean isLockDown, boolean isWall, boolean isRestrictionMovement)
     {   /*** nbZones c'est le nombre de petites zones, si on a 2 zones ca veut dire qu'on a un mur
     c'est à dire  nbmurs=nbZones-1 **/
         this.nbZones=nbZones;
         this.controller = controller;
         setWidth(controller.getSpaceSize()[0]);
         setHeight(controller.getSpaceSize()[1]);
-        this.p = new Population(controller, controller.getPersonsCount(),isLockDown, isWall, isRestrictionMovement,nbZones);
+        this.p = new Population(controller, controller.getPersonsCount(),isLockDown, isWall, isRestrictionMovement);
     }
 
     public void stopTimer(boolean b_StopTimer)
@@ -51,18 +51,14 @@ public class Zone  {
 
     public void moving(){
         /** if we apply this (p.socialDistancing()) with 100persons for example, it is quiet visible that the contamination rate slows down **/
-        // p.lockDown();
 
         stopTimer(false);
         this.timer.schedule(this.timerTask=new TimerTask() {
             @Override
             public void run(){
                 if (controller.getState() == Controllable.eState.Working){
-                    //p.interaction(controller.getDurationCovid(),10000, controller.getDurationNonContamination()); // ses informations sont sauvegardé dans Population, on n'as pas besoin de les transmettre a chaque fois.
-                    //Pour les murs: p.separate(nbZones);
                     p.Contacts();
                     p.Moving_Bille();
-                    //System.out.println("Zone Thread run " + Thread.currentThread().getId());
                 }
             }
         },0,1*33);
@@ -72,20 +68,5 @@ public class Zone  {
 
         this.moving();
     }
-
-    /**
-    *{@summary Return true if x coordinate is out the the Zone.}
-    */
-    public static boolean outOfX(double x){
-      if(x<=0 || x>=width){return true;}
-      return false;
-    }
-
-    /**
-    *{@summary Return true if y coordinate is out the the Zone.}
-    */
-    public static boolean outOfY(double y){
-      if(y<=0 || y>=height){return true;}
-      return false;
-    }
+    
 }

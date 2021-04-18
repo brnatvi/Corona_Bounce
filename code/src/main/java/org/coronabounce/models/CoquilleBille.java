@@ -126,10 +126,12 @@ public class CoquilleBille {
       }
       else{ movingSpeedY*=-1; }
     }
+    /**
+    *{@summary bounce.}<br>
+    */
     protected void bounce(){
-         movingSpeedX*=-1;
-            // System.out.println(id+" bounce in x : "+(int)(p.getX()+movingSpeedX)+"from"+(int)p.getX());//@a
-        movingSpeedY*=-1;
+      bounce(true);
+      bounce(false);
     }
 
 

@@ -21,7 +21,6 @@ import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.data.Data;
 import org.coronabounce.models.CoquilleBille;
-import org.coronabounce.models.Wall;
 import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
@@ -47,7 +46,6 @@ public class MainController
     private boolean isWalls2;             // has right population (population2) mobile bounds
     private boolean isRestrictionMovement1;
     private boolean isRestrictionMovement2;
-    // private List<Wall> walls;                     // list of mobile bounds
 
     private XYChart.Series healthy1;              // charts and area chart tor population1's graph
     private XYChart.Series sick1;
@@ -95,7 +93,6 @@ public class MainController
         isWalls2 = false;
         isRestrictionMovement1 = false;
         isRestrictionMovement2 = false;
-        // this.walls = model1.getListWall();
     }
 
     /**
@@ -103,11 +100,11 @@ public class MainController
      */
     public void changeController(Controllable c)
     {
-        this.zone1 = new Zone(c,isLockDown1,isWalls1,isRestrictionMovement1,1);
+        this.zone1 = new Zone(c,isLockDown1,isWalls1,isRestrictionMovement1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
 
-        this.zone2 = new Zone(c,isLockDown2,isWalls2,isRestrictionMovement2,1);
+        this.zone2 = new Zone(c,isLockDown2,isWalls2,isRestrictionMovement2);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
 
@@ -248,7 +245,7 @@ public class MainController
         launchDrawGraph();
         zone1.moving();
         zone2.moving();
-        changeEnableDisable(btnStart);
+        makeDisabled(btnStart);
     }
 
     /**
@@ -288,7 +285,7 @@ public class MainController
 
         changeController(currentController);
 
-        changeEnableDisable(btnStart);
+        makeEnable(btnStart);
 
         initialize();
     }
@@ -342,7 +339,7 @@ public class MainController
 
     //========================= MenuBar's functions ====================================================================/
 
-    public void left_Scenario_1_Lockdown() throws IOException
+    public void left_Scenario_1_SoftLockdown() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown1 = true;
@@ -356,12 +353,12 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void left_Scenario_2_Wall() throws IOException
+    public void left_Scenario_2_StrictLockdown() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown1 = false;
-        this.isWalls1 = true;
-        this.isRestrictionMovement1 = false;
+        this.isWalls1 = false;
+        this.isRestrictionMovement1 =true;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -370,11 +367,11 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void left_Scenario_3_WithoutScenario() throws IOException
+    public void left_Scenario_3_Wall() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown1 = false;
-        this.isWalls1 = false;
+        this.isWalls1 = true;
         this.isRestrictionMovement1 = false;
         closePreviousTask();
         changeController(currentController);
@@ -398,12 +395,12 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void left_Scenario_5_RestrictMovement() throws IOException
+    public void left_Scenario_5_WithoutScenario() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown1 = false;
         this.isWalls1 = false;
-        this.isRestrictionMovement1 =true;
+        this.isRestrictionMovement1 = false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -412,7 +409,7 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_1_Lockdown() throws IOException
+    public void right_Scenario_1_SoftLockdown() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown2 = true;
@@ -426,12 +423,12 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_2_Wall() throws IOException
+    public void right_Scenario_2_StrictLockdown() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown2 = false;
-        this.isWalls2 = true;
-        this.isRestrictionMovement2 = false;
+        this.isWalls2 = false;
+        this.isRestrictionMovement2 =true;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -440,12 +437,12 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_3_WithoutScenario() throws IOException
+    public void right_Scenario_3_Wall() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown2 = false;
-        this.isWalls2 = false;
-        this.isRestrictionMovement2 = false;
+        this.isWalls2 = true;
+        this.isRestrictionMovement2 =false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -468,12 +465,12 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_5_RestrictMovement() throws IOException
+    public void right_Scenario_5_WithoutScenario() throws IOException
     {
         setSettingsController(currentController);
         this.isLockDown2 = false;
         this.isWalls2 = false;
-        this.isRestrictionMovement2 =true;
+        this.isRestrictionMovement2 = false;
         closePreviousTask();
         changeController(currentController);
         initNewPopulation();
@@ -507,18 +504,16 @@ public class MainController
     }
 
     /**
-     * @summary Change enable/disable the button btn
+     * @summary Make enable/disable the button btn
      */
-    public void changeEnableDisable(Button btn)
+    public void makeEnable(Button btn)
     {
-        if (btn.isDisabled())
-        {
-            btn.setDisable(false);
-        }
-        else
-        {
-            btn.setDisable(true);
-        }
+        btn.setDisable(false);
+    }
+
+    public void makeDisabled(Button btn)
+    {
+        btn.setDisable(true);
     }
 
     //========================= Button's auxiliary functions ==========================================================/
@@ -529,7 +524,7 @@ public class MainController
      */
     private int choosePeriod()
     {
-        if (controller.getPersonsCount() <= 100)
+        if (currentController.getPersonsCount() <= 100)
         {
             return 100;
         }
@@ -669,8 +664,8 @@ public class MainController
      */
     private void drawPopulation(boolean is_panel1)
     {
-        double koeffW = panel1.getWidth()/controller.getSpaceSize()[0];
-        double koeffH = panel1.getHeight()/controller.getSpaceSize()[1];
+        double koeffW = panel1.getWidth()/currentController.getSpaceSize()[0];
+        double koeffH = panel1.getHeight()/currentController.getSpaceSize()[1];
         if (is_panel1)
         {
             for (CoquilleBille cb : points1)
@@ -698,7 +693,7 @@ public class MainController
         String state = cb.getIndividual().healthState();
         double coordX = cb.getPosition().getX() * koeffW;
         double coordY = cb.getPosition().getY() * koeffH;
-        Circle point = new Circle(coordX, coordY, controller.getRadiusDot() * koeffH);
+        Circle point = new Circle(coordX, coordY, currentController.getRadiusDot() * koeffH);
         if (state.equals("Healthy")) {point.setFill(valueOf("70e000"));}    //green
         if (state.equals("Incubating")) {point.setFill(valueOf("ff1830"));}  //red
         if (state.equals("Recovered")) {point.setFill(valueOf("ffd22f"));}  //yellow
@@ -719,8 +714,8 @@ public class MainController
      */
     private void drawWalls(boolean is_panel1)
     {
-        double koeffW = panel1.getWidth() / controller.getSpaceSize()[0];
-        double koeffH = panel1.getHeight() / controller.getSpaceSize()[1];
+        double koeffW = panel1.getWidth() / currentController.getSpaceSize()[0];
+        double koeffH = panel1.getHeight() / currentController.getSpaceSize()[1];
 
         if (is_panel1)
         {
@@ -730,7 +725,7 @@ public class MainController
                 ArrayList<Double> heightOfWalls1 = model1.getHeigthsOfWalls();
                 ArrayList<Double> thicknesses1 = model1.getThicknessesOfWalls();
 
-                for (int i = 0; i < controller.getWallsCount(); i++)
+                for (int i = 0; i < currentController.getWallsCount(); i++)
                 {
                     //System.out.println("Draw walls in panel 1 = " + positionX1.get(i));                   // code for debug
                     Rectangle wall1 = new Rectangle((positionX1.get(i) - thicknesses1.get(i) / 4) * koeffW, 0,
@@ -750,7 +745,7 @@ public class MainController
                 ArrayList<Double> heightOfWalls2 = model2.getHeigthsOfWalls();
                 ArrayList<Double> thicknesses2 = model2.getThicknessesOfWalls();
 
-                for (int i = 0; i < controller.getWallsCount(); i++)
+                for (int i = 0; i < currentController.getWallsCount(); i++)
                 {
                     //System.out.println("Draw walls in panel 2 = " + positionX2.get(i));              // code for debug
                     Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 4) * koeffW, 0,

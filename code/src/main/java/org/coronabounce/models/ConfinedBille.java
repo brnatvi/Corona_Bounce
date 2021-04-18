@@ -70,9 +70,9 @@ public class ConfinedBille extends CoquilleBille {
                 c=genererDouble()*a;
                 this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));
             }
-           // moveABitRandomly();
+          
         }
-        //this.getPosition().setPos(this.getPosition().getX() + this.getMovingSpeedX(), this.getPosition().getY() + this.getMovingSpeedY());
+        
     }
 
 }
