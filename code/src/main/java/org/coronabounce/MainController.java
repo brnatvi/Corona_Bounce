@@ -102,11 +102,11 @@ public class MainController
      */
     public void changeController(Controllable c)
     {
-        this.zone1 = new Zone(c,isLockDown1,isWalls1,isRestrictionMovement1,1);
+        this.zone1 = new Zone(c,isLockDown1,isWalls1,isRestrictionMovement1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
 
-        this.zone2 = new Zone(c,isLockDown2,isWalls2,isRestrictionMovement2,1);
+        this.zone2 = new Zone(c,isLockDown2,isWalls2,isRestrictionMovement2);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
 

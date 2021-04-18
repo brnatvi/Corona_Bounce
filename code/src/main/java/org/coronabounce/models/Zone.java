@@ -15,14 +15,14 @@ public class Zone  {
     private TimerTask timerTask = null;
     private int nbZones;
 
-    public Zone (Controllable controller,boolean isLockDown, boolean isWall, boolean isRestrictionMovement,int nbZones)
+    public Zone (Controllable controller,boolean isLockDown, boolean isWall, boolean isRestrictionMovement)
     {   /*** nbZones c'est le nombre de petites zones, si on a 2 zones ca veut dire qu'on a un mur
     c'est à dire  nbmurs=nbZones-1 **/
         this.nbZones=nbZones;
         this.controller = controller;
         setWidth(controller.getSpaceSize()[0]);
         setHeight(controller.getSpaceSize()[1]);
-        this.p = new Population(controller, controller.getPersonsCount(),isLockDown, isWall, isRestrictionMovement,nbZones);
+        this.p = new Population(controller, controller.getPersonsCount(),isLockDown, isWall, isRestrictionMovement);
     }
 
     public void stopTimer(boolean b_StopTimer)

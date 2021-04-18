@@ -10,23 +10,20 @@ import java.util.*;
 public class Population implements Displayable {
 
     private Controllable controller;
-    private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();
+    private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();// Contient la liste des Coquille Billes de la population
     private Data data;
-    public int nbSick;
-    public int nbHealthy;
-    public int nbRecovered;
-    public int nbIncubating;
-    private List<Wall> listWall = new ArrayList<Wall>();
+    public int nbSick;// le nombre de personnes malades
+    public int nbHealthy;//le nombre de personnes saines
+    public int nbRecovered;//le nombre de personnes guéries
+    public int nbIncubating;//le nombre de personnes qui portent le virus
+    private List<Wall> listWall = new ArrayList<Wall>();//la lsite des murs
     private Timer timer;
     private TimerTask timerTask = null;
     private static Random random = new Random();
-    // Wall mur =new Wall(); //si vous voulez 1 seul mur ajouter en 1 seul lors de l'appel a createWalls();
-    private int nbZones;
-
+   
     //========================= Constructors ==========================================================================/
 
-    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean isLockDown, boolean isWall, boolean isRestrictionMovement,int nbZones) {
-        //this.nbZones=nbZones;
+    public Population(Controllable controller, int nbH, int nbS, int nbR,boolean isLockDown, boolean isWall, boolean isRestrictionMovement) {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
@@ -96,8 +93,8 @@ public class Population implements Displayable {
     }
 
 
-    public Population(Controllable controller, int nbIndividus,boolean isLockDown, boolean isWall, boolean isRestrictionMovement,int nbZones) {
-        this(controller, nbIndividus - 1, 1, 0,isLockDown,isWall,isRestrictionMovement,nbZones);
+    public Population(Controllable controller, int nbIndividus,boolean isLockDown, boolean isWall, boolean isRestrictionMovement) {
+        this(controller, nbIndividus - 1, 1, 0,isLockDown,isWall,isRestrictionMovement);
     }
     public Population(){}
     public List<CoquilleBille> getAllPoints() {

@@ -18,7 +18,7 @@ public class Wall  {
        this.positionY=0;
        this.controller = iController;
        id=cpt++;
-       System.out.println("new wall "+id+" from "+(positionX-thikness)+" to "+(positionX+thikness));//@a
+       //System.out.println("new wall "+id+" from "+(positionX-thikness)+" to "+(positionX+thikness));//@a
     }
     public String toString(){return id+" x="+positionX+" y="+positionY+" th="+thikness;}
 
@@ -120,6 +120,12 @@ public class Wall  {
       }
       return false;
     }
+  /* public void willCrossWallInX(CoquilleBille coc){
+        if(positionX-coc.getPosition().getX() <5){
+            return true;
+        }
+        return false;
+    }*/
 
     // public double[] repartInZones(int nombre,double th){
     //     //<>
