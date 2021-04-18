@@ -28,7 +28,7 @@ public class Population implements Displayable {
         data = new Data();
         timer = new Timer();
 
-        if(isLockDown){
+        if(isLockDown){// dans le cas ou on est dans le scénario lockdown il suffit de creer des ConfinedBille
             for (int i = 0; i < nbH; i++) {
                 CoquilleBille coc = new ConfinedBille(null);
                 Individual in = new Healthy(coc, this);
@@ -51,65 +51,55 @@ public class Population implements Displayable {
         }
         else {
             for (int i = 0; i < nbH; i++) {
-                CoquilleBille coc = new CoquilleBille(null);
-                Individual in = new Healthy(coc, this);
-                coc.setIndividual(in);
-                listCoquille.add(coc);
+                CoquilleBille coc = new CoquilleBille(null);// creer d'abord une Coquille Bille vide
+                Individual in = new Healthy(coc, this);// creer un individu Healthy
+                coc.setIndividual(in);//Remplir la coquille vide avec un individu de type Healthy
+                listCoquille.add(coc);// ajouter la coquille qui contient l individu a la liste des CoquilleBille
             }
             for (int i = 0; i < nbS; i++) {
-                CoquilleBille coc = new CoquilleBille(null);
-                Individual in = new Sick(coc, this);
-                coc.setIndividual(in);
-                listCoquille.add(coc);
+                CoquilleBille coc = new CoquilleBille(null);// creer d'abord une Coquille Bille vide
+                Individual in = new Sick(coc, this);// creer un individu Sick
+                coc.setIndividual(in);//Remplir la coquille vide avec un individu de type Sick
+                listCoquille.add(coc);// ajouter la coquille qui contient l individu a la liste des CoquilleBille
             }
             for (int i = 0; i < nbR; i++) {
-                CoquilleBille coc = new CoquilleBille(null);
-                Individual in = new Recovered(coc, this);
-                coc.setIndividual(in);
-                listCoquille.add(coc);
+                CoquilleBille coc = new CoquilleBille(null);// creer d'abord une Coquille Bille vide
+                Individual in = new Recovered(coc, this);// creer un individu Recovered
+                coc.setIndividual(in);//Remplir la coquille vide avec un individu de type Recovered
+                listCoquille.add(coc);// ajouter la coquille qui contient l individu a la liste des CoquilleBille
             }
 
         }
-        if(isRestrictionMovement) {this.RestrictMovement();}
-        if(isWall){
-          createWalls(controller.getWallsCount());
+        if(isRestrictionMovement) {this.RestrictMovement();}// dans le cas ou on est dans le scénarios Restrict Movement il suffait d appeler la methode RestrictMovement
+        if(isWall){// dans le cas ou on est dans le scénarios Walls ,on crée des murs
+          createWalls(controller.getWallsCount());// obtenir d abord le nombre de mur a aprtir de Controller et les ajouter a la aliste des murs
           for (Wall wall : listWall ) {
-            wall.makeWallGoDown(this);
+            wall.makeWallGoDown(this);//faire descendre les murs petit a petit
           }
         }
 
     }
-    /**
-    *{@summary Create the walls.}<br>
-    *All the wall will be create at equals distance from eatch other.<br>
-    *@param numberOfWall the number of wall that will be add.
-    */
-    private void createWalls(int numberOfWall){
-      double maxX = Controller.getWidth();
-      for (int i=1; i<=numberOfWall; i++) {
-        double posX = (maxX*i)/(numberOfWall+1);
-        listWall.add(new Wall(this.controller, posX));
-      }
-    }
-
-
     public Population(Controllable controller, int nbIndividus,boolean isLockDown, boolean isWall, boolean isRestrictionMovement) {
         this(controller, nbIndividus - 1, 1, 0,isLockDown,isWall,isRestrictionMovement);
     }
     public Population(){}
-    public List<CoquilleBille> getAllPoints() {
-        return listCoquille;
-    }
-    public Timer getT() {return timer;}
-    public List<Wall> getListWall() { return listWall; }
+  
+    /*******************************************************************************************************************************************/
+   
 
-    public void addIndividual(Individual i) {
+   
+  
+
+    public void addIndividual(Individual i) { //la méthode permet de creer Une CoquilleBille et la remplir avec l individu i et l ajouter a la liste des CoquilleBille
         CoquilleBille coc = new CoquilleBille(i);
         listCoquille.add(coc);
     }
 
 
     //========================= Virus Getters/Setters==================================================================/
+    public List<CoquilleBille> getAllPoints() {
+        return listCoquille;
+    }
 
     public long getDurationCovid() {
         return controller.getDurationCovid();
@@ -133,29 +123,39 @@ public class Population implements Displayable {
     public List<CoquilleBille> getListCoquille() {
         return this.listCoquille;
     }
-
+    public Timer getT() {return timer;}
+    public List<Wall> getListWall() { return listWall; }
 
     //========================= Points Interactions ===================================================================/
-
     public void Contacts(){
         for(CoquilleBille coc:listCoquille){
             coc.getIndividual().agitSur();
         }
     }
-    public double dist(Wall w,CoquilleBille coc){
-        double x1 = coc.getPosition().getX();
-        double x2 = w.getPositionX();
-        double y1 = coc.getPosition().getY();
-        double y2 = w.getPositionY();
+    //========================================================intermediate methods=======================================//
+    
+    public double dist(Wall w,CoquilleBille coc){//Calcule la distance entre une CoquilleBille et le mur
+        double x1 = coc.getPosition().getX();//Position X de la coquilleBille
+        double x2 = w.getPositionX();//Position X du mur
+        double y1 = coc.getPosition().getY();//Position Y de la coquilleBille
+        double y2 = w.getPositionY();//Position Y du mur
         return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
     }
 
+   
+    public double distance(CoquilleBille i1, CoquilleBille i2) {//Calcule la distance entre les postions de deux Coquilles billes
+        double x1 = i1.getPosition().getX();//Position X de la coquilleBille1
+        double x2 = i2.getPosition().getX();//Position X de la coquilleBille2
+        double y1 = i1.getPosition().getY();//Position Y de la coquilleBille1
+        double y2 = i2.getPosition().getY();//Position Y de la coquilleBille2
+        return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+    }
     public void Rebound (CoquilleBille c){
         for(CoquilleBille coc:listCoquille){
             if(coc != c && this.distance(coc,c)<5){
-               coc.bounce();
-               c.bounce();
+                coc.bounce();
+                c.bounce();
             }
             if(listWall.size()>0 ){
                 for(Wall wall:listWall){
@@ -163,22 +163,11 @@ public class Population implements Displayable {
                         coc.bounce();
                     }
                 }
-
+                
             }
         }
     }
-
-
-    
-
-    public double distance(CoquilleBille i1, CoquilleBille i2) {
-        double x1 = i1.getPosition().getX();
-        double x2 = i2.getPosition().getX();
-        double y1 = i1.getPosition().getY();
-        double y2 = i2.getPosition().getY();
-        return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-    }
-
+    //*****************************************************Strict lockdown*************************************************/
     /** @summary
      *
      * RestrictMovement() prevent a big part of the population from moving
@@ -202,24 +191,19 @@ public class Population implements Displayable {
 
     //========================= Prints ================================================================================/
 
-    public void printPop() {
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
-
+    public void printPop() {// methode qui affiche la position et l etat de chaque Coquille Bille sur la console
+       
         int i = 0;
         for (CoquilleBille coc : listCoquille) {
             System.out.printf("Individu num : %d de position suivante  %.3f et  %.3f et de etat de sante  %s  Vitesse : %.3f \n", i, coc.getPosition().getX(), coc.getPosition().getY(), coc.getIndividual().healthState(), coc.getMovingSpeed());
-           i++;
+            i++;
         }
-       // System.out.println("le nombre des personnes contaminées:" + getNbSick() + " de personnes guéries :" + getNbRecovered() + " non contaminées :" + getNbHealthy());
-        //System.out.println("Pourcentage de contamination: " + this.percentageSick() + " %  Pourcentage de guérison :" + this.percentageRecovered() + "% Pourcentage de non contamination est :" + this.percentageHealthy()+" %");
     }
-
+    /**********************************************Moving of Billes*************************************************/
+   
     public void Moving_Bille() {
-        //System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
+      
         for (CoquilleBille coc : listCoquille) {
-          // for (Wall wall : getListWall() ) {
-          //   wall.makeWall();
-          // }
           coc.move();
           Rebound(coc);
         }
@@ -277,8 +261,21 @@ public class Population implements Displayable {
         }
         return rez;
     }
-
-
+    /**
+     *{@summary Create the walls.}<br>
+     *All the wall will be create at equals distance from eatch other.<br>
+     *@param numberOfWall the number of wall that will be add.
+     */
+    private void createWalls(int numberOfWall){
+        double maxX = Controller.getWidth();
+        for (int i=1; i<=numberOfWall; i++) {
+            double posX = (maxX*i)/(numberOfWall+1);
+            listWall.add(new Wall(this.controller, posX));
+        }
+    }
+    
+    
+    
     //========================= Population Statistics =================================================================/
 
     /**
