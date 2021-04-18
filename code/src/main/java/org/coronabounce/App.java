@@ -47,9 +47,10 @@ public class App extends Application {
         scene.getStylesheets().add(getClass().getResource("style.css").toString());
         stage.setScene(scene);
 
-        stage.setMinHeight(620);
+        stage.setMinHeight(600);
+//        stage.setMinWidth(1000);
         stage.setMinWidth(1000);
-//        stage.setMaxHeight(650);
+//        stage.setMaxHeight(600);
 //        stage.setMaxWidth(1000);
 
         stage.sizeToScene();
@@ -79,8 +80,8 @@ public class App extends Application {
         } else {
             scene.setRoot(parentSettings);
         }
-
     }
+
 
     private static Parent loadMain() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("corona bounce.fxml"));
