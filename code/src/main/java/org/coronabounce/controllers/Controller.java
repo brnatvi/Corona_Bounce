@@ -20,7 +20,7 @@ public class Controller implements Controllable
     private static double diametreX = 15;
     private static double diametreY = 10;
     private static double thickness = 4;              // thickness of the walls
-    private int WALLS_COUNT = 4;
+    private int WALLS_COUNT = 4;                      // number of boundaries
 
     private Controllable.eState state = Controllable.eState.Paused;   // enum variable to control all our timers at the same time
     ReentrantLock statLock = new ReentrantLock();                   // variable to make lock/unlock the threads

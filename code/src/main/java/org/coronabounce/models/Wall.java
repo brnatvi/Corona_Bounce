@@ -28,7 +28,7 @@ public class Wall  {
     public double getThickness() { return this.thikness; }
     public void makeWallGoDown(Population pop){
         TimerTask tt = null;
-        pop.getT().schedule(tt = new TimerTaskWall(this.controller,this), 0, 100);
+        pop.getTimer().schedule(tt = new TimerTaskWall(this.controller,this), 0, 100);
     }
     /**
     *{@summary Return true if it will cross the wall in x.}<br>
