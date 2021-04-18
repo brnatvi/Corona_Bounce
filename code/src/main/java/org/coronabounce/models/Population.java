@@ -172,13 +172,7 @@ public class Population implements Displayable {
     }
 
 
-    public void separate(int nbZones)
-    {
-        for(CoquilleBille coc : listCoquille) {
-            // mur.HitWallInX(coc,nbZones);
-            // mur.separatePop1(coc,nbZones);
-        }
-    }
+    
 
     public double distance(CoquilleBille i1, CoquilleBille i2) {
         double x1 = i1.getPosition().getX();
