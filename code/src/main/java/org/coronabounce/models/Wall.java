@@ -28,7 +28,7 @@ public class Wall  {
     public double getPositionY() { return positionY; }
     public double getThickness() { return this.thikness; }
 
-
+    //On aurai pu mettre les murs dans la Zone et utiliser le timer de Zone dans population.
     public void makeWallGoDown(Population pop){
         TimerTask tt = null;
         pop.getT().schedule(tt = new TimerTaskWall(this.controller,this), 0, 100);
