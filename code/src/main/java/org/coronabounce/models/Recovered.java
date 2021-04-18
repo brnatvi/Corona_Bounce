@@ -10,7 +10,7 @@ public class Recovered extends Individual{
     public Recovered(CoquilleBille coc, Population p){
       super(coc,p);
        p.nbRecovered++;
-       p.getT().schedule(new TimerTask() {
+       p.getTimer().schedule(new TimerTask() {
           @Override
           public void run() {
               if (p.getController().getState() == Controllable.eState.Working) {

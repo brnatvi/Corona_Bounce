@@ -39,12 +39,12 @@ public class MainController
     private List<CoquilleBille> points2;          // list of population2's individuals
     private Timeline tlPoints;                    // timeline for animation of point's moving
     private Timeline tlGraph;                     // timeline for animation of graph
-    private boolean isLockDown1;          // has left population (population1) lockdown
-    private boolean isLockDown2;          // has right population (population2) lockdown
-    private boolean isWalls1;             // has left population (population1) mobile bounds
-    private boolean isWalls2;             // has right population (population2) mobile bounds
-    private boolean isRestrictionMovement1;
-    private boolean isRestrictionMovement2;
+    private boolean isLockDown1;                  // has left population (population1) soft lockdown
+    private boolean isLockDown2;                  // has right population (population2) soft lockdown
+    private boolean isWalls1;                     // has left population (population1) mobile boundaries
+    private boolean isWalls2;                     // has right population (population2) mobile boundaries
+    private boolean isRestrictionMovement1;       // has left population (population1) strict lockdown
+    private boolean isRestrictionMovement2;       // has right population (population2) strict lockdown
 
     private XYChart.Series healthy1;              // charts and area chart tor population1's graph
     private XYChart.Series sick1;

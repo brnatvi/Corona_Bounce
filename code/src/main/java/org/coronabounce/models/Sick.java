@@ -11,7 +11,7 @@ public class Sick extends Individual {
       super(coc,p);
       p.nbSick++;
       p.nbIncubating--;
-      p.getT().schedule(new TimerTask()
+      p.getTimer().schedule(new TimerTask()
       {
           @Override
           public void run()
@@ -42,7 +42,7 @@ public class Sick extends Individual {
     *</ul>
     */
     private void contaminate(){
-        for(CoquilleBille c : p.getListCoquille()){
+        for(CoquilleBille c : p.getAllPoints()){
             if(!coc.equals(c) && p.distance(coc,c)<= p.getContaminationRadius() && c.getIndividual() instanceof Healthy){
                 c.setIndividual(new Incubating(c,p));
             }

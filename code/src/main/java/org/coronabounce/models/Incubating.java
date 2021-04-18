@@ -9,7 +9,7 @@ public class Incubating extends Individual{
   public Incubating(CoquilleBille coc, Population p){
     super(coc,p);
     p.nbIncubating++;
-    p.getT().schedule(new TimerTask() {
+    p.getTimer().schedule(new TimerTask() {
         @Override
         public void run() {
             if (Incubating.super.p.getController().getState() == Controllable.eState.Working){
