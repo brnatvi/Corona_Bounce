@@ -50,7 +50,7 @@ public class SettingsController
         App.setRoot("corona bounce");
     }
 
-    public void performAction(ActionEvent actionEvent) throws IOException {
+    public void performAction(ActionEvent actionEvent) {
 
         MenuItem target  = (MenuItem) actionEvent.getSource();
         System.out.println("Clicked On Item:"+target.getId());
