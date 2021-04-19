@@ -10,11 +10,8 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 //import org.coronabounce.models.musique;
-
 import java.io.IOException;
-
 
 /**
  * JavaFX App
@@ -22,7 +19,6 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-
     private static MainController controllerMain;
     private static SettingsController controllerSettings;
     private static Parent parentMain, parentSettings;
@@ -32,7 +28,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         parentMain = loadMain();
         parentSettings = loadSettings();
-        ((SettingsController) controllerSettings).setMainController(controllerMain);
+        controllerSettings.setMainController(controllerMain);
 
         double heightRatio = .80;
         double widthRatio = .80;
@@ -41,17 +37,13 @@ public class App extends Application {
 
         double sceneHeight = primaryScreenBounds.getHeight() * heightRatio;
         double sceneWidth = primaryScreenBounds.getWidth() * widthRatio;
-
         scene = new Scene(parentMain, sceneWidth, sceneHeight);
 
         scene.getStylesheets().add(getClass().getResource("style.css").toString());
         stage.setScene(scene);
 
         stage.setMinHeight(600);
-//        stage.setMinWidth(1000);
         stage.setMinWidth(1000);
-//        stage.setMaxHeight(600);
-//        stage.setMaxWidth(1000);
 
         stage.sizeToScene();
         stage.setResizable(true);
@@ -70,11 +62,10 @@ public class App extends Application {
                 }
             }
         });
-
        // musique.start();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    static void setRoot(String fxml) {
         if(fxml == "corona bounce") {
             scene.setRoot(parentMain);
         } else {
@@ -82,29 +73,21 @@ public class App extends Application {
         }
     }
 
-
     private static Parent loadMain() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("corona bounce.fxml"));
-        Parent p = (Parent) fxmlLoader.load();
+        Parent p = fxmlLoader.load();
         controllerMain = fxmlLoader.getController();
         return p;
     }
 
     private static Parent loadSettings() throws IOException {
-        // controllerMain.stopTimer();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("settings.fxml"));
-        Parent p = (Parent) fxmlLoader.load();
+        Parent p = fxmlLoader.load();
         controllerSettings = fxmlLoader.getController();
         return p;
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
-
     public static void main(String[] args) {
-
         launch();
     }
 }

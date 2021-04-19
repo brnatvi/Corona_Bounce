@@ -1,11 +1,11 @@
 package org.coronabounce;
 
+import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.mvcconnectors.Controllable;
-
-import java.io.IOException;
 
 public class SettingsController
 {
@@ -23,29 +23,42 @@ public class SettingsController
         this.mainController = mainController;
     }
 
-    // takes settings from GUI and passes them to Controller
     @FXML
-    public void passSettingsToController() throws IOException {
-        // creates new current controller
+    public void passSettingsToController() {
         this.c = new Controller();
-        
-        // update his parameters from Settings
-        c.setPersonsCount(Integer.parseInt(individualsNumberSettings.getText()));
-        c.setDurationCovid((long)(sliderCovidDuration.getValue())*1000);
-        c.setContaminationRadius(sliderContaminationRadius.getValue());
-        c.setDurationHealing((long)(sliderCovidDuration.getValue())*1000);
-        c.setDurationNonContamination((long)(sliderNonContaminationDuration.getValue())*1000);
-        c.setWallsCount((int)sliderWallsNumber.getValue());
+        int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
+        c.setPersonsCount(newIndividualsNumber);
+        double newCovidDuration = (sliderCovidDuration.getValue())*1000;
+        c.setDurationCovid((long)newCovidDuration);
+        double newContaminationRadius = (sliderContaminationRadius.getValue());
+        c.setContaminationRadius(newContaminationRadius);
+        double newHealingDuration = (sliderCovidDuration.getValue())*1000;
+        c.setDurationHealing((long)newHealingDuration);
+        double newNonContaminationDuration = (sliderNonContaminationDuration.getValue())*1000;
+        c.setDurationNonContamination((long)newNonContaminationDuration);
+        double newWallsNumber = (sliderWallsNumber.getValue());
+        c.setWallsCount((int)newWallsNumber);
 
-        // saves new settings and loads them into MainController
+        // save new settings in currentController of MainController
         mainController.setSettingsController(c);
         mainController.changeController(c);
 
-        // inits graphPanel, fills mainGrid by graphPanel and draws new populations
+        // init graphPanel, fil mainGrid by graphPanel and draw new populations
         mainController.initNewPopulation();
-
         mainController.btnStart.setDisable(false);
 
+        App.setRoot("corona bounce");
+    }
+
+    public void performAction(ActionEvent actionEvent) throws IOException {
+
+        MenuItem target  = (MenuItem) actionEvent.getSource();
+        System.out.println("Clicked On Item:"+target.getId());
+
+        Controllable c = new Controller();
+        c.setPersonsCount(99);
+
+        mainController.changeController(c);
         App.setRoot("corona bounce");
     }
 }
