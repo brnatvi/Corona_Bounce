@@ -119,8 +119,6 @@ public class MainController
 
     public Controllable getController() { return this.currentController; }
 
-    public void setSettingsController(Controllable c) { this.currentController = c; }
-
     //========================= Initialisation ========================================================================/
 
     /**
@@ -228,6 +226,17 @@ public class MainController
             t.stop();
             t = null;
         }
+    }
+
+    /**
+     * @summary Function for correct closing tasks before changing the settings.
+     * It stops Timelines of graph and points, and stop timers of both Populations and Zones.
+     */
+    private void closePreviousTask()
+    {
+        stopTimeLine(tlPoints);
+        stopTimeLine(tlGraph);
+        stopTimer();
     }
 
     //========================= Button's functions ====================================================================/
@@ -478,15 +487,9 @@ public class MainController
     //===================== Functions to use in Settings Controller ===================================================/
 
     /**
-     * @summary Function for correct closing tasks before changing the settings.
-     * It stops Timelines of graph and points, and stop timers of both Populations and Zones.
+     * @summary Upload new current controller
      */
-    public void closePreviousTask()
-    {
-        stopTimeLine(tlPoints);
-        stopTimeLine(tlGraph);
-        stopTimer();
-    }
+    public void setSettingsController(Controllable c) { this.currentController = c; }
 
     /**
      * @summary Initialize graphPanel, fil mainGrid by graphPanel and draw new populations
@@ -502,8 +505,9 @@ public class MainController
     //========================= Button's auxiliary functions ==========================================================/
 
     /**
-     * @summary Function used to provide graph's Timeline a milliseconds appropriated to population size
-     * @return 100 ms for small populations and 500 for big one
+     * @summary Choose a period for graph's Timeline, appropriated to population size
+     * it helps to reduce workload on threads for big size populations
+     * @return 100 ms for small populations and 500 ms for big ones
      */
     private int choosePeriod()
     {
