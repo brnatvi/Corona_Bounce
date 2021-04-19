@@ -1,6 +1,5 @@
 package org.coronabounce;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -16,7 +15,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.data.Data;
@@ -245,14 +243,14 @@ public class MainController
         launchDrawGraph();
         zone1.moving();
         zone2.moving();
-        makeDisabled(btnStart);
+        btnStart.setDisable(true);
     }
 
     /**
      * @summary Function for button "Settings" - redirect to window settings
      */
     @FXML
-    private void switchToSettings() throws IOException
+    private void switchToSettings()
     {
         closePreviousTask();
         App.setRoot("settings");
@@ -280,13 +278,11 @@ public class MainController
     @FXML
     private void resetModel()
     {
-        closePreviousTask();          //stops Timelines of graph and points, and stop timers of both Populations and Zones
+        // stops Timelines of graph and points, and stop timers of both Populations and Zones
+        closePreviousTask();
         retainPopulationsAndWalls();
-
         changeController(currentController);
-
-        makeEnable(btnStart);
-
+        btnStart.setDisable(false);
         initialize();
     }
 
@@ -339,7 +335,7 @@ public class MainController
 
     //========================= MenuBar's functions ====================================================================/
 
-    public void left_Scenario_1_SoftLockdown() throws IOException
+    public void left_Scenario_1_SoftLockdown()
     {
         setSettingsController(currentController);
         this.isLockDown1 = true;
@@ -353,7 +349,7 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void left_Scenario_2_StrictLockdown() throws IOException
+    public void left_Scenario_2_StrictLockdown()
     {
         setSettingsController(currentController);
         this.isLockDown1 = false;
@@ -367,7 +363,7 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void left_Scenario_3_Wall() throws IOException
+    public void left_Scenario_3_Wall()
     {
         setSettingsController(currentController);
         this.isLockDown1 = false;
@@ -381,7 +377,7 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void left_Scenario_4_WallAndLockdown() throws IOException
+    public void left_Scenario_4_WallAndLockdown()
     {
         setSettingsController(currentController);
         this.isLockDown1 = true;
@@ -395,7 +391,7 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void left_Scenario_5_WithoutScenario() throws IOException
+    public void left_Scenario_5_WithoutScenario()
     {
         setSettingsController(currentController);
         this.isLockDown1 = false;
@@ -409,7 +405,7 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_1_SoftLockdown() throws IOException
+    public void right_Scenario_1_SoftLockdown()
     {
         setSettingsController(currentController);
         this.isLockDown2 = true;
@@ -423,7 +419,7 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_2_StrictLockdown() throws IOException
+    public void right_Scenario_2_StrictLockdown()
     {
         setSettingsController(currentController);
         this.isLockDown2 = false;
@@ -437,7 +433,7 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_3_Wall() throws IOException
+    public void right_Scenario_3_Wall()
     {
         setSettingsController(currentController);
         this.isLockDown2 = false;
@@ -451,7 +447,7 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_4_WallAndLockdown() throws IOException
+    public void right_Scenario_4_WallAndLockdown()
     {
         setSettingsController(currentController);
         this.isLockDown2 = true;
@@ -465,7 +461,7 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
-    public void right_Scenario_5_WithoutScenario() throws IOException
+    public void right_Scenario_5_WithoutScenario()
     {
         setSettingsController(currentController);
         this.isLockDown2 = false;
@@ -501,19 +497,6 @@ public class MainController
         initGraphs();
         drawPopulation(true);
         drawPopulation(false);
-    }
-
-    /**
-     * @summary Make enable/disable the button btn
-     */
-    public void makeEnable(Button btn)
-    {
-        btn.setDisable(false);
-    }
-
-    public void makeDisabled(Button btn)
-    {
-        btn.setDisable(true);
     }
 
     //========================= Button's auxiliary functions ==========================================================/
@@ -597,7 +580,6 @@ public class MainController
             //long diff = stopTime - startTime;
             //System.out.println("Difference: " + diff);
             //System.out.println("Graph Thread: " + Thread.currentThread().getId());
-
         }));
         tlGraph.setCycleCount(Animation.INDEFINITE);
         tlGraph.play();
@@ -625,7 +607,6 @@ public class MainController
 
             // update statistic
             updateStatistics();
-
         }));
         tlPoints.setCycleCount(Animation.INDEFINITE);
         tlPoints.play();
@@ -671,7 +652,6 @@ public class MainController
             for (CoquilleBille cb : points1)
             {
                 drawPoint(cb, true, koeffW, koeffH);
-                //System.out.println("Draw point = " + cb.getPosition().getX());         // code for debug
             }
         }
         else
@@ -727,7 +707,6 @@ public class MainController
 
                 for (int i = 0; i < currentController.getWallsCount(); i++)
                 {
-                    //System.out.println("Draw walls in panel 1 = " + positionX1.get(i));                   // code for debug
                     Rectangle wall1 = new Rectangle((positionX1.get(i) - thicknesses1.get(i) / 4) * koeffW, 0,
                                                     thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
                     wall1.setFill(valueOf("008B8B"));
@@ -747,7 +726,6 @@ public class MainController
 
                 for (int i = 0; i < currentController.getWallsCount(); i++)
                 {
-                    //System.out.println("Draw walls in panel 2 = " + positionX2.get(i));              // code for debug
                     Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 4) * koeffW, 0,
                                                     thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
 

@@ -1,11 +1,9 @@
 package org.coronabounce;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.mvcconnectors.Controllable;
 
@@ -14,10 +12,6 @@ public class SettingsController
     private MainController mainController;
     private Controllable c = null;
 
-    public void setMainController(MainController mainController) {
-        this.mainController = mainController;
-    }
-
     @FXML TextField individualsNumberSettings;
     @FXML Slider sliderCovidDuration;
     @FXML Slider sliderContaminationRadius;
@@ -25,12 +19,12 @@ public class SettingsController
     @FXML Slider sliderNonContaminationDuration;
     @FXML Slider sliderWallsNumber;
 
-//    public void attributeIndividualsNumber() {
-//        int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
-//    }
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
     @FXML
-    public void passSettingsToController(MouseEvent mouseEvent) throws IOException {
+    public void passSettingsToController() {
         this.c = new Controller();
         int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
         c.setPersonsCount(newIndividualsNumber);
@@ -49,10 +43,9 @@ public class SettingsController
         mainController.setSettingsController(c);
         mainController.changeController(c);
 
-
         // init graphPanel, fil mainGrid by graphPanel and draw new populations
         mainController.initNewPopulation();
-        mainController.makeEnable(mainController.btnStart);
+        mainController.btnStart.setDisable(false);
 
         App.setRoot("corona bounce");
     }
