@@ -1,22 +1,16 @@
 package org.coronabounce;
 
-import java.io.IOException;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.mvcconnectors.Controllable;
+
+import java.io.IOException;
 
 public class SettingsController
 {
     private MainController mainController;
     private Controllable c = null;
-
-    public void setMainController(MainController mainController) {
-        this.mainController = mainController;
-    }
 
     @FXML TextField individualsNumberSettings;
     @FXML Slider sliderCovidDuration;
@@ -25,47 +19,33 @@ public class SettingsController
     @FXML Slider sliderNonContaminationDuration;
     @FXML Slider sliderWallsNumber;
 
-//    public void attributeIndividualsNumber() {
-//        int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
-//    }
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
+    // takes settings from GUI and passes them to Controller
     @FXML
-    public void passSettingsToController(MouseEvent mouseEvent) throws IOException {
+    public void passSettingsToController() throws IOException {
+        // creates new current controller
         this.c = new Controller();
-        int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
-        c.setPersonsCount(newIndividualsNumber);
-        double newCovidDuration = (sliderCovidDuration.getValue())*1000;
-        c.setDurationCovid((long)newCovidDuration);
-        double newContaminationRadius = (sliderContaminationRadius.getValue());
-        c.setContaminationRadius(newContaminationRadius);
-        double newHealingDuration = (sliderCovidDuration.getValue())*1000;
-        c.setDurationHealing((long)newHealingDuration);
-        double newNonContaminationDuration = (sliderNonContaminationDuration.getValue())*1000;
-        c.setDurationNonContamination((long)newNonContaminationDuration);
-        double newWallsNumber = (sliderWallsNumber.getValue());
-        c.setWallsCount((int)newWallsNumber);
+        
+        // update his parameters from Settings
+        c.setPersonsCount(Integer.parseInt(individualsNumberSettings.getText()));
+        c.setDurationCovid((long)(sliderCovidDuration.getValue())*1000);
+        c.setContaminationRadius(sliderContaminationRadius.getValue());
+        c.setDurationHealing((long)(sliderCovidDuration.getValue())*1000);
+        c.setDurationNonContamination((long)(sliderNonContaminationDuration.getValue())*1000);
+        c.setWallsCount((int)sliderWallsNumber.getValue());
 
-        // save new settings in currentController of MainController
+        // saves new settings and loads them into MainController
         mainController.setSettingsController(c);
         mainController.changeController(c);
 
-
-        // init graphPanel, fil mainGrid by graphPanel and draw new populations
+        // inits graphPanel, fills mainGrid by graphPanel and draws new populations
         mainController.initNewPopulation();
-        mainController.makeEnable(mainController.btnStart);
 
-        App.setRoot("corona bounce");
-    }
+        mainController.btnStart.setDisable(false);
 
-    public void performAction(ActionEvent actionEvent) throws IOException {
-
-        MenuItem target  = (MenuItem) actionEvent.getSource();
-        System.out.println("Clicked On Item:"+target.getId());
-
-        Controllable c = new Controller();
-        c.setPersonsCount(99);
-
-        mainController.changeController(c);
         App.setRoot("corona bounce");
     }
 }
