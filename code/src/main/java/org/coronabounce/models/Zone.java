@@ -13,12 +13,10 @@ public class Zone  {
     private static double height=1;
     private Timer timer=new Timer();
     private TimerTask timerTask = null;
-    private int nbZones;
+
 
     public Zone (Controllable controller,boolean isLockDown, boolean isWall, boolean isRestrictionMovement)
-    {   /*** nbZones c'est le nombre de petites zones, si on a 2 zones ca veut dire qu'on a un mur
-    c'est à dire  nbmurs=nbZones-1 **/
-        this.nbZones=nbZones;
+    {
         this.controller = controller;
         setWidth(controller.getSpaceSize()[0]);
         setHeight(controller.getSpaceSize()[1]);
@@ -50,7 +48,7 @@ public class Zone  {
     public Population getPopulation() {return p;}
 
     public void moving(){
-        /** if we apply this (p.socialDistancing()) with 100persons for example, it is quiet visible that the contamination rate slows down **/
+       
 
         stopTimer(false);
         this.timer.schedule(this.timerTask=new TimerTask() {
