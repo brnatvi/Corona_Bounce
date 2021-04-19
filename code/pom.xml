@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.coronabounce</groupId>
     <artifactId>coronabounce</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.8</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
@@ -43,7 +43,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>org.coronabounce.App</mainClass>
+                    <mainClass>org.coronabounce.NewMain</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -73,6 +73,51 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.0.0-M5</version>
           </plugin>
-        </plugins>
+        <!-- <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.2.0</version>
+          <configuration>
+            <archive>
+              <index>true</index>
+              <manifest>
+                <addClasspath>true</addClasspath>
+                <mainClass>org.coronabounce.NewMain</mainClass>
+              </manifest>
+              <manifestEntries>
+                <mode>development</mode>
+                <key>value</key>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin> -->
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <descriptorRefs>
+              <descriptorRef>jar-with-dependencies</descriptorRef>
+            </descriptorRefs>
+            <archive>
+              <index>true</index>
+              <manifest>
+                <addClasspath>true</addClasspath>
+                <mainClass>org.coronabounce.NewMain</mainClass>
+              </manifest>
+              <manifestEntries>
+                <mode>development</mode>
+                <key>value</key>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin>
+      </plugins>
     </build>
 </project>
