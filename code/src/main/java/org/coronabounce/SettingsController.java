@@ -23,6 +23,9 @@ public class SettingsController
         this.mainController = mainController;
     }
 
+    /**
+     * @summary takes settings from GUI to renitialize mainController
+     */
     @FXML
     public void passSettingsToController() {
         this.c = new Controller();
@@ -39,26 +42,15 @@ public class SettingsController
         double newWallsNumber = (sliderWallsNumber.getValue());
         c.setWallsCount((int)newWallsNumber);
 
-        // save new settings in currentController of MainController
+        // saves new settings in currentController of MainController
         mainController.setSettingsController(c);
         mainController.changeController(c);
 
-        // init graphPanel, fil mainGrid by graphPanel and draw new populations
+        // inits graphPanel, fills mainGrid by graphPanel and draw new populations
         mainController.initNewPopulation();
         mainController.btnStart.setDisable(false);
 
         App.setRoot("corona bounce");
     }
 
-    public void performAction(ActionEvent actionEvent) {
-
-        MenuItem target  = (MenuItem) actionEvent.getSource();
-        System.out.println("Clicked On Item:"+target.getId());
-
-        Controllable c = new Controller();
-        c.setPersonsCount(99);
-
-        mainController.changeController(c);
-        App.setRoot("corona bounce");
-    }
 }
