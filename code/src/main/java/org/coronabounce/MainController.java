@@ -498,6 +498,7 @@ public class MainController
     {
         retainPopulationsAndWalls();
         initGraphs();
+        updateStatistics();
         drawPopulation(true);
         drawPopulation(false);
     }
