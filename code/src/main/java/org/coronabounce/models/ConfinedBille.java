@@ -40,7 +40,7 @@ public class ConfinedBille extends CoquilleBille {
     public void move() {
 
         reduceSpeed();//reduire la vitesse de la Coquille
-        stayNextToHome();//verifier a cahque fois est dans sa zone de départ sinon il faut la rendre a sa zone
+        stayNextToHome();//verifier a chaque fois est dans sa zone de départ sinon il faut la rendre a sa zone
         super.move();//mettre a jour la position de la Coquille
 
 

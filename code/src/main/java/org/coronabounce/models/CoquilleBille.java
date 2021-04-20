@@ -57,14 +57,36 @@ public class CoquilleBille {
         if(y<=getPop().getRadiusDot() || y>= Controller.getHeight()-getPop().getRadiusDot()){return true;}
         return false;
     }
-     protected void bounceIfHitWall(){
-          for (Wall wall : getPop().getListWall() ) {
-               if(wall.willCrossWallInX(this) && wall.willCrossWallInY(this)){
+     protected void bounceIfHitWall() {
+          for (Wall wall : getPop().getListWall()) {
+               if (wall.willCrossWallInX(this) && wall.willCrossWallInY(this)) {
                     bounce(true);
                }
           }
      }
+       public boolean InY(CoquilleBille coc){
+         if((this.getPosition().getY()-coc.getPosition().getY()<10)&& (this.getPosition().getY()-coc.getPosition().getY()>=0)||(this.getPosition().getY()-coc.getPosition().getY()<10)&& (coc.getPosition().getY()-coc.getPosition().getY()>=0) ){
+              return true;
+         }else{
+              return false;
+         }
+     }
+     public boolean InX(CoquilleBille coc){
+          if((this.getPosition().getX()-coc.getPosition().getX()<10)&& (this.getPosition().getX()-coc.getPosition().getX()>=0)||(this.getPosition().getX()-coc.getPosition().getX()<10)&& (coc.getPosition().getX()-coc.getPosition().getX()>=0) ){
+               return true;
+          }else{
+               return false;
+          }
+     }
+     public void Bouncee(boolean bool){
+         if(bool){
+              this.setMovingSpeed(this.getMovingSpeedX()*-1,this.getMovingSpeedY());
      
+         }else{
+              this.setMovingSpeed(this.getMovingSpeedX(),this.getMovingSpeedY()*-1);
+     
+         }
+     }
      /**
       *{@summary bounce if this will go out of the zone.}<br>
       */
