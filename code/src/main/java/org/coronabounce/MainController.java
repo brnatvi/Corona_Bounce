@@ -626,12 +626,12 @@ public class MainController
     {
         // statistics1
         labelHealthy1.setText(String.valueOf(model1.getNbHealthy()));
-        labelSick1.setText(String.valueOf(model1.getNbSick()));
+        labelSick1.setText(String.valueOf(model1.getNbInfected()));
         labelRecovered1.setText(String.valueOf(model1.getNbRecovered()));
 
         // statistics2
         labelHealthy2.setText(String.valueOf(model2.getNbHealthy()));
-        labelSick2.setText(String.valueOf(model2.getNbSick()));
+        labelSick2.setText(String.valueOf(model2.getNbInfected()));
         labelRecovered2.setText(String.valueOf(model2.getNbRecovered()));
     }
 

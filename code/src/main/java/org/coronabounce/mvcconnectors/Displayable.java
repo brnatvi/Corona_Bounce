@@ -30,7 +30,7 @@ public interface Displayable
     /**
      * Get number of contagious / sick people.
      */
-    public int getNbSick();
+    public int getNbInfected();
 
     /**
      * Get number of recovered

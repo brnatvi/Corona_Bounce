@@ -276,9 +276,9 @@ public class Population implements Displayable {
     public int getNbHealthy() { return nbHealthy; }
 
     /**
-     * Get number of sick people.
+     * Get number of infected people (sick + incubating).
      */
-    public int getNbSick() { return nbSick; }
+    public int getNbInfected() { return nbSick + nbIncubating; }
 
     /**
      * Get number of recovered
