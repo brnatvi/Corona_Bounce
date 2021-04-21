@@ -10,7 +10,6 @@ public class Sick extends Individual {
   public Sick(CoquilleBille coc, Population p){
       super(coc,p);
       p.nbSick++;
-      p.nbIncubating--;
       p.getTimer().schedule(new TimerTask()
       {
           @Override
