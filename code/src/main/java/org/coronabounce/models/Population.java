@@ -81,7 +81,7 @@ public class Population implements Displayable {
     }
 
     public Population(Controllable controller, int nbIndividus,boolean isLockDown, boolean isWall, boolean isRestrictionMovement) {
-        this(controller, nbIndividus - 1, nbIndividus/6, 0,isLockDown,isWall,isRestrictionMovement);
+        this(controller, nbIndividus - 1, 1, 0,isLockDown,isWall,isRestrictionMovement);
     }
 
     //===========================  Getters/Setters ====================================================================/

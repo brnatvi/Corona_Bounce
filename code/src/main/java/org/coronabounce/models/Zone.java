@@ -20,7 +20,12 @@ public class Zone  {
         this.controller = controller;
         setWidth(controller.getSpaceSize()[0]);
         setHeight(controller.getSpaceSize()[1]);
-        this.p = new Population(controller, controller.getPersonsCount(),isLockDown, isWall, isRestrictionMovement);
+        if(isLockDown) {
+            int nbpersons=controller.getPersonsCount();
+            this.p = new Population(controller,nbpersons-nbpersons/6,nbpersons/6,0,isLockDown,isWall,isRestrictionMovement);
+        }
+        else  this.p = new Population(controller, controller.getPersonsCount(),isLockDown, isWall, isRestrictionMovement);
+
     }
 
     public void stopTimer(boolean b_StopTimer)
