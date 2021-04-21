@@ -70,23 +70,23 @@ public interface Controllable
      * @summary Set duration of sickness to controller
      * @param time - number of milliseconds
      */
-    public void setDurationCovid(long time);
+    public void setDurationIncubation(long time);
 
     /**
      * @summary Get duration of sickness from controller
      */
-    public long getDurationCovid();
+    public long getDurationIncubation();
 
     /**
      * @summary Set duration of non-contamination after recovery
      * @param time - number of milliseconds
      */
-    public void setDurationNonContamination(long time);
+    public void setDurationImmunity(long time);
 
     /**
      * @summary Get duration of non-contamination after recovery
      */
-    public long getDurationNonContamination();
+    public long getDurationImmunity();
 
     /**
      * @summary Set duration of recovery

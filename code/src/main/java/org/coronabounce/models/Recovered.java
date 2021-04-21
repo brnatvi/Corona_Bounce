@@ -18,7 +18,7 @@ public class Recovered extends Individual{
                   p.nbRecovered--;
               }
           }
-       },p.getDurationNonContamination());
+       },p.getDurationImmunity());
 
 
     }

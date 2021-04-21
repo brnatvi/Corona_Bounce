@@ -8,94 +8,77 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #31d2a5;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.coronabounce.SettingsController">
     <children>
         <HBox alignment="TOP_CENTER" spacing="20.0" style="-fx-padding: 0 0 10 0;">
-        <Text layoutX="207.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select settings"
-              textAlignment="CENTER" wrappingWidth="308.0">
+        <Text layoutX="207.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select settings" textAlignment="CENTER" wrappingWidth="308.0">
             <font>
-                <Font name="Avenir Book" size="24.0"/>
+                <Font name="Avenir Book" size="24.0" />
             </font>
         </Text>
         </HBox>
         <HBox alignment="TOP_CENTER" spacing="20.0" style="-fx-padding: 10 0 10 0;">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Persons number"
-                  wrappingWidth="197.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Persons number" wrappingWidth="197.0">
                 <font>
-                    <Font size="18.0"/>
+                    <Font size="18.0" />
                 </font>
             </Text>
-            <TextField fx:id="individualsNumberSettings" prefHeight="36.0" prefWidth="53.0"
-                       text="0"/>
+            <TextField fx:id="individualsNumberSettings" prefHeight="36.0" prefWidth="53.0" text="100" />
 
         </HBox>
         <HBox alignment="TOP_CENTER" spacing="50.0" style="-fx-padding: 20 0 20 0;">
             <VBox>
-                <Slider fx:id="sliderCovidDuration" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0"
-                        max="6.0" min="2.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true"/>
-                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Illness duration (in seconds)"
-                      wrappingWidth="360.0">
+                <Slider fx:id="sliderIncubationDuration" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0" max="6.0" min="2.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
+                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Incubation duration (in seconds)" wrappingWidth="360.0">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </Text>
             </VBox>
             <VBox>
-                <Slider fx:id="sliderHealingDuration" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0"
-                        max="10.0" min="6.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true"/>
-                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Healing duration (in seconds)"
-                      wrappingWidth="360.0">
+                <Slider fx:id="sliderHealingDuration" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0" max="10.0" min="6.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
+                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Healing duration (in seconds)" wrappingWidth="360.0">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </Text>
             </VBox>
         </HBox>
         <HBox alignment="TOP_CENTER" spacing="50.0" style="-fx-padding: 20 0 20 0;">
             <VBox>
-                <Slider fx:id="sliderContaminationRadius" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="10.0" max="30.0"
-                        min="10.0" prefHeight="16.0" prefWidth="308.0" showTickLabels="true"/>
-                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contamination radius (in pixels)"
-                      wrappingWidth="360.0">
+                <Slider fx:id="sliderContaminationRadius" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="10.0" max="30.0" min="10.0" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
+                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contamination radius (in pixels)" wrappingWidth="360.0">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </Text>
             </VBox>
             <VBox>
-                <Slider fx:id="sliderNonContaminationDuration" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0"
-                        max="7.0" min="3.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true"/>
-                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Immunity duration (in seconds)"
-                      wrappingWidth="360.0">
+                <Slider fx:id="sliderImmunityDuration" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0" max="7.0" min="3.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
+                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Immunity duration (in seconds)" wrappingWidth="360.0">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </Text>
             </VBox>
         </HBox>
         <HBox alignment="TOP_CENTER" spacing="50.0" style="-fx-padding: 20 0 20 0;">
             <VBox>
-                <Slider fx:id="sliderWallsNumber" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0"
-                        max="4.0" min="1.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true"/>
-                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Walls number"
-                      wrappingWidth="360.0">
+                <Slider fx:id="sliderWallsNumber" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0" max="4.0" min="1.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" snapToTicks="true" />
+                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Walls number" wrappingWidth="360.0">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </Text>
             </VBox>
             <VBox>
-                <Slider blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0"
-                        max="6.0" min="2.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true"/>
-                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Random slider"
-                      wrappingWidth="360.0">
+                <Slider blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0" max="6.0" min="2.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
+                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Random slider" wrappingWidth="360.0">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </Text>
             </VBox>
         </HBox>
         <HBox alignment="TOP_CENTER" style="-fx-padding: 20 0 20 0;">
-                <Button fx:id="btnApplySettings" layoutX="536.0" layoutY="388.0" mnemonicParsing="false"
-                        onMouseClicked="#passSettingsToController" onMousePressed="#passSettingsToController" prefHeight="26.0"
-                        prefWidth="84.0" text="Apply"/>
+                <Button fx:id="btnApplySettings" layoutX="536.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#passSettingsToController" onMousePressed="#passSettingsToController" prefHeight="26.0" prefWidth="84.0" text="Apply" />
         </HBox>
 
     </children>

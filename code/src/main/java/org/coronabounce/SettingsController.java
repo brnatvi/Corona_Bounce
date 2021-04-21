@@ -11,10 +11,10 @@ public class SettingsController
     private Controllable c = null;
 
     @FXML TextField individualsNumberSettings;
-    @FXML Slider sliderCovidDuration;
+    @FXML Slider sliderIncubationDuration;
     @FXML Slider sliderContaminationRadius;
     @FXML Slider sliderHealingDuration;
-    @FXML Slider sliderNonContaminationDuration;
+    @FXML Slider sliderImmunityDuration;
     @FXML Slider sliderWallsNumber;
 
     public void setMainController(MainController mainController) {
@@ -29,14 +29,14 @@ public class SettingsController
         this.c = new Controller();
         int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
         c.setPersonsCount(newIndividualsNumber);
-        double newCovidDuration = (sliderCovidDuration.getValue())*1000;
-        c.setDurationCovid((long)newCovidDuration);
+        double newIncubationDuration = (sliderIncubationDuration.getValue())*1000;
+        c.setDurationIncubation((long)newIncubationDuration);
         double newContaminationRadius = (sliderContaminationRadius.getValue());
         c.setContaminationRadius(newContaminationRadius);
-        double newHealingDuration = (sliderCovidDuration.getValue())*1000;
+        double newHealingDuration = (sliderIncubationDuration.getValue())*1000;
         c.setDurationHealing((long)newHealingDuration);
-        double newNonContaminationDuration = (sliderNonContaminationDuration.getValue())*1000;
-        c.setDurationNonContamination((long)newNonContaminationDuration);
+        double newImmunityDuration = (sliderImmunityDuration.getValue())*1000;
+        c.setDurationImmunity((long)newImmunityDuration);
         double newWallsNumber = (sliderWallsNumber.getValue());
         c.setWallsCount((int)newWallsNumber);
 

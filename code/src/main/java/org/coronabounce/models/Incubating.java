@@ -18,7 +18,7 @@ public class Incubating extends Individual{
                 p.nbIncubating--;
             }
         }
-    }, p.getDurationCovid());
+    }, p.getDurationIncubation());
   }
   
   @Override

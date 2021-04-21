@@ -12,9 +12,9 @@ public class Controller implements Controllable
     private static double HEIGTH = 290 ;              // population space size (height)
     private int COUNT = 30;                           // population size
     private double CONTAMINATION_RADIUS = 10;         // radius of contamination
-    private long DURATION_COVID = 3000;               // has contact <-> sick
+    private long DURATION_INCUBATION = 3000;          // healthy <-> sick
     private long DURATION_HEALING = 8000;             // sick <-> recovered
-    private long DURATION_NON_CONTAMINATION = 5000;   // recovered <-> can be contaminate again
+    private long DURATION_IMMUNITY = 5000;            // recovered <-> healthy (can be contaminate again)
     private double RADIUS_DOT = 3;                    // radius of point in GUI
     private static double Kilometrage = 50;
     private static double diametreX = 15;
@@ -111,16 +111,16 @@ public class Controller implements Controllable
     public void setContaminationRadius(double pxls) { CONTAMINATION_RADIUS = pxls; }
 
     @Override
-    public long getDurationCovid() { return DURATION_COVID; }
+    public long getDurationIncubation() { return DURATION_INCUBATION; }
 
     @Override
-    public void setDurationCovid(long time) { DURATION_COVID = time; }
+    public void setDurationIncubation(long time) { DURATION_INCUBATION = time; }
 
     @Override
-    public long getDurationNonContamination() { return DURATION_NON_CONTAMINATION; }
+    public long getDurationImmunity() { return DURATION_IMMUNITY; }
 
     @Override
-    public void setDurationNonContamination(long time) { DURATION_NON_CONTAMINATION = time; }
+    public void setDurationImmunity(long time) { DURATION_IMMUNITY = time; }
 
     @Override
     public long getDurationHealing() { return DURATION_HEALING;}

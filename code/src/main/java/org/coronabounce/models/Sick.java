@@ -21,7 +21,7 @@ public class Sick extends Individual {
                   p.nbSick--;
               }
           }
-      },p.getDurationCovid()+p.getDurationHealing());
+      },p.getDurationHealing());
   }
 
     public void run() {

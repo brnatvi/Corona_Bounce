@@ -145,10 +145,7 @@ public class MainController
         updateStatistics();
 
         // pause all timers
-        if (this.currentController.getState() == Controllable.eState.Working)
-        {
-            this.currentController.setState(Controllable.eState.Paused);
-        }
+        this.currentController.setState(Controllable.eState.Paused);
 
         btnPause.setDisable(true);
     }

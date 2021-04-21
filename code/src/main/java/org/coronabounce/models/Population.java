@@ -101,9 +101,9 @@ public class Population implements Displayable {
 
     //========================= Virus Getters/Setters =================================================================/
 
-    public long getDurationCovid() { return controller.getDurationCovid(); }
+    public long getDurationIncubation() { return controller.getDurationIncubation(); }
 
-    public long getDurationNonContamination() { return controller.getDurationNonContamination(); }
+    public long getDurationImmunity() { return controller.getDurationImmunity(); }
 
     public long getDurationHealing() { return controller.getDurationHealing(); }
 
