@@ -119,14 +119,21 @@ public class MainController
 
     public Controllable getController() { return this.currentController; }
 
+    /**
+     * @summary Upload new current controller
+     */
+    public void setSettingsController(Controllable c) { this.currentController = c; }
+
     //========================= Initialisation ========================================================================/
 
     /**
      * @summary Initialise Graphs, Panels and StatisticGrids and paused all timers in model
      */
     @FXML
-    private void initialize()
+    public void initialize()
     {
+        retainPopulationsAndWalls();
+
         // init graphPanel and fil mainGrid by graphPanel
         initGraphs();
 
@@ -142,6 +149,8 @@ public class MainController
         {
             this.currentController.setState(Controllable.eState.Paused);
         }
+
+        btnPause.setDisable(true);
     }
 
     /**
@@ -259,6 +268,7 @@ public class MainController
         zone1.moving();
         zone2.moving();
         btnStart.setDisable(true);
+        btnPause.setDisable(false);
     }
 
     /**
@@ -299,7 +309,7 @@ public class MainController
         retainPopulationsAndWalls();
         changeController(currentController);
         btnStart.setDisable(false);
-
+        
         //initializes new populations, statistic and graphs and pauses all timers
         initialize();
     }
@@ -361,9 +371,8 @@ public class MainController
         this.isRestrictionMovement1 = false;
         closePreviousTask();
         changeController(currentController);
-        initNewPopulation();
+        initialize();
         btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -375,9 +384,8 @@ public class MainController
         this.isRestrictionMovement1 =true;
         closePreviousTask();
         changeController(currentController);
-        initNewPopulation();
+        initialize();
         btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -389,9 +397,8 @@ public class MainController
         this.isRestrictionMovement1 = false;
         closePreviousTask();
         changeController(currentController);
-        initNewPopulation();
+        initialize();
         btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -403,9 +410,8 @@ public class MainController
         this.isRestrictionMovement1 = false;
         closePreviousTask();
         changeController(currentController);
-        initNewPopulation();
+        initialize();
         btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -417,9 +423,8 @@ public class MainController
         this.isRestrictionMovement1 = false;
         closePreviousTask();
         changeController(currentController);
-        initNewPopulation();
+        initialize();
         btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -431,9 +436,8 @@ public class MainController
         this.isRestrictionMovement2 = false;
         closePreviousTask();
         changeController(currentController);
-        initNewPopulation();
+        initialize();
         btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -445,9 +449,8 @@ public class MainController
         this.isRestrictionMovement2 =true;
         closePreviousTask();
         changeController(currentController);
-        initNewPopulation();
+        initialize();
         btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -459,9 +462,8 @@ public class MainController
         this.isRestrictionMovement2 =false;
         closePreviousTask();
         changeController(currentController);
-        initNewPopulation();
+        initialize();
         btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -473,9 +475,8 @@ public class MainController
         this.isRestrictionMovement2 = false;
         closePreviousTask();
         changeController(currentController);
-        initNewPopulation();
+        initialize();
         btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
     }
 
@@ -487,33 +488,9 @@ public class MainController
         this.isRestrictionMovement2 = false;
         closePreviousTask();
         changeController(currentController);
-        initNewPopulation();
+        initialize();
         btnStart.setDisable(false);
-        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("corona bounce");
-    }
-
-    //===================== Functions to use in Settings Controller ===================================================/
-
-    /**
-     * @summary Upload new current controller
-     */
-    public void setSettingsController(Controllable c) { this.currentController = c; }
-
-    /**
-     * @summary Initialize graphPanel, fil mainGrid by graphPanel and draw new populations
-     */
-    public void initNewPopulation()
-    {
-        retainPopulationsAndWalls();
-        initGraphs();
-        updateStatistics();
-        drawPopulation(true);
-        drawPopulation(false);
-        if (this.currentController.getState() == Controllable.eState.Working)
-        {
-            this.currentController.setState(Controllable.eState.Paused);
-        }
     }
 
     //========================= Button's auxiliary functions ==========================================================/

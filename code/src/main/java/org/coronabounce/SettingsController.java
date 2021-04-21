@@ -1,7 +1,5 @@
 package org.coronabounce;
 
-import java.io.IOException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.coronabounce.controllers.Controller;
@@ -47,7 +45,7 @@ public class SettingsController
         mainController.changeController(c);
 
         // inits graphPanel, fills mainGrid by graphPanel and draw new populations
-        mainController.initNewPopulation();
+        mainController.initialize();
         mainController.btnStart.setDisable(false);
 
         App.setRoot("corona bounce");
