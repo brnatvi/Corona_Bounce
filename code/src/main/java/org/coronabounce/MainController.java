@@ -122,7 +122,7 @@ public class MainController
     //========================= Initialisation ========================================================================/
 
     /**
-     * @summary Initialise Graphs, Panels and StatisticGrids
+     * @summary Initialise Graphs, Panels and StatisticGrids and paused all timers in model
      */
     @FXML
     private void initialize()
@@ -136,6 +136,12 @@ public class MainController
 
         // init statistic
         updateStatistics();
+
+        // pause all timers
+        if (this.currentController.getState() == Controllable.eState.Working)
+        {
+            this.currentController.setState(Controllable.eState.Paused);
+        }
     }
 
     /**
@@ -262,6 +268,7 @@ public class MainController
     private void switchToSettings()
     {
         closePreviousTask();
+        this.currentController.setState(Controllable.eState.Paused);
         App.setRoot("settings");
     }
 
@@ -292,6 +299,8 @@ public class MainController
         retainPopulationsAndWalls();
         changeController(currentController);
         btnStart.setDisable(false);
+
+        //initializes new populations, statistic and graphs and pauses all timers
         initialize();
     }
 
@@ -501,6 +510,10 @@ public class MainController
         updateStatistics();
         drawPopulation(true);
         drawPopulation(false);
+        if (this.currentController.getState() == Controllable.eState.Working)
+        {
+            this.currentController.setState(Controllable.eState.Paused);
+        }
     }
 
     //========================= Button's auxiliary functions ==========================================================/
