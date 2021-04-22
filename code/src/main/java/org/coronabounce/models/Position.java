@@ -1,38 +1,46 @@
 package org.coronabounce.models;
 
-import org.coronabounce.controllers.Controller;
+import org.coronabounce.mvcconnectors.Controllable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-
 
 public class Position   {
     // Pour savoir quelles positions de la Zone sont déjà prises(Il y'a déjà un individu dessus)
     private static List<Position> listTakenPositions =new ArrayList<>();
     private double posX;
     private double posY;
+    private double minLimit;
+    private double maxLimitX;
+    private double maxLimitY;
     private static Random r = new Random();
+    private Controllable controller;
 
     // CONSTRUCTORS ------------------------------------------------------------
-    public Position() {
+    public Position(Controllable controller) {
+
+        this.maxLimitX = controller.getSpaceSize()[0] - controller.getRadiusDot();
+        this.maxLimitY = controller.getSpaceSize()[1] - controller.getRadiusDot();
+        this.minLimit = controller.getRadiusDot();
+
+        this.controller = controller;
         do {
-            this.posX = Math.abs(r.nextInt((int) Controller.getWidth()));
-            this.posY = Math.abs(r.nextInt((int) Controller.getHeight()));
+            this.posX = Math.abs(r.nextInt((int) (maxLimitX - controller.getRadiusDot()))) + controller.getRadiusDot();
+            this.posY = Math.abs(r.nextInt((int) (maxLimitY - controller.getRadiusDot()))) + controller.getRadiusDot();
         } while (!isEmpty() || isInWallOrOutOfZone());
         listTakenPositions.add(this);
         System.out.println(listTakenPositions.size());//@a
     }
 
-    public Position(double posX, double posY) {
-        if (posX <= Controller.getWidth() && posY <= Controller.getHeight()) {
+    public Position(double posX, double posY, Controllable cont) {
+        this.controller = cont;
+        if (posX <= maxLimitX && posY <= maxLimitY) {
             this.posX = posX;
             this.posY = posY;
         } else {
-            this.posX = 0;
-            this.posY = 0;
+            this.posX = minLimit;
+            this.posY = minLimit;
             System.out.println("Unable to set position in Constructors of position for x:"+posX+" y:"+posY);
         }
         listTakenPositions.add(this);
@@ -44,28 +52,28 @@ public class Position   {
     public double getX() {return this.posX;}
     public double getY() {return this.posY;}
 
-    public void setPos(double x, double y) {
-      if(x<0){x=0;}
-      else if(x> Controller.getWidth()){x=Controller.getWidth();}
-      if(y<0){y=0;}
-      else if(y>Controller.getHeight()){y=Controller.getHeight();}
+    public void setPos(double x, double y) {           //TODO add condition do not set in positions of walls
+      if (x < 0) {x = minLimit;}
+      else if (x > maxLimitX) {x = maxLimitX;}
+      if (y < 0) {y = minLimit;}
+      else if (y > maxLimitY){y = maxLimitY;}
       this.posX = x;
       this.posY = y;
     }
 
     public void setPosX(double posX) {
-        if (posX <= Controller.getWidth() ){
+        if (posX <= maxLimitX ){
             this.posX = posX;
         }else{
-            this.posX = 0;
+            this.posX = minLimit;
         }
     }
 
     public void setPosY(double posY) {
-        if(posY <= Controller.getHeight()) {
+        if(posY <= maxLimitY) {
             this.posY = posY;
         }else{
-            this.posY = 0;
+            this.posY = minLimit;
         }
     }
 

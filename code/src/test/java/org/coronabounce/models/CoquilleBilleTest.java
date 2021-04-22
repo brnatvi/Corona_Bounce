@@ -9,8 +9,8 @@ public class CoquilleBilleTest extends Assertions{
   public void testEquals(){
     Controller c = new Controller();
     Population p = new Population(c, 0, 0, 0,false,false,false);
-    Individual i1 = new Sick(new CoquilleBille(null),p);
-    Individual i2 = new Healthy(new CoquilleBille(null),p);
+    Individual i1 = new Sick(new CoquilleBille(null, p),p);
+    Individual i2 = new Healthy(new CoquilleBille(null, p),p);
     p.addIndividual(i1);
     p.addIndividual(i2);
     CoquilleBille coc1=null, coc2=null, coc3=null;

@@ -13,7 +13,7 @@ public class Incubating extends Individual{
     p.getTimer().schedule(new TimerTask() {
         @Override
         public void run() {
-            if (Incubating.super.p.getController().getState() == Controllable.eState.Working){
+            if (Incubating.super.population.getController().getState() == Controllable.eState.Working){
                 coc.setIndividual(new Sick(coc, p));
                 p.nbIncubating--;
             }

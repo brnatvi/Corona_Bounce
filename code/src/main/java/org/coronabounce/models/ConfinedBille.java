@@ -1,17 +1,21 @@
 package org.coronabounce.models;
 
-import org.coronabounce.controllers.Controller;
+import org.coronabounce.mvcconnectors.Controllable;
+
 import java.util.Random;
 
 public class ConfinedBille extends CoquilleBille {
-  private static Random random = new Random();
+    private static Random random = new Random();
+    private Controllable controller;
 
-    public ConfinedBille(double speedX, double speedY, Individual individual) {
-        super(speedX, speedY, individual);
+    public ConfinedBille(double speedX, double speedY, Individual individual, Population pop) {
+        super(speedX, speedY, individual, pop);
+        this.controller = pop.getController();
     }
 
-    public ConfinedBille(Individual i) {
-        super(i);
+    public ConfinedBille(Individual i, Population pop) {
+        super(i, pop);
+        this.controller = pop.getController();
     }
 
     private double genererDouble() {//cette methode permet de generer un reel entre 0 et 1
@@ -49,23 +53,23 @@ public class ConfinedBille extends CoquilleBille {
         double b = genererDouble();
         double a = genererDouble() * b;
         double c;
-        if (distancePos() >= Controller.getKilometrage()) {// dans le cas disrance(position courante ,position de depart)>Kilometrange
-            if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()+Controller.getDiametreX()) {
+        if (distancePos() >= controller.getKilometrage()) {// dans le cas disrance(position courante ,position de depart)>Kilometrange
+            if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()+controller.getDiametreX()) {
                 c=genererDouble()*b;
 
                 this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()+c));//reculer en X pour atteindre position de depart
             }
-            if ((this.getMovingSpeedY() - a) + this.getPosition().getY() > this.getStartingPosition().getY()+Controller.getDiametreY()) {
+            if ((this.getMovingSpeedY() - a) + this.getPosition().getY() > this.getStartingPosition().getY()+controller.getDiametreY()) {
 
                 c=genererDouble()*a;
                 this.setMovingSpeed((this.getMovingSpeedX()+c), (this.getMovingSpeedY() - a));//reculer en Y pour atteindre la position de départ
             }
-            if ((this.getMovingSpeedX() + a) + this.getPosition().getX() <= this.getStartingPosition().getX()+Controller.getDiametreX()) {
+            if ((this.getMovingSpeedX() + a) + this.getPosition().getX() <= this.getStartingPosition().getX()+controller.getDiametreX()) {
                 c=genererDouble()*b;
 
                 this.setMovingSpeed((this.getMovingSpeedX()) + a, (this.getMovingSpeedY()-c));//avancer en X pour atteindre la position de départ
             }
-            if ((this.getMovingSpeedY() + a) + this.getPosition().getY() <= this.getStartingPosition().getY()+Controller.getDiametreY()) {
+            if ((this.getMovingSpeedY() + a) + this.getPosition().getY() <= this.getStartingPosition().getY()+controller.getDiametreY()) {
 
                 c=genererDouble()*a;
                 this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));//avancer en Y pour atteindre la position de départ

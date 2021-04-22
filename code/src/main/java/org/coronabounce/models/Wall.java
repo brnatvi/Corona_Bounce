@@ -15,17 +15,17 @@ public class Wall  {
     /** Id counter */
     private static int cpt=0;
     /** How much thik is the wall */
-    private double thikness;
+    private final double thikness;
     private final double positionX;
     private double positionY;
     private Controllable controller;
 
     // CONSTRUCTORS ------------------------------------------------------------
-    public Wall(Controllable iController, double posX){//ce mur va separer la population en deux populations
-       this.thikness=Controller.getThickness();
+    public Wall(Controllable controller, double posX){//ce mur va separer la population en deux populations
+       this.controller = controller;
+       this.thikness=controller.getThickness();
        this.positionX=posX;
        this.positionY=0;
-       this.controller = iController;
        id=cpt++;
     }
 
@@ -37,6 +37,7 @@ public class Wall  {
 
     // FUNCTIONS ---------------------------------------------------------------
     public String toString(){return id+" x="+positionX+" y="+positionY+" th="+thikness;}
+
     public void makeWallGoDown(Population pop){
         TimerTask tt = null;
         pop.getTimer().schedule(tt = new TimerTaskWall(this.controller,this), 0, 100);
@@ -106,7 +107,7 @@ class TimerTaskWall extends TimerTask{
     public synchronized void run(){
         if (this.controller.getState() == Controllable.eState.Working){
             w.setPositionY(w.getPositionY()+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
-            if(w.getPositionY()>Controller.getHeight()){
+            if(w.getPositionY()>controller.getSpaceSize()[1]){
                 cancel();
             }
         }

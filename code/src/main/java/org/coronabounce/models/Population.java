@@ -1,6 +1,5 @@
 package org.coronabounce.models;
 
-import org.coronabounce.controllers.Controller;
 import org.coronabounce.data.Data;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
@@ -30,20 +29,20 @@ public class Population implements Displayable {
 
         if(isLockDown){// dans le cas ou on est dans le scénario lockdown il suffit de creer des ConfinedBille
             for (int i = 0; i < nbH; i++) {
-                CoquilleBille coc = new ConfinedBille(null);
+                CoquilleBille coc = new ConfinedBille(null, this);
                 Individual in = new Healthy(coc, this);
                 coc.setIndividual(in);
                 listCoquille.add(coc);
             }
             for (int i = 0; i < nbS; i++) {
-                CoquilleBille coc = new ConfinedBille(null);
+                CoquilleBille coc = new ConfinedBille(null, this);
 
                 Individual in = new Sick(coc, this);
                 coc.setIndividual(in);
                 listCoquille.add(coc);
             }
             for (int i = 0; i < nbR; i++) {
-                CoquilleBille coc = new ConfinedBille(null);
+                CoquilleBille coc = new ConfinedBille(null, this);
                 Individual in = new Recovered(coc, this);
                 coc.setIndividual(in);
                 listCoquille.add(coc);
@@ -51,19 +50,19 @@ public class Population implements Displayable {
         }
         else {
             for (int i = 0; i < nbH; i++) {
-                CoquilleBille coc = new CoquilleBille(null);// creer d'abord une Coquille Bille vide
+                CoquilleBille coc = new CoquilleBille(null, this);// creer d'abord une Coquille Bille vide
                 Individual in = new Healthy(coc, this);// creer un individu Healthy
                 coc.setIndividual(in);//Remplir la coquille vide avec un individu de type Healthy
                 listCoquille.add(coc);// ajouter la coquille qui contient l individu a la liste des CoquilleBille
             }
             for (int i = 0; i < nbS; i++) {
-                CoquilleBille coc = new CoquilleBille(null);// creer d'abord une Coquille Bille vide
+                CoquilleBille coc = new CoquilleBille(null, this);// creer d'abord une Coquille Bille vide
                 Individual in = new Sick(coc, this);// creer un individu Sick
                 coc.setIndividual(in);//Remplir la coquille vide avec un individu de type Sick
                 listCoquille.add(coc);// ajouter la coquille qui contient l individu a la liste des CoquilleBille
             }
             for (int i = 0; i < nbR; i++) {
-                CoquilleBille coc = new CoquilleBille(null);// creer d'abord une Coquille Bille vide
+                CoquilleBille coc = new CoquilleBille(null, this);// creer d'abord une Coquille Bille vide
                 Individual in = new Recovered(coc, this);// creer un individu Recovered
                 coc.setIndividual(in);//Remplir la coquille vide avec un individu de type Recovered
                 listCoquille.add(coc);// ajouter la coquille qui contient l individu a la liste des CoquilleBille
@@ -112,7 +111,7 @@ public class Population implements Displayable {
     //========================= Points Interactions ===================================================================/
 
     public void addIndividual(Individual i) { //la méthode permet de creer Une CoquilleBille et la remplir avec l individu i et l ajouter a la liste des CoquilleBille
-        CoquilleBille coc = new CoquilleBille(i);
+        CoquilleBille coc = new CoquilleBille(i, this);
         listCoquille.add(coc);//ajouter la Coquille Bille a la liste des Coquille Bille
     }
 
@@ -214,9 +213,9 @@ public class Population implements Displayable {
      *@param numberOfWall the number of wall that will be add.
      */
     private boolean createWalls(int numberOfWall){
-        double maxX = Controller.getWidth();
-        for (int i=1; i<=numberOfWall; i++) {
-            double posX = (maxX*i)/(numberOfWall+1);
+        double maxX = controller.getSpaceSize()[0];
+        for (int i = 1; i <= numberOfWall; i++) {
+            double posX = (maxX * i)/(numberOfWall + 1);
             listWall.add(new Wall(this.controller, posX));
         }
         if(numberOfWall>0){

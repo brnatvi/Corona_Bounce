@@ -1,15 +1,12 @@
 package org.coronabounce.models;
 
-import java.util.Random;
-import java.util.Timer;
-
 public  abstract class Individual {
     protected CoquilleBille coc;
-    protected Population p;
+    protected Population population;
 
     public Individual(CoquilleBille coc, Population p){
-      this.coc=coc;
-      this.p=p;
+        this.population = p;
+        this.coc=coc;
     }
 
     /**
@@ -26,6 +23,6 @@ public  abstract class Individual {
     public boolean isSick(){return false;}
 
     public void setCoc(CoquilleBille coc){this.coc=coc;}
-    public Population getPop(){return p;}
+    public Population getPopulation(){return population;}
 
 }

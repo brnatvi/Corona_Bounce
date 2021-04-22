@@ -8,18 +8,18 @@ public class Controller implements Controllable
 {
     //these constants are initials and will be changed during the changing the settings of program in GUI
 
-    private static double WIDTH = 465 ;               // population space size (width)
-    private static double HEIGTH = 290 ;              // population space size (height)
+    private double WIDTH = 465 ;                      // population space size (width)
+    private double HEIGTH = 290 ;                     // population space size (height)
     private int COUNT = 30;                           // population size
     private double CONTAMINATION_RADIUS = 10;         // radius of contamination
-    private long DURATION_INCUBATION = 3000;          // healthy <-> sick
+    private long DURATION_INCUBATION = 3000;          // incubation <-> sick
     private long DURATION_HEALING = 8000;             // sick <-> recovered
     private long DURATION_IMMUNITY = 5000;            // recovered <-> healthy (can be contaminate again)
     private double RADIUS_DOT = 3;                    // radius of point in GUI
-    private static double Kilometrage = 50;
-    private static double diametreX = 15;
-    private static double diametreY = 10;
-    private static double thickness = 4;              // thickness of the walls
+    private double Kilometrage = 50;
+    private double diametreX = 15;
+    private double diametreY = 10;
+    private double thickness = 4;                     // thickness of the walls
     private int WALLS_COUNT = 4;                      // number of boundaries
 
     private Controllable.eState state = Controllable.eState.Paused;   // enum variable to control all our timers at the same time
@@ -64,28 +64,32 @@ public class Controller implements Controllable
         HEIGTH = h;
     }
 
-    public static double getThickness() {
+    @Override
+    public double getThickness() {
         return thickness;
     }
 
-    public static double getWidth() { return WIDTH; }
+  //  public static double getWidth() { return WIDTH; }
 
-    public static double getHeight() { return HEIGTH; }
+  //  public static double getHeight() { return HEIGTH; }
 
-    public static void setWidth(double w) { if (w >= 1) { WIDTH = w; }}
+ //   public static void setWidth(double w) { if (w >= 1) { WIDTH = w; }}
 
 
     //====================================== Scenarios Settings =======================================================/
 
-    public static double getKilometrage() {
+    @Override
+    public double getKilometrage() {
         return Kilometrage;
     }
 
-    public static double getDiametreX() {
+    @Override
+    public double getDiametreX() {
         return diametreX;
     }
-
-    public static double getDiametreY() {
+    
+    @Override
+    public double getDiametreY() {
         return diametreY;
     }
 
