@@ -66,10 +66,5 @@ public class Zone  {
             }
         },0,1*33);
     }
-
-    public void test(){
-
-        this.moving();
-    }
     
 }
