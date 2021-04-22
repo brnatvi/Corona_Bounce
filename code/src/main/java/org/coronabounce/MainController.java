@@ -699,7 +699,7 @@ public class MainController
 
                 for (int i = 0; i < currentController.getWallsCount(); i++)
                 {
-                    Rectangle wall1 = new Rectangle((positionX1.get(i) - thicknesses1.get(i) / 4) * koeffW, 0,
+                    Rectangle wall1 = new Rectangle((positionX1.get(i) - thicknesses1.get(i) / 2) * koeffW, 0,
                                                     thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
                     wall1.setFill(valueOf("008B8B"));
 
@@ -718,7 +718,7 @@ public class MainController
 
                 for (int i = 0; i < currentController.getWallsCount(); i++)
                 {
-                    Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 4) * koeffW, 0,
+                    Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 2) * koeffW, 0,
                                                     thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
 
                     wall2.setFill(valueOf("008B8B"));
