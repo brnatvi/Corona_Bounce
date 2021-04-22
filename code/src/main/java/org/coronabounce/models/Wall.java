@@ -34,18 +34,45 @@ public class Wall  {
     *{@summary Return true if it will cross the wall in x.}<br>
     *@param coc The CoquilleBille that we may make bounce.
     */
+
     public boolean willCrossWallInX(CoquilleBille coc){
 
-      double curentX = coc.getPosition().getX();
-      double futurX = curentX+coc.getMovingSpeedX();
-      double radius = coc.getPop().getRadiusDot();
-      radius/=2;
-      if(curentX < positionX-thikness/2 && futurX > positionX-thikness/2){ return true;}
-      if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
-      if(curentX-radius < positionX-thikness/2 && futurX+radius > positionX+thikness/2){ return true;}
-      if(curentX+radius > positionX+thikness/2 && futurX-radius < positionX+thikness/2){ return true;}
-      return false;
+        double curentX = coc.getPosition().getX();
+        double futurX = curentX+coc.getMovingSpeedX();
+        double radius = coc.getPop().getRadiusDot();
+        double R=controller.getRadiusDot();
+        radius/=2;
+        if(curentX < positionX-thikness/2 && futurX > positionX-thikness/2){ return true;}
+        if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
+        if(curentX-radius < positionX-thikness/2 && futurX+radius > positionX+thikness/2){ return true;}
+        if(curentX+radius > positionX+thikness/2 && futurX-radius < positionX+thikness/2){ return true;}
+
+        if (intersect(futurX) ) {
+            if (futurX<positionX) futurX=positionX-thikness/2-R-1;
+            else if(futurX >positionX) futurX=positionX+thikness/2+R+1;
+
+            return true;}
+        if(intersect(curentX))
+        {
+            return  true;}
+
+
+        return false;
     }
+
+    private boolean isBetween(double c,double a , double b) {
+        if( c<=b && c>=a ) return true;
+        return false;
+    }
+
+    private boolean intersect(double X1)
+    {
+        double R=controller.getRadiusDot();
+        if((isBetween(X1,X1-R,X1+R)) && (isBetween(X1,positionX-thikness/2-R,positionX+thikness/2+R))) return true;
+        return false;
+    }
+
+
     /**
     *{@summary Return true if it will cross the wall in y.}<br>
     *It will hit in Y only if wall is enoth low.<br>

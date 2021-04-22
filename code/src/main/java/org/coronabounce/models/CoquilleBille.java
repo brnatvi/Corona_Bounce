@@ -20,7 +20,7 @@ public class CoquilleBille {
     private static int idCpt=0;// le nombre de Coquille déja crées
     private static Random r = new Random();
     private final Position startingPosition;// memoriser la position de départ de la Coquille
-
+    private static double minReboundSpeed=3;
 
     public CoquilleBille(double speedX,double speedY, Individual individual){
 
@@ -57,13 +57,32 @@ public class CoquilleBille {
         if(y<=getPop().getRadiusDot() || y>= Controller.getHeight()-getPop().getRadiusDot()){return true;}
         return false;
     }
-     protected void bounceIfHitWall() {
-          for (Wall wall : getPop().getListWall()) {
-               if (wall.willCrossWallInX(this) && wall.willCrossWallInY(this)) {
+
+    protected void bounceIfHitWall() {
+        for (Wall wall : getPop().getListWall()) {
+            if (wall.willCrossWallInX(this) && wall.willCrossWallInY(this)) {
+                if(isBetween(p.getX(),wall.getPositionX()- wall.getThickness()/2-getPop().getRadiusDot(), wall.getPositionX()) ) {
+                    if(this.movingSpeedX<minReboundSpeed) {
+
+                        this.movingSpeedX =minReboundSpeed-1 ;
+                    }
+
                     bounce(true);
+                }
+                else if (isBetween(p.getX(),wall.getPositionX(),wall.getPositionX()+ wall.getThickness()/2+getPop().getRadiusDot()))
+
+                    if(this.movingSpeedX<minReboundSpeed) {
+
+                        this.movingSpeedX = minReboundSpeed-1;}
                }
-          }
-     }
+                }
+                  }
+
+    private boolean isBetween(double c,double a , double b) {
+        if( c<=b && c>=a ) return true;
+        return false;
+    }
+
        public boolean InY(CoquilleBille coc){
          if((this.getPosition().getY()-coc.getPosition().getY()<10)&& (this.getPosition().getY()-coc.getPosition().getY()>=0)||(this.getPosition().getY()-coc.getPosition().getY()<10)&& (coc.getPosition().getY()-coc.getPosition().getY()>=0) ){
               return true;
