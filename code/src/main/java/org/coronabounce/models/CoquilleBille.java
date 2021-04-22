@@ -5,14 +5,9 @@ import java.util.Random;
 
 public class CoquilleBille {
 
-    /**
-    * A moving speed in x to move faster or slower.
-    */
+    /** A moving speed in x to move faster or slower. */
     private double movingSpeedX;//le vecteur vitesse en Vx de la Coquille
-    /**
-    * A moving speed in y to move faster or slower.
-    */
-
+    /** A moving speed in y to move faster or slower. */
     private double movingSpeedY;//le vecteur vitesse Vy de la Coquille
     private Individual individual;//l individu que la Coquille va contenir
     private Position p;// la position e X et et en Y de la Coquille
@@ -46,12 +41,15 @@ public class CoquilleBille {
       return false;
     }
     //=====================================================Rebondissements=============================================//
+    /**
+     *{@summary Return true if x coordinate is out the the Zone at next move.}
+     */
     public boolean outOfX(double x){
         if(x<=getPop().getRadiusDot() || x>= Controller.getWidth()-getPop().getRadiusDot()){return true;}//verifie si la position de la Coquille dépasse les bornes de la zone par rapport a X
         return false;
     }
     /**
-     *{@summary Return true if y coordinate is out the the Zone.}
+     *{@summary Return true if y coordinate is out the the Zone at next move.}
      */
     public boolean outOfY(double y){//verifie si la position de la Coquille dépasse les bornes de la zone par rapport a Y
         if(y<=getPop().getRadiusDot() || y>= Controller.getHeight()-getPop().getRadiusDot()){return true;}
@@ -72,11 +70,11 @@ public class CoquilleBille {
                 else if (isBetween(p.getX(),wall.getPositionX(),wall.getPositionX()+ wall.getThickness()/2+getPop().getRadiusDot()))
 
                     if(this.movingSpeedX<minReboundSpeed) {
-
-                        this.movingSpeedX = minReboundSpeed-1;}
-               }
-                }
-                  }
+                        this.movingSpeedX = minReboundSpeed-1;
+                    }
+              }
+        }
+    }
 
     private boolean isBetween(double c,double a , double b) {
         if( c<=b && c>=a ) return true;
@@ -100,10 +98,9 @@ public class CoquilleBille {
      public void Bouncee(boolean bool){
          if(bool){
               this.setMovingSpeed(this.getMovingSpeedX()*-1,this.getMovingSpeedY());
-     
          }else{
               this.setMovingSpeed(this.getMovingSpeedX(),this.getMovingSpeedY()*-1);
-     
+
          }
      }
      /**
@@ -122,9 +119,8 @@ public class CoquilleBille {
       *@param inX True if bounce in x coor.
       */
      protected void bounce(boolean inX){// elle sert a gerer les rebondissemnt
-          if(inX){ movingSpeedX*=-1;//inverser le vecteur vitesse Vx en le multipliant pas -1
-          }
-          else{ movingSpeedY*=-1; }//inverser le vecteur vitesse Vy en le multipliant pas -1
+          if(inX){ movingSpeedX*=-1;}//inverser le vecteur vitesse Vx en le multipliant par -1
+          else{ movingSpeedY*=-1; }//inverser le vecteur vitesse Vy en le multipliant par -1
      }
      /**
       *{@summary bounce.}<br>
@@ -166,7 +162,7 @@ public class CoquilleBille {
     /**
     *{@summary bounce if this hit a wall.}<br>
     */
-  
+
     //==================================================getters=====================================================================//
     public double getMovingSpeed() {return Math.sqrt( (this.movingSpeedX*this.movingSpeedX)+(this.movingSpeedY*this.movingSpeedY));}
     public Individual getIndividual(){return individual;}
@@ -182,6 +178,6 @@ public class CoquilleBille {
      public Position getStartingPosition() {
           return startingPosition;
      }
-     
-    
+
+
 }

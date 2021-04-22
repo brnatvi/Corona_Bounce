@@ -11,20 +11,38 @@ import java.util.Random;
 
 public class Position   {
     // Pour savoir quelles positions de la Zone sont déjà prises(Il y'a déjà un individu dessus)
-
-    private List<Position> listTakenPositions =new ArrayList<>();
+    private static List<Position> listTakenPositions =new ArrayList<>();
     private double posX;
     private double posY;
+    private static Random r = new Random();
 
-
-    public double getX() {
-        return this.posX;
+    // CONSTRUCTORS ------------------------------------------------------------
+    public Position() {
+        do {
+            this.posX = Math.abs(r.nextInt((int) Controller.getWidth()));
+            this.posY = Math.abs(r.nextInt((int) Controller.getHeight()));
+        } while (!isEmpty() || isInWallOrOutOfZone());
+        listTakenPositions.add(this);
+        System.out.println(listTakenPositions.size());//@a
     }
 
-    public double getY() {
-        return this.posY;
+    public Position(double posX, double posY) {
+        if (posX <= Controller.getWidth() && posY <= Controller.getHeight()) {
+            this.posX = posX;
+            this.posY = posY;
+        } else {
+            this.posX = 0;
+            this.posY = 0;
+            System.out.println("Unable to set position in Constructors of position for x:"+posX+" y:"+posY);
+        }
+        listTakenPositions.add(this);
+        System.out.println(listTakenPositions.size());//@a
     }
 
+
+    // GET SET -----------------------------------------------------------------
+    public double getX() {return this.posX;}
+    public double getY() {return this.posY;}
 
     public void setPos(double x, double y) {
       if(x<0){x=0;}
@@ -33,36 +51,6 @@ public class Position   {
       else if(y>Controller.getHeight()){y=Controller.getHeight();}
       this.posX = x;
       this.posY = y;
-
-
-
-    }
-
-    public Position() {
-
-        Random r = new Random();
-        this.posX = Math.abs(r.nextInt((int) Controller.getWidth()));
-        this.posY = Math.abs(r.nextInt((int) Controller.getHeight()));
-
-
-
-        while( !isEmpty(posX,posY))
-        {
-
-            this.posX = Math.abs(r.nextInt((int) Controller.getWidth()));
-            this.posY = Math.abs(r.nextInt((int) Controller.getHeight()));
-        }
-
-    }
-
-    public Position(double PosX, double PosY) {
-        if (PosX <= Controller.getWidth() && PosY <= Controller.getHeight()) {
-            this.posX = PosX;
-            this.posY = PosY;
-        } else {
-            this.posX = 0;
-            this.posY = 0;
-        }
     }
 
     public void setPosX(double posX) {
@@ -81,15 +69,17 @@ public class Position   {
         }
     }
 
-    public boolean isEmpty(double PosX, double PosY)
+    // FUNCTIONS ---------------------------------------------------------------
+    private boolean isEmpty()
     {
         for (Position pos : this.listTakenPositions)
         {
-            if(pos.posX==PosX && pos.posY==posY) return false;//Position déjà prise
+            if(pos.posX==this.posX && pos.posY==this.posY) return false;//Position déjà prise
         }
-        listTakenPositions.add(new Position(PosX,PosY));
         return true;
     }
-
-
+    private boolean isInWallOrOutOfZone(){
+      //TODO
+      return false;
+    }
 }
