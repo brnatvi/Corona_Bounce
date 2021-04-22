@@ -214,12 +214,12 @@ public class MainController
         {
             if (zone1 != null)
             {
-                zone1.stopTimer(true);
+                zone1.stopTimerTask(true);
                 zone1.getPopulation().stopTimer(true);
             }
             if (zone2 != null)
             {
-                zone2.stopTimer(true);
+                zone2.stopTimerTask(true);
                 zone2.getPopulation().stopTimer(true);
             }
         } catch (Exception e)
@@ -306,7 +306,7 @@ public class MainController
         retainPopulationsAndWalls();
         changeController(currentController);
         btnStart.setDisable(false);
-        
+
         //initializes new populations, statistic and graphs and pauses all timers
         initialize();
     }
