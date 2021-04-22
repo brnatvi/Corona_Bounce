@@ -12,17 +12,11 @@ import java.util.TimerTask;
 public class Zone  {
 
     private Controllable controller;
-    /**
-     *Population that is in the Zone.
-     */
+    /** Population that is in the Zone. */
     private Population p;
-    /**
-     *Width of all Zones.
-     */
+    /** Width of all Zones. */
     private static double width=1;
-    /**
-     *Heigth of all Zones.
-     */
+    /** Heigth of all Zones. */
     private static double height=1;
     private Timer timer;
     private TimerTask timerTask;
