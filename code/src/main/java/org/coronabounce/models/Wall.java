@@ -4,14 +4,23 @@ import org.coronabounce.controllers.Controller;
 import org.coronabounce.mvcconnectors.Controllable;
 
 import java.util.*;
+
+/**
+ *{@summary Stop CoquilleBille by making them bounce.}
+ *It have a fix X position but can be moved in y.
+ */
 public class Wall  {
+    /** Unique id */
     private final int id;
+    /** Id counter */
     private static int cpt=0;
+    /** How much thik is the wall */
     private double thikness;
-    private double positionX;
+    private final double positionX;
     private double positionY;
     private Controllable controller;
 
+    // CONSTRUCTORS ------------------------------------------------------------
     public Wall(Controllable iController, double posX){//ce mur va separer la population en deux populations
        this.thikness=Controller.getThickness();
        this.positionX=posX;
@@ -19,13 +28,15 @@ public class Wall  {
        this.controller = iController;
        id=cpt++;
     }
-    public String toString(){return id+" x="+positionX+" y="+positionY+" th="+thikness;}
 
-    public void setPositionY(double positionY) { this.positionY = positionY; }
-
+    // GET SET -----------------------------------------------------------------
     public double getPositionX() { return this.positionX; }
     public double getPositionY() { return positionY; }
+    public void setPositionY(double positionY) { this.positionY = positionY; }
     public double getThickness() { return this.thikness; }
+
+    // FUNCTIONS ---------------------------------------------------------------
+    public String toString(){return id+" x="+positionX+" y="+positionY+" th="+thikness;}
     public void makeWallGoDown(Population pop){
         TimerTask tt = null;
         pop.getTimer().schedule(tt = new TimerTaskWall(this.controller,this), 0, 100);
@@ -36,16 +47,40 @@ public class Wall  {
     */
     public boolean willCrossWallInX(CoquilleBille coc){
 
-      double curentX = coc.getPosition().getX();
-      double futurX = curentX+coc.getMovingSpeedX();
-      double radius = coc.getPop().getRadiusDot();
-      radius/=2;
-      if(curentX < positionX-thikness/2 && futurX > positionX-thikness/2){ return true;}
-      if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
-      if(curentX-radius < positionX-thikness/2 && futurX+radius > positionX+thikness/2){ return true;}
-      if(curentX+radius > positionX+thikness/2 && futurX-radius < positionX+thikness/2){ return true;}
-      return false;
+        double curentX = coc.getPosition().getX();
+        double futurX = curentX+coc.getMovingSpeedX();
+        double radius = coc.getPop().getRadiusDot();
+        // radius/=2;
+        //part without thinking about CoquilleBille radius.
+        // if(curentX < positionX-thikness/2 && futurX > positionX-thikness/2){ return true;}
+        // if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
+        //part with thinking about CoquilleBille radius.
+        if(curentX < positionX-thikness/2 && futurX+radius > positionX-thikness/2){ return true;}
+        if(curentX > positionX+thikness/2 && futurX-radius < positionX+thikness/2){ return true;}
+
+        // if (intersect(futurX)) {
+        //     if (futurX<positionX) futurX=positionX-thikness/2-radius-1;
+        //     else if(futurX >positionX) futurX=positionX+thikness/2+radius+1;
+        //     return true;
+        // }
+        // if(intersect(curentX)){return  true;}
+
+        return false;
     }
+
+    private boolean isBetween(double c,double a , double b) {
+        if( c<=b && c>=a ) return true;
+        return false;
+    }
+
+    private boolean intersect(double X1)
+    {
+        double radius=controller.getRadiusDot();
+        if((isBetween(X1,X1-radius,X1+radius)) && (isBetween(X1,positionX-thikness/2-radius,positionX+thikness/2+radius))) return true;
+        return false;
+    }
+
+
     /**
     *{@summary Return true if it will cross the wall in y.}<br>
     *It will hit in Y only if wall is enoth low.<br>
