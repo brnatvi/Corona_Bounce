@@ -11,9 +11,9 @@ public class Position   {
     private static List<Position> listTakenPositions =new ArrayList<>();
     private double posX;
     private double posY;
-    private double minLimit;
-    private double maxLimitX;
-    private double maxLimitY;
+    private static double minLimit;
+    private static double maxLimitX;
+    private static double maxLimitY;
     private static Random r = new Random();
 
     // CONSTRUCTORS ------------------------------------------------------------
@@ -29,7 +29,6 @@ public class Position   {
         do {
             this.posX = Math.abs(r.nextInt((int) (maxLimitX - minLimit))) + minLimit;
             this.posY = Math.abs(r.nextInt((int) (maxLimitY - minLimit))) + minLimit;
-
         } while (!isEmpty() || isInWall());
         listTakenPositions.add(this);
     }
@@ -65,12 +64,12 @@ public class Position   {
 
     private boolean isInWall(){
       //We already check that it will not be out of zone.
-      // if(posX < minLimit || posX > maxLimitX){
-      //   return true;
-      // }
-      // if(posY < minLimit || posY > maxLimitY){
-      //   return true;
-      // }
+      if(posX < minLimit || posX > maxLimitX){
+        return true;
+      }
+      if(posY < minLimit || posY > maxLimitY){
+        return true;
+      }
       //is in wall part :
       //todo only if we whant to make existing wall.
       return false;

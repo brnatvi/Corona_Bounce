@@ -24,7 +24,7 @@ public class Controller implements Controllable
     private int WALL_SPEED = 1;
 
     private Controllable.eState state = Controllable.eState.Paused;   // enum variable to control all our timers at the same time
-    ReentrantLock statLock = new ReentrantLock();                   // variable to make lock/unlock the threads
+    private ReentrantLock statLock = new ReentrantLock();                   // variable to make lock/unlock the threads
 
     //==================================== Timer Management ===========================================================/
 
