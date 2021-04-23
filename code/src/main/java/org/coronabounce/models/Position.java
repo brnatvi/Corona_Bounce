@@ -10,16 +10,19 @@ import java.util.Random;
 public class Position implements Cloneable{
     // Pour savoir quelles positions de la Zone sont déjà prises(Il y'a déjà un individu dessus)
     private static List<Position> listTakenPositions =new ArrayList<>();
+    // the 2 important value.
     private double posX;
     private double posY;
+    //static value for lest space use.
     private static double minLimit;
     private static double maxLimitX;
     private static double maxLimitY;
     private static Random r = new Random();
+    private static Controllable controller;
 
     // CONSTRUCTORS ------------------------------------------------------------
     public Position(Controllable controller, boolean chooseAUniquePosition) {
-
+        this.controller = controller;
         // initial position according bounds of Zone & radius of point
         // (because it is the center of point who takes position)
         this.minLimit = controller.getRadiusDot();
@@ -55,9 +58,7 @@ public class Position implements Cloneable{
 
     // GET SET -----------------------------------------------------------------
     public double getX() {return this.posX;}
-
     public double getY() {return this.posY;}
-
     public void setPos(double x, double y) {           //TODO add condition do not set in positions of walls
       if (x < 0) {x = minLimit;}
       else if (x > maxLimitX) {x = maxLimitX;}
@@ -75,21 +76,14 @@ public class Position implements Cloneable{
      */
     private boolean isEmpty(){
         //TODO use thinkness.
-        for (Position pos : this.listTakenPositions)
-        {
+        for (Position pos : this.listTakenPositions){
+          // if(pos.getX()<getX()-controller.getThickness()){}
             if(pos.posX==this.posX && pos.posY==this.posY) return false;//Position déjà prise
         }
         return true;
     }
 
     private boolean isInWall(){
-      //We already check that it will not be out of zone.
-      // if(posX < minLimit || posX > maxLimitX){
-      //   return true;
-      // }
-      // if(posY < minLimit || posY > maxLimitY){
-      //   return true;
-      // }
       //is in wall part :
       //todo only if we whant to make existing wall.
       return false;
