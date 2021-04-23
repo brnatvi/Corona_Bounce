@@ -21,6 +21,7 @@ public class Controller implements Controllable
     private double DIAMETER_Y = 10;
     private double THICKNESS = 4;                     // thickness of the walls
     private int WALLS_COUNT = 4;                      // number of boundaries
+    private int WALL_SPEED = 1;
 
     private Controllable.eState state = Controllable.eState.Paused;   // enum variable to control all our timers at the same time
     ReentrantLock statLock = new ReentrantLock();                   // variable to make lock/unlock the threads
@@ -139,4 +140,10 @@ public class Controller implements Controllable
 
     @Override
     public void setWallsCount(int count) { WALLS_COUNT = count;}
+
+    @Override
+    public int getWallSpeed() {return WALL_SPEED;}
+
+    @Override
+    public void setWallSpeed(int speed) {WALL_SPEED = speed;}
 }

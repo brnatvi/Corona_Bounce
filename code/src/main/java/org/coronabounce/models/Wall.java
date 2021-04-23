@@ -105,7 +105,7 @@ class TimerTaskWall extends TimerTask{
     @Override
     public synchronized void run(){
         if (this.controller.getState() == Controllable.eState.Working){
-            wall.setPositionY(wall.getPositionY()+1);//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
+            wall.setPositionY(wall.getPositionY()+controller.getWallSpeed());//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
             if(wall.getPositionY()>controller.getSpaceSize()[1]){
                 cancel();
             }

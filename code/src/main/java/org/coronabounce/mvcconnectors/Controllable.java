@@ -116,6 +116,10 @@ public interface Controllable
 
     public double getThickness();
 
+    public int getWallSpeed();
+
+    public void setWallSpeed (int speed);
+
     //===================================== Scenarios Settings ======================================================/
 
     public double getKilometrage();
