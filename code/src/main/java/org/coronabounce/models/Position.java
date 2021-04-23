@@ -1,12 +1,13 @@
 package org.coronabounce.models;
 
 import org.coronabounce.mvcconnectors.Controllable;
+import org.coronabounce.models.exceptions.ToMuchPointsException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Position   {
+public class Position implements Cloneable{
     // Pour savoir quelles positions de la Zone sont déjà prises(Il y'a déjà un individu dessus)
     private static List<Position> listTakenPositions =new ArrayList<>();
     private double posX;
@@ -17,7 +18,7 @@ public class Position   {
     private static Random r = new Random();
 
     // CONSTRUCTORS ------------------------------------------------------------
-    public Position(Controllable controller) {
+    public Position(Controllable controller, boolean chooseAUniquePosition) {
 
         // initial position according bounds of Zone & radius of point
         // (because it is the center of point who takes position)
@@ -26,11 +27,30 @@ public class Position   {
         this.maxLimitY = controller.getSpaceSize()[1] - minLimit;
 
         // takes random number in interval from minLimit to maxLimit
-        do {
+        if(chooseAUniquePosition){
+          int k=0;
+          do {
+            k++;
             this.posX = Math.abs(r.nextInt((int) (maxLimitX - minLimit))) + minLimit;
             this.posY = Math.abs(r.nextInt((int) (maxLimitY - minLimit))) + minLimit;
-        } while (!isEmpty() || isInWall());
+            // posX=(int)(posX/10)*10;
+            // posY=(int)(posY/10)*10;
+          } while ((!isEmpty() || isInWall()) && k<1000);
+          if(k>=1000){
+            throw new ToMuchPointsException();
+          }
+        }else{
+          this.posX = Math.abs(r.nextInt((int) (maxLimitX - minLimit))) + minLimit;
+          this.posY = Math.abs(r.nextInt((int) (maxLimitY - minLimit))) + minLimit;
+        }
         listTakenPositions.add(this);
+    }
+    public Position(Controllable c){
+      this(c, true);
+    }
+    private Position(double x, double y){
+      posX=x;
+      posY=y;
     }
 
     // GET SET -----------------------------------------------------------------
@@ -64,14 +84,18 @@ public class Position   {
 
     private boolean isInWall(){
       //We already check that it will not be out of zone.
-      if(posX < minLimit || posX > maxLimitX){
-        return true;
-      }
-      if(posY < minLimit || posY > maxLimitY){
-        return true;
-      }
+      // if(posX < minLimit || posX > maxLimitX){
+      //   return true;
+      // }
+      // if(posY < minLimit || posY > maxLimitY){
+      //   return true;
+      // }
       //is in wall part :
       //todo only if we whant to make existing wall.
       return false;
+    }
+    @Override
+    public Position clone(){
+      return new Position(posX,posY);
     }
 }

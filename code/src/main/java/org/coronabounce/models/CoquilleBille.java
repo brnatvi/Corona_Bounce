@@ -24,9 +24,14 @@ public class CoquilleBille {
 
         this.individual = individual;
         this.controller = pop.getController();
-        this.startingPosition = new Position(controller);
-        this.currentPosition = new Position(controller);
-        currentPosition.setPos(startingPosition.getX(), startingPosition.getY());
+        try {
+          this.currentPosition = new Position(controller);
+        }catch (Exception e) {
+          this.currentPosition = new Position(controller,false);
+          System.out.println("Position of the point have been set, but it fail to fined a free space.");
+        }
+        //TODO clone position insted of recreating 1.
+        this.startingPosition = currentPosition.clone();
         id=idCpt++;//incrémonter le nombre de Coquilles qui existent
         this.movingSpeedX=speedX;
         this.movingSpeedY=speedY;
