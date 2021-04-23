@@ -83,4 +83,28 @@ public class PositionTest extends Assertions{
     //It work if we accept to have 2 CoquilleBille at the same place.
     Position p2 = new Position(c,false);
   }
+
+  @Test
+  public void testCleanListTakenPositions(){
+    Controller c = new Controller();
+    Position.cleanListTakenPositions();
+    Position p = new Position(c,false);
+    assertEquals(1,p.getListTakenPositionsSize());
+    Position.cleanListTakenPositions();
+    assertEquals(0,p.getListTakenPositionsSize());
+  }
+  @Test
+  public void testDistanceFrom(){
+    Controller c = new Controller();
+    Position p = new Position(c,false);
+    Position p2 = new Position(c,false);
+    p.setPos(0,0);
+    p2.setPos(1,1);
+    assertEquals(Math.sqrt(2),p.distanceFrom(p2));
+    p2.setPos(10,1);
+    assertEquals(Math.sqrt(10*10 + 1),p.distanceFrom(p2));
+    p.setPos(2,3);
+    assertEquals(Math.sqrt(8*8 + 2*2),p.distanceFrom(p2));
+    assertEquals(Math.sqrt(8*8 + 2*2),p2.distanceFrom(p));
+  }
 }

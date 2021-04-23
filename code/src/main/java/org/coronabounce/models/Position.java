@@ -65,6 +65,7 @@ public class Position implements Cloneable{
       this.posX = x;
       this.posY = y;
     }
+    public int getListTakenPositionsSize(){return listTakenPositions.size();}
 
     // FUNCTIONS ---------------------------------------------------------------
 
