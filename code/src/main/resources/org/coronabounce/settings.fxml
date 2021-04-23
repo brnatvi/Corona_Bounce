@@ -69,8 +69,8 @@
                 </Text>
             </VBox>
             <VBox>
-                <Slider blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0" max="6.0" min="2.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
-                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Random slider" wrappingWidth="360.0">
+                <Slider fx:id="sliderWallsSpeed" blockIncrement="1.0" layoutX="53.0" layoutY="154.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="1" prefHeight="16.0" prefWidth="308.0" showTickLabels="true" />
+                <Text layoutX="61.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Walls speed" wrappingWidth="360.0">
                     <font>
                         <Font size="18.0" />
                     </font>

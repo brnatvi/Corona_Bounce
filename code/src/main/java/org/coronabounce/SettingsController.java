@@ -16,6 +16,7 @@ public class SettingsController
     @FXML Slider sliderHealingDuration;
     @FXML Slider sliderImmunityDuration;
     @FXML Slider sliderWallsNumber;
+    @FXML Slider sliderWallsSpeed;
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
@@ -39,6 +40,8 @@ public class SettingsController
         c.setDurationImmunity((long)newImmunityDuration);
         double newWallsNumber = (sliderWallsNumber.getValue());
         c.setWallsCount((int)newWallsNumber);
+        double newWallsSpeed = sliderWallsSpeed.getValue();
+        c.setWallSpeed((int)newWallsSpeed);
 
         // saves new settings in currentController of MainController
         mainController.setSettingsController(c);
