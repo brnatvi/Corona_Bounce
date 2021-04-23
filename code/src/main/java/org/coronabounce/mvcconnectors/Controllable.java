@@ -114,7 +114,7 @@ public interface Controllable
      */
     public void setWallsCount(int count);
 
-    public double getTHICKNESS();
+    public double getThickness();
 
     //===================================== Scenarios Settings ======================================================/
 

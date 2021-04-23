@@ -65,7 +65,7 @@ public class Controller implements Controllable
     }
 
     @Override
-    public double getTHICKNESS() {
+    public double getThickness() {
         return THICKNESS;
     }
 

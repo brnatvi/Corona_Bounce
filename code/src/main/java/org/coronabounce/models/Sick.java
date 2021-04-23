@@ -33,7 +33,7 @@ public class Sick extends Individual {
         contaminate();
     }
     /**
-    *A function that transform to Sick an Individual if :
+    *A function that transform to Incubating an Individual if :
     *<ul>
     *<li> It is a  different Individual.
     *<li> It is close to this.
