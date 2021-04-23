@@ -46,9 +46,9 @@ public class IndividualTest extends Assertions{
     }
     assertTrue(coc1!=null);
     assertTrue(coc2!=null);
-    coc1.getPosition().setPos(0,0);
+    coc1.getCurrentPosition().setPos(0,0);
     i1.setCoc(coc1);
-    coc2.getPosition().setPos(1,1);
+    coc2.getCurrentPosition().setPos(1,1);
     i2.setCoc(coc2);
     assertTrue(coc1.getIndividual().isSick());
     assertTrue(!coc2.getIndividual().isSick());

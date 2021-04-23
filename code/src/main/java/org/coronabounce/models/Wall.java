@@ -47,7 +47,7 @@ public class Wall  {
     */
     public boolean willCrossWallInX(CoquilleBille coc){
 
-        double curentX = coc.getPosition().getX();
+        double curentX = coc.getCurrentPosition().getX();
         double futurX = curentX+coc.getMovingSpeedX();
         double radius = coc.getPopulation().getRadiusDot();
         // radius/=2;
@@ -87,7 +87,7 @@ public class Wall  {
     *@param coc The CoquilleBille that we may make bounce.
     */
     public boolean willCrossWallInY(CoquilleBille coc){
-      if(positionY > (coc.getPosition().getY() )){
+      if(positionY > (coc.getCurrentPosition().getY() )){
         return true;
       }
       return false;

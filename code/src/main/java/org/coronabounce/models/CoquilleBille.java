@@ -18,13 +18,15 @@ public class CoquilleBille {
     private Position startingPosition;// memoriser la position de départ de la Coquille
     private double minReboundSpeed=3;
     private Controllable controller;
+    private int MAX_SPEED = 5;
 
     public CoquilleBille(double speedX,double speedY, Individual individual, Population pop){
 
         this.individual = individual;
         this.controller = pop.getController();
         this.startingPosition = new Position(controller);
-        this.currentPosition = startingPosition;
+        this.currentPosition = new Position(controller);
+        currentPosition.setPos(startingPosition.getX(), startingPosition.getY());
         id=idCpt++;//incrémonter le nombre de Coquilles qui existent
         this.movingSpeedX=speedX;
         this.movingSpeedY=speedY;
@@ -32,15 +34,15 @@ public class CoquilleBille {
 
     public CoquilleBille(Individual individual, Population pop){
         this(0,0,individual, pop);
-        this.addSpeedX(5);
-        this.addSpeedY(5);
+        this.addSpeedX(MAX_SPEED);
+        this.addSpeedY(MAX_SPEED);
     }
 
     //=============================================== getters/setters =================================================//
 
     public int getId(){return id;}
 
-    public Position getPosition() {return this.currentPosition;}
+    public Position getCurrentPosition() {return this.currentPosition;}
     public Position getStartingPosition() {
         return startingPosition;
     }
@@ -103,14 +105,14 @@ public class CoquilleBille {
     }
 
     public boolean InY(CoquilleBille coc){
-         if((this.getPosition().getY()-coc.getPosition().getY()<10)&& (this.getPosition().getY()-coc.getPosition().getY()>=0)||(this.getPosition().getY()-coc.getPosition().getY()<10)&& (coc.getPosition().getY()-coc.getPosition().getY()>=0) ){
+         if((this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()<10)&& (this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()>=0)||(this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()<10)&& (coc.getCurrentPosition().getY()-coc.getCurrentPosition().getY()>=0) ){
               return true;
          }else{
               return false;
          }
     }
     public boolean InX(CoquilleBille coc){
-          if((this.getPosition().getX()-coc.getPosition().getX()<10)&& (this.getPosition().getX()-coc.getPosition().getX()>=0)||(this.getPosition().getX()-coc.getPosition().getX()<10)&& (coc.getPosition().getX()-coc.getPosition().getX()>=0) ){
+          if((this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()<10)&& (this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()>=0)||(this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()<10)&& (coc.getCurrentPosition().getX()-coc.getCurrentPosition().getX()>=0) ){
                return true;
           }else{
                return false;
@@ -163,9 +165,9 @@ public class CoquilleBille {
     }
 
     protected double distancePos() {//cette methode calcule la distance entre la position courante de la Coquille et la position de départ
-        double x1 = this.getPosition().getX();
+        double x1 = this.getCurrentPosition().getX();
         double x2 = this.getStartingPosition().getX();
-        double y1 = this.getPosition().getY();
+        double y1 = this.getCurrentPosition().getY();
         double y2 = this.getStartingPosition().getY();
         return  Math.sqrt((x1 -x2) * (x1 -x2) + (y1 -y2) * (y1 -y2));
     }

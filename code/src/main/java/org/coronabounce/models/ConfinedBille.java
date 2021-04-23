@@ -32,7 +32,7 @@ public class ConfinedBille extends CoquilleBille {
         int percentage = genererInt(60, 100);//generer un entier entre 60 et 100
 
         if ((this.getMovingSpeedX() * percentage / 100) <= 1 || (this.getMovingSpeedY() * percentage / 100) <= 1) {//verifier si la vitesse n est pas presque nulle
-                this.setMovingSpeed(this.getMovingSpeedX(), this.getMovingSpeedX());//laisser la vitesse courante de la Coquille
+            this.setMovingSpeed(this.getMovingSpeedX(), this.getMovingSpeedX());//laisser la vitesse courante de la Coquille
         } else {
             this.setMovingSpeed((this.getMovingSpeedX() * percentage / 100), (this.getMovingSpeedY() * percentage / 100));//mettre a jour la vitesse courante de la coquille
         }
@@ -54,29 +54,30 @@ public class ConfinedBille extends CoquilleBille {
         double a = genererDouble() * b;
         double c;
         if (distancePos() >= controller.getKilometrage()) {// dans le cas disrance(position courante ,position de depart)>Kilometrange
-            if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()+controller.getDiameterX()) {
+            if ((this.getMovingSpeedX() - a) + this.getCurrentPosition().getX() > this.getStartingPosition().getX()+controller.getDiameterX()) {
                 c=genererDouble()*b;
 
                 this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()+c));//reculer en X pour atteindre position de depart
             }
-            if ((this.getMovingSpeedY() - a) + this.getPosition().getY() > this.getStartingPosition().getY()+controller.getDiameterY()) {
+            if ((this.getMovingSpeedY() - a) + this.getCurrentPosition().getY() > this.getStartingPosition().getY()+controller.getDiameterY()) {
 
                 c=genererDouble()*a;
                 this.setMovingSpeed((this.getMovingSpeedX()+c), (this.getMovingSpeedY() - a));//reculer en Y pour atteindre la position de départ
             }
-            if ((this.getMovingSpeedX() + a) + this.getPosition().getX() <= this.getStartingPosition().getX()+controller.getDiameterX()) {
+            if ((this.getMovingSpeedX() + a) + this.getCurrentPosition().getX() <= this.getStartingPosition().getX()+controller.getDiameterX()) {
                 c=genererDouble()*b;
 
                 this.setMovingSpeed((this.getMovingSpeedX()) + a, (this.getMovingSpeedY()-c));//avancer en X pour atteindre la position de départ
             }
-            if ((this.getMovingSpeedY() + a) + this.getPosition().getY() <= this.getStartingPosition().getY()+controller.getDiameterY()) {
+            if ((this.getMovingSpeedY() + a) + this.getCurrentPosition().getY() <= this.getStartingPosition().getY()+controller.getDiameterY()) {
 
                 c=genererDouble()*a;
                 this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));//avancer en Y pour atteindre la position de départ
             }
-          
+
         }
-        
+
     }
+
 
 }

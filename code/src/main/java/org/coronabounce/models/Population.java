@@ -125,19 +125,19 @@ public class Population implements Displayable {
     }
     
     private double dist(Wall w,CoquilleBille coc){/** Calculate distance between a "CoquilleBille" and a "Wall" **/
-        double x1 = coc.getPosition().getX();/** The X  position of the CoquilleBille **/
+        double x1 = coc.getCurrentPosition().getX();/** The X  position of the CoquilleBille **/
         double x2 = w.getPositionX();/** The X position of the Wall **/
-        double y1 = coc.getPosition().getY();/** The Y position of the CoquilleBille **/
+        double y1 = coc.getCurrentPosition().getY();/** The Y position of the CoquilleBille **/
         double y2 = w.getPositionY();/** The Y position of the Wall **/
         return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }
 
    
     public double distance(CoquilleBille i1, CoquilleBille i2) { /** Calculate distance between two  "CoquilleBille" (s)  **/
-        double x1 = i1.getPosition().getX();/** The X  position of  CoquilleBille 1**/
-        double x2 = i2.getPosition().getX();/** The X  position of  CoquilleBille 2 **/
-        double y1 = i1.getPosition().getY();/** The Y position of the CoquilleBille 1 **/
-        double y2 = i2.getPosition().getY();/** The Y position of the CoquilleBille 2 **/
+        double x1 = i1.getCurrentPosition().getX();/** The X  position of  CoquilleBille 1**/
+        double x2 = i2.getCurrentPosition().getX();/** The X  position of  CoquilleBille 2 **/
+        double y1 = i1.getCurrentPosition().getY();/** The Y position of the CoquilleBille 1 **/
+        double y2 = i2.getCurrentPosition().getY();/** The Y position of the CoquilleBille 2 **/
         return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }
 
@@ -192,7 +192,7 @@ public class Population implements Displayable {
        
         int i = 0;
         for (CoquilleBille coc : listCoquille) {
-            System.out.printf("Individu num : %d de position suivante  %.3f et  %.3f et de etat de sante  %s  Vitesse : %.3f \n", i, coc.getPosition().getX(), coc.getPosition().getY(), coc.getIndividual().healthState(), coc.getMovingSpeed());
+            System.out.printf("Individu num : %d de position suivante  %.3f et  %.3f et de etat de sante  %s  Vitesse : %.3f \n", i, coc.getCurrentPosition().getX(), coc.getCurrentPosition().getY(), coc.getIndividual().healthState(), coc.getMovingSpeed());
             i++;
         }
     }
