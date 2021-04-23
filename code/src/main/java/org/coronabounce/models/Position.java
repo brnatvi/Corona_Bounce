@@ -19,20 +19,19 @@ public class Position   {
     // CONSTRUCTORS ------------------------------------------------------------
     public Position(Controllable controller) {
 
-        // initial position according bounds of Zone and radius of point
+        // initial position according bounds of Zone & radius of point
         // (because it is the center of point who takes position)
-        this.maxLimitX = controller.getSpaceSize()[0] - controller.getRadiusDot();
-        this.maxLimitY = controller.getSpaceSize()[1] - controller.getRadiusDot();
         this.minLimit = controller.getRadiusDot();
+        this.maxLimitX = controller.getSpaceSize()[0] - minLimit;
+        this.maxLimitY = controller.getSpaceSize()[1] - minLimit;
 
         // takes random number in interval from minLimit to maxLimit
         do {
             this.posX = Math.abs(r.nextInt((int) (maxLimitX - minLimit))) + minLimit;
             this.posY = Math.abs(r.nextInt((int) (maxLimitY - minLimit))) + minLimit;
 
-        } while (!isEmpty() || isInWallOrOutOfZone());
+        } while (!isEmpty() || isInWall());
         listTakenPositions.add(this);
-        // System.out.println(listTakenPositions.size());
     }
 
     // GET SET -----------------------------------------------------------------
@@ -55,8 +54,8 @@ public class Position   {
      * Check if position of instance is distinguished from all other point's one
      * @return
      */
-    private boolean isEmpty()
-    {
+    private boolean isEmpty(){
+        //TODO use thinkness.
         for (Position pos : this.listTakenPositions)
         {
             if(pos.posX==this.posX && pos.posY==this.posY) return false;//Position déjà prise
@@ -64,13 +63,16 @@ public class Position   {
         return true;
     }
 
-    private boolean isInWallOrOutOfZone(){
+    private boolean isInWall(){
+      //We already check that it will not be out of zone.
       // if(posX < minLimit || posX > maxLimitX){
       //   return true;
       // }
       // if(posY < minLimit || posY > maxLimitY){
       //   return true;
       // }
+      //is in wall part :
+      //todo only if we whant to make existing wall.
       return false;
     }
 }
