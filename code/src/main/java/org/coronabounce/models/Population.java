@@ -19,13 +19,14 @@ public class Population implements Displayable {
     private Timer timer;
     private TimerTask timerTask = null;
     private static Random random = new Random();
-   
+
     //============================= Constructors ======================================================================/
 
     public Population(Controllable controller, int nbH, int nbS, int nbR,boolean isLockDown, boolean isWall, boolean isRestrictionMovement) {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
+        Position.cleanListTakenPositions();
 
         if(isLockDown){  /** In case we apply "LockDown" scenario, we need to create "ConfinedBille(S)" **/
 
@@ -94,7 +95,7 @@ public class Population implements Displayable {
     public List<CoquilleBille> getAllPoints() { return listCoquille; }
 
     public double getRadiusDot() { return controller.getRadiusDot(); }
-    
+
     public Timer getTimer() { return timer; }
 
     public List<Wall> getListWall() { return listWall; }
@@ -121,9 +122,9 @@ public class Population implements Displayable {
             coc.getIndividual().agitSur();
             Rebound(coc);
         }
-        
+
     }
-    
+
     private double dist(Wall w,CoquilleBille coc){/** Calculate distance between a "CoquilleBille" and a "Wall" **/
         double x1 = coc.getCurrentPosition().getX();/** The X  position of the CoquilleBille **/
         double x2 = w.getPositionX();/** The X position of the Wall **/
@@ -132,7 +133,7 @@ public class Population implements Displayable {
         return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }
 
-   
+
     public double distance(CoquilleBille i1, CoquilleBille i2) { /** Calculate distance between two  "CoquilleBille" (s)  **/
         double x1 = i1.getCurrentPosition().getX();/** The X  position of  CoquilleBille 1**/
         double x2 = i2.getCurrentPosition().getX();/** The X  position of  CoquilleBille 2 **/
@@ -151,7 +152,7 @@ public class Population implements Displayable {
                     coc.Bouncee(false);
                     c.Bouncee(false);}
                 }
-            
+
             if( ! listWall.isEmpty()){
                 for(Wall wall:listWall){
                     if(dist(wall,coc) <= (2 * controller.getRadiusDot())){
@@ -161,7 +162,7 @@ public class Population implements Displayable {
             }
         }
     }
-    
+
     //*****************************************************Strict lockdown*************************************************/
     /** @summary
      *
@@ -189,7 +190,7 @@ public class Population implements Displayable {
      * @summary Print for debug, internal using function
      */
     private void printPop() {
-       
+
         int i = 0;
         for (CoquilleBille coc : listCoquille) {
             System.out.printf("Individu num : %d de position suivante  %.3f et  %.3f et de etat de sante  %s  Vitesse : %.3f \n", i, coc.getCurrentPosition().getX(), coc.getCurrentPosition().getY(), coc.getIndividual().healthState(), coc.getMovingSpeed());
@@ -198,7 +199,7 @@ public class Population implements Displayable {
     }
 
     /**********************************************Moving of Billes*************************************************/
-   
+
     public void makeBilleMove() {
         for (CoquilleBille coc : listCoquille) {
           coc.move();
@@ -275,7 +276,7 @@ public class Population implements Displayable {
         }
         return rez;
     }
-    
+
     //========================= Population Statistics =================================================================/
 
     /**

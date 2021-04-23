@@ -9,6 +9,7 @@ public class PositionTest extends Assertions{
   @Test
   public void testPosition(){
     Controller c = new Controller();
+    Position.cleanListTakenPositions();
     c.setWidth(1000);
     c.setHeigth(5);
     c.setRadiusDot(0);
@@ -23,6 +24,7 @@ public class PositionTest extends Assertions{
   @Test
   public void testPosition2(){
     Controller c = new Controller();
+    Position.cleanListTakenPositions();
     c.setWidth(10);
     c.setHeigth(500);
     c.setRadiusDot(2);
@@ -37,6 +39,7 @@ public class PositionTest extends Assertions{
   @Test
   public void testPosition3(){
     Controller c = new Controller();
+    Position.cleanListTakenPositions();
     c.setWidth(3);
     c.setHeigth(3);
     c.setRadiusDot(0.9);
@@ -48,6 +51,7 @@ public class PositionTest extends Assertions{
   @Test
   public void testPosition4(){
     Controller c = new Controller();
+    Position.cleanListTakenPositions();
     c.setWidth(5);
     c.setHeigth(5);
     c.setRadiusDot(2.2);
@@ -59,6 +63,7 @@ public class PositionTest extends Assertions{
   @Test
   public void testPosition5(){
     Controller c = new Controller();
+    Position.cleanListTakenPositions();
     c.setWidth(5);
     c.setHeigth(5);
     c.setRadiusDot(1.9);
@@ -70,6 +75,7 @@ public class PositionTest extends Assertions{
   @Test
   public void testPosition6(){
     Controller c = new Controller();
+    Position.cleanListTakenPositions();
     c.setWidth(5);
     c.setHeigth(5);
     c.setRadiusDot(1.9);

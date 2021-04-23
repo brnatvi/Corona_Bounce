@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Position implements Cloneable{
     // Pour savoir quelles positions de la Zone sont déjà prises(Il y'a déjà un individu dessus)
-    private static List<Position> listTakenPositions =new ArrayList<>();
+    private static List<Position> listTakenPositions = new ArrayList<Position>();
     // the 2 important value.
     private double posX;
     private double posY;
@@ -18,11 +18,9 @@ public class Position implements Cloneable{
     private static double maxLimitX;
     private static double maxLimitY;
     private static Random r = new Random();
-    private static Controllable controller;
 
     // CONSTRUCTORS ------------------------------------------------------------
     public Position(Controllable controller, boolean chooseAUniquePosition) {
-        this.controller = controller;
         // initial position according bounds of Zone & radius of point
         // (because it is the center of point who takes position)
         this.minLimit = controller.getRadiusDot();
@@ -75,10 +73,8 @@ public class Position implements Cloneable{
      * @return
      */
     private boolean isEmpty(){
-        //TODO use thinkness.
         for (Position pos : this.listTakenPositions){
-          // if(pos.getX()<getX()-controller.getThickness()){}
-            if(pos.posX==this.posX && pos.posY==this.posY) return false;//Position déjà prise
+          if(distanceFrom(pos) < minLimit*2.0){return false;}
         }
         return true;
     }
@@ -91,5 +87,15 @@ public class Position implements Cloneable{
     @Override
     public Position clone(){
       return new Position(posX,posY);
+    }
+    public double distanceFrom(Position pos){
+      double x1 = getX();
+      double x2 = pos.getX();
+      double y1 = getY();
+      double y2 = pos.getY();
+      return  Math.sqrt((x1 -x2) * (x1 -x2) + (y1 -y2) * (y1 -y2));
+    }
+    public static void cleanListTakenPositions(){
+      listTakenPositions = new ArrayList<Position>();
     }
 }

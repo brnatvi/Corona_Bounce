@@ -169,11 +169,7 @@ public class CoquilleBille {
     }
 
     protected double distancePos() {//cette methode calcule la distance entre la position courante de la Coquille et la position de départ
-        double x1 = this.getCurrentPosition().getX();
-        double x2 = this.getStartingPosition().getX();
-        double y1 = this.getCurrentPosition().getY();
-        double y2 = this.getStartingPosition().getY();
-        return  Math.sqrt((x1 -x2) * (x1 -x2) + (y1 -y2) * (y1 -y2));
+      return getCurrentPosition().distanceFrom(getStartingPosition());
     }
 
     public double getRandomMovingSpeed(int maxSpeed){// elle permet de generer une vitesse qui ne depasse pas maxspeed
