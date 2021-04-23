@@ -114,14 +114,14 @@ public interface Controllable
      */
     public void setWallsCount(int count);
 
-    public double getThickness();
+    public double getTHICKNESS();
 
     //===================================== Scenarios Settings ======================================================/
 
     public double getKilometrage();
 
-    public double getDiametreX();
+    public double getDiameterX();
 
-    public double getDiametreY();
+    public double getDiameterY();
 
 }

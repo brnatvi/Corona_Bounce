@@ -15,41 +15,29 @@ public class Position   {
     private double maxLimitX;
     private double maxLimitY;
     private static Random r = new Random();
-    private Controllable controller;
 
     // CONSTRUCTORS ------------------------------------------------------------
     public Position(Controllable controller) {
 
+        // initial position according bounds of Zone and radius of point
+        // (because it is the center of point who takes position)
         this.maxLimitX = controller.getSpaceSize()[0] - controller.getRadiusDot();
         this.maxLimitY = controller.getSpaceSize()[1] - controller.getRadiusDot();
         this.minLimit = controller.getRadiusDot();
 
-        this.controller = controller;
+        // takes random number in interval from minLimit to maxLimit
         do {
-            this.posX = Math.abs(r.nextInt((int) (maxLimitX - controller.getRadiusDot()))) + controller.getRadiusDot();
-            this.posY = Math.abs(r.nextInt((int) (maxLimitY - controller.getRadiusDot()))) + controller.getRadiusDot();
+            this.posX = Math.abs(r.nextInt((int) (maxLimitX - minLimit))) + minLimit;
+            this.posY = Math.abs(r.nextInt((int) (maxLimitY - minLimit))) + minLimit;
+
         } while (!isEmpty() || isInWallOrOutOfZone());
         listTakenPositions.add(this);
-        System.out.println(listTakenPositions.size());//@a
+        System.out.println(listTakenPositions.size());
     }
-
-    public Position(double posX, double posY, Controllable cont) {
-        this.controller = cont;
-        if (posX <= maxLimitX && posY <= maxLimitY) {
-            this.posX = posX;
-            this.posY = posY;
-        } else {
-            this.posX = minLimit;
-            this.posY = minLimit;
-            System.out.println("Unable to set position in Constructors of position for x:"+posX+" y:"+posY);
-        }
-        listTakenPositions.add(this);
-        System.out.println(listTakenPositions.size());//@a
-    }
-
 
     // GET SET -----------------------------------------------------------------
     public double getX() {return this.posX;}
+
     public double getY() {return this.posY;}
 
     public void setPos(double x, double y) {           //TODO add condition do not set in positions of walls
@@ -61,23 +49,12 @@ public class Position   {
       this.posY = y;
     }
 
-    public void setPosX(double posX) {
-        if (posX <= maxLimitX ){
-            this.posX = posX;
-        }else{
-            this.posX = minLimit;
-        }
-    }
-
-    public void setPosY(double posY) {
-        if(posY <= maxLimitY) {
-            this.posY = posY;
-        }else{
-            this.posY = minLimit;
-        }
-    }
-
     // FUNCTIONS ---------------------------------------------------------------
+
+    /**
+     * Check if position of instance is distinguished from all other point's one
+     * @return
+     */
     private boolean isEmpty()
     {
         for (Position pos : this.listTakenPositions)
@@ -86,6 +63,7 @@ public class Position   {
         }
         return true;
     }
+
     private boolean isInWallOrOutOfZone(){
       //TODO
       return false;

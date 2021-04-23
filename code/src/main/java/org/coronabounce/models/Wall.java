@@ -1,6 +1,5 @@
 package org.coronabounce.models;
 
-import org.coronabounce.controllers.Controller;
 import org.coronabounce.mvcconnectors.Controllable;
 
 import java.util.*;
@@ -23,7 +22,7 @@ public class Wall  {
     // CONSTRUCTORS ------------------------------------------------------------
     public Wall(Controllable controller, double posX){//ce mur va separer la population en deux populations
        this.controller = controller;
-       this.thikness=controller.getThickness();
+       this.thikness=controller.getTHICKNESS();
        this.positionX=posX;
        this.positionY=0;
        id=cpt++;

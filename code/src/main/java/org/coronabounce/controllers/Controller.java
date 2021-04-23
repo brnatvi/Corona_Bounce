@@ -9,17 +9,17 @@ public class Controller implements Controllable
     //these constants are initials and will be changed during the changing the settings of program in GUI
 
     private double WIDTH = 465 ;                      // population space size (width)
-    private double HEIGTH = 290 ;                     // population space size (height)
+    private double HEIGHT = 290 ;                     // population space size (height)
     private int COUNT = 30;                           // population size
     private double CONTAMINATION_RADIUS = 10;         // radius of contamination
     private long DURATION_INCUBATION = 3000;          // incubation <-> sick
     private long DURATION_HEALING = 8000;             // sick <-> recovered
     private long DURATION_IMMUNITY = 5000;            // recovered <-> healthy (can be contaminate again)
     private double RADIUS_DOT = 3;                    // radius of point in GUI
-    private double Kilometrage = 50;
-    private double diametreX = 15;
-    private double diametreY = 10;
-    private double thickness = 4;                     // thickness of the walls
+    private double KILOMETRAGE = 50;
+    private double DIAMETER_X = 15;
+    private double DIAMETER_Y = 10;
+    private double THICKNESS = 4;                     // thickness of the walls
     private int WALLS_COUNT = 4;                      // number of boundaries
 
     private Controllable.eState state = Controllable.eState.Paused;   // enum variable to control all our timers at the same time
@@ -55,18 +55,18 @@ public class Controller implements Controllable
     //====================================== Space Settings ===========================================================/
 
     @Override
-    public double[] getSpaceSize() { return new double[]{this.WIDTH, this.HEIGTH}; }
+    public double[] getSpaceSize() { return new double[]{this.WIDTH, this.HEIGHT}; }
 
     @Override
     public void setSpaceSize(double w, double h)
     {
         WIDTH = w;
-        HEIGTH = h;
+        HEIGHT = h;
     }
 
     @Override
-    public double getThickness() {
-        return thickness;
+    public double getTHICKNESS() {
+        return THICKNESS;
     }
 
   //  public static double getWidth() { return WIDTH; }
@@ -80,17 +80,17 @@ public class Controller implements Controllable
 
     @Override
     public double getKilometrage() {
-        return Kilometrage;
+        return KILOMETRAGE;
     }
 
     @Override
-    public double getDiametreX() {
-        return diametreX;
+    public double getDiameterX() {
+        return DIAMETER_X;
     }
     
     @Override
-    public double getDiametreY() {
-        return diametreY;
+    public double getDiameterY() {
+        return DIAMETER_Y;
     }
 
     //===================================== Population Settings =======================================================/

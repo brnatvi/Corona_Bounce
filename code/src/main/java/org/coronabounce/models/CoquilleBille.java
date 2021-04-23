@@ -18,11 +18,9 @@ public class CoquilleBille {
     private Position startingPosition;// memoriser la position de départ de la Coquille
     private double minReboundSpeed=3;
     private Controllable controller;
-    private Population population;
 
     public CoquilleBille(double speedX,double speedY, Individual individual, Population pop){
 
-        this.population = pop;
         this.individual = individual;
         this.controller = pop.getController();
         this.startingPosition = new Position(controller);

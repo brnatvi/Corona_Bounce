@@ -54,22 +54,22 @@ public class ConfinedBille extends CoquilleBille {
         double a = genererDouble() * b;
         double c;
         if (distancePos() >= controller.getKilometrage()) {// dans le cas disrance(position courante ,position de depart)>Kilometrange
-            if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()+controller.getDiametreX()) {
+            if ((this.getMovingSpeedX() - a) + this.getPosition().getX() > this.getStartingPosition().getX()+controller.getDiameterX()) {
                 c=genererDouble()*b;
 
                 this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()+c));//reculer en X pour atteindre position de depart
             }
-            if ((this.getMovingSpeedY() - a) + this.getPosition().getY() > this.getStartingPosition().getY()+controller.getDiametreY()) {
+            if ((this.getMovingSpeedY() - a) + this.getPosition().getY() > this.getStartingPosition().getY()+controller.getDiameterY()) {
 
                 c=genererDouble()*a;
                 this.setMovingSpeed((this.getMovingSpeedX()+c), (this.getMovingSpeedY() - a));//reculer en Y pour atteindre la position de départ
             }
-            if ((this.getMovingSpeedX() + a) + this.getPosition().getX() <= this.getStartingPosition().getX()+controller.getDiametreX()) {
+            if ((this.getMovingSpeedX() + a) + this.getPosition().getX() <= this.getStartingPosition().getX()+controller.getDiameterX()) {
                 c=genererDouble()*b;
 
                 this.setMovingSpeed((this.getMovingSpeedX()) + a, (this.getMovingSpeedY()-c));//avancer en X pour atteindre la position de départ
             }
-            if ((this.getMovingSpeedY() + a) + this.getPosition().getY() <= this.getStartingPosition().getY()+controller.getDiametreY()) {
+            if ((this.getMovingSpeedY() + a) + this.getPosition().getY() <= this.getStartingPosition().getY()+controller.getDiameterY()) {
 
                 c=genererDouble()*a;
                 this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));//avancer en Y pour atteindre la position de départ
