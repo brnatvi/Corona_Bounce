@@ -18,7 +18,7 @@ public class CoquilleBille {
     private Position startingPosition;// memoriser la position de départ de la Coquille
     private double minReboundSpeed=3;
     private Controllable controller;
-    private int MAX_SPEED = 5;
+    private static int MAX_SPEED = 5;
 
     public CoquilleBille(double speedX,double speedY, Individual individual, Population pop){
 

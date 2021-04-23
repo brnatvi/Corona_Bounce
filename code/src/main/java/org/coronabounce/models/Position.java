@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Position implements Cloneable{
-    // Pour savoir quelles positions de la Zone sont déjà prises(Il y'a déjà un individu dessus)
+    /** To know if there is already an Individual at this location. */
     private static List<Position> listTakenPositions = new ArrayList<Position>();
     // the 2 important value.
     private double posX;
@@ -34,8 +34,6 @@ public class Position implements Cloneable{
             k++;
             this.posX = Math.abs(r.nextInt((int) (maxLimitX - minLimit))) + minLimit;
             this.posY = Math.abs(r.nextInt((int) (maxLimitY - minLimit))) + minLimit;
-            // posX=(int)(posX/10)*10;
-            // posY=(int)(posY/10)*10;
           } while ((!isEmpty() || isInWall()) && k<1000);
           if(k>=1000){
             throw new ToMuchPointsException();
