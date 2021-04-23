@@ -32,7 +32,7 @@ public class Position   {
 
         } while (!isEmpty() || isInWallOrOutOfZone());
         listTakenPositions.add(this);
-        System.out.println(listTakenPositions.size());
+        // System.out.println(listTakenPositions.size());
     }
 
     // GET SET -----------------------------------------------------------------
@@ -65,7 +65,12 @@ public class Position   {
     }
 
     private boolean isInWallOrOutOfZone(){
-      //TODO
+      // if(posX < minLimit || posX > maxLimitX){
+      //   return true;
+      // }
+      // if(posY < minLimit || posY > maxLimitY){
+      //   return true;
+      // }
       return false;
     }
 }

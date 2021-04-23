@@ -70,9 +70,11 @@ public class Controller implements Controllable
         return THICKNESS;
     }
 
-  //  public static double getWidth() { return WIDTH; }
+    public double getWidth() { return WIDTH; }
+    public void setWidth(double x){WIDTH=x; if(WIDTH<1){WIDTH=1;}}
+    public double getHeight() { return HEIGHT; }
+    public void setHeigth(double x){HEIGHT=x; if(HEIGHT<1){HEIGHT=1;}}
 
-  //  public static double getHeight() { return HEIGTH; }
 
  //   public static void setWidth(double w) { if (w >= 1) { WIDTH = w; }}
 
@@ -88,7 +90,7 @@ public class Controller implements Controllable
     public double getDiameterX() {
         return DIAMETER_X;
     }
-    
+
     @Override
     public double getDiameterY() {
         return DIAMETER_Y;
