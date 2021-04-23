@@ -9,13 +9,13 @@ import java.util.*;
 public class Population implements Displayable {
 
     private Controllable controller;
-    private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();// Contient la liste des Coquille Billes de la population
+    private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();/** Contains the population "CoquilleBille"  list **/
     private Data data;
-    public int nbSick;// le nombre de personnes malades
-    public int nbHealthy;//le nombre de personnes saines
-    public int nbRecovered;//le nombre de personnes guéries
-    public int nbIncubating;//le nombre de personnes qui portent le virus
-    private List<Wall> listWall = new ArrayList<Wall>();//la liste des murs
+    public int nbSick; /** Sick people number **/
+    public int nbHealthy; /** Healthy people number **/
+    public int nbRecovered; /** Recovered people number **/
+    public int nbIncubating; /** Incubating people number ( got the virus ) **/
+    private List<Wall> listWall = new ArrayList<Wall>(); /** Boundaries (walls) list **/
     private Timer timer;
     private TimerTask timerTask = null;
     private static Random random = new Random();
@@ -27,7 +27,8 @@ public class Population implements Displayable {
         data = new Data();
         timer = new Timer();
 
-        if(isLockDown){// dans le cas ou on est dans le scénario lockdown il suffit de creer des ConfinedBille
+        if(isLockDown){  /** In case we apply "LockDown" scenario, we need to create "ConfinedBille(S)" **/
+
             for (int i = 0; i < nbH; i++) {
                 CoquilleBille coc = new ConfinedBille(null, this);
                 Individual in = new Healthy(coc, this);
@@ -50,30 +51,30 @@ public class Population implements Displayable {
         }
         else {
             for (int i = 0; i < nbH; i++) {
-                CoquilleBille coc = new CoquilleBille(null, this);// creer d'abord une Coquille Bille vide
-                Individual in = new Healthy(coc, this);// creer un individu Healthy
-                coc.setIndividual(in);//Remplir la coquille vide avec un individu de type Healthy
-                listCoquille.add(coc);// ajouter la coquille qui contient l individu a la liste des CoquilleBille
+                CoquilleBille coc = new CoquilleBille(null, this);/**First, create an empty "CoquilleBille" **/
+                Individual in = new Healthy(coc, this);/** create a Healthy individual **/
+                coc.setIndividual(in);/** Put a Healthy individual in the "CoquilleBille" **/
+                listCoquille.add(coc);/** Add this "Coquille" to the list **/
             }
             for (int i = 0; i < nbS; i++) {
-                CoquilleBille coc = new CoquilleBille(null, this);// creer d'abord une Coquille Bille vide
-                Individual in = new Sick(coc, this);// creer un individu Sick
-                coc.setIndividual(in);//Remplir la coquille vide avec un individu de type Sick
-                listCoquille.add(coc);// ajouter la coquille qui contient l individu a la liste des CoquilleBille
+                CoquilleBille coc = new CoquilleBille(null, this);/**First, create an empty "CoquilleBille" **/
+                Individual in = new Sick(coc, this);/** create a Sick individual **/
+                coc.setIndividual(in);/** Put a Sick individual in the "CoquilleBille" **/
+                listCoquille.add(coc);/** Add this "Coquille" to the list **/
             }
             for (int i = 0; i < nbR; i++) {
-                CoquilleBille coc = new CoquilleBille(null, this);// creer d'abord une Coquille Bille vide
-                Individual in = new Recovered(coc, this);// creer un individu Recovered
-                coc.setIndividual(in);//Remplir la coquille vide avec un individu de type Recovered
-                listCoquille.add(coc);// ajouter la coquille qui contient l individu a la liste des CoquilleBille
+                CoquilleBille coc = new CoquilleBille(null, this);/**First, create an empty "CoquilleBille" **/
+                Individual in = new Recovered(coc, this);/** create a Recovered individual **/
+                coc.setIndividual(in); /** Put a Recovered individual in the "CoquilleBille" **/
+                listCoquille.add(coc); /** Add this "Coquille" to the list **/
             }
 
         }
-        if(isRestrictionMovement) {this.RestrictMovement();}// dans le cas ou on est dans le scénario Restrict Movement il suffit d appeler la methode RestrictMovement
-        if(isWall){// dans le cas ou on est dans le scénarios Walls ,on crée des murs
-          createWalls(controller.getWallsCount());// obtenir d abord le nombre de mur a aprtir de Controller et les ajouter a la aliste des murs
+        if(isRestrictionMovement) {this.RestrictMovement();}/**In case , "RectrictedMouvement" scenario is applied, method RestrictMouvement() is called **/
+        if(isWall){ /** In "Boundaries" scanario , we create Walls **/
+          createWalls(controller.getWallsCount());/** Get the walls' number via the Controller, and create that many (add them the the walls' list ) **/
           for (Wall wall : listWall ) {
-            wall.makeWallGoDown(this);//faire descendre les murs petit a petit
+            wall.makeWallGoDown(this);/** Make the wall go down little by little **/
           }
         }
 
@@ -110,9 +111,9 @@ public class Population implements Displayable {
 
     //========================= Points Interactions ===================================================================/
 
-    public void addIndividual(Individual i) { //la méthode permet de creer Une CoquilleBille et la remplir avec l individu i et l ajouter a la liste des CoquilleBille
+    public void addIndividual(Individual i) { /** Create a "CoquilleBille" , put in the Individual "i" and add it the the CoquilleBille ' list **/
         CoquilleBille coc = new CoquilleBille(i, this);
-        listCoquille.add(coc);//ajouter la Coquille Bille a la liste des Coquille Bille
+        listCoquille.add(coc);
     }
 
     public void Contacts(){
@@ -123,20 +124,20 @@ public class Population implements Displayable {
         
     }
     
-    private double dist(Wall w,CoquilleBille coc){//Calcule la distance entre une CoquilleBille et le mur
-        double x1 = coc.getPosition().getX();//Position X de la coquilleBille
-        double x2 = w.getPositionX();//Position X du mur
-        double y1 = coc.getPosition().getY();//Position Y de la coquilleBille
-        double y2 = w.getPositionY();//Position Y du mur
+    private double dist(Wall w,CoquilleBille coc){/** Calculate distance between a "CoquilleBille" and a "Wall" **/
+        double x1 = coc.getPosition().getX();/** The X  position of the CoquilleBille **/
+        double x2 = w.getPositionX();/** The X position of the Wall **/
+        double y1 = coc.getPosition().getY();/** The Y position of the CoquilleBille **/
+        double y2 = w.getPositionY();/** The Y position of the Wall **/
         return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }
 
    
-    public double distance(CoquilleBille i1, CoquilleBille i2) {//Calcule la distance entre les postions de deux Coquilles billes
-        double x1 = i1.getPosition().getX();//Position X de la coquilleBille1
-        double x2 = i2.getPosition().getX();//Position X de la coquilleBille2
-        double y1 = i1.getPosition().getY();//Position Y de la coquilleBille1
-        double y2 = i2.getPosition().getY();//Position Y de la coquilleBille2
+    public double distance(CoquilleBille i1, CoquilleBille i2) { /** Calculate distance between two  "CoquilleBille" (s)  **/
+        double x1 = i1.getPosition().getX();/** The X  position of  CoquilleBille 1**/
+        double x2 = i2.getPosition().getX();/** The X  position of  CoquilleBille 2 **/
+        double y1 = i1.getPosition().getY();/** The Y position of the CoquilleBille 1 **/
+        double y2 = i2.getPosition().getY();/** The Y position of the CoquilleBille 2 **/
         return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }
 
@@ -174,7 +175,7 @@ public class Population implements Displayable {
 
         while (cpt > 0) {
             int index = random.nextInt(this.getNbIndividus());
-            //make sure to get a new coquille(check if the coquille has already been chosen or not)
+            /** make sure to get a new coquille(check if the coquille has already been chosen or not) **/
             while (this.listCoquille.get(index).getMovingSpeed() == 0) index = random.nextInt(this.getNbIndividus());
             this.listCoquille.get(index).setMovingSpeed(0, 0);
             cpt--;
