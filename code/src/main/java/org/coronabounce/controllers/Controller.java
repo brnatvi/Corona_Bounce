@@ -4,12 +4,15 @@ import org.coronabounce.mvcconnectors.Controllable;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * The type Controller.
+ */
 public class Controller implements Controllable
 {
     //these constants are initials and will be changed during the changing the settings of program in GUI
 
-    private double WIDTH = 465 ;                      // population space size (width)
-    private double HEIGHT = 290 ;                     // population space size (height)
+    private double WIDTH = 400 ;                      // population space size (width)
+    private double HEIGHT = 300 ;                     // population space size (height)
     private int COUNT = 30;                           // population size
     private double CONTAMINATION_RADIUS = 10;         // radius of contamination
     private long DURATION_INCUBATION = 3000;          // incubation <-> sick
@@ -21,7 +24,7 @@ public class Controller implements Controllable
     private double DIAMETER_Y = 10;
     private double THICKNESS = 4;                     // thickness of the walls
     private int WALLS_COUNT = 4;                      // number of boundaries
-    private int WALL_SPEED = 1;
+    private int WALL_SPEED = 1;                       // speed of boundaries closing
 
     private Controllable.eState state = Controllable.eState.Paused;   // enum variable to control all our timers at the same time
     private ReentrantLock statLock = new ReentrantLock();                   // variable to make lock/unlock the threads
@@ -65,36 +68,44 @@ public class Controller implements Controllable
         HEIGHT = h;
     }
 
-    @Override
-    public double getThickness() {
-        return THICKNESS;
-    }
-
+    /**
+     * Gets width.
+     *
+     * @return the width
+     */
     public double getWidth() { return WIDTH; }
+
+    /**
+     * Set width.
+     *
+     * @param x the x
+     */
     public void setWidth(double x){WIDTH=x; if(WIDTH<1){WIDTH=1;}}
+
+    /**
+     * Gets height.
+     *
+     * @return the height
+     */
     public double getHeight() { return HEIGHT; }
+
+    /**
+     * Set heigth.
+     *
+     * @param x the x
+     */
     public void setHeigth(double x){HEIGHT=x; if(HEIGHT<1){HEIGHT=1;}}
-
-
- //   public static void setWidth(double w) { if (w >= 1) { WIDTH = w; }}
-
 
     //====================================== Scenarios Settings =======================================================/
 
     @Override
-    public double getKilometrage() {
-        return KILOMETRAGE;
-    }
+    public double getKilometrage() { return KILOMETRAGE; }
 
     @Override
-    public double getDiameterX() {
-        return DIAMETER_X;
-    }
+    public double getDiameterX() { return DIAMETER_X; }
 
     @Override
-    public double getDiameterY() {
-        return DIAMETER_Y;
-    }
+    public double getDiameterY() { return DIAMETER_Y; }
 
     //===================================== Population Settings =======================================================/
 
@@ -107,6 +118,11 @@ public class Controller implements Controllable
     @Override
     public double getRadiusDot() { return RADIUS_DOT; }
 
+    /**
+     * Sets radius dot.
+     *
+     * @param x the x
+     */
     public void setRadiusDot(double x) { RADIUS_DOT = x; }
 
     //========================================= Virus Settings ========================================================/
@@ -148,4 +164,8 @@ public class Controller implements Controllable
 
     @Override
     public void setWallSpeed(int speed) {WALL_SPEED = speed;}
+
+    @Override
+    public double getThickness() { return THICKNESS; }
+
 }

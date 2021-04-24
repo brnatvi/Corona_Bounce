@@ -10,18 +10,21 @@ public class CoquilleBille {
     private double movingSpeedX;//le vecteur vitesse en Vx de la Coquille
     /** A moving speed in y to move faster or slower. */
     private double movingSpeedY;//le vecteur vitesse Vy de la Coquille
+    private Population population;
     private Individual individual;//l individu que la Coquille va contenir
+    private Position startingPosition;// memoriser la position de départ de la Coquille
     private Position currentPosition;// la position e X et et en Y de la Coquille
     private final int id;// identifiant de la Coquille (afin de  redefinir equals )
     private static int idCpt=0;// le nombre de Coquille déja crées
     private Random r = new Random();
-    private Position startingPosition;// memoriser la position de départ de la Coquille
+
     private double minReboundSpeed=3;
     private Controllable controller;
     private static int MAX_SPEED = 5;
 
     public CoquilleBille(double speedX,double speedY, Individual individual, Population pop){
 
+        this.population = pop;
         this.individual = individual;
         this.controller = pop.getController();
         try {
@@ -30,7 +33,9 @@ public class CoquilleBille {
           this.currentPosition = new Position(controller,false);
           System.out.println("Position of the point have been set, but it fail to fined a free space.");
         }
+
         this.startingPosition = currentPosition.clone();
+       // this.sector = getSector(currentPosition.getX(), currentPosition.getY());
         id=idCpt++;//incrémonter le nombre de Coquilles qui existent
         this.movingSpeedX=speedX;
         this.movingSpeedY=speedY;
@@ -68,6 +73,7 @@ public class CoquilleBille {
     public Population getPopulation(){ return individual.getPopulation(); }
 
     //==================================================== Ricochets =================================================//
+
     /**
      *{@summary Return true if x coordinate is out the the Zone at next move.}
      */

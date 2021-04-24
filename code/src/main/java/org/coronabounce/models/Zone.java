@@ -12,14 +12,12 @@ import java.util.TimerTask;
 public class Zone  {
 
     private Controllable controller;
-    /** Population that is in the Zone. */
-    private Population p;
-    /** Width of all Zones. */
-    private double width;
-    /** Heigth of all Zones. */
-    private double height;
+    private Population p;                   // Population that is in the Zone
+    private double width;                   // Width of all Zones
+    private double height;                  // Height of all Zones
     private Timer timer;
     private TimerTask timerTask;
+
 
     // CONSTRUCTORS ------------------------------------------------------------
     public Zone (Controllable controller,boolean isLockDown, boolean isWall, boolean isRestrictionMovement)
@@ -41,7 +39,9 @@ public class Zone  {
     public void setWidth(double w){ if(w>=1){width = w;}}
     public double getHeight() { return height; }
     public void setHeight(double h) { if(h>=1){height = h;}}
+    public Controllable getController() { return controller; }
     public Population getPopulation() {return p;}
+
 
     // FUNCTIONS ---------------------------------------------------------------
     /**

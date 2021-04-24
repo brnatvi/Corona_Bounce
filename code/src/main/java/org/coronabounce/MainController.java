@@ -26,6 +26,9 @@ import org.coronabounce.mvcconnectors.Displayable;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 import static javafx.scene.paint.Paint.valueOf;
 
+/**
+ * Main controller class. Run by launch() in App class and launch all processes.
+ */
 public class MainController
 {
     private Controllable controller;              // controller with initial settings
@@ -55,6 +58,7 @@ public class MainController
     private XYChart.Series recovered2;
     private AreaChart graphPanel2 = null;
 
+
     @FXML Pane panel1;                            // field with moving points of population1
     @FXML Pane panel2;                            // field with moving points of population2
     @FXML GridPane mainGrid;
@@ -78,6 +82,9 @@ public class MainController
 
     //========================= Constructor ===========================================================================/
 
+    /**
+     * Instantiates a new Main controller.
+     */
     public MainController()
     {
         this.tlPoints = null;
@@ -95,14 +102,16 @@ public class MainController
 
     /**
      * {@summary Reinitialise Zones (and all key variables of class MainController) with new controller (= new settings)}
+     *
+     * @param controller the controller
      */
-    public void changeController(Controllable c)
+    public void changeController(Controllable controller)
     {
-        this.zone1 = new Zone(c,isLockDown1,isWalls1,isRestrictionMovement1);
+        this.zone1 = new Zone(controller,isLockDown1,isWalls1,isRestrictionMovement1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
 
-        this.zone2 = new Zone(c,isLockDown2,isWalls2,isRestrictionMovement2);
+        this.zone2 = new Zone(controller,isLockDown2,isWalls2,isRestrictionMovement2);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
 
@@ -117,12 +126,19 @@ public class MainController
 
     //========================= Getters / Setters =====================================================================/
 
+    /**
+     * {@summary Return current controller which consist all settings done.}
+     *
+     * @return current controller
+     */
     public Controllable getController() { return this.currentController; }
 
     /**
      * {@summary Upload new current controller}
+     *
+     * @param newCurrentController the newCurrentController
      */
-    public void setSettingsController(Controllable c) { this.currentController = c; }
+    public void setSettingsController(Controllable newCurrentController) { this.currentController = newCurrentController; }
 
     //========================= Initialisation ========================================================================/
 
@@ -206,7 +222,7 @@ public class MainController
     //=============================== Interrupters ====================================================================/
 
     /**
-     * {@summary Timer interrupter}
+     * {@summary Timer's interrupter}
      */
     private void stopTimer()
     {
@@ -229,7 +245,7 @@ public class MainController
     }
 
     /**
-     * {@summary Timeline interrupter}
+     * {@summary Timeline's interrupter}
      */
     private void stopTimeLine(Timeline t)
     {
@@ -360,6 +376,9 @@ public class MainController
 
     //========================= MenuBar's functions ====================================================================/
 
+    /**
+     * {@summary Scenario "Soft lockdown" for the left population.}
+     */
     public void left_Scenario_1_SoftLockdown()
     {
         setSettingsController(currentController);
@@ -373,6 +392,9 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
+    /**
+     * {@summary Scenario "Strict lockdown" for the left population.}
+     */
     public void left_Scenario_2_StrictLockdown()
     {
         setSettingsController(currentController);
@@ -386,6 +408,9 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
+    /**
+     * {@summary Scenario "Boundaries" for the left population.}
+     */
     public void left_Scenario_3_Wall()
     {
         setSettingsController(currentController);
@@ -399,6 +424,9 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
+    /**
+     * {@summary Scenario "Boundaries and soft lockdown" for the left population.}
+     */
     public void left_Scenario_4_WallAndLockdown()
     {
         setSettingsController(currentController);
@@ -412,6 +440,9 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
+    /**
+     * {@summary Scenario "Without scenario" for the left population.}
+     */
     public void left_Scenario_5_WithoutScenario()
     {
         setSettingsController(currentController);
@@ -425,6 +456,9 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
+    /**
+     * {@summary Scenario "Soft lockdown" for the right population.}
+     */
     public void right_Scenario_1_SoftLockdown()
     {
         setSettingsController(currentController);
@@ -438,6 +472,9 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
+    /**
+     * {@summary Scenario "Strict lockdown" for the right population.}
+     */
     public void right_Scenario_2_StrictLockdown()
     {
         setSettingsController(currentController);
@@ -451,6 +488,9 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
+    /**
+     * {@summary Scenario "Boundaries" for the right population.}
+     */
     public void right_Scenario_3_Wall()
     {
         setSettingsController(currentController);
@@ -464,6 +504,9 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
+    /**
+     * {@summary Scenario "Boundaries and soft lockdown" for the right population.}
+     */
     public void right_Scenario_4_WallAndLockdown()
     {
         setSettingsController(currentController);
@@ -477,6 +520,9 @@ public class MainController
         App.setRoot("corona bounce");
     }
 
+    /**
+     * {@summary Scenario "Without scenario" for the right population.}
+     */
     public void right_Scenario_5_WithoutScenario()
     {
         setSettingsController(currentController);
@@ -509,9 +555,11 @@ public class MainController
     /**
      * {@summary Timeline launcher for drawing the graphs in AreaChart}
      * To show correctly superposed layers in AreaChart we take:
-     *      - NbHealthy taken as 100% (bottom layer)
-     *      - nbSick = nbSick + NbIncubating + nbRecovered (middle layer)
-     *      - NbRecovered = NbRecovered (top layer)
+     * <ul>
+     * <li> NbHealthy taken as 100% (bottom layer)
+     * <li> nbSick = nbSick + NbIncubating + nbRecovered (middle layer)
+     * <li> NbRecovered = NbRecovered (top layer)
+     * </ul>
      * Superposed they present ratio of these tree values (nbHealthy, nbSick/Incubating and nbRecovered) in 100%
      */
     private void launchDrawGraph()
@@ -656,11 +704,14 @@ public class MainController
     }
 
     /**
+     * {@summary Renderer of points.}
      * Function which:
      * <ul>
      * <li> adapt position in GUI's Pane relative to position in Model's Zone
      * <li> draw point according its status (Healthy, Sick, Recovered, Incubating)
      * </ul>
+     * @param is_panel1 serves to distinguish drawing in Panel1 and Panel2 and its populations.
+     * @param koeffW, koeffH serve to adapt dimensions the walls during changing dimensions the scene.
      */
     private void drawPoint(CoquilleBille cb, boolean is_panel1, double koeffW, double koeffH)
     {
@@ -683,8 +734,9 @@ public class MainController
     }
 
     /**
-     * {@summary Function of drawing the walls}
-     * (koeffW and koeffH serve to adapt dimensions the walls during changing dimensions the scene)
+     * {@summary Renderer of walls}
+     * @param is_panel1 serves to distinguish drawing in Panel1 and Panel2 and its populations.
+     * koeffW and koeffH serve to adapt dimensions the walls during changing dimensions the scene.
      */
     private void drawWalls(boolean is_panel1)
     {
