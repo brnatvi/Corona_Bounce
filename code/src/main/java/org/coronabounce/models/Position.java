@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * {@summary Class used to save an x &#38; an y.}<br>
+ * Position are always between x &#38; y limits of the controller.<br>
+ */
 public class Position implements Cloneable{
     /** To know if there is already an Individual at this location. */
     private static List<Position> listTakenPositions = new ArrayList<Position>();
@@ -20,6 +24,11 @@ public class Position implements Cloneable{
     private static Random r = new Random();
 
     // CONSTRUCTORS ------------------------------------------------------------
+    /**
+     * {@summary Main constructor.}
+     * @param controller the controller used to fix limits.
+     * @param chooseAUniquePosition If true it will try to fined a unique position in the Zone.
+     */
     public Position(Controllable controller, boolean chooseAUniquePosition) {
         // initial position according bounds of Zone & radius of point
         // (because it is the center of point who takes position)
@@ -44,9 +53,16 @@ public class Position implements Cloneable{
         }
         listTakenPositions.add(this);
     }
-    public Position(Controllable c){
+    /**
+     * {@summary Secondary constructor with chooseAUniquePosition at true.}
+     * @param controller the controller used to fix limits.
+     */
+    public Position(Controllable controller){
       this(c, true);
     }
+    /**
+     * {@summary Private constructor use only by clone.}
+     */
     private Position(double x, double y){
       posX=x;
       posY=y;
@@ -55,7 +71,13 @@ public class Position implements Cloneable{
     // GET SET -----------------------------------------------------------------
     public double getX() {return this.posX;}
     public double getY() {return this.posY;}
-    public void setPos(double x, double y) {           //TODO add condition do not set in positions of walls
+    /**
+     * {@summary Set a new x &#38; y.}<br>
+     * It will set position only in the limits of the Zone.<br>
+     * Dot radius is used to avoid GUI glitch.<br>
+     */
+    public void setPos(double x, double y) {
+      //TODO add condition do not set in positions of walls
       if (x < 0) {x = minLimit;}
       else if (x > maxLimitX) {x = maxLimitX;}
       if (y < 0) {y = minLimit;}
@@ -69,7 +91,7 @@ public class Position implements Cloneable{
 
     /**
      * Check if position of instance is distinguished from all other point's one
-     * @return
+     * @return True if curent position (see as a circle) is empty.
      */
     private boolean isEmpty(){
         for (Position pos : this.listTakenPositions){
@@ -77,16 +99,27 @@ public class Position implements Cloneable{
         }
         return true;
     }
-
+    /**
+     * Check if position is in wall
+     * @return True if curent position is in a wall.
+     */
     private boolean isInWall(){
       //is in wall part :
       //todo only if we whant to make existing wall.
       return false;
     }
+    /**
+     * Standard clone function.
+     */
     @Override
     public Position clone(){
       return new Position(posX,posY);
     }
+    /**
+     * {@summary Get distance from an other position.}
+     * @param pos the other Position.
+     * @return the distance from this to pos.
+     */
     public double distanceFrom(Position pos){
       double x1 = getX();
       double x2 = pos.getX();
@@ -94,6 +127,10 @@ public class Position implements Cloneable{
       double y2 = pos.getY();
       return  Math.sqrt((x1 -x2) * (x1 -x2) + (y1 -y2) * (y1 -y2));
     }
+    /**
+     * {@summary Clean the list of the taken positions.}
+     * It allowed to create new Position without checking if old Position interfer with this 1.
+     */
     public static void cleanListTakenPositions(){
       listTakenPositions = new ArrayList<Position>();
     }

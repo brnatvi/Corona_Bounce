@@ -49,7 +49,7 @@ public class Data
     //========================= Own functions =========================================================================/
 
     /**
-     * @summary Remove the first element of queue and add new values (sick, recovered) on the end.
+     * {@summary Remove the first element of queue and add new values (sick, recovered) on the end.}
      * Made thread-saved because data is shared by two processes:
      *          reading for drawing graph and writing to update queue.
      */

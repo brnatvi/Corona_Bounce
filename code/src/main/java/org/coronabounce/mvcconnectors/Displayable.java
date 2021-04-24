@@ -12,8 +12,7 @@ public interface Displayable
 
     /**
      * Get list of points
-     * @param
-     * @return
+     * @return the list of all points
      */
     public List getAllPoints();
 
@@ -38,7 +37,7 @@ public interface Displayable
     public int getNbRecovered();
 
     /**
-     * @summary Transfers NbSick and NbRecovered to Data to save them to draw AreaChart.
+     * {@summary Transfers NbSick and NbRecovered to Data to save them to draw AreaChart.}
      * To show the layers of AreaChart correctly with superposition we take
      * NbRecovered = NbRecovered,
      * nbSick = nbSick + nbRecovered,
@@ -64,17 +63,17 @@ public interface Displayable
     public List<Wall> getListWall();
 
     /**
-     * @summary Return list of positions on axis of abscissas of all walls
+     * {@summary Return list of positions on axis of abscissas of all walls.}
      */
     public ArrayList<Double> getPositionsOfWalls();
 
     /**
-     * @summary Return list of heights of all walls
+     * {@summary Return list of heights of all walls.}
      */
     public ArrayList<Double> getHeigthsOfWalls();
 
     /**
-     * @summary Return list of thicknesses of all walls
+     * {@summary Return list of thicknesses of all walls.}
      */
     public ArrayList<Double> getThicknessesOfWalls();
 }

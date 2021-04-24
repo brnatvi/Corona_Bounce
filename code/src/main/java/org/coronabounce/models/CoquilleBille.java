@@ -180,7 +180,7 @@ public class CoquilleBille {
 
     /**
     *{@summary Set a random moving speed to SpeedX between -maxSpeed & maxSpeed.}<br>
-    *@param maxSpeed
+    *@param maxSpeed the max speed to add.
     */
     public void addSpeedX(int maxSpeed){
         if(maxSpeed<1){maxSpeed=1;}
@@ -190,7 +190,7 @@ public class CoquilleBille {
 
     /**
      *{@summary Set a random moving speed to SpeedY between -maxSpeed & maxSpeed.}<br>
-     *@param maxSpeed
+     *@param maxSpeed the max speed to add.
      */
     public void addSpeedY(int maxSpeed){
         if(maxSpeed<1){maxSpeed=1;}
