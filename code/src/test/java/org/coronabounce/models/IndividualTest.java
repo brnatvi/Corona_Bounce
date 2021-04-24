@@ -30,6 +30,7 @@ public class IndividualTest extends Assertions{
   @Test
   public void testContact(){
     Controller c = new Controller();
+    c.setRadiusDot(0);
     Population p = new Population(c, 0, 0, 0,false,false,false);
     Individual i1 = new Sick(new CoquilleBille(null, p),p);
     Individual i2 = new Healthy(new CoquilleBille(null, p),p);

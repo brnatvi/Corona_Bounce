@@ -96,6 +96,7 @@ public class PositionTest extends Assertions{
   @Test
   public void testDistanceFrom(){
     Controller c = new Controller();
+    c.setRadiusDot(0);
     Position p = new Position(c,false);
     Position p2 = new Position(c,false);
     p.setPos(0,0);
@@ -106,5 +107,48 @@ public class PositionTest extends Assertions{
     p.setPos(2,3);
     assertEquals(Math.sqrt(8*8 + 2*2),p.distanceFrom(p2));
     assertEquals(Math.sqrt(8*8 + 2*2),p2.distanceFrom(p));
+  }
+  @Test
+  public void testSetPos(){
+    Controller c = new Controller();
+    c.setRadiusDot(0);
+    c.setWidth(5);
+    c.setHeigth(5);
+    Position p = new Position(c,false);
+    p.setPos(0,0);
+    assertEquals(0,p.getX());
+    assertEquals(0,p.getY());
+    p.setPos(1,3);
+    assertEquals(1,p.getX());
+    assertEquals(3,p.getY());
+    p.setPos(-1,-6);
+    assertEquals(0,p.getX());
+    assertEquals(0,p.getY());
+    p.setPos(6,10);
+    assertEquals(5,p.getX());
+    assertEquals(5,p.getY());
+  }
+  @Test
+  public void testSetPos2(){
+    Controller c = new Controller();
+    c.setRadiusDot(1);
+    c.setWidth(5);
+    c.setHeigth(5);
+    Position p = new Position(c,false);
+    p.setPos(0,0);
+    assertEquals(1,p.getX());
+    assertEquals(1,p.getY());
+    p.setPos(1,3);
+    assertEquals(1,p.getX());
+    assertEquals(3,p.getY());
+    p.setPos(-1,-6);
+    assertEquals(1,p.getX());
+    assertEquals(1,p.getY());
+    p.setPos(6,10);
+    assertEquals(4,p.getX());
+    assertEquals(4,p.getY());
+    p.setPos(6,-345678);
+    assertEquals(4,p.getX());
+    assertEquals(1,p.getY());
   }
 }

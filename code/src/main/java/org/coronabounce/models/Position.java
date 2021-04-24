@@ -78,9 +78,9 @@ public class Position implements Cloneable{
      */
     public void setPos(double x, double y) {
       //TODO add condition do not set in positions of walls
-      if (x < 0) {x = minLimit;}
+      if (x < minLimit) {x = minLimit;}
       else if (x > maxLimitX) {x = maxLimitX;}
-      if (y < 0) {y = minLimit;}
+      if (y < minLimit) {y = minLimit;}
       else if (y > maxLimitY){y = maxLimitY;}
       this.posX = x;
       this.posY = y;
