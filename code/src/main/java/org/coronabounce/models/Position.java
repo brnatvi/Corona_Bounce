@@ -58,7 +58,7 @@ public class Position implements Cloneable{
      * @param controller the controller used to fix limits.
      */
     public Position(Controllable controller){
-      this(c, true);
+      this(controller, true);
     }
     /**
      * {@summary Private constructor use only by clone.}
