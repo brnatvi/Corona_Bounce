@@ -37,7 +37,7 @@
             <configuration>
               <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
               <reportOutputDirectory>docs/javadoc/</reportOutputDirectory>
-              <!-- <show>private</show> -->
+              <show>private</show>
               <quiet>true</quiet>
               <locale>en_US</locale>
               <!-- <additionalJOption>-Xdoclint:-missing</additionalJOption> -->
