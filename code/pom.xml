@@ -41,6 +41,10 @@
               <!-- <show>private</show> -->
               <quiet>true</quiet>
               <locale>en_US</locale>
+              <!-- <additionalparam>-Xdoclint:none</additionalparam> -->
+              <!-- <additionalOptions>-Xdoclint:none</additionalOptions> -->
+              <!-- <additionalJOption>-Xdoclint:-missing</additionalJOption> -->
+              <doclint>all,-missing</doclint>
             </configuration>
           </plugin>
           <plugin>
