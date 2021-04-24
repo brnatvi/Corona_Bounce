@@ -94,7 +94,7 @@ public class MainController
     }
 
     /**
-     * @summary Reinitialise Zones (and all key variables of class MainController) with new controller (= new settings)
+     * {@summary Reinitialise Zones (and all key variables of class MainController) with new controller (= new settings)}
      */
     public void changeController(Controllable c)
     {
@@ -120,14 +120,14 @@ public class MainController
     public Controllable getController() { return this.currentController; }
 
     /**
-     * @summary Upload new current controller
+     * {@summary Upload new current controller}
      */
     public void setSettingsController(Controllable c) { this.currentController = c; }
 
     //========================= Initialisation ========================================================================/
 
     /**
-     * @summary Initialise Graphs, Panels and StatisticGrids and paused all timers in model
+     * {@summary Initialise Graphs, Panels and StatisticGrids and paused all timers in model}
      */
     @FXML
     public void initialize()
@@ -151,7 +151,7 @@ public class MainController
     }
 
     /**
-     * @summary Initialisation of graphs and filing of mainGrid by graphStatGrid1 and graphStatGrid2
+     * {@summary Initialisation of graphs and filing of mainGrid by graphStatGrid1 and graphStatGrid2}
      */
     private void initGraphs()
     {
@@ -206,7 +206,7 @@ public class MainController
     //=============================== Interrupters ====================================================================/
 
     /**
-     * @summary Timer interrupter
+     * {@summary Timer interrupter}
      */
     private void stopTimer()
     {
@@ -229,7 +229,7 @@ public class MainController
     }
 
     /**
-     * @summary Timeline interrupter
+     * {@summary Timeline interrupter}
      */
     private void stopTimeLine(Timeline t)
     {
@@ -241,7 +241,7 @@ public class MainController
     }
 
     /**
-     * @summary Function for correct closing tasks before changing the settings.
+     * {@summary Function for correct closing tasks before changing the settings.}
      * It stops Timelines of graph and points, and stop timers of both Populations and Zones.
      */
     private void closePreviousTask()
@@ -254,7 +254,7 @@ public class MainController
     //========================= Button's functions ====================================================================/
 
     /**
-     * @summary Function for button "Start" - create Timeline and launch function moving() on zone
+     * {@summary Function for button "Start" - create Timeline and launch function moving() on zone}
      */
     @FXML
     private void launchMoving()
@@ -269,7 +269,7 @@ public class MainController
     }
 
     /**
-     * @summary Function for button "Settings" - redirect to window settings
+     * {@summary Function for button "Settings" - redirect to window settings}
      */
     @FXML
     private void switchToSettings()
@@ -280,7 +280,7 @@ public class MainController
     }
 
     /**
-     * @summary Function for button "Pause/Resume"
+     * {@summary Function for button "Pause/Resume"}
      */
     @FXML
     private void makePauseResume()
@@ -296,7 +296,7 @@ public class MainController
     }
 
     /**
-     * @summary Function for button "Reset"
+     * {@summary Function for button "Reset"}
      */
     @FXML
     private void resetModel()
@@ -312,7 +312,7 @@ public class MainController
     }
 
     /**
-     * @summary Function for button "?"
+     * {@summary Function for button "?"}
      */
     @FXML
     private void showLegend()
@@ -493,7 +493,7 @@ public class MainController
     //========================= Button's auxiliary functions ==========================================================/
 
     /**
-     * @summary Choose a period for graph's Timeline, appropriated to population size
+     * {@summary Choose a period for graph's Timeline, appropriated to population size}
      * it helps to reduce workload on threads for big size populations
      * @return 100 ms for small populations and 500 ms for big ones
      */
@@ -507,7 +507,7 @@ public class MainController
     }
 
     /**
-     * @summary Timeline launcher for drawing the graphs in AreaChart
+     * {@summary Timeline launcher for drawing the graphs in AreaChart}
      * To show correctly superposed layers in AreaChart we take:
      *      - NbHealthy taken as 100% (bottom layer)
      *      - nbSick = nbSick + NbIncubating + nbRecovered (middle layer)
@@ -578,7 +578,7 @@ public class MainController
     }
 
     /**
-     * @summary Timeline launcher to draw moving points, walls and update statistics
+     * {@summary Timeline launcher to draw moving points, walls and update statistics}
      */
     private void launchPointsAndStat()
     {
@@ -607,7 +607,7 @@ public class MainController
     //========================= Animation auxiliary functions =========================================================/
 
     /**
-     * @summary Takes fresh numbers of healthy, sick, recovered to labels in gridStat
+     * {@summary Takes fresh numbers of healthy, sick, recovered to labels in gridStat}
      */
     private void updateStatistics()
     {
@@ -623,7 +623,7 @@ public class MainController
     }
 
     /**
-     * @summary Clean panels from all theirs children
+     * {@summary Clean panels from all theirs children}
      */
     private void retainPopulationsAndWalls()
     {
@@ -632,7 +632,7 @@ public class MainController
     }
 
     /**
-     * @summary Function call drawPoint() for all points of list
+     * {@summary Function call drawPoint() for all points of list}
      * @param is_panel1 helps to use this function for both populations
      */
     private void drawPopulation(boolean is_panel1)
@@ -656,9 +656,11 @@ public class MainController
     }
 
     /**
-     * @summary Function which:
-     * 1) adapt position in GUI's Pane relative to position in Model's Zone
-     * 2) draw point according its status (Healthy, Sick, Recovered, Incubating)
+     * Function which:
+     * <ul>
+     * <li> adapt position in GUI's Pane relative to position in Model's Zone
+     * <li> draw point according its status (Healthy, Sick, Recovered, Incubating)
+     * </ul>
      */
     private void drawPoint(CoquilleBille cb, boolean is_panel1, double koeffW, double koeffH)
     {
@@ -681,7 +683,7 @@ public class MainController
     }
 
     /**
-     * @summary Function of drawing the walls
+     * {@summary Function of drawing the walls}
      * (koeffW and koeffH serve to adapt dimensions the walls during changing dimensions the scene)
      */
     private void drawWalls(boolean is_panel1)

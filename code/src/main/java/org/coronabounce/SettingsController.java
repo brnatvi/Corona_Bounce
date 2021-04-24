@@ -23,7 +23,7 @@ public class SettingsController
     }
 
     /**
-     * @summary takes settings from GUI to renitialize mainController
+     * {@summary takes settings from GUI to renitialize mainController.}
      */
     @FXML
     public void passSettingsToController() {

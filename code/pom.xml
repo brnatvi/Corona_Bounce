@@ -36,13 +36,10 @@
             <version>3.2.0</version>
             <configuration>
               <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
-              <!-- <outputDirectory>docs/javadoc/</outputDirectory> -->
               <reportOutputDirectory>docs/javadoc/</reportOutputDirectory>
               <!-- <show>private</show> -->
               <quiet>true</quiet>
               <locale>en_US</locale>
-              <!-- <additionalparam>-Xdoclint:none</additionalparam> -->
-              <!-- <additionalOptions>-Xdoclint:none</additionalOptions> -->
               <!-- <additionalJOption>-Xdoclint:-missing</additionalJOption> -->
               <doclint>all,-missing</doclint>
             </configuration>

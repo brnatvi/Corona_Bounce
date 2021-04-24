@@ -65,12 +65,12 @@ public class Data
     }
 
     /**
-     * @summary Lock the thread of the processes there data will be used.
+     * {@summary Lock the thread of the processes there data will be used.}
      */
     public void Lock() {lock.lock();}
 
     /**
-     * @summary Unlock the thread of the processes there data will be used.
+     * {@summary Unlock the thread of the processes there data will be used.}
      */
     public void unLock() {lock.unlock();}
 }

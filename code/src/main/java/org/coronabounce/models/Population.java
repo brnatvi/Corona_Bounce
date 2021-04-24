@@ -164,7 +164,7 @@ public class Population implements Displayable {
     }
 
     //*****************************************************Strict lockdown*************************************************/
-    /** @summary
+    /**
      *
      * RestrictMovement() prevent a big part of the population from moving
      olny(doctors, cops ..) go to work and people go out rarely and just out of necessity **/
@@ -187,7 +187,7 @@ public class Population implements Displayable {
     //========================= Prints ================================================================================/
 
     /**
-     * @summary Print for debug, internal using function
+     * {@summary Print for debug, internal using function}
      */
     private void printPop() {
 
@@ -300,7 +300,7 @@ public class Population implements Displayable {
     public int getNbRecovered() { return nbRecovered; }
 
     /**
-     * @summary Transfers NbSick and NbRecovered to Data to save them to draw AreaChart.
+     * {@summary Transfers NbSick and NbRecovered to Data to save them to draw AreaChart.}
      * To show correctly superposed layers in AreaChart we take:
      *      - NbHealthy taken as 100% (bottom layer)
      *      - nbSick = nbSick + NbIncubating + nbRecovered (middle layer)

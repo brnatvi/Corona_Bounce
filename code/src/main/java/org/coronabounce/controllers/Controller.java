@@ -29,7 +29,7 @@ public class Controller implements Controllable
     //==================================== Timer Management ===========================================================/
 
     /**
-     * @summary Get value of enum state.
+     * {@summary Get value of enum state.}
      * Made thread-save because state is shared by many processes.
      */
     @Override
@@ -42,7 +42,7 @@ public class Controller implements Controllable
     }
 
     /**
-     * @summary Change value of enum state.
+     * {@summary Change value of enum state.}
      * Made thread-save because state is shared by many processes.
      */
     @Override
