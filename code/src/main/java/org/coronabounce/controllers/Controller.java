@@ -5,7 +5,8 @@ import org.coronabounce.mvcconnectors.Controllable;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * The type Controller.
+ * Class Controller is a auxiliary to MainController and SettingsController.
+ * It provide initial values of constants and methods to change them in the course of using the program.
  */
 public class Controller implements Controllable
 {
@@ -58,9 +59,15 @@ public class Controller implements Controllable
 
     //====================================== Space Settings ===========================================================/
 
+    /**
+     * {@summary Space size getter.}
+     */
     @Override
     public double[] getSpaceSize() { return new double[]{this.WIDTH, this.HEIGHT}; }
 
+    /**
+     * {@summary Space size setter.}
+     */
     @Override
     public void setSpaceSize(double w, double h)
     {
@@ -69,35 +76,34 @@ public class Controller implements Controllable
     }
 
     /**
-     * Gets width.
-     *
+     * {@summary Gets width. Used in tests.}
      * @return the width
      */
     public double getWidth() { return WIDTH; }
 
     /**
-     * Set width.
-     *
-     * @param x the x
+     * {@summary Set width. Used in tests.}
+     * @param x the width.
      */
     public void setWidth(double x){WIDTH=x; if(WIDTH<1){WIDTH=1;}}
 
     /**
-     * Gets height.
-     *
-     * @return the height
+     * {@summary Gets height. Used in tests.}
+     * @return the height.
      */
     public double getHeight() { return HEIGHT; }
 
     /**
-     * Set heigth.
-     *
-     * @param x the x
+     * {@summary Set heigth. Used in tests.}
+     * @param x the height.
      */
     public void setHeigth(double x){HEIGHT=x; if(HEIGHT<1){HEIGHT=1;}}
 
     //====================================== Scenarios Settings =======================================================/
 
+    /**
+     * {@summary Getter of distance authorized for moving during lockdown.}
+     */
     @Override
     public double getKilometrage() { return KILOMETRAGE; }
 
@@ -109,62 +115,120 @@ public class Controller implements Controllable
 
     //===================================== Population Settings =======================================================/
 
+    /**
+     * {@summary Get total number of persons in simulation from controller.}
+     * @return the size of population.
+     */
     @Override
     public int getPersonsCount() { return COUNT; }
 
+    /**
+     * {@summary Set total number of persons in simulation to controller.}
+     * @param nmbPersons size of population.
+     */
     @Override
     public void setPersonsCount(int nmbPersons) { COUNT = nmbPersons;}
 
+    /**
+     * {@summary Get radius of dot/individual.}
+     * @return radius dot.
+     */
     @Override
     public double getRadiusDot() { return RADIUS_DOT; }
 
     /**
-     * Sets radius dot.
-     *
-     * @param x the x
+     * {@summary Sets radius dot.}
+     * Used in tests.
+     * @param x the radius of dot.
      */
     public void setRadiusDot(double x) { RADIUS_DOT = x; }
 
     //========================================= Virus Settings ========================================================/
 
+    /**
+     * {@summary Get radius of contamination around point.}
+     * @return contamination radius.
+     */
     @Override
     public double getContaminationRadius() { return CONTAMINATION_RADIUS; }
 
+    /**
+     * {@summary Set radius of contamination around point.}
+     * @param pxls number of pixels.
+     */
     @Override
     public void setContaminationRadius(double pxls) { CONTAMINATION_RADIUS = pxls; }
 
+    /**
+     * {@summary Get duration of sickness from controller.}
+     */
     @Override
     public long getDurationIncubation() { return DURATION_INCUBATION; }
 
+    /**
+     * {@summary Set duration of sickness to controller.}
+     * @param time - number of milliseconds.
+     */
     @Override
     public void setDurationIncubation(long time) { DURATION_INCUBATION = time; }
 
+    /**
+     * {@summary Get duration of non-contamination after recovery.}
+     */
     @Override
     public long getDurationImmunity() { return DURATION_IMMUNITY; }
 
+    /**
+     * {@summary Set duration of non-contamination after recovery.}
+     * @param time - number of milliseconds.
+     */
     @Override
     public void setDurationImmunity(long time) { DURATION_IMMUNITY = time; }
 
+    /**
+     * {@summary Get duration of recovery.}
+     */
     @Override
     public long getDurationHealing() { return DURATION_HEALING;}
 
+    /**
+     * {@summary Set duration of recovery.}
+     * @param time - duration in milliseconds.
+     */
     @Override
     public void setDurationHealing(long time) { DURATION_HEALING = time; }
 
     //====================================== Walls Settings ===========================================================/
 
+    /**
+     * {@summary Get number of walls.}
+     * @return number of walls.
+     */
     @Override
     public int getWallsCount() { return WALLS_COUNT;}
 
+    /**
+     * {@summary Set number of walls.}
+     * @param count - new number of walls.
+     */
     @Override
     public void setWallsCount(int count) { WALLS_COUNT = count;}
 
+    /**
+     * {@summary Getter of walls closing speed.}
+     */
     @Override
     public int getWallSpeed() {return WALL_SPEED;}
 
+    /**
+     * {@summary Setter of walls closing speed.}
+     */
     @Override
     public void setWallSpeed(int speed) {WALL_SPEED = speed;}
 
+    /**
+     * {@summary Getter of thickness of walls.}
+     */
     @Override
     public double getThickness() { return THICKNESS; }
 

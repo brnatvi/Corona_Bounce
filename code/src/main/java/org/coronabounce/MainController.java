@@ -245,7 +245,8 @@ public class MainController
     }
 
     /**
-     * {@summary Timeline's interrupter}
+     * {@summary Timeline's interrupter.}
+     * @param t timeline to stop.
      */
     private void stopTimeLine(Timeline t)
     {
@@ -258,7 +259,7 @@ public class MainController
 
     /**
      * {@summary Function for correct closing tasks before changing the settings.}
-     * It stops Timelines of graph and points, and stop timers of both Populations and Zones.
+     * Stops Timelines of graph and points, and stops timers of both Populations and Zones.
      */
     private void closePreviousTask()
     {
@@ -270,7 +271,8 @@ public class MainController
     //========================= Button's functions ====================================================================/
 
     /**
-     * {@summary Function for button "Start" - create Timeline and launch function moving() on zone}
+     * {@summary Function for button "Start".}
+     * Creates Timeline and launch function moving() on zone.
      */
     @FXML
     private void launchMoving()
@@ -285,7 +287,8 @@ public class MainController
     }
 
     /**
-     * {@summary Function for button "Settings" - redirect to window settings}
+     * {@summary Function for button "Settings"}
+     * Redirect to window "Settings".
      */
     @FXML
     private void switchToSettings()
@@ -296,7 +299,8 @@ public class MainController
     }
 
     /**
-     * {@summary Function for button "Pause/Resume"}
+     * {@summary Function for button "Pause/Resume".}
+     * Pauses animation.
      */
     @FXML
     private void makePauseResume()
@@ -313,6 +317,7 @@ public class MainController
 
     /**
      * {@summary Function for button "Reset"}
+     * Reset animation with the same parameters (settings) and scenarios applied.
      */
     @FXML
     private void resetModel()
@@ -328,7 +333,9 @@ public class MainController
     }
 
     /**
-     * {@summary Function for button "?"}
+     * {@summary Function for button "?".}
+     * Creates tooltips for all elements of the scene.
+     * Tooltips are showing during few seconds, then need to push "?" again.
      */
     @FXML
     private void showLegend()
@@ -680,8 +687,9 @@ public class MainController
     }
 
     /**
-     * {@summary Function call drawPoint() for all points of list}
-     * @param is_panel1 helps to use this function for both populations
+     * {@summary Renderer of populations.}
+     * Function call drawPoint() for all points of list.
+     * @param is_panel1 helps to use this function for both populations.
      */
     private void drawPopulation(boolean is_panel1)
     {
@@ -735,8 +743,8 @@ public class MainController
 
     /**
      * {@summary Renderer of walls}
+     * koeffW and koeffH serve to adapt dimensions the walls during changing dimensions the scene.      *
      * @param is_panel1 serves to distinguish drawing in Panel1 and Panel2 and its populations.
-     * koeffW and koeffH serve to adapt dimensions the walls during changing dimensions the scene.
      */
     private void drawWalls(boolean is_panel1)
     {
