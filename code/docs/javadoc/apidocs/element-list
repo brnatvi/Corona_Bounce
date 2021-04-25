@@ -4,3 +4,4 @@ org.coronabounce.data
 org.coronabounce.models
 org.coronabounce.models.exceptions
 org.coronabounce.mvcconnectors
+org.coronabounce.vues

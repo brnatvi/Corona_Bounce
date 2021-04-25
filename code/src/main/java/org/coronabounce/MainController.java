@@ -1,6 +1,5 @@
 package org.coronabounce;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javafx.animation.Animation;
@@ -12,8 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.data.Data;
@@ -22,8 +19,7 @@ import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
 import org.coronabounce.vues.Graph;
-
-import static javafx.scene.paint.Paint.valueOf;
+import org.coronabounce.vues.Renderer;
 
 /**
  * Main controller class. Run by launch() in App class and launch all processes.
@@ -66,6 +62,9 @@ public class MainController
     private Graph graph1;
     /** Graph for population1 **/
     private Graph graph2;
+
+    private Renderer renderer1;
+    private Renderer renderer2;
 
     /** Field with moving points of population1 **/
     @FXML Pane panel1;
@@ -117,8 +116,8 @@ public class MainController
         this.tlPoints = null;
         this.tlGraph = null;
         this.controller = new Controller();
-        changeController(this.controller);
         this.currentController = controller;
+        changeController(this.currentController);
         isLockDown1 = false;
         isLockDown2 = false;
         isWalls1 = false;
@@ -138,11 +137,13 @@ public class MainController
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
         this.graph1 = new Graph(model1);
+        this.renderer1 = new Renderer(model1, currentController);
 
         this.zone2 = new Zone(controller,isLockDown2,isWalls2,isRestrictionMovement2);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
         this.graph2 = new Graph(model2);
+        this.renderer2 = new Renderer(model2, currentController);
     }
 
     //========================= Getters / Setters =====================================================================/
@@ -175,8 +176,7 @@ public class MainController
         initGraphs();
 
         // init points
-        drawPopulation(false);
-        drawPopulation(true);
+        drawPopulations();
 
         // init statistic
         updateStatistics();
@@ -609,12 +609,10 @@ public class MainController
             retainPopulationsAndWalls();
 
             // update points
-            drawPopulation(true);
-            drawPopulation(false);
+            drawPopulations();
 
             // update walls
-            drawWalls(true);
-            drawWalls(false);
+            drawWalls();
 
             // update statistic
             updateStatistics();
@@ -653,106 +651,22 @@ public class MainController
     /**
      * {@summary Renderer of populations.}
      * Function call drawPoint() for all points of list.
-     * @param is_panel1 helps to use this function for both populations.
+   //  * @param is_panel1 helps to use this function for both populations.
      */
-    private void drawPopulation(boolean is_panel1)
+    private void drawPopulations()
     {
-        double koeffW = panel1.getWidth()/currentController.getSpaceSize()[0];
-        double koeffH = panel1.getHeight()/currentController.getSpaceSize()[1];
-        if (is_panel1)
-        {
-            for (CoquilleBille cb : points1)
-            {
-                drawPoint(cb, true, koeffW, koeffH);
-            }
-        }
-        else
-        {
-            for (CoquilleBille cb : points2)
-            {
-                drawPoint(cb, false, koeffW, koeffH);
-            }
-        }
-    }
-
-    /**
-     * {@summary Renderer of points.}
-     * Function which:
-     * <ul>
-     * <li> adapt position in GUI's Pane relative to position in Model's Zone
-     * <li> draw point according its status (Healthy, Sick, Recovered, Incubating)
-     * </ul>
-     * @param is_panel1 serves to distinguish drawing in Panel1 and Panel2 and its populations.
-     * @param koeffW, koeffH serve to adapt dimensions the walls during changing dimensions the scene.
-     */
-    private void drawPoint(CoquilleBille cb, boolean is_panel1, double koeffW, double koeffH)
-    {
-        String state = cb.getIndividual().healthState();
-        double coordX = cb.getCurrentPosition().getX() * koeffW;
-        double coordY = cb.getCurrentPosition().getY() * koeffH;
-        Circle point = new Circle(coordX, coordY, currentController.getRadiusDot() * koeffH);
-        if (state.equals("Healthy")) {point.setFill(valueOf("70e000"));}    //green
-        if (state.equals("Incubating")) {point.setFill(valueOf("ff1830"));}  //red
-        if (state.equals("Recovered")) {point.setFill(valueOf("ffd22f"));}  //yellow
-        if (state.equals("Sick")){point.setFill(valueOf("a80011"));}     // dark red
-        if (is_panel1)
-        {
-            panel1.getChildren().add(point);
-        }
-        else
-        {
-            panel2.getChildren().add(point);
-        }
+        renderer1.drawPopulation(panel1);
+        renderer2.drawPopulation(panel2);
     }
 
     /**
      * {@summary Renderer of walls}
-     * koeffW and koeffH serve to adapt dimensions the walls during changing dimensions the scene.      *
-     * @param is_panel1 serves to distinguish drawing in Panel1 and Panel2 and its populations.
+     * koeffW and koeffH serve to adapt dimensions the walls during changing dimensions the scene.
+    // * @param is_panel1 serves to distinguish drawing in Panel1 and Panel2 and its populations.
      */
-    private void drawWalls(boolean is_panel1)
+    private void drawWalls()
     {
-        double koeffW = panel1.getWidth() / currentController.getSpaceSize()[0];
-        double koeffH = panel1.getHeight() / currentController.getSpaceSize()[1];
-
-        if (is_panel1)
-        {
-            if (isWalls1)
-            {
-                ArrayList<Double> positionX1 = model1.getPositionsOfWalls();
-                ArrayList<Double> heightOfWalls1 = model1.getHeigthsOfWalls();
-                ArrayList<Double> thicknesses1 = model1.getThicknessesOfWalls();
-
-                for (int i = 0; i < currentController.getWallsCount(); i++)
-                {
-                    Rectangle wall1 = new Rectangle((positionX1.get(i) - thicknesses1.get(i) / 2) * koeffW, 0,
-                                                    thicknesses1.get(i) * koeffW, heightOfWalls1.get(i) * koeffH);
-                    wall1.setFill(valueOf("008B8B"));
-
-                    // put into panel1
-                    panel1.getChildren().add(wall1);
-                }
-            }
-        }
-        else
-        {
-            if (isWalls2)
-            {
-                ArrayList<Double> positionX2 = model2.getPositionsOfWalls();
-                ArrayList<Double> heightOfWalls2 = model2.getHeigthsOfWalls();
-                ArrayList<Double> thicknesses2 = model2.getThicknessesOfWalls();
-
-                for (int i = 0; i < currentController.getWallsCount(); i++)
-                {
-                    Rectangle wall2 = new Rectangle((positionX2.get(i) - thicknesses2.get(i) / 2) * koeffW, 0,
-                                                    thicknesses2.get(i) * koeffW, heightOfWalls2.get(i) * koeffH);
-
-                    wall2.setFill(valueOf("008B8B"));
-
-                    // put into panel2
-                    panel2.getChildren().add(wall2);
-                }
-            }
-        }
+        renderer1.drawWall(panel1, isWalls1);
+        renderer2.drawWall(panel2, isWalls2);
     }
 }

@@ -16,7 +16,7 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 public class Graph
 {
     /** Population - model to draw graph. **/
-    private Displayable population;
+    private Displayable model;
     /** Chart of healthy. **/
     private XYChart.Series healthy;
     /** Chart of sick. **/
@@ -29,11 +29,11 @@ public class Graph
 
     /**
      * Instantiates a new Graph.
-     * @param population the population = model
+     * @param model the population = model
      */
-    public Graph (Displayable population)
+    public Graph (Displayable model)
     {
-        this.population = population;
+        this.model = model;
 
         this.healthy = new XYChart.Series();
         this.sick = new XYChart.Series();
@@ -53,7 +53,7 @@ public class Graph
     public void initGraphs(GridPane gridGraphStat)
     {
         // init graphPanel
-        NumberAxis xAxis1 = new NumberAxis(0, this.population.getData().getNmbr(), 1);
+        NumberAxis xAxis1 = new NumberAxis(0, this.model.getData().getNmbr(), 1);
         xAxis1.setTickLabelsVisible(false);
         xAxis1.setTickMarkVisible(false);
         NumberAxis yAxis1 = new NumberAxis(0, 100, 1);
