@@ -52,10 +52,10 @@ public class CoquilleBille {
     public int getId(){return id;}
 
     public Position getCurrentPosition() {return this.currentPosition;}
-    public Position getStartingPosition() {
-        return startingPosition;
-    }
+    public Position getStartingPosition() {return this.startingPosition;}
 
+    public double getMovingSpeedX() { return this.movingSpeedX;}
+    public double getMovingSpeedY() { return this.movingSpeedY;}
     public double getMovingSpeed() {
         return Math.sqrt((this.movingSpeedX*this.movingSpeedX)+(this.movingSpeedY*this.movingSpeedY));
     }
@@ -66,14 +66,13 @@ public class CoquilleBille {
 
     public Individual getIndividual() {return individual;}
     public void setIndividual(Individual individual) { this.individual=individual; }
-
-    public double getMovingSpeedX() { return this.movingSpeedX;}
-    public double getMovingSpeedY() { return this.movingSpeedY;}
-
     public Population getPopulation(){ return individual.getPopulation(); }
 
     //==================================================== Ricochets =================================================//
 
+    public String toString(){
+      return id+"pos: "+currentPosition.toString()+" speed: "+movingSpeedX+" "+movingSpeedY+"\t"+individual+"\t"+getPopulation();
+    }
     /**
      *{@summary Return true if x coordinate is out the the Zone at next move.}
      */
@@ -92,19 +91,21 @@ public class CoquilleBille {
     protected void bounceIfHitWall(){
         for (Wall wall : getPopulation().getListWall()) {
             if (wall.willCrossWallInX(this) && wall.willCrossWallInY(this)) {
-                if(isBetween(currentPosition.getX(),wall.getPositionX()- wall.getThickness()/2- getPopulation().getRadiusDot(), wall.getPositionX()) ) {
-                    if(this.movingSpeedX<minReboundSpeed) {
-
-                        this.movingSpeedX =minReboundSpeed-1 ;
-                    }
+                // System.out.print(this+ "        ");
+                // if(isBetween(currentPosition.getX(),wall.getPositionX()- wall.getThickness()/2- getPopulation().getRadiusDot(), wall.getPositionX()) ) {
+                //     if(this.movingSpeedX<minReboundSpeed) {
+                //
+                //         this.movingSpeedX =minReboundSpeed-1 ;
+                //     }
 
                     bounce(true);
-                }
-                else if (isBetween(currentPosition.getX(),wall.getPositionX(),wall.getPositionX()+ wall.getThickness()/2+ getPopulation().getRadiusDot()))
-
-                    if(this.movingSpeedX<minReboundSpeed) {
-                        this.movingSpeedX = minReboundSpeed-1;
-                    }
+                // }
+                // else if (isBetween(currentPosition.getX(),wall.getPositionX(),wall.getPositionX()+ wall.getThickness()/2+ getPopulation().getRadiusDot()))
+                //
+                //     if(this.movingSpeedX<minReboundSpeed) {
+                //         this.movingSpeedX = minReboundSpeed-1;
+                //     }
+                // System.out.println(this);
               }
         }
     }
@@ -127,14 +128,6 @@ public class CoquilleBille {
           }else{
                return false;
           }
-    }
-
-    public void Bouncee(boolean bool){
-         if(bool){
-              this.setMovingSpeed(this.getMovingSpeedX()*-1,this.getMovingSpeedY());
-         }else{
-              this.setMovingSpeed(this.getMovingSpeedX(),this.getMovingSpeedY()*-1);
-         }
     }
 
     /**

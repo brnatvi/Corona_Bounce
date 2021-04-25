@@ -36,7 +36,10 @@ public class Wall  {
 
     // FUNCTIONS ---------------------------------------------------------------
     public String toString(){return id+" x="+positionX+" y="+positionY+" th="+ thickness;}
-
+    /**
+    *{@summary Schedule a new timerTask that will make wall go down every 100ms.}<br>
+    *@param pop Popu
+    */
     public void makeWallGoDown(Population pop){
         TimerTask tt = null;
         pop.getTimer().schedule(tt = new TimerTaskWall(this.controller,this), 0, 100);
@@ -46,40 +49,13 @@ public class Wall  {
     *@param coc The CoquilleBille that we may make bounce.
     */
     public boolean willCrossWallInX(CoquilleBille coc){
-
         double curentX = coc.getCurrentPosition().getX();
         double futurX = curentX+coc.getMovingSpeedX();
         double radius = coc.getPopulation().getRadiusDot();
-        // radius/=2;
-        //part without thinking about CoquilleBille radius.
-        // if(curentX < positionX-thikness/2 && futurX > positionX-thikness/2){ return true;}
-        // if(curentX > positionX+thikness/2 && futurX < positionX+thikness/2){ return true;}
-        //part with thinking about CoquilleBille radius.
         if(curentX < positionX- thickness /2 && futurX+radius > positionX- thickness /2){ return true;}
         if(curentX > positionX+ thickness /2 && futurX-radius < positionX+ thickness /2){ return true;}
-
-        // if (intersect(futurX)) {
-        //     if (futurX<positionX) futurX=positionX-thikness/2-radius-1;
-        //     else if(futurX >positionX) futurX=positionX+thikness/2+radius+1;
-        //     return true;
-        // }
-        // if(intersect(curentX)){return  true;}
-
         return false;
     }
-
-    private boolean isBetween(double c,double a , double b) {
-        if( c<=b && c>=a ) return true;
-        return false;
-    }
-
-    private boolean intersect(double X1)
-    {
-        double radius=controller.getRadiusDot();
-        if((isBetween(X1,X1-radius,X1+radius)) && (isBetween(X1,positionX- thickness /2-radius,positionX+ thickness /2+radius))) return true;
-        return false;
-    }
-
 
     /**
     *{@summary Return true if it will cross the wall in y.}<br>
@@ -87,25 +63,40 @@ public class Wall  {
     *@param coc The CoquilleBille that we may make bounce.
     */
     public boolean willCrossWallInY(CoquilleBille coc){
-      if(positionY > (coc.getCurrentPosition().getY() )){
-        return true;
-      }
+        if(positionY > (coc.getCurrentPosition().getY() )){
+            return true;
+        }
+        return false;
+    }
+    public boolean willGoIntoTheWall(){
+      //TODO to have thiker wall than dot.
       return false;
     }
 
 }
+/**
+ *{@summary Timer task to make wall go down.}
+ */
 class TimerTaskWall extends TimerTask{
     private Wall wall;
-    private Controllable controller;
-
-    public TimerTaskWall(Controllable c, Wall wall){
+    private static Controllable controller;
+    /**
+     * {@summary Main constructor.}
+     * @param controller the controller used to get wall speed.
+     * @param wall the Wall that need to move.
+     */
+    public TimerTaskWall(Controllable controller, Wall wall){
         this.wall = wall;
-        this.controller = c;
+        this.controller = controller;
     }
+    /**
+     * {@summary Make wall go down from wallSpeed every time we call it.}<br>
+     * Task will auto destroy itself if it reach the limits of the Zone.<br>
+     */
     @Override
     public synchronized void run(){
         if (this.controller.getState() == Controllable.eState.Working){
-            wall.setPositionY(wall.getPositionY()+controller.getWallSpeed());//le mur avance petit a petit pour aller de la postio y=0 et attendre y=zone.height
+            wall.setPositionY(wall.getPositionY()+controller.getWallSpeed());
             if(wall.getPositionY()>controller.getSpaceSize()[1]){
                 cancel();
             }

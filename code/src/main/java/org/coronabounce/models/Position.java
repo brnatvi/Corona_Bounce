@@ -88,7 +88,9 @@ public class Position implements Cloneable{
     public int getListTakenPositionsSize(){return listTakenPositions.size();}
 
     // FUNCTIONS ---------------------------------------------------------------
-
+    public String toString(){
+      return "("+posX+";"+posY+")";
+    }
     /**
      * Check if position of instance is distinguished from all other point's one
      * @return True if curent position (see as a circle) is empty.

@@ -146,11 +146,11 @@ public class Population implements Displayable {
         for(CoquilleBille coc:listCoquille){
             if(coc != c && this.distance(coc,c) <= (2* controller.getRadiusDot())){
                 if(coc.InX(c)){
-                coc.Bouncee(true);
-                c.Bouncee(true);}
+                coc.bounce(true);
+                c.bounce(true);}
                 if(coc.InY(c)){
-                    coc.Bouncee(false);
-                    c.Bouncee(false);}
+                    coc.bounce(false);
+                    c.bounce(false);}
                 }
 
             if( ! listWall.isEmpty()){

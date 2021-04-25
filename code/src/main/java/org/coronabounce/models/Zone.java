@@ -20,8 +20,7 @@ public class Zone  {
 
 
     // CONSTRUCTORS ------------------------------------------------------------
-    public Zone (Controllable controller,boolean isLockDown, boolean isWall, boolean isRestrictionMovement)
-    {
+    public Zone (Controllable controller,boolean isLockDown, boolean isWall, boolean isRestrictionMovement){
         timer=new Timer();
         this.controller = controller;
         this.width = controller.getSpaceSize()[0];
@@ -65,7 +64,7 @@ public class Zone  {
      *Make Coquille move every 33 ms.
      */
     public void moving(){
-        stopTimerTask(false); //Stop last timer task.
+        // stopTimerTask(false); //Stop last timer task.
         this.timer.schedule(this.timerTask=new TimerTask() {
             @Override
             public void run(){
