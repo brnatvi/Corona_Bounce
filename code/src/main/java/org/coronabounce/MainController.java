@@ -1,6 +1,5 @@
 package org.coronabounce;
 
-import java.util.List;
 import java.util.Vector;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -14,7 +13,6 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.data.Data;
-import org.coronabounce.models.CoquilleBille;
 import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
@@ -38,10 +36,6 @@ public class MainController
     private Zone zone1 = null;
     /** Right population's (population2) zone **/
     private Zone zone2 = null;
-    /** List of population1's individuals **/
-    private List<CoquilleBille> points1;
-    /** List of population2's individuals **/
-    private List<CoquilleBille> points2;
     /** Timeline for animation of point's moving **/
     private Timeline tlPoints;
     /** Timeline for animation of graph **/
@@ -60,10 +54,11 @@ public class MainController
     private boolean isRestrictionMovement2;
     /** Graph for population1 **/
     private Graph graph1;
-    /** Graph for population1 **/
+    /** Graph for population2 **/
     private Graph graph2;
-
+    /** Renderer of points and walls for population1 **/
     private Renderer renderer1;
+    /** Renderer of points and walls for population2 **/
     private Renderer renderer2;
 
     /** Field with moving points of population1 **/
@@ -135,13 +130,11 @@ public class MainController
     {
         this.zone1 = new Zone(controller,isLockDown1,isWalls1,isRestrictionMovement1);
         this.model1 = zone1.getPopulation();
-        this.points1 = model1.getAllPoints();
         this.graph1 = new Graph(model1);
         this.renderer1 = new Renderer(model1, currentController);
 
         this.zone2 = new Zone(controller,isLockDown2,isWalls2,isRestrictionMovement2);
         this.model2 = zone2.getPopulation();
-        this.points2 = model2.getAllPoints();
         this.graph2 = new Graph(model2);
         this.renderer2 = new Renderer(model2, currentController);
     }
@@ -651,7 +644,6 @@ public class MainController
     /**
      * {@summary Renderer of populations.}
      * Function call drawPoint() for all points of list.
-   //  * @param is_panel1 helps to use this function for both populations.
      */
     private void drawPopulations()
     {
@@ -662,7 +654,6 @@ public class MainController
     /**
      * {@summary Renderer of walls}
      * koeffW and koeffH serve to adapt dimensions the walls during changing dimensions the scene.
-    // * @param is_panel1 serves to distinguish drawing in Panel1 and Panel2 and its populations.
      */
     private void drawWalls()
     {
