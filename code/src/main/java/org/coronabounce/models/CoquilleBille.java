@@ -33,7 +33,7 @@ public class CoquilleBille {
           this.currentPosition = new Position(controller,false);
           System.out.println("Position of the point have been set, but it fail to fined a free space.");
         }
-
+        currentPosition.setPos(currentPosition.getX()/5-5,currentPosition.getY());//@edited
         this.startingPosition = currentPosition.clone();
        // this.sector = getSector(currentPosition.getX(), currentPosition.getY());
         id=idCpt++;//incrémonter le nombre de Coquilles qui existent
@@ -86,8 +86,9 @@ public class CoquilleBille {
     */
     public void move(){
         bounceIfOutOfZone();
-        bounceIfHitWall();
-        bounceIfHitOtherCoquilleBille();
+        if(!bounceIfHitWall()){ //@edited
+          bounceIfHitOtherCoquilleBille(); //@edited
+        }
         this.currentPosition.setPos(this.currentPosition.getX()+this.movingSpeedX,this.currentPosition.getY()+this.movingSpeedY);
     }
     //==================================================== Bounce if =================================================//
@@ -104,8 +105,9 @@ public class CoquilleBille {
     }
     /**
      *{@summary bounce if this will hit a wall.}<br>
+     *@return True if it have bounce.
      */
-    protected void bounceIfHitWall(){
+    private boolean bounceIfHitWall(){
         for (Wall wall : getPopulation().getListWall()) {
             if (wall.willCrossWallInX(this) && wall.willCrossWallInY(this)) {
                 // System.out.print(this+ "        ");
@@ -116,6 +118,7 @@ public class CoquilleBille {
                 //     }
 
                     bounce(true);
+                    return true;
                 // }
                 // else if (isBetween(currentPosition.getX(),wall.getPositionX(),wall.getPositionX()+ wall.getThickness()/2+ getPopulation().getRadiusDot()))
                 //
@@ -125,6 +128,7 @@ public class CoquilleBille {
                 // System.out.println(this);
               }
         }
+        return false;
     }
     /**
      *{@summary bounce if this will hit an other CoquilleBille.}<br>

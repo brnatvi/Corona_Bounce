@@ -24,7 +24,7 @@ public class Wall  {
        this.controller = controller;
        this.thickness =controller.getThickness();
        this.positionX=posX;
-       this.positionY=0;
+       this.positionY=300; //@edited
        id=cpt++;
     }
 
