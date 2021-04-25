@@ -120,7 +120,6 @@ public class Population implements Displayable {
     public void Contacts(){
         for(CoquilleBille coc:listCoquille){
             coc.getIndividual().agitSur();
-            Rebound(coc);
         }
 
     }
@@ -135,32 +134,7 @@ public class Population implements Displayable {
 
 
     public double distance(CoquilleBille i1, CoquilleBille i2) { /** Calculate distance between two  "CoquilleBille" (s)  **/
-        double x1 = i1.getCurrentPosition().getX();/** The X  position of  CoquilleBille 1**/
-        double x2 = i2.getCurrentPosition().getX();/** The X  position of  CoquilleBille 2 **/
-        double y1 = i1.getCurrentPosition().getY();/** The Y position of the CoquilleBille 1 **/
-        double y2 = i2.getCurrentPosition().getY();/** The Y position of the CoquilleBille 2 **/
-        return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-    }
-
-    public void Rebound (CoquilleBille c){
-        for(CoquilleBille coc:listCoquille){
-            if(coc != c && this.distance(coc,c) <= (2* controller.getRadiusDot())){
-                if(coc.InX(c)){
-                coc.bounce(true);
-                c.bounce(true);}
-                if(coc.InY(c)){
-                    coc.bounce(false);
-                    c.bounce(false);}
-                }
-
-            // if( ! listWall.isEmpty()){
-            //     for(Wall wall:listWall){
-            //         if(dist(wall,coc) <= (2 * controller.getRadiusDot())){
-            //             coc.bounce();
-            //         }
-            //     }
-            // }
-        }
+        return i1.getCurrentPosition().distanceFrom(i2.getCurrentPosition());
     }
 
     //*****************************************************Strict lockdown*************************************************/
@@ -203,7 +177,6 @@ public class Population implements Displayable {
     public void makeBilleMove() {
         for (CoquilleBille coc : listCoquille) {
           coc.move();
-          Rebound(coc);
         }
     }
 

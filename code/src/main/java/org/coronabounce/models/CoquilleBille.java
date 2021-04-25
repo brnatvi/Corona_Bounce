@@ -73,21 +73,38 @@ public class CoquilleBille {
     public String toString(){
       return id+"pos: "+currentPosition.toString()+" speed: "+movingSpeedX+" "+movingSpeedY+"\t"+individual+"\t"+getPopulation();
     }
-    /**
-     *{@summary Return true if x coordinate is out the the Zone at next move.}
-     */
-    public boolean outOfX(double x){
-        if(x<= getPopulation().getRadiusDot() || x>= controller.getSpaceSize()[0]- getPopulation().getRadiusDot()){return true;}//verifie si la position de la Coquille dépasse les bornes de la zone par rapport a X
+    @Override
+    public boolean equals(Object o){// redefinition de equals
+        if(o!= null && o instanceof CoquilleBille){
+            return getId()==((CoquilleBille)(o)).getId();//Comparer par rapport a l'id de la Coquille
+        }
         return false;
     }
     /**
-     *{@summary Return true if y coordinate is out the the Zone at next move.}
-     */
-    public boolean outOfY(double y){//verifie si la position de la Coquille dépasse les bornes de la zone par rapport a Y
-        if(y<= getPopulation().getRadiusDot() || y>= controller.getSpaceSize()[1]- getPopulation().getRadiusDot()){return true;}
-        return false;
+    *{@summary The moving funtion.}<br>
+    *Speed will be modify if this hurt a limit of the zone.
+    */
+    public void move(){
+        bounceIfOutOfZone();
+        bounceIfHitWall();
+        bounceIfHitOtherCoquilleBille();
+        this.currentPosition.setPos(this.currentPosition.getX()+this.movingSpeedX,this.currentPosition.getY()+this.movingSpeedY);
     }
-
+    //==================================================== Bounce if =================================================//
+    /**
+     *{@summary bounce if this will go out of the zone.}<br>
+     */
+    protected void bounceIfOutOfZone(){//verifie si la position de la Coquille atteint la borne de la zone pour rebondir
+         if (outOfX(currentPosition.getX()+movingSpeedX)) {
+              bounce(true);//rebondir selon X
+         }
+         if (outOfY(currentPosition.getY()+movingSpeedY)) {
+              bounce(false);//Rebondir selon Y
+         }
+    }
+    /**
+     *{@summary bounce if this will hit a wall.}<br>
+     */
     protected void bounceIfHitWall(){
         for (Wall wall : getPopulation().getListWall()) {
             if (wall.willCrossWallInX(this) && wall.willCrossWallInY(this)) {
@@ -108,6 +125,56 @@ public class CoquilleBille {
                 // System.out.println(this);
               }
         }
+    }
+    /**
+     *{@summary bounce if this will hit an other CoquilleBille.}<br>
+     *All CoquilleBille that this can hit are in population.
+     */
+    public void bounceIfHitOtherCoquilleBille(){
+      for(CoquilleBille coc : population.getAllPoints()){
+        if(!coc.equals(this) && getCurrentPosition().distanceFrom(coc.getCurrentPosition()) <= (2* controller.getRadiusDot())){
+          if(coc.InX(this)){
+          coc.bounce(true);
+          this.bounce(true);}
+          if(coc.InY(this)){
+            coc.bounce(false);
+            this.bounce(false);
+          }
+        }
+      }
+    }
+
+    /**
+     *{@summary bounce.}<br>
+     *@param inX True if bounce in x coor.
+     */
+    protected void bounce(boolean inX){// elle sert a gerer les rebondissemnt
+         if(inX){ movingSpeedX*=-1;}//inverser le vecteur vitesse Vx en le multipliant par -1
+         else{ movingSpeedY*=-1; }//inverser le vecteur vitesse Vy en le multipliant par -1
+    }
+
+    /**
+     *{@summary bounce in x and y.}<br>
+     */
+    protected void bounce(){
+         bounce(true);
+         bounce(false);
+    }
+    //==================================================== Private =================================================//
+    /**
+     *{@summary Return true if x coordinate is out the the Zone at next move.}
+     *Public only for test.
+     */
+    public boolean outOfX(double x){
+        if(x<= getPopulation().getRadiusDot() || x>= controller.getSpaceSize()[0]- getPopulation().getRadiusDot()){return true;}//verifie si la position de la Coquille dépasse les bornes de la zone par rapport a X
+        return false;
+    }
+    /**
+     *{@summary Return true if y coordinate is out the the Zone at next move.}
+     */
+    private boolean outOfY(double y){//verifie si la position de la Coquille dépasse les bornes de la zone par rapport a Y
+        if(y<= getPopulation().getRadiusDot() || y>= controller.getSpaceSize()[1]- getPopulation().getRadiusDot()){return true;}
+        return false;
     }
 
     private boolean isBetween(double c, double a, double b){
@@ -130,42 +197,7 @@ public class CoquilleBille {
           }
     }
 
-    /**
-     *{@summary bounce if this will go out of the zone.}<br>
-     */
-    protected void bounceIfOutOfZone(){//verifie si la position de la Coquille atteint la borne de la zone pour rebondir
-         if (outOfX(currentPosition.getX()+movingSpeedX)) {
-              bounce(true);//rebondir selon X
-         }
-         if (outOfY(currentPosition.getY()+movingSpeedY)) {
-              bounce(false);//Rebondir selon Y
-         }
-    }
-
-    /**
-     *{@summary bounce.}<br>
-     *@param inX True if bounce in x coor.
-     */
-    protected void bounce(boolean inX){// elle sert a gerer les rebondissemnt
-         if(inX){ movingSpeedX*=-1;}//inverser le vecteur vitesse Vx en le multipliant par -1
-         else{ movingSpeedY*=-1; }//inverser le vecteur vitesse Vy en le multipliant par -1
-    }
-
-    /**
-     *{@summary bounce.}<br>
-     */
-    protected void bounce(){
-         bounce(true);
-         bounce(false);
-    }
     //******************************************************************************************************************************//
-
-    public boolean equals(Object o){// redefinition de equals
-        if(o!= null && o instanceof CoquilleBille){
-            return getId()==((CoquilleBille)(o)).getId();//Comparer par rapport a l'id de la Coquille
-        }
-        return false;
-    }
 
     protected double distancePos() {//cette methode calcule la distance entre la position courante de la Coquille et la position de départ
       return getCurrentPosition().distanceFrom(getStartingPosition());
@@ -196,18 +228,4 @@ public class CoquilleBille {
         if(r.nextBoolean()){maxSpeed=maxSpeed*(-1);}
         this.movingSpeedY = r.nextDouble()*maxSpeed;
     }
-
-    /**
-    *{@summary The moving funtion.}<br>
-    *Speed will be modify if this hurt a limit of the zone.
-    */
-    public void move(){
-        bounceIfOutOfZone();
-        if (getPopulation().getNbZones() !=1) bounceIfHitWall();
-        this.currentPosition.setPos(this.currentPosition.getX()+this.movingSpeedX,this.currentPosition.getY()+this.movingSpeedY);
-    }
-
-
-
-
 }
