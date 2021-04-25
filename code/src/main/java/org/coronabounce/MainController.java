@@ -7,7 +7,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,8 +21,8 @@ import org.coronabounce.models.CoquilleBille;
 import org.coronabounce.models.Zone;
 import org.coronabounce.mvcconnectors.Controllable;
 import org.coronabounce.mvcconnectors.Displayable;
+import org.coronabounce.vues.Graph;
 
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 import static javafx.scene.paint.Paint.valueOf;
 
 /**
@@ -63,19 +62,10 @@ public class MainController
     private boolean isRestrictionMovement1;
     /** Boolean for population2's strict lockdown **/
     private boolean isRestrictionMovement2;
-
-
-    private XYChart.Series healthy1;
-    private XYChart.Series sick1;
-    private XYChart.Series recovered1;
-    /** AreaChart tor population1's graph **/
-    private AreaChart graphPanel1 = null;
-
-    private XYChart.Series healthy2;
-    private XYChart.Series sick2;
-    private XYChart.Series recovered2;
-    /** AreaChart tor population2's graph **/
-    private AreaChart graphPanel2 = null;
+    /** Graph for population1 **/
+    private Graph graph1;
+    /** Graph for population1 **/
+    private Graph graph2;
 
     /** Field with moving points of population1 **/
     @FXML Pane panel1;
@@ -147,18 +137,12 @@ public class MainController
         this.zone1 = new Zone(controller,isLockDown1,isWalls1,isRestrictionMovement1);
         this.model1 = zone1.getPopulation();
         this.points1 = model1.getAllPoints();
+        this.graph1 = new Graph(model1);
 
         this.zone2 = new Zone(controller,isLockDown2,isWalls2,isRestrictionMovement2);
         this.model2 = zone2.getPopulation();
         this.points2 = model2.getAllPoints();
-
-        this.healthy1 = new XYChart.Series();
-        this.sick1 = new XYChart.Series();
-        this.recovered1 = new XYChart.Series();
-
-        this.healthy2 = new XYChart.Series();
-        this.sick2 = new XYChart.Series();
-        this.recovered2 = new XYChart.Series();
+        this.graph2 = new Graph(model2);
     }
 
     //========================= Getters / Setters =====================================================================/
@@ -208,52 +192,8 @@ public class MainController
      */
     private void initGraphs()
     {
-        // init graphPanel1
-        NumberAxis xAxis1 = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
-        xAxis1.setTickLabelsVisible(false);
-        xAxis1.setTickMarkVisible(false);
-        NumberAxis yAxis1 = new NumberAxis(0, 100, 1);
-        yAxis1.setTickLabelsVisible(false);
-        yAxis1.setTickMarkVisible(false);
-        this.graphPanel1 = new AreaChart(xAxis1, yAxis1);
-        graphPanel1.getData().addAll(healthy1, sick1, recovered1);
-        graphPanel1.setCreateSymbols(false);
-
-        // fil gridGraphStat1 by graphPanel1
-        graphPanel1.setHorizontalGridLinesVisible(false);
-        graphPanel1.setVerticalGridLinesVisible(false);
-        gridGraphStat1.add(graphPanel1, 1, 0);
-
-        graphPanel1.setMinWidth(150);
-        graphPanel1.setMinHeight(100);
-        graphPanel1.setPrefWidth(USE_COMPUTED_SIZE);
-        graphPanel1.setPrefHeight(100);
-        graphPanel1.setMaxWidth(USE_COMPUTED_SIZE);
-        graphPanel1.setMaxHeight(100);
-
-        // init graphPanel2
-        NumberAxis xAxis2 = new NumberAxis(0, this.model1.getData().getNmbr(), 1);
-        xAxis2.setTickLabelsVisible(false);
-        xAxis2.setTickMarkVisible(false);
-        NumberAxis yAxis2 = new NumberAxis(0, 100, 1);
-        yAxis2.setTickLabelsVisible(false);
-        yAxis2.setTickMarkVisible(false);
-        this.graphPanel2 = new AreaChart(xAxis2, yAxis2);
-        graphPanel2.getData().addAll(healthy2, sick2, recovered2);
-        graphPanel2.setCreateSymbols(false);
-
-
-        // fil gridGraphStat2 by graphPanel2
-        graphPanel2.setHorizontalGridLinesVisible(false);
-        graphPanel2.setVerticalGridLinesVisible(false);
-        gridGraphStat2.add(graphPanel2, 1, 0);
-
-        graphPanel2.setMinWidth(150);
-        graphPanel2.setMinHeight(100);
-        graphPanel2.setPrefWidth(USE_COMPUTED_SIZE);
-        graphPanel2.setPrefHeight(100);
-        graphPanel2.setMaxWidth(USE_COMPUTED_SIZE);
-        graphPanel2.setMaxHeight(100);
+        graph1.initGraphs(this.gridGraphStat1);
+        graph2.initGraphs(this.gridGraphStat2);
     }
 
     //=============================== Interrupters ====================================================================/
@@ -406,8 +346,8 @@ public class MainController
 
         Tooltip tooltip5 = new Tooltip();
         tooltip5.setText("Colors are almost the same as for the dots:\ngreen for healthy, red for incubating/sick and yellow for recovered");
-        Tooltip.install(graphPanel1, tooltip5);
-        Tooltip.install(graphPanel2, tooltip5);
+        Tooltip.install(graph1.getGraphPanel(), tooltip5);
+        Tooltip.install(graph2.getGraphPanel(), tooltip5);
 
         Tooltip tooltip6 = new Tooltip();
         Tooltip tooltip7 = new Tooltip();
@@ -609,13 +549,9 @@ public class MainController
     private void launchDrawGraph()
     {
         stopTimeLine(tlGraph);
-        healthy1.getData().retainAll();
-        sick1.getData().retainAll();
-        recovered1.getData().retainAll();
 
-        healthy2.getData().retainAll();
-        sick2.getData().retainAll();
-        recovered2.getData().retainAll();
+        graph1.retainCharts();
+        graph2.retainCharts();
 
         model1.saveStatToData();
         model2.saveStatToData();
@@ -624,13 +560,8 @@ public class MainController
         {
             //long startTime = System.currentTimeMillis();                           // code for debug
 
-            healthy1.getData().clear();
-            sick1.getData().clear();
-            recovered1.getData().clear();
-
-            healthy2.getData().clear();
-            sick2.getData().clear();
-            recovered2.getData().clear();
+            graph1.clearData();
+            graph2.clearData();
 
             model1.getData().Lock();
             model2.getData().Lock();
@@ -642,18 +573,14 @@ public class MainController
             int x = 0;
             for (Data.Slice Slice : History1)
             {
-                healthy1.getData().add(new XYChart.Data(x, 100));
-                sick1.getData().add(new XYChart.Data(x, Slice.getPrcSick()));
-                recovered1.getData().add(new XYChart.Data(x, Slice.getPrcRecovered()));
+                graph1.drawGraph(Slice, x);
                 x++;
             }
 
             int y = 0;
             for (Data.Slice Slice : History2)
             {
-                healthy2.getData().add(new XYChart.Data(y, 100));
-                sick2.getData().add(new XYChart.Data(y, Slice.getPrcSick()));
-                recovered2.getData().add(new XYChart.Data(y, Slice.getPrcRecovered()));
+                graph2.drawGraph(Slice, y);
                 y++;
             }
 
