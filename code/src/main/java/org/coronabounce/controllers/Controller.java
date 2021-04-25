@@ -10,25 +10,40 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class Controller implements Controllable
 {
-    //these constants are initials and will be changed during the changing the settings of program in GUI
-
-    private double WIDTH = 400 ;                      // population space size (width)
-    private double HEIGHT = 300 ;                     // population space size (height)
-    private int COUNT = 30;                           // population size
-    private double CONTAMINATION_RADIUS = 10;         // radius of contamination
-    private long DURATION_INCUBATION = 3000;          // incubation <-> sick
-    private long DURATION_HEALING = 8000;             // sick <-> recovered
-    private long DURATION_IMMUNITY = 5000;            // recovered <-> healthy (can be contaminate again)
-    private double RADIUS_DOT = 3;                    // radius of point in GUI
+    /**
+     * Constants are initials and will be changed during the changing the settings of program in GUI
+     */
+    
+    /** Population space size (width) **/
+    private double WIDTH = 400 ;
+    /** Population space size (height) **/
+    private double HEIGHT = 300 ;
+    /** Population size (number of persons) **/
+    private int COUNT = 30;
+    /** Radius of contamination **/
+    private double CONTAMINATION_RADIUS = 10;
+    /** Duration of incubation ( from incubation to sick ) **/
+    private long DURATION_INCUBATION = 3000;
+    /** Duration of healing ( from sick to recovered ) **/
+    private long DURATION_HEALING = 8000;
+    /** Duration of immunity ( from recovered to healthy, can be contaminate again ) **/
+    private long DURATION_IMMUNITY = 5000;
+    /** Radius of point in GUI **/
+    private double RADIUS_DOT = 3;
+    /** Permitted moving off distance in lockdown **/
     private double KILOMETRAGE = 50;
     private double DIAMETER_X = 15;
     private double DIAMETER_Y = 10;
-    private double THICKNESS = 4;                     // thickness of the walls
-    private int WALLS_COUNT = 4;                      // number of boundaries
-    private int WALL_SPEED = 1;                       // speed of boundaries closing
-
-    private Controllable.eState state = Controllable.eState.Paused;   // enum variable to control all our timers at the same time
-    private ReentrantLock statLock = new ReentrantLock();                   // variable to make lock/unlock the threads
+    /** Thickness of the walls **/
+    private double THICKNESS = 4;
+    /** Number of boundaries **/
+    private int WALLS_COUNT = 4;
+    /** Speed of boundaries closing **/
+    private int WALL_SPEED = 1;
+    /** Enum variable to control all our timers at the same time **/
+    private Controllable.eState state = Controllable.eState.Paused;
+    /** Variable to make lock/unlock threads **/
+    private ReentrantLock statLock = new ReentrantLock();
 
     //==================================== Timer Management ===========================================================/
 
@@ -160,13 +175,13 @@ public class Controller implements Controllable
     public void setContaminationRadius(double pxls) { CONTAMINATION_RADIUS = pxls; }
 
     /**
-     * {@summary Get duration of sickness from controller.}
+     * {@summary Get duration of incubation. }
      */
     @Override
     public long getDurationIncubation() { return DURATION_INCUBATION; }
 
     /**
-     * {@summary Set duration of sickness to controller.}
+     * {@summary Set duration of incubation to controller.}
      * @param time - number of milliseconds.
      */
     @Override

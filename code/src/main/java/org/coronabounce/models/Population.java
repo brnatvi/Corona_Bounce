@@ -8,14 +8,22 @@ import java.util.*;
 
 public class Population implements Displayable {
 
+    /** Current controller contains all parameters **/
     private Controllable controller;
-    private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();/** Contains the population "CoquilleBille"  list **/
+    /** Contains the population "CoquilleBille"  list **/
+    private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();
+    /** Collect the counts of healthy, sick, incubating, recovered in form of FIFO **/
     private Data data;
-    public int nbSick; /** Sick people number **/
-    public int nbHealthy; /** Healthy people number **/
-    public int nbRecovered; /** Recovered people number **/
-    public int nbIncubating; /** Incubating people number ( got the virus ) **/
-    private List<Wall> listWall = new ArrayList<Wall>(); /** Boundaries (walls) list **/
+    /** Sick people count **/
+    public int nbSick;
+    /** Healthy people count **/
+    public int nbHealthy;
+    /** Recovered people count **/
+    public int nbRecovered;
+    /** Incubating people count ( got the virus but not sick ) **/
+    public int nbIncubating;
+    /** Boundaries (walls) list **/
+    private List<Wall> listWall = new ArrayList<Wall>();
     private Timer timer;
     private TimerTask timerTask = null;
     private static Random random = new Random();
@@ -88,26 +96,52 @@ public class Population implements Displayable {
     //===========================  Getters/Setters ====================================================================/
 
     /**
-     *Share controller
+     * {@summary Share controller.}
      */
     public Controllable getController() { return controller; }
 
+    /**
+     * {@summary Get list of points/individuals.}
+     */
     public List<CoquilleBille> getAllPoints() { return listCoquille; }
 
+    /**
+     * {@summary Get radius of dot/individual.}
+     * @return radius dot.
+     */
     public double getRadiusDot() { return controller.getRadiusDot(); }
 
+    /**
+     * {@summary Get timer created in Population.}
+     */
     public Timer getTimer() { return timer; }
 
+    /**
+     * {@summary Get list of walls.}
+     */
     public List<Wall> getListWall() { return listWall; }
 
     //========================= Virus Getters/Setters =================================================================/
 
+    /**
+     * {@summary Get duration of incubation.}
+     */
     public long getDurationIncubation() { return controller.getDurationIncubation(); }
 
+    /**
+     * {@summary Get duration of non-contamination after recovery.}
+     */
     public long getDurationImmunity() { return controller.getDurationImmunity(); }
 
+    /**
+     * {@summary Get duration of sickness.}
+     */
     public long getDurationHealing() { return controller.getDurationHealing(); }
 
+    /**
+     * {@summary Get radius of contamination around point.}
+     * @return contamination radius.
+     */
     public double getContaminationRadius() { return controller.getContaminationRadius(); }
 
     //========================= Points Interactions ===================================================================/
@@ -212,7 +246,7 @@ public class Population implements Displayable {
     public int getNbWall(){ return listWall.size(); }
 
     /**
-     * Return list of positions on axis of abscissas of all walls
+     * {@summary Return list of positions on axis of abscissas of all walls.}
      */
     public ArrayList<Double> getPositionsOfWalls()
     {
@@ -225,7 +259,7 @@ public class Population implements Displayable {
     }
 
     /**
-     * Return list of heights of all walls
+     * {@summary Return list of heights of all walls.}
      */
     public ArrayList<Double> getHeigthsOfWalls()
     {
@@ -238,7 +272,7 @@ public class Population implements Displayable {
     }
 
     /**
-     * Return list of thicknesses of all walls
+     * {@summary Return list of thicknesses of all walls. }
      */
     public ArrayList<Double> getThicknessesOfWalls()
     {
@@ -253,32 +287,34 @@ public class Population implements Displayable {
     //========================= Population Statistics =================================================================/
 
     /**
-     * Get total number of points / number of Individuals.
+     * {@summary Get total number of points / number of Individuals. }
      */
     public int getNbIndividus() { return getAllPoints().size(); }
 
     /**
-     * Get number of healthy
+     * {@summary Get number of healthy}
      */
     public int getNbHealthy() { return nbHealthy; }
 
     /**
-     * Get number of infected people (sick + incubating).
+     * {@summary Get number of infected people (sick + incubating).}
      */
     public int getNbInfected() { return (nbSick + nbIncubating); }
 
     /**
-     * Get number of recovered
+     * {@summary Get number of recovered. }
      */
     public int getNbRecovered() { return nbRecovered; }
 
     /**
      * {@summary Transfers NbSick and NbRecovered to Data to save them to draw AreaChart.}
      * To show correctly superposed layers in AreaChart we take:
-     *      - NbHealthy taken as 100% (bottom layer)
-     *      - nbSick = nbSick + NbIncubating + nbRecovered (middle layer)
-     *      - NbRecovered = NbRecovered (top layer)
-     * Superposed they present ratio of these tree values (nbHealthy, nbSick/Incubating and nbRecovered) in 100%
+     * <ul>
+     * <li> NbHealthy taken as 100% (bottom layer)
+     * <li> nbSick = nbSick + NbIncubating + nbRecovered (middle layer)
+     * <li> NbRecovered = NbRecovered (top layer)
+     * </ul>
+     * Superposed they present ratio of these tree values (nbHealthy, nbSick/Incubating and nbRecovered) in 100%.
      */
     @Override
     public void saveStatToData()
@@ -297,7 +333,7 @@ public class Population implements Displayable {
     }
 
     /**
-     * Get saved statistics (history)
+     * {@summary Get saved statistics (history) }
      * @return Data - history
      */
     @Override
@@ -306,7 +342,7 @@ public class Population implements Displayable {
     //============================= Timer Management ===================================================================/
 
     /**
-     *Close timer to stop using this population.
+     * {@summary Close timer to stop using this population.}
      */
     public void stopTimer(boolean b_StopTimer)
     {

@@ -31,53 +31,90 @@ import static javafx.scene.paint.Paint.valueOf;
  */
 public class MainController
 {
-    private Controllable controller;              // controller with initial settings
-    private Controllable currentController;       // controller with modified settings
-    private Displayable model1;                   // left population (population1)
-    private Displayable model2;                   // right population (population2)
-    private Zone zone1 = null;                    // left population's (population1) zone
-    private Zone zone2 = null;                    // right population's (population2) zone
-    private List<CoquilleBille> points1;          // list of population1's individuals
-    private List<CoquilleBille> points2;          // list of population2's individuals
-    private Timeline tlPoints;                    // timeline for animation of point's moving
-    private Timeline tlGraph;                     // timeline for animation of graph
-    private boolean isLockDown1;                  // has left population (population1) soft lockdown
-    private boolean isLockDown2;                  // has right population (population2) soft lockdown
-    private boolean isWalls1;                     // has left population (population1) mobile boundaries
-    private boolean isWalls2;                     // has right population (population2) mobile boundaries
-    private boolean isRestrictionMovement1;       // has left population (population1) strict lockdown
-    private boolean isRestrictionMovement2;       // has right population (population2) strict lockdown
+    /** Controller contains initial settings **/
+    private Controllable controller;
+    /** Controller contains modified settings **/
+    private Controllable currentController;
+    /** Left population (population1) **/
+    private Displayable model1;
+    /** Right population (population2) **/
+    private Displayable model2;
+    /** Left population's (population1) zone **/
+    private Zone zone1 = null;
+    /** Right population's (population2) zone **/
+    private Zone zone2 = null;
+    /** List of population1's individuals **/
+    private List<CoquilleBille> points1;
+    /** List of population2's individuals **/
+    private List<CoquilleBille> points2;
+    /** Timeline for animation of point's moving **/
+    private Timeline tlPoints;
+    /** Timeline for animation of graph **/
+    private Timeline tlGraph;
+    /** Boolean for population1's soft lockdown **/
+    private boolean isLockDown1;
+    /** Boolean for population2's soft lockdown **/
+    private boolean isLockDown2;
+    /** Boolean for population1's boundaries scenario **/
+    private boolean isWalls1;
+    /** Boolean for population2's boundaries scenario **/
+    private boolean isWalls2;
+    /** Boolean for population1's strict lockdown **/
+    private boolean isRestrictionMovement1;
+    /** Boolean for population2's strict lockdown **/
+    private boolean isRestrictionMovement2;
 
-    private XYChart.Series healthy1;              // charts and area chart tor population1's graph
+
+    private XYChart.Series healthy1;
     private XYChart.Series sick1;
     private XYChart.Series recovered1;
+    /** AreaChart tor population1's graph **/
     private AreaChart graphPanel1 = null;
 
-    private XYChart.Series healthy2;              // charts and area chart tor population2's graph
+    private XYChart.Series healthy2;
     private XYChart.Series sick2;
     private XYChart.Series recovered2;
+    /** AreaChart tor population2's graph **/
     private AreaChart graphPanel2 = null;
 
-
-    @FXML Pane panel1;                            // field with moving points of population1
-    @FXML Pane panel2;                            // field with moving points of population2
+    /** Field with moving points of population1 **/
+    @FXML Pane panel1;
+    /** Field with moving points of population2 **/
+    @FXML Pane panel2;
     @FXML GridPane mainGrid;
-    @FXML GridPane gridGraphStat1;                // grid contains statistic's grid (gridStatistic1) and graph (graphPanel1)
-    @FXML GridPane gridGraphStat2;                // grid contains statistic's grid (gridStatisti2c) and graph (graphPanel2)
-    @FXML GridPane gridStat1;                     // grid contains statistics and texts "Healthy", "Sick", "Recovered"
-    @FXML GridPane gridStat2;                     // grid contains statistics and texts "Healthy", "Sick", "Recovered"
-    @FXML Label labelHealthy1;                    // labels for gridStatistic1
+    /** Grid contains statistic's grid (gridStatistic1) and graph (graphPanel1) **/
+    @FXML GridPane gridGraphStat1;
+    /** Grid contains statistic's grid (gridStatisti2c) and graph (graphPanel2) **/
+    @FXML GridPane gridGraphStat2;
+    /** Grid contains statistics and texts "Healthy", "Sick", "Recovered" for population1 **/
+    @FXML GridPane gridStat1;
+    /** Grid contains statistics and texts "Healthy", "Sick", "Recovered" for population2 **/
+    @FXML GridPane gridStat2;
+    /** Label of healthy for population1 **/
+    @FXML Label labelHealthy1;
+    /** Label of sick for population1 **/
     @FXML Label labelSick1;
+    /** Label of recovered for population1 **/
     @FXML Label labelRecovered1;
-    @FXML Label labelHealthy2;                    // labels for gridStatistic2
+    /** Label of healthy for population2 **/
+    @FXML Label labelHealthy2;
+    /** Label of sick for population2 **/
     @FXML Label labelSick2;
+    /** Label of recovered for population2 **/
     @FXML Label labelRecovered2;
+    /** Menu bar of scenarios for population1 **/
     @FXML MenuBar mbScenario1;
+    /** Menu bar of scenarios for population2 **/
     @FXML MenuBar mbScenario2;
+    /** Button "Start" **/
     @FXML Button btnStart;
+    /** Button "Pause-Resume" **/
     @FXML Button btnPause;
+    /** Button "Reset" **/
     @FXML Button btnReset;
+    /** Button "Settings" **/
     @FXML Button btnSettings;
+    /** Button "Help" **/
     @FXML Button btnLegend;
 
     //========================= Constructor ===========================================================================/
