@@ -153,13 +153,13 @@ public class Population implements Displayable {
                     c.bounce(false);}
                 }
 
-            if( ! listWall.isEmpty()){
-                for(Wall wall:listWall){
-                    if(dist(wall,coc) <= (2 * controller.getRadiusDot())){
-                        coc.bounce();
-                    }
-                }
-            }
+            // if( ! listWall.isEmpty()){
+            //     for(Wall wall:listWall){
+            //         if(dist(wall,coc) <= (2 * controller.getRadiusDot())){
+            //             coc.bounce();
+            //         }
+            //     }
+            // }
         }
     }
 
