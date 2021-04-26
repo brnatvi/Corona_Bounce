@@ -5,29 +5,43 @@ import javafx.scene.control.*;
 import org.coronabounce.controllers.Controller;
 import org.coronabounce.mvcconnectors.Controllable;
 
+/**
+ * Settings controller class. Being related to the Settings window, represents settings possible to apply.
+ */
 public class SettingsController
 {
+    /** MainController and Controller as parameters of SettingsController**/
     private MainController mainController;
     private Controllable c = null;
 
+    /** Text field for a new individuals number **/
     @FXML TextField individualsNumberSettings;
+    /** Slider for a new incubating  duration **/
     @FXML Slider sliderIncubationDuration;
+    /** Slider for a new contamination radius **/
     @FXML Slider sliderContaminationRadius;
+    /** Slider for a new healing duration **/
     @FXML Slider sliderHealingDuration;
+    /** Slider for a new immunity duration**/
     @FXML Slider sliderImmunityDuration;
+    /** Slider for a new walls number **/
     @FXML Slider sliderWallsNumber;
+    /** Slider for a new walls speed **/
     @FXML Slider sliderWallsSpeed;
 
+    /** Sets a new Main Controller. **/
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
 
     /**
-     * {@summary takes settings from GUI to renitialize mainController.}
+     * {@summary takes settings from GUI to reinitialize mainController.}
      */
     @FXML
     public void passSettingsToController() {
+        // a new Controller is created
         this.c = new Controller();
+        // following settings are passed to Controller c :
         int newIndividualsNumber = Integer.parseInt(individualsNumberSettings.getText());
         c.setPersonsCount(newIndividualsNumber);
         double newIncubationDuration = (sliderIncubationDuration.getValue())*1000;

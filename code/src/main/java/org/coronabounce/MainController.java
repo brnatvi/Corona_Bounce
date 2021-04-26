@@ -20,7 +20,7 @@ import org.coronabounce.vues.Graph;
 import org.coronabounce.vues.Renderer;
 
 /**
- * Main controller class. Run by launch() in App class and launch all processes.
+ * Main controller class. Runs by launch() in App class and launches all processes.
  */
 public class MainController
 {
@@ -142,14 +142,14 @@ public class MainController
     //========================= Getters / Setters =====================================================================/
 
     /**
-     * {@summary Return current controller which consist all settings done.}
+     * {@summary Returns current controller which consist all settings done.}
      *
      * @return current controller
      */
     public Controllable getController() { return this.currentController; }
 
     /**
-     * {@summary Upload new current controller}
+     * {@summary Uploads new current controller}
      *
      * @param newCurrentController the newCurrentController
      */
@@ -158,7 +158,7 @@ public class MainController
     //========================= Initialisation ========================================================================/
 
     /**
-     * {@summary Initialise Graphs, Panels and StatisticGrids and paused all timers in model}
+     * {@summary Initialises Graphs, Panels and StatisticGrids and pauses all timers in model}
      */
     @FXML
     public void initialize()
@@ -228,7 +228,7 @@ public class MainController
     }
 
     /**
-     * {@summary Function for correct closing tasks before changing the settings.}
+     * {@summary Function for correct tasks closing before changing the settings.}
      * Stops Timelines of graph and points, and stops timers of both Populations and Zones.
      */
     private void closePreviousTask()
@@ -258,7 +258,7 @@ public class MainController
 
     /**
      * {@summary Function for button "Settings"}
-     * Redirect to window "Settings".
+     * Redirects to window "Settings".
      */
     @FXML
     private void switchToSettings()
@@ -287,7 +287,7 @@ public class MainController
 
     /**
      * {@summary Function for button "Reset"}
-     * Reset animation with the same parameters (settings) and scenarios applied.
+     * Resets animation with the same parameters (settings) and scenarios applied.
      */
     @FXML
     private void resetModel()
@@ -305,7 +305,7 @@ public class MainController
     /**
      * {@summary Function for button "?".}
      * Creates tooltips for all elements of the scene.
-     * Tooltips are showing during few seconds, then need to push "?" again.
+     * Tooltips are showed during few seconds, then need to push "?" again.
      */
     @FXML
     private void showLegend()
@@ -633,7 +633,7 @@ public class MainController
     }
 
     /**
-     * {@summary Clean panels from all theirs children}
+     * {@summary Cleans panels from all theirs children}
      */
     private void retainPopulationsAndWalls()
     {
@@ -643,7 +643,7 @@ public class MainController
 
     /**
      * {@summary Renderer of populations.}
-     * Function call drawPoint() for all points of list.
+     * Function calls drawPoint() for all points of list.
      */
     private void drawPopulations()
     {
