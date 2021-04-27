@@ -14,7 +14,7 @@ public class ConfinedBille extends CoquilleBille {
         this.controller = pop.getController();
         
     }
-    protected double distancePos() {//cette methode calcule la distance entre la position courante de la Coquille et la position de départ
+    private  double distancePos() {//cette methode calcule la distance entre la position courante de la Coquille et la position de départ
         return getCurrentPosition().distanceFrom(getStartingPosition());
     }
     
