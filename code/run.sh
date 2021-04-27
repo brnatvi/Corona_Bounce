@@ -1,1 +1,1 @@
-mvn compile exec:java -Dexec.mainClass="org.coronabounce.App"
+mvn compile exec:java -Dexec.mainClass="org.coronabounce.NewMain"
