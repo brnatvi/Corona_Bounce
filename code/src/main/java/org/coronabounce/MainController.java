@@ -549,30 +549,26 @@ public class MainController
      */
     private void applyScenario(boolean isLockDown, boolean isWalls, boolean isRestrict, Displayable pop)
     {
+        setSettingsController(currentController);
         if (pop == model1)
         {
-            setSettingsController(currentController);
+
             this.isLockDown1 = isLockDown;
             this.isWalls1 = isWalls;
             this.isRestrictionMovement1 = isRestrict;
-            closePreviousTask();
-            changeController(currentController);
-            initialize();
-            btnStart.setDisable(false);
-            App.setRoot("corona bounce");
         }
         else
         {
-            setSettingsController(currentController);
+
             this.isLockDown2 = isLockDown;
             this.isWalls2 = isWalls;
             this.isRestrictionMovement2 = isRestrict;
-            closePreviousTask();
-            changeController(currentController);
-            initialize();
-            btnStart.setDisable(false);
-            App.setRoot("corona bounce");
         }
+        closePreviousTask();
+        changeController(currentController);
+        initialize();
+        btnStart.setDisable(false);
+        App.setRoot("corona bounce");
     }
 
     //========================= Animation auxiliary functions =========================================================/
