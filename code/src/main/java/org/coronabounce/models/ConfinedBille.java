@@ -7,84 +7,93 @@ import java.util.Random;
 public class ConfinedBille extends CoquilleBille {
     private static Random random = new Random();
     private Controllable controller;
-    private Position startingPosition;// memoriser la position de départ de la Coquille
-
+    private Position startingPosition;/**memorize the starting position of the Shell**/
+    //=================================Constructors==========================================//
     public ConfinedBille(double speedX, double speedY, Individual individual, Population pop) {
         super(speedX, speedY, individual, pop);
         this.controller = pop.getController();
         
     }
-    private  double distancePos() {//cette methode calcule la distance entre la position courante de la Coquille et la position de départ
-        return getCurrentPosition().distanceFrom(getStartingPosition());
-    }
-    
     public ConfinedBille(Individual i, Population pop) {
         super(i, pop);
         this.controller = pop.getController();
         this.startingPosition = this.getCurrentPosition().clone();
     }
+    //================================== Intermediate methods====================================//
+    /**
+     * {@summary this method allows to calculate the distance between the current position of the Shell with its starting position .}
+     */
+    private  double distancePos() {//cette methode calcule la distance entre la position courante de la Coquille et la position de départ
+        return getCurrentPosition().distanceFrom(getStartingPosition());
+    }
     public Position getStartingPosition() {return this.startingPosition;}
-
     private double genererDouble() {//cette methode permet de generer un reel entre 0 et 1
         return random.nextDouble();
     }
-
-    private int genererInt(int borneInf, int borneSup) {//Cette methode permet de generer un entier entre borneInf et borneSup
+    /**
+     * {@summary This method is used to generate an integer between terminalInf and terminalSup.}
+     */
+    private int genererInt(int borneInf, int borneSup) {
         int nb;
         nb = borneInf + random.nextInt(borneSup - borneInf);
         return nb;
     }
+    /**
+     * {@summary this method allows to reduce the speed of movement of the shells by a random percentage between 60% and 100%.}
+     */
+    private void reduceSpeed() {
+        int percentage = genererInt(60, 100);/**generate an integer between 60 and 100**/
 
-    private void reduceSpeed() {// cette emthode permet de reduire la vitesse de déplacement  des coquilles d un pourcentage alétoire entre 60% et 100%
-        int percentage = genererInt(60, 100);//generer un entier entre 60 et 100
-
-        if ((this.getMovingSpeedX() * percentage / 100) <= 1 || (this.getMovingSpeedY() * percentage / 100) <= 1) {//verifier si la vitesse n est pas presque nulle
-            this.setMovingSpeed(this.getMovingSpeedX(), this.getMovingSpeedX());//laisser la vitesse courante de la Coquille
+        if ((this.getMovingSpeedX() * percentage / 100) <= 1 || (this.getMovingSpeedY() * percentage / 100) <= 1) {/**check if the speed is not almost zero**/
+            this.setMovingSpeed(this.getMovingSpeedX(), this.getMovingSpeedX());/**leave the current speed of the Shell**/
         } else {
-            this.setMovingSpeed((this.getMovingSpeedX() * percentage / 100), (this.getMovingSpeedY() * percentage / 100));//mettre a jour la vitesse courante de la coquille
+            this.setMovingSpeed((this.getMovingSpeedX() * percentage / 100), (this.getMovingSpeedY() * percentage / 100));/**update current shell speed**/
         }
-
-
+        
+    }
+    /**
+     * {@summary this method allows to calculate the distance between the current position of the Shell with its starting position if it exceeds a certain mileage then it must be brought back to its starting area .}
+     */
+    public void stayNextToHome(){
+        double b = genererDouble();
+        double a = genererDouble() * b;
+        double c;
+        if (distancePos() >= controller.getKilometrage()) {/** in the case disrance (current position, starting position)> Mileage**/
+            if ((this.getMovingSpeedX() - a) + this.getCurrentPosition().getX() > this.getStartingPosition().getX()+controller.getDiameterX()) {
+                c=genererDouble()*b;
+                
+                this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()+c));/**move back in X to reach starting position**/
+            }
+            if ((this.getMovingSpeedY() - a) + this.getCurrentPosition().getY() > this.getStartingPosition().getY()+controller.getDiameterY()) {
+                
+                c=genererDouble()*a;
+                this.setMovingSpeed((this.getMovingSpeedX()+c), (this.getMovingSpeedY() - a));/**move back in Y to reach starting position**/
+            }
+            if ((this.getMovingSpeedX() + a) + this.getCurrentPosition().getX() <= this.getStartingPosition().getX()+controller.getDiameterX()) {
+                c=genererDouble()*b;
+                
+                this.setMovingSpeed((this.getMovingSpeedX()) + a, (this.getMovingSpeedY()-c));/**move forward in X to reach the starting position**/
+            }
+            if ((this.getMovingSpeedY() + a) + this.getCurrentPosition().getY() <= this.getStartingPosition().getY()+controller.getDiameterY()) {
+                
+                c=genererDouble()*a;
+                this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));/**move forward in Y to reach the starting position**/
+            }
+            
+        }
+        
     }
 
     @Override
     public void move() {
 
-        reduceSpeed();//reduire la vitesse de la Coquille
-        stayNextToHome();//verifier a chaque fois est dans sa zone de départ sinon il faut la rendre a sa zone
-        super.move();//mettre a jour la position de la Coquille
+        reduceSpeed();/**reduce the speed of the CoquilleBille**/
+        stayNextToHome();/**each time you check is in your starting area otherwise you have to return it to your area**/
+        super.move();/**update the CoquilleBille position**/
 
 
     }
-    public void stayNextToHome(){//cette methode permet de calculer la distance entre la position courante de la Coquille avce sa postion de départ si elle dépasse un certain kilometrage alors il faut rendre la c
-        double b = genererDouble();
-        double a = genererDouble() * b;
-        double c;
-        if (distancePos() >= controller.getKilometrage()) {// dans le cas disrance(position courante ,position de depart)>Kilometrange
-            if ((this.getMovingSpeedX() - a) + this.getCurrentPosition().getX() > this.getStartingPosition().getX()+controller.getDiameterX()) {
-                c=genererDouble()*b;
-
-                this.setMovingSpeed((this.getMovingSpeedX()) - a, (this.getMovingSpeedY()+c));//reculer en X pour atteindre position de depart
-            }
-            if ((this.getMovingSpeedY() - a) + this.getCurrentPosition().getY() > this.getStartingPosition().getY()+controller.getDiameterY()) {
-
-                c=genererDouble()*a;
-                this.setMovingSpeed((this.getMovingSpeedX()+c), (this.getMovingSpeedY() - a));//reculer en Y pour atteindre la position de départ
-            }
-            if ((this.getMovingSpeedX() + a) + this.getCurrentPosition().getX() <= this.getStartingPosition().getX()+controller.getDiameterX()) {
-                c=genererDouble()*b;
-
-                this.setMovingSpeed((this.getMovingSpeedX()) + a, (this.getMovingSpeedY()-c));//avancer en X pour atteindre la position de départ
-            }
-            if ((this.getMovingSpeedY() + a) + this.getCurrentPosition().getY() <= this.getStartingPosition().getY()+controller.getDiameterY()) {
-
-                c=genererDouble()*a;
-                this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));//avancer en Y pour atteindre la position de départ
-            }
-
-        }
-
-    }
+  
 
 
 }
