@@ -29,7 +29,7 @@ public class CoquilleBille {
     private Random r = new Random();
     private double minReboundSpeed=3;
     /** Upper bound to set speed points. **/
-    private static int MAX_SPEED = 5;
+    private static int MAX_SPEED = 4;
 
     /**
      * {@summary Instantiates a new Coquille bille.}
