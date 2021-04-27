@@ -8,7 +8,7 @@ import java.util.TimerTask;
 public class Incubating extends Individual{
   public Incubating(CoquilleBille coc, Population p){
     super(coc,p);
-    p.nbIncubating++;/**increase the number of incubating individuals//
+    p.nbIncubating++;/**increase the number of incubating individuals**/
     p.nbHealthy--;/**decrease the number of healthy individuals**/
     p.getTimer().schedule(new TimerTask() {/**plan an action that will take place after the incubation period**/
         @Override
