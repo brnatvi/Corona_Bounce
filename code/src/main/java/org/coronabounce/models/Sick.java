@@ -23,11 +23,7 @@ public class Sick extends Individual {
           }
       },p.getDurationHealing());
   }
-
-    public void run() {
-        
-    }
-
+  
 
     public void agitSur() {
         contaminate();

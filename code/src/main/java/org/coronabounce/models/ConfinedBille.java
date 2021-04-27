@@ -7,16 +7,23 @@ import java.util.Random;
 public class ConfinedBille extends CoquilleBille {
     private static Random random = new Random();
     private Controllable controller;
+    private Position startingPosition;// memoriser la position de départ de la Coquille
 
     public ConfinedBille(double speedX, double speedY, Individual individual, Population pop) {
         super(speedX, speedY, individual, pop);
         this.controller = pop.getController();
+        
     }
-
+    protected double distancePos() {//cette methode calcule la distance entre la position courante de la Coquille et la position de départ
+        return getCurrentPosition().distanceFrom(getStartingPosition());
+    }
+    
     public ConfinedBille(Individual i, Population pop) {
         super(i, pop);
         this.controller = pop.getController();
+        this.startingPosition = this.getCurrentPosition().clone();
     }
+    public Position getStartingPosition() {return this.startingPosition;}
 
     private double genererDouble() {//cette methode permet de generer un reel entre 0 et 1
         return random.nextDouble();

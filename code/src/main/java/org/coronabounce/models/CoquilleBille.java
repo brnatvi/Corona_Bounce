@@ -12,12 +12,11 @@ public class CoquilleBille {
     private double movingSpeedY;//le vecteur vitesse Vy de la Coquille
     private Population population;
     private Individual individual;//l individu que la Coquille va contenir
-    private Position startingPosition;// memoriser la position de départ de la Coquille
+    
     private Position currentPosition;// la position e X et et en Y de la Coquille
     private final int id;// identifiant de la Coquille (afin de  redefinir equals )
     private static int idCpt=0;// le nombre de Coquille déja crées
     private Random r = new Random();
-
     private double minReboundSpeed=3;
     private Controllable controller;
     private static int MAX_SPEED = 5;
@@ -34,7 +33,7 @@ public class CoquilleBille {
           System.out.println("Position of the point have been set, but it fail to fined a free space.");
         }
 
-        this.startingPosition = currentPosition.clone();
+       
        // this.sector = getSector(currentPosition.getX(), currentPosition.getY());
         id=idCpt++;//incrémonter le nombre de Coquilles qui existent
         this.movingSpeedX=speedX;
@@ -52,7 +51,7 @@ public class CoquilleBille {
     public int getId(){return id;}
 
     public Position getCurrentPosition() {return this.currentPosition;}
-    public Position getStartingPosition() {return this.startingPosition;}
+   
 
     public double getMovingSpeedX() { return this.movingSpeedX;}
     public double getMovingSpeedY() { return this.movingSpeedY;}
@@ -199,9 +198,6 @@ public class CoquilleBille {
 
     //******************************************************************************************************************************//
 
-    protected double distancePos() {//cette methode calcule la distance entre la position courante de la Coquille et la position de départ
-      return getCurrentPosition().distanceFrom(getStartingPosition());
-    }
 
     public double getRandomMovingSpeed(int maxSpeed){// elle permet de generer une vitesse qui ne depasse pas maxspeed
          if(maxSpeed<1){maxSpeed=1;}
