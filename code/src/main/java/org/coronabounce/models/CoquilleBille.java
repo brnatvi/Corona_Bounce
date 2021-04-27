@@ -7,15 +7,18 @@ import java.util.Random;
 public class CoquilleBille {
 
     /** A moving speed in x to move faster or slower. */
-    private double movingSpeedX;//le vecteur vitesse en Vx de la Coquille
+    private double movingSpeedX;
     /** A moving speed in y to move faster or slower. */
-    private double movingSpeedY;//le vecteur vitesse Vy de la Coquille
+    private double movingSpeedY;
     private Population population;
-    private Individual individual;//l individu que la Coquille va contenir
-    
-    private Position currentPosition;// la position e X et et en Y de la Coquille
-    private final int id;// identifiant de la Coquille (afin de  redefinir equals )
-    private static int idCpt=0;// le nombre de Coquille déja crées
+    /**the individual that the Shell will contain**/
+    private Individual individual;
+    /** the current position the Shell**/
+    private Position currentPosition;
+     /**Shell identifier (in order to redefine equals)**/
+    private final int id;
+    /** the number of Shell already created**/
+    private static int idCpt=0;
     private Random r = new Random();
     private double minReboundSpeed=3;
     private Controllable controller;
@@ -32,10 +35,9 @@ public class CoquilleBille {
           this.currentPosition = new Position(controller,false);
           System.out.println("Position of the point have been set, but it fail to fined a free space.");
         }
-
-        id=idCpt++;//incrémonter le nombre de Coquilles qui existent
-        this.movingSpeedX=speedX;
-        this.movingSpeedY=speedY;
+        id=idCpt++;/**increment the number of Shells that exist**/
+        this.movingSpeedX=speedX;/**update movinSpeedX**/
+        this.movingSpeedY=speedY;/** update movingSpeedY**/
     }
 
     public CoquilleBille(Individual individual, Population pop){
@@ -65,16 +67,15 @@ public class CoquilleBille {
     public void setIndividual(Individual individual) { this.individual=individual; }
     public Population getPopulation(){ return individual.getPopulation(); }
 
-    //============================================================================================================//
-
+    //==================================================== Ricochets =================================================//
 
     public String toString(){
       return id+"pos: "+currentPosition.toString()+" speed: "+movingSpeedX+" "+movingSpeedY+"\t"+individual+"\t"+getPopulation();
     }
     @Override
-    public boolean equals(Object o){// redefinition de equals
+    public boolean equals(Object o){/**redefinition of equals**/
         if(o!= null && o instanceof CoquilleBille){
-            return getId()==((CoquilleBille)(o)).getId();//Comparer par rapport a l'id de la Coquille
+            return getId()==((CoquilleBille)(o)).getId();/**Compare Against Shell Id**/
         }
         return false;
     }
@@ -83,22 +84,21 @@ public class CoquilleBille {
     *Speed will be modify if this hurt a limit of the zone.
     */
     public void move(){
-     //   bounceIfHitOtherCoquilleBille();
-        this.currentPosition.setPos(this.currentPosition.getX()+this.movingSpeedX,this.currentPosition.getY()+this.movingSpeedY);
         bounceIfOutOfZone();
         bounceIfHitWall();
-        ricochetAll();
+        bounceIfHitOtherCoquilleBille();
+        this.currentPosition.setPos(this.currentPosition.getX()+this.movingSpeedX,this.currentPosition.getY()+this.movingSpeedY);
     }
-    //========================================== Bounce off walls =================================================//
+    //==================================================== Bounce if =================================================//
     /**
      *{@summary bounce if this will go out of the zone.}<br>
      */
-    protected void bounceIfOutOfZone(){//verifie si la position de la Coquille atteint la borne de la zone pour rebondir
-         if (outOfX(currentPosition.getX()+movingSpeedX)) {
-              bounce(true);//rebondir selon X
+    protected void bounceIfOutOfZone(){
+         if (outOfX(currentPosition.getX()+movingSpeedX)) {/**check if the position X of the Shell reaches the boundary X mark of the rebound zone**/
+              bounce(true);/**bounce along X**/
          }
-         if (outOfY(currentPosition.getY()+movingSpeedY)) {
-              bounce(false);//Rebondir selon Y
+         if (outOfY(currentPosition.getY()+movingSpeedY)) {/**check if the position Y of the Shell reaches the boundary Y mark of the rebound zone**/
+              bounce(false);/**bounce along Y **/
          }
     }
     /**
@@ -107,21 +107,8 @@ public class CoquilleBille {
     protected void bounceIfHitWall(){
         for (Wall wall : getPopulation().getListWall()) {
             if (wall.willCrossWallInX(this) && wall.willCrossWallInY(this)) {
-                // System.out.print(this+ "        ");
-                // if(isBetween(currentPosition.getX(),wall.getPositionX()- wall.getThickness()/2- getPopulation().getRadiusDot(), wall.getPositionX()) ) {
-                //     if(this.movingSpeedX<minReboundSpeed) {
-                //
-                //         this.movingSpeedX =minReboundSpeed-1 ;
-                //     }
-
                     bounce(true);
-                // }
-                // else if (isBetween(currentPosition.getX(),wall.getPositionX(),wall.getPositionX()+ wall.getThickness()/2+ getPopulation().getRadiusDot()))
-                //
-                //     if(this.movingSpeedX<minReboundSpeed) {
-                //         this.movingSpeedX = minReboundSpeed-1;
-                //     }
-                // System.out.println(this);
+               
               }
         }
     }
@@ -129,19 +116,19 @@ public class CoquilleBille {
      *{@summary bounce if this will hit an other CoquilleBille.}<br>
      *All CoquilleBille that this can hit are in population.
      */
- //   public void bounceIfHitOtherCoquilleBille(){
- //     for(CoquilleBille coc : population.getAllPoints()){
- //       if(!coc.equals(this) && getCurrentPosition().distanceFrom(coc.getCurrentPosition()) <= (2* controller.getRadiusDot())){
- //         if(coc.InX(this)){
- //         coc.bounce(true);
- //         this.bounce(true);}
- //         if(coc.InY(this)){
- //           coc.bounce(false);
- //           this.bounce(false);
- //         }
- //       }
- //     }
- //   }
+    public void bounceIfHitOtherCoquilleBille(){
+      for(CoquilleBille coc : population.getAllPoints()){
+        if(!coc.equals(this) && getCurrentPosition().distanceFrom(coc.getCurrentPosition()) <= (2* controller.getRadiusDot())){
+          if(coc.InX(this)){
+          coc.bounce(true);
+          this.bounce(true);}
+          if(coc.InY(this)){
+            coc.bounce(false);
+            this.bounce(false);
+          }
+        }
+      }
+    }
 
     /**
      *{@summary bounce.}<br>
@@ -159,7 +146,7 @@ public class CoquilleBille {
          bounce(true);
          bounce(false);
     }
-    //================================================= Find Limits =================================================//
+    //==================================================== Private =================================================//
     /**
      *{@summary Return true if x coordinate is out the the Zone at next move.}
      *Public only for test.
@@ -176,34 +163,28 @@ public class CoquilleBille {
         return false;
     }
 
-  //  private boolean isBetween(double c, double a, double b){
-  //      if( c<=b && c>=a ) return true;
-  //      return false;
-  //  }
-  //
-  //  public boolean InY(CoquilleBille coc){
-  //       if((this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()<10)&& (this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()>=0)||(this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()<10)&& (coc.getCurrentPosition().getY()-coc.getCurrentPosition().getY()>=0) ){
-  //            return true;
-  //       }else{
-  //            return false;
-  //       }
-  //  }
-  //  public boolean InX(CoquilleBille coc){
-  //        if((this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()<10)&& (this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()>=0)||(this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()<10)&& (coc.getCurrentPosition().getX()-coc.getCurrentPosition().getX()>=0) ){
-  //             return true;
-  //        }else{
-  //             return false;
-  //        }
-  //  }
+    private boolean isBetween(double c, double a, double b){
+        if( c<=b && c>=a ) return true;
+        return false;
+    }
 
-    //************************************ Manage Speed **********************************************************//
+    public boolean InY(CoquilleBille coc){
+         if((this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()<10)&& (this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()>=0)||(this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()<10)&& (coc.getCurrentPosition().getY()-coc.getCurrentPosition().getY()>=0) ){
+              return true;
+         }else{
+              return false;
+         }
+    }
+    public boolean InX(CoquilleBille coc){
+          if((this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()<10)&& (this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()>=0)||(this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()<10)&& (coc.getCurrentPosition().getX()-coc.getCurrentPosition().getX()>=0) ){
+               return true;
+          }else{
+               return false;
+          }
+    }
 
-
-  //  public double getRandomMovingSpeed(int maxSpeed){// elle permet de generer une vitesse qui ne depasse pas maxspeed
-  //       if(maxSpeed<1){maxSpeed=1;}
-  //       if(r.nextBoolean()){maxSpeed=maxSpeed*(-1);}
-  //       return r.nextDouble()*maxSpeed;
-  //  }
+    //******************************************************************************************************************************//
+    
 
     /**
     *{@summary Set a random moving speed to SpeedX between -maxSpeed &#38; maxSpeed.}<br>
@@ -223,58 +204,5 @@ public class CoquilleBille {
         if(maxSpeed<1){maxSpeed=1;}
         if(r.nextBoolean()){maxSpeed=maxSpeed*(-1);}
         this.movingSpeedY = r.nextDouble()*maxSpeed;
-    }
-
-    //============================================= Mutual Bounces =================================================//
-
-    /**
-     *{@summary Makes ricochet if necessary with all other points.}
-     */
-    public void ricochetAll()
-    {
-        for (CoquilleBille coc : population.getAllPoints())
-        {
-            if (!this.equals(coc))
-            {
-                this.ricochet(coc, false);
-            }
-        }
-    }
-
-    /**
-     *{@summary Makes ricochet if it does not made yet.}
-     *@param coc coquilleBille to make ricochet with.
-     *@return true if ricochet was made.
-     */
-    public boolean ricochet(CoquilleBille coc, boolean isRicochet)
-    {
-        boolean isDone = false;
-        if (!isRicochet && isNear(coc))
-        {
-            double tmpX = coc.getMovingSpeedX();
-            double tmpY = coc.getMovingSpeedY();
-            coc.setMovingSpeed(this.movingSpeedX, this.movingSpeedY);
-            this.setMovingSpeed(tmpX, tmpY);
-            isDone = true;
-        }            
-        return isDone;
-    }
-
-    /**
-     *{@summary Measure distance between current point and point passing as parameter.}
-     *@param coc coquilleBille to measure distance with.
-     *@return true if distance less than or equal to two radius of points (so they are contiguous).
-     */
-    public boolean isNear(CoquilleBille coc)
-    {
-        double cocX = coc.getCurrentPosition().getX();
-        double cocY = coc.getCurrentPosition().getY();
-        double currX = this.getCurrentPosition().getX();
-        double currY = this.getCurrentPosition().getY();
-        if (Math.sqrt(Math.pow(cocX - currX, 2) + Math.pow(cocY - currY, 2)) <= 2*controller.getRadiusDot())
-        {
-            return true;
-        }
-        return false;
     }
 }
