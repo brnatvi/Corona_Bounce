@@ -358,15 +358,7 @@ public class MainController
      */
     public void left_Scenario_1_SoftLockdown()
     {
-        setSettingsController(currentController);
-        this.isLockDown1 = true;
-        this.isWalls1 = false;
-        this.isRestrictionMovement1 = false;
-        closePreviousTask();
-        changeController(currentController);
-        initialize();
-        btnStart.setDisable(false);
-        App.setRoot("corona bounce");
+        applyScenario( true, false, false, model1);
     }
 
     /**
@@ -374,15 +366,7 @@ public class MainController
      */
     public void left_Scenario_2_StrictLockdown()
     {
-        setSettingsController(currentController);
-        this.isLockDown1 = false;
-        this.isWalls1 = false;
-        this.isRestrictionMovement1 =true;
-        closePreviousTask();
-        changeController(currentController);
-        initialize();
-        btnStart.setDisable(false);
-        App.setRoot("corona bounce");
+        applyScenario( false, false, true, model1);
     }
 
     /**
@@ -390,15 +374,7 @@ public class MainController
      */
     public void left_Scenario_3_Wall()
     {
-        setSettingsController(currentController);
-        this.isLockDown1 = false;
-        this.isWalls1 = true;
-        this.isRestrictionMovement1 = false;
-        closePreviousTask();
-        changeController(currentController);
-        initialize();
-        btnStart.setDisable(false);
-        App.setRoot("corona bounce");
+        applyScenario( false, true, false, model1);
     }
 
     /**
@@ -406,15 +382,7 @@ public class MainController
      */
     public void left_Scenario_4_WallAndLockdown()
     {
-        setSettingsController(currentController);
-        this.isLockDown1 = true;
-        this.isWalls1 = true;
-        this.isRestrictionMovement1 = false;
-        closePreviousTask();
-        changeController(currentController);
-        initialize();
-        btnStart.setDisable(false);
-        App.setRoot("corona bounce");
+        applyScenario( true, true, false, model1);
     }
 
     /**
@@ -422,15 +390,7 @@ public class MainController
      */
     public void left_Scenario_5_WithoutScenario()
     {
-        setSettingsController(currentController);
-        this.isLockDown1 = false;
-        this.isWalls1 = false;
-        this.isRestrictionMovement1 = false;
-        closePreviousTask();
-        changeController(currentController);
-        initialize();
-        btnStart.setDisable(false);
-        App.setRoot("corona bounce");
+        applyScenario( false, false, false, model1);
     }
 
     /**
@@ -438,15 +398,7 @@ public class MainController
      */
     public void right_Scenario_1_SoftLockdown()
     {
-        setSettingsController(currentController);
-        this.isLockDown2 = true;
-        this.isWalls2 = false;
-        this.isRestrictionMovement2 = false;
-        closePreviousTask();
-        changeController(currentController);
-        initialize();
-        btnStart.setDisable(false);
-        App.setRoot("corona bounce");
+        applyScenario( true, false, false, model2);
     }
 
     /**
@@ -454,15 +406,7 @@ public class MainController
      */
     public void right_Scenario_2_StrictLockdown()
     {
-        setSettingsController(currentController);
-        this.isLockDown2 = false;
-        this.isWalls2 = false;
-        this.isRestrictionMovement2 =true;
-        closePreviousTask();
-        changeController(currentController);
-        initialize();
-        btnStart.setDisable(false);
-        App.setRoot("corona bounce");
+        applyScenario( false, false, true, model2);
     }
 
     /**
@@ -470,15 +414,7 @@ public class MainController
      */
     public void right_Scenario_3_Wall()
     {
-        setSettingsController(currentController);
-        this.isLockDown2 = false;
-        this.isWalls2 = true;
-        this.isRestrictionMovement2 =false;
-        closePreviousTask();
-        changeController(currentController);
-        initialize();
-        btnStart.setDisable(false);
-        App.setRoot("corona bounce");
+        applyScenario( false, true, false, model2);
     }
 
     /**
@@ -486,15 +422,7 @@ public class MainController
      */
     public void right_Scenario_4_WallAndLockdown()
     {
-        setSettingsController(currentController);
-        this.isLockDown2 = true;
-        this.isWalls2 = true;
-        this.isRestrictionMovement2 = false;
-        closePreviousTask();
-        changeController(currentController);
-        initialize();
-        btnStart.setDisable(false);
-        App.setRoot("corona bounce");
+        applyScenario( true, true, false, model2);
     }
 
     /**
@@ -502,15 +430,7 @@ public class MainController
      */
     public void right_Scenario_5_WithoutScenario()
     {
-        setSettingsController(currentController);
-        this.isLockDown2 = false;
-        this.isWalls2 = false;
-        this.isRestrictionMovement2 = false;
-        closePreviousTask();
-        changeController(currentController);
-        initialize();
-        btnStart.setDisable(false);
-        App.setRoot("corona bounce");
+        applyScenario( false, false, false, model2);
     }
 
     //========================= Button's auxiliary functions ==========================================================/
@@ -612,6 +532,47 @@ public class MainController
         }));
         tlPoints.setCycleCount(Animation.INDEFINITE);
         tlPoints.play();
+    }
+
+    /**
+     * {@summary Apply scenarios according boolean values. }
+     * Function which :
+     * <ul>
+     * <li> save settings in current controller;
+     * <li> initializes booleans managed scenarios;
+     * <li> close previous task;
+     * <li> update current controller;
+     * <li> initialize new zones, populations, points, statistics and graphs;
+     * <li> disable button Start;
+     * <li> switch to main window.
+     * </ul>
+     */
+    private void applyScenario(boolean isLockDown, boolean isWalls, boolean isRestrict, Displayable pop)
+    {
+        if (pop == model1)
+        {
+            setSettingsController(currentController);
+            this.isLockDown1 = isLockDown;
+            this.isWalls1 = isWalls;
+            this.isRestrictionMovement1 = isRestrict;
+            closePreviousTask();
+            changeController(currentController);
+            initialize();
+            btnStart.setDisable(false);
+            App.setRoot("corona bounce");
+        }
+        else
+        {
+            setSettingsController(currentController);
+            this.isLockDown2 = isLockDown;
+            this.isWalls2 = isWalls;
+            this.isRestrictionMovement2 = isRestrict;
+            closePreviousTask();
+            changeController(currentController);
+            initialize();
+            btnStart.setDisable(false);
+            App.setRoot("corona bounce");
+        }
     }
 
     //========================= Animation auxiliary functions =========================================================/
