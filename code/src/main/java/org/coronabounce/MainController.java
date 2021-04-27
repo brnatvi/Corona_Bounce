@@ -24,18 +24,16 @@ import org.coronabounce.vues.Renderer;
  */
 public class MainController
 {
-    /** Controller contains initial settings **/
-    private Controllable controller;
-    /** Controller contains modified settings **/
+    /** Controller contained initial or modified settings **/
     private Controllable currentController;
     /** Left population (population1) **/
     private Displayable model1;
     /** Right population (population2) **/
     private Displayable model2;
     /** Left population's (population1) zone **/
-    private Zone zone1 = null;
+    private Zone zone1;
     /** Right population's (population2) zone **/
-    private Zone zone2 = null;
+    private Zone zone2;
     /** Timeline for animation of point's moving **/
     private Timeline tlPoints;
     /** Timeline for animation of graph **/
@@ -110,8 +108,7 @@ public class MainController
     {
         this.tlPoints = null;
         this.tlGraph = null;
-        this.controller = new Controller();
-        this.currentController = controller;
+        this.currentController = new Controller();
         changeController(this.currentController);
         isLockDown1 = false;
         isLockDown2 = false;
@@ -550,16 +547,14 @@ public class MainController
     private void applyScenario(boolean isLockDown, boolean isWalls, boolean isRestrict, Displayable pop)
     {
         setSettingsController(currentController);
-        if (pop == model1)
+        if (pop.equals(model1))
         {
-
             this.isLockDown1 = isLockDown;
             this.isWalls1 = isWalls;
             this.isRestrictionMovement1 = isRestrict;
         }
         else
         {
-
             this.isLockDown2 = isLockDown;
             this.isWalls2 = isWalls;
             this.isRestrictionMovement2 = isRestrict;
