@@ -120,6 +120,8 @@ public class Population implements Displayable {
      * {@summary Get list of walls.}
      */
     public List<Wall> getListWall() { return listWall; }
+    //Use only by test.
+    public void setListWall(List<Wall> l){listWall=l;}
 
     //========================= Virus Getters/Setters =================================================================/
 

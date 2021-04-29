@@ -129,6 +129,8 @@ public class CoquilleBille {
         this.movingSpeedY=Vy;
     }
 
+    public void setPos(double x, double y){getCurrentPosition().setPos(x,y);}
+
     //=====================================================================================================//
 
     public String toString(){
@@ -148,13 +150,15 @@ public class CoquilleBille {
      */
     public void move(){
         //bounceIfHitOtherCoquilleBille();
-        if(!bounceIfOutOfZone() | !bounceIfHitWall()){
+        if(bounceIfOutOfZone() | bounceIfHitWall()){
+          // System.out.println("Can not bounce: "+id);//@a
           canBounceMore=false;
         }else{
+          // System.out.println("Bounce: "+id);//@a
           canBounceMore=true;
         }
-        ricochetAll();
         this.currentPosition.setPos(this.currentPosition.getX()+this.movingSpeedX,this.currentPosition.getY()+this.movingSpeedY);
+        ricochetAll();
     }
     //==================================================== Bounce off walls =================================================//
 
@@ -319,13 +323,15 @@ public class CoquilleBille {
     public boolean ricochet(CoquilleBille coc, boolean isRicochet)
     {
         boolean isDone = false;
-        if (!isRicochet && coc.canBounceMore && canBounceMore && isNear(coc))
+        if (!isRicochet && isNear(coc))
         {
+          if (coc.canBounceMore && canBounceMore) {
             double tmpX = coc.getMovingSpeedX();
             double tmpY = coc.getMovingSpeedY();
             coc.setMovingSpeed(this.movingSpeedX, this.movingSpeedY);
             this.setMovingSpeed(tmpX, tmpY);
             isDone = true;
+          }
         }
         return isDone;
     }

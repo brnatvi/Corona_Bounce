@@ -13,7 +13,7 @@ public class Controller implements Controllable
     /**
      * Constants are initials and will be changed during the changing the settings of program in GUI
      */
-    
+
     /** Population space size (width) **/
     private double WIDTH = 400 ;
     /** Population space size (height) **/
@@ -35,7 +35,7 @@ public class Controller implements Controllable
     private double DIAMETER_X = 15;
     private double DIAMETER_Y = 10;
     /** Thickness of the walls **/
-    private double THICKNESS = 4;
+    private double THICKNESS = 5;
     /** Number of boundaries **/
     private int WALLS_COUNT = 4;
     /** Speed of boundaries closing **/
@@ -246,5 +246,6 @@ public class Controller implements Controllable
      */
     @Override
     public double getThickness() { return THICKNESS; }
+    public void setThickness(double d) { THICKNESS=d; }
 
 }
