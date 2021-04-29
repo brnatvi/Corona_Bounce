@@ -25,6 +25,7 @@ public class CoquilleBille {
     private final int id;
     /** The number of Shell already created. **/
     private static int idCpt=0;
+    private boolean canBounceMore;
     /** Random number to set speed points. **/
     private Random r = new Random();
     private double minReboundSpeed=3;
@@ -147,42 +148,50 @@ public class CoquilleBille {
      */
     public void move(){
         //bounceIfHitOtherCoquilleBille();
-        this.currentPosition.setPos(this.currentPosition.getX()+this.movingSpeedX,this.currentPosition.getY()+this.movingSpeedY);
-        bounceIfOutOfZone();
-        bounceIfHitWall();
+        if(!bounceIfOutOfZone() | !bounceIfHitWall()){
+          canBounceMore=false;
+        }else{
+          canBounceMore=true;
+        }
         ricochetAll();
+        this.currentPosition.setPos(this.currentPosition.getX()+this.movingSpeedX,this.currentPosition.getY()+this.movingSpeedY);
     }
     //==================================================== Bounce off walls =================================================//
 
     /**
      * {@summary Bounce if this will go out of the zone.}<br>
      */
-    protected void bounceIfOutOfZone(){
-         if (outOfX(currentPosition.getX()+movingSpeedX)) {/**check if the position X of the Shell reaches the boundary X mark of the rebound zone**/
-              bounce(true);/**bounce along X**/
-         }
-         if (outOfY(currentPosition.getY()+movingSpeedY)) {/**check if the position Y of the Shell reaches the boundary Y mark of the rebound zone**/
-              bounce(false);/**bounce along Y **/
-         }
+    protected boolean bounceIfOutOfZone(){
+        boolean haveBounce = false;
+        if (outOfX(currentPosition.getX()+movingSpeedX)) {/**check if the position X of the Shell reaches the boundary X mark of the rebound zone**/
+            bounce(true);/**bounce along X**/
+            haveBounce=true;
+        }
+        if (outOfY(currentPosition.getY()+movingSpeedY)) {/**check if the position Y of the Shell reaches the boundary Y mark of the rebound zone**/
+            bounce(false);/**bounce along Y **/
+            haveBounce=true;
+        }
+        return haveBounce;
     }
 
     /**
      * {@summary Bounce if this will hit a wall.}<br>
      */
-    protected void bounceIfHitWall(){
+    protected boolean bounceIfHitWall(){
         for (Wall wall : getPopulation().getListWall()) {
             switch (wall.needToBounceBecauseOfWall(this)) {
                 case 0:
                 bounce(false);
-                break;
+                return true;
                 case 1:
                 bounce(true);
-                break;
+                return true;
                 case 2:
                 bounce();
-                break;
+                return true;
             }
         }
+        return false;
     }
 //    /**
 //     *{@summary bounce if this will hit an other CoquilleBille.}<br>
@@ -310,7 +319,7 @@ public class CoquilleBille {
     public boolean ricochet(CoquilleBille coc, boolean isRicochet)
     {
         boolean isDone = false;
-        if (!isRicochet && isNear(coc))
+        if (!isRicochet && coc.canBounceMore && canBounceMore && isNear(coc))
         {
             double tmpX = coc.getMovingSpeedX();
             double tmpY = coc.getMovingSpeedY();
