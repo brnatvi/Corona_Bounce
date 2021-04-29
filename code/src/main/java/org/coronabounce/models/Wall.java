@@ -51,6 +51,7 @@ public class Wall  {
     */
     public byte needToBounceBecauseOfWall(CoquilleBille coc){
       if(willGoIntoTheWall(coc)){
+        if(isIntoTheWall(coc)){return -1;}
         if (willCrossWallInX(coc)){
           return 1;
         }else{
@@ -99,7 +100,6 @@ public class Wall  {
     */
     //public only for test.
     public boolean isIntoTheWall(CoquilleBille coc){
-      //TODO use it to push CoquilleBille out of the wall if some of them have been trap (like every 5s.)
       double curentX = coc.getCurrentPosition().getX();
       double curentY = coc.getCurrentPosition().getY();
       double radius = coc.getPopulation().getRadiusDot();
