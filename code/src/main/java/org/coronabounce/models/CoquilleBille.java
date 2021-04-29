@@ -320,11 +320,7 @@ public class CoquilleBille {
      */
     public boolean isNear(CoquilleBille coc)
     {
-        double cocX = coc.getCurrentPosition().getX();
-        double cocY = coc.getCurrentPosition().getY();
-        double currX = this.getCurrentPosition().getX();
-        double currY = this.getCurrentPosition().getY();
-        if (Math.sqrt(Math.pow(cocX - currX, 2) + Math.pow(cocY - currY, 2)) <= 2*controller.getRadiusDot())
+        if (getCurrentPosition().distanceFrom(coc.getCurrentPosition()) <= 2*controller.getRadiusDot())
         {
             return true;
         }

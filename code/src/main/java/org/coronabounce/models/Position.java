@@ -127,7 +127,7 @@ public class Position implements Cloneable{
       double x2 = pos.getX();
       double y1 = getY();
       double y2 = pos.getY();
-      return  Math.sqrt((x1 -x2) * (x1 -x2) + (y1 -y2) * (y1 -y2));
+      return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
     /**
      * {@summary Clean the list of the taken positions.}
