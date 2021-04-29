@@ -171,9 +171,17 @@ public class CoquilleBille {
      */
     protected void bounceIfHitWall(){
         for (Wall wall : getPopulation().getListWall()) {
-            if (wall.willCrossWallInX(this) && wall.willCrossWallInY(this)) {
-                    bounce(true);
-              }
+            switch (wall.needToBounceBecauseOfWall(this)) {
+                case 0:
+                bounce(false);
+                break;
+                case 1:
+                bounce(true);
+                break;
+                case 2:
+                bounce();
+                break;
+            }
         }
     }
 //    /**

@@ -38,38 +38,76 @@ public class Wall  {
     public String toString(){return id+" x="+positionX+" y="+positionY+" th="+ thickness;}
     /**
     *{@summary Schedule a new timerTask that will make wall go down every 100ms.}<br>
-    *@param pop Popu
+    *@param pop Population to use the timer.
     */
     public void makeWallGoDown(Population pop){
         TimerTask tt = null;
         pop.getTimer().schedule(tt = new TimerTaskWall(this.controller,this), 0, 100);
     }
     /**
+    *{@summary Return a byte to know how to bounce.}<br>
+    *@param coc The CoquilleBille that we may make bounce.
+    *@return 0 to bounce in y, 1 to bounce in x, 2 to bounce in x and y, everything else to do nothing.
+    */
+    public byte needToBounceBecauseOfWall(CoquilleBille coc){
+      if(willGoIntoTheWall(coc)){
+        if (willCrossWallInX(coc)){
+          return 1;
+        }else{
+          return 0;
+        }
+      }
+      return -1;
+    }
+    /**
     *{@summary Return true if it will cross the wall in x.}<br>
     *@param coc The CoquilleBille that we may make bounce.
     */
-    public boolean willCrossWallInX(CoquilleBille coc){
+    private boolean willCrossWallInX(CoquilleBille coc){
         double curentX = coc.getCurrentPosition().getX();
         double futurX = curentX+coc.getMovingSpeedX();
         double radius = coc.getPopulation().getRadiusDot();
-        if(curentX < positionX- thickness /2 && futurX+radius > positionX- thickness /2){ return true;}
-        if(curentX > positionX+ thickness /2 && futurX-radius < positionX+ thickness /2){ return true;}
+        // if(curentX < positionX- thickness /2 && futurX+radius > positionX- thickness /2){ return true;}
+        // if(curentX > positionX+ thickness /2 && futurX-radius < positionX+ thickness /2){ return true;}
+        if(curentX < positionX- thickness /2){ return true;}
+        if(curentX > positionX+ thickness /2){ return true;}
         return false;
     }
 
     /**
-    *{@summary Return true if it will cross the wall in y.}<br>
-    *It will hit in Y only if wall is enoth low.<br>
-    *@param coc The CoquilleBille that we may make bounce.
+    *{@summary Return true if it will go into the wall.}<br>
+    *It will return true if coc is already in the wall.<br>
+    *@param coc The CoquilleBille that we test.
     */
-    public boolean willCrossWallInY(CoquilleBille coc){
-        if(positionY > (coc.getCurrentPosition().getY() )){
-            return true;
+    //public only for test.
+    public boolean willGoIntoTheWall(CoquilleBille coc){
+      double curentX = coc.getCurrentPosition().getX();
+      double futurX = curentX+coc.getMovingSpeedX();
+      double curentY = coc.getCurrentPosition().getY();
+      double futurY = curentY+coc.getMovingSpeedY();
+      double radius = coc.getPopulation().getRadiusDot();
+      if(futurY-radius < positionY){
+        if(futurX+radius > positionX-thickness/2 && futurX-radius < positionX+thickness/2){
+          return true;
         }
-        return false;
+      }
+      return false;
     }
-    public boolean willGoIntoTheWall(){
-      //TODO to have thiker wall than dot.
+    /**
+    *{@summary Return true if it is into the wall.}<br>
+    *@param coc The CoquilleBille that we test.
+    */
+    //public only for test.
+    public boolean isIntoTheWall(CoquilleBille coc){
+      //TODO use it to push CoquilleBille out of the wall if some of them have been trap (like every 5s.)
+      double curentX = coc.getCurrentPosition().getX();
+      double curentY = coc.getCurrentPosition().getY();
+      double radius = coc.getPopulation().getRadiusDot();
+      if(curentY-radius < positionY){
+        if(curentX+radius > positionX-thickness/2 && curentX-radius < positionX+thickness/2){
+          return true;
+        }
+      }
       return false;
     }
 
@@ -97,6 +135,7 @@ class TimerTaskWall extends TimerTask{
     public synchronized void run(){
         if (this.controller.getState() == Controllable.eState.Working){
             wall.setPositionY(wall.getPositionY()+controller.getWallSpeed());
+            //TODO check that no CoquilleBille will be crush by the wall or make it move (or give it more speed).
             if(wall.getPositionY()>controller.getSpaceSize()[1]){
                 cancel();
             }
