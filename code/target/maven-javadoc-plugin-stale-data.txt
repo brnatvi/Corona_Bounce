@@ -1,0 +1,84 @@
+/usr/lib/jvm/java-11-openjdk-amd64/bin/javadoc
+@options
+@packages
+-locale
+'en_US'
+-classpath
+'/home/nata/.m2/repository/org/openjfx/javafx-controls/15.0.1/javafx-controls-15.0.1.jar:/home/nata/.m2/repository/org/openjfx/javafx-controls/15.0.1/javafx-controls-15.0.1-linux.jar:/home/nata/.m2/repository/org/openjfx/javafx-graphics/15.0.1/javafx-graphics-15.0.1.jar:/home/nata/.m2/repository/org/openjfx/javafx-graphics/15.0.1/javafx-graphics-15.0.1-linux.jar:/home/nata/.m2/repository/org/openjfx/javafx-base/15.0.1/javafx-base-15.0.1.jar:/home/nata/.m2/repository/org/openjfx/javafx-base/15.0.1/javafx-base-15.0.1-linux.jar:/home/nata/.m2/repository/org/openjfx/javafx-fxml/15.0.1/javafx-fxml-15.0.1.jar:/home/nata/.m2/repository/org/openjfx/javafx-fxml/15.0.1/javafx-fxml-15.0.1-linux.jar'
+-encoding
+'UTF-8'
+-private
+-quiet
+-sourcepath
+'/home/nata/Documents/!!_Corona_project/corona-bounce/code/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2021. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs'
+-docencoding
+'UTF-8'
+-Xdoclint:all,-missing
+-doctitle
+'coronabounce 1.0.8 API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' '/home/nata/Documents/!!_Corona_project/corona-bounce/code/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'coronabounce 1.0.8 API'
+org.coronabounce.data
+org.coronabounce.vues
+org.coronabounce.vues
+org.coronabounce.controllers
+org.coronabounce
+org.coronabounce
+org.coronabounce
+org.coronabounce
+org.coronabounce.mvcconnectors
+org.coronabounce.mvcconnectors
+org.coronabounce.models
+org.coronabounce.models
+org.coronabounce.models
+org.coronabounce.models
+org.coronabounce.models
+org.coronabounce.models.exceptions
+org.coronabounce.models
+org.coronabounce.models
+org.coronabounce.models
+org.coronabounce.models
+org.coronabounce.models
+org.coronabounce.models
+org.coronabounce.models
+/home/nata/.m2/repository/org/openjfx/javafx-controls/15.0.1/javafx-controls-15.0.1.jar = 1614781245360
+/home/nata/.m2/repository/org/openjfx/javafx-controls/15.0.1/javafx-controls-15.0.1-linux.jar = 1614781246568
+/home/nata/.m2/repository/org/openjfx/javafx-graphics/15.0.1/javafx-graphics-15.0.1.jar = 1614781245116
+/home/nata/.m2/repository/org/openjfx/javafx-graphics/15.0.1/javafx-graphics-15.0.1-linux.jar = 1614781246872
+/home/nata/.m2/repository/org/openjfx/javafx-base/15.0.1/javafx-base-15.0.1.jar = 1614781245208
+/home/nata/.m2/repository/org/openjfx/javafx-base/15.0.1/javafx-base-15.0.1-linux.jar = 1614781246084
+/home/nata/.m2/repository/org/openjfx/javafx-fxml/15.0.1/javafx-fxml-15.0.1.jar = 1614781245264
+/home/nata/.m2/repository/org/openjfx/javafx-fxml/15.0.1/javafx-fxml-15.0.1-linux.jar = 1614781245656
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/src/main/java = 1619362388113
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/element-list = 1619973074941
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/index-all.html = 1619973075301
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/index.html = 1619973075333
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/package-search-index.js = 1619973075285
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/search.js = 1619973075349
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/deprecated-list.html = 1619973075321
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/help-doc.html = 1619973075349
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/constant-values.html = 1619973075017
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/member-search-index.zip = 1619973075293
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/allclasses.html = 1619973075325
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/stylesheet.css = 1619973075349
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/type-search-index.zip = 1619973075289
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/serialized-form.html = 1619973075033
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/overview-summary.html = 1619973075333
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/member-search-index.js = 1619973075293
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/script.js = 1619973075349
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/allpackages-index.html = 1619973075313
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/package-search-index.zip = 1619973075289
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/allclasses-index.html = 1619973075309
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/overview-tree.html = 1619973075169
+/home/nata/Documents/!!_Corona_project/corona-bounce/code/docs/javadoc/apidocs/type-search-index.js = 1619973075289
