@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * {@summary Class used to save an x &#38; an y.}<br>
+ * {@summary Class used to save coordinates of person.}<br>
  * Position are always between x &#38; y limits of the controller.<br>
  */
 public class Position implements Cloneable{
@@ -17,17 +17,18 @@ public class Position implements Cloneable{
     // the 2 important value.
     private double posX;
     private double posY;
-    //static value for lest space use.
+    //static values for lest space use.
     private static double minLimit;
     private static double maxLimitX;
     private static double maxLimitY;
     private static Random r = new Random();
 
     // CONSTRUCTORS ------------------------------------------------------------
+
     /**
      * {@summary Main constructor.}
-     * @param controller the controller used to fix limits.
-     * @param chooseAUniquePosition If true it will try to fined a unique position in the Zone.
+     * @param controller the controller used to take limits of Zone in consideration.
+     * @param chooseAUniquePosition If true it will try to find an unique position in the Zone.
      */
     public Position(Controllable controller, boolean chooseAUniquePosition) {
         // initial position according bounds of Zone & radius of point
@@ -53,15 +54,15 @@ public class Position implements Cloneable{
         }
         listTakenPositions.add(this);
     }
+
     /**
      * {@summary Secondary constructor with chooseAUniquePosition at true.}
      * @param controller the controller used to fix limits.
      */
-    public Position(Controllable controller){
-      this(controller, true);
-    }
+    public Position(Controllable controller){this(controller, true);}
+
     /**
-     * {@summary Private constructor use only by clone.}
+     * {@summary Private constructor used only by clone.}
      */
     private Position(double x, double y){
       posX=x;
@@ -69,8 +70,17 @@ public class Position implements Cloneable{
     }
 
     // GET SET -----------------------------------------------------------------
+
+    /**
+     * {@summary Getter of x coordinate.}
+     */
     public double getX() {return this.posX;}
+
+    /**
+     * {@summary Getter of y coordinate.}
+     */
     public double getY() {return this.posY;}
+
     /**
      * {@summary Set a new x &#38; y.}<br>
      * It will set position only in the limits of the Zone.<br>
@@ -85,12 +95,18 @@ public class Position implements Cloneable{
       this.posX = x;
       this.posY = y;
     }
+
+    /**
+     * {@summary Getter of all taken positions.}
+     */
     public int getListTakenPositionsSize(){return listTakenPositions.size();}
 
     // FUNCTIONS ---------------------------------------------------------------
+
     public String toString(){
       return "("+posX+";"+posY+")";
     }
+
     /**
      * Check if position of instance is distinguished from all other point's one
      * @return True if curent position (see as a circle) is empty.
@@ -101,6 +117,7 @@ public class Position implements Cloneable{
         }
         return true;
     }
+
     /**
      * Check if position is in wall
      * @return True if curent position is in a wall.
@@ -110,6 +127,7 @@ public class Position implements Cloneable{
       //todo only if we whant to make existing wall.
       return false;
     }
+
     /**
      * Standard clone function.
      */
@@ -117,6 +135,7 @@ public class Position implements Cloneable{
     public Position clone(){
       return new Position(posX,posY);
     }
+
     /**
      * {@summary Get distance from an other position.}
      * @param pos the other Position.
@@ -129,6 +148,7 @@ public class Position implements Cloneable{
       double y2 = pos.getY();
       return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
+
     /**
      * {@summary Clean the list of the taken positions.}
      * It allowed to create new Position without checking if old Position interfer with this 1.
