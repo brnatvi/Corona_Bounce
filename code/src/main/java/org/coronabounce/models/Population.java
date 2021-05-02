@@ -203,7 +203,7 @@ public class Population implements Displayable {
     //*****************************************************Strict lockdown*************************************************/
 
     /**
-     * {@summary Prevents a big part of the population from moving (70-80%). Only doctors, cops etc. went to work.
+     * {@summary Prevents a big part of the population from moving (70-80%). Only doctors, cops etc. went to work.}
      **/
     public void RestrictMovement()
     {

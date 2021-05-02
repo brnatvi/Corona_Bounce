@@ -5,7 +5,7 @@ import org.coronabounce.mvcconnectors.Controllable;
 import java.util.TimerTask;
 
 /**
- * Part of Model - Class which represents a virus carrier.
+ * Class which represents a virus carrier.
  * He can contaminate healthy persons, but has not yet any symptoms.
  * He transforms to Sick then duration of incubation expires.
  */

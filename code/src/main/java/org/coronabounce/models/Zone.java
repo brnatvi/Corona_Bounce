@@ -67,7 +67,7 @@ public class Zone  {
     }
 
     /**
-     * @summary Make CoquilleBille move every 33 ms.
+     * {@summary Make CoquilleBille move every 33 ms. }
      */
     public void moving(){
         // stopTimerTask(false); //Stop last timer task.

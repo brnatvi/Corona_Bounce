@@ -1,7 +1,7 @@
 package org.coronabounce.models;
 
 /**
- * Part of Model - Person which can produce some action and is not sick by default.
+ * Person which can produce some action and is not sick by default.
  * It is an abstraction for Healthy, Sick, Incubating and Recovered.
  * Moving capacity of person is attached to Individual by function setCoc(CoquilleBille coc).
  */

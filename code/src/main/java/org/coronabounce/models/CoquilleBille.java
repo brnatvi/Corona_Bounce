@@ -344,14 +344,14 @@ public class CoquilleBille {
     }
 
     /**
-     * @summary Redefinition of toString. }
+     * {@summary Redefinition of toString. }
      */
     public String toString(){
         return id+"pos: "+currentPosition.toString()+" speed: "+movingSpeedX+" "+movingSpeedY+"\t"+individual+"\t"+getPopulation();
     }
 
     /**
-     * @summary Redefinition of equals. }
+     * {@summary Redefinition of equals. }
      * @return true if o is CoquilleBille.
      */
     @Override
