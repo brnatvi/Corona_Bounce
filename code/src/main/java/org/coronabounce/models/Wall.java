@@ -5,22 +5,25 @@ import org.coronabounce.mvcconnectors.Controllable;
 import java.util.*;
 
 /**
- *{@summary Stop CoquilleBille by making them bounce.}
- *It have a fix X position but can be moved in y.
+ * Boundary / wall which separate Zone by sections and so it limit individual's moving.
+ * It has a fix X position and grows up progressively.
  */
 public class Wall  {
     /** Unique id */
     private final int id;
     /** Id counter */
     private static int cpt=0;
-    /** How much thik is the wall */
+    /** Thickness of the wall */
     private final double thickness;
+    /** X coordinate of the wall */
     private final double positionX;
+    /** Height of the wall */
     private double positionY;
+    /** Current controller */
     private Controllable controller;
 
     // CONSTRUCTORS ------------------------------------------------------------
-    public Wall(Controllable controller, double posX){//ce mur va separer la population en deux populations
+    public Wall(Controllable controller, double posX){
        this.controller = controller;
        this.thickness =controller.getThickness();
        this.positionX=posX;
@@ -36,6 +39,7 @@ public class Wall  {
 
     // FUNCTIONS ---------------------------------------------------------------
     public String toString(){return id+" x="+positionX+" y="+positionY+" th="+ thickness;}
+
     /**
     *{@summary Schedule a new timerTask that will make wall go down every 100ms.}<br>
     *@param pop Population to use the timer.
@@ -44,6 +48,7 @@ public class Wall  {
         TimerTask tt = null;
         pop.getTimer().schedule(tt = new TimerTaskWall(this.controller,this), 0, 100);
     }
+
     /**
     *{@summary Return a byte to know how to bounce.}<br>
     *@param coc The CoquilleBille that we may make bounce.
@@ -67,8 +72,11 @@ public class Wall  {
       }
       return -1;
     }
+
+    // TEST FUNCTIONS -----------------------------------------------------------------
+
     /**
-    *{@summary Return true if it will cross the wall in x.}<br>
+    *{@summary Return true if it will cross the wall in x. Used only by tests. }<br>
     *@param coc The CoquilleBille that we may make bounce.
     */
     //public only for test.
@@ -84,6 +92,7 @@ public class Wall  {
         // if(futurX-radius < wallBorder2){ return true;}
         return false;
     }
+
     /**
     *{@summary Return true if it will cross the wall in y.}<br>
     *@param coc The CoquilleBille that we may make bounce.
@@ -101,8 +110,9 @@ public class Wall  {
     //     if(positionY > futurY-radius){return true;}
     //     return false;
     // }
+
     /**
-    *{@summary Return true if it will go into the wall.}<br>
+    *{@summary Return true if it will go into the wall. Used by tests. }<br>
     *It will return true if coc is already in the wall.<br>
     *@param coc The CoquilleBille that we test.
     */
@@ -120,30 +130,32 @@ public class Wall  {
       }
       return false;
     }
+
     /**
-    *{@summary Return true if it is into the wall.}<br>
+    *{@summary Return true if it is into the wall. Used only by tests. }<br>
     *@param coc The CoquilleBille that we test.
     */
     //public only for test.
     public boolean isIntoTheWall(CoquilleBille coc){
-      double curentX = coc.getCurrentPosition().getX();
-      double curentY = coc.getCurrentPosition().getY();
-      double radius = coc.getPopulation().getRadiusDot();
-      if(curentY-radius < positionY){
-        if(curentX+radius > positionX-thickness/2 && curentX-radius < positionX+thickness/2){
-          return true;
+        double curentX = coc.getCurrentPosition().getX();
+        double curentY = coc.getCurrentPosition().getY();
+        double radius = coc.getPopulation().getRadiusDot();
+        if(curentY-radius < positionY){
+            if(curentX+radius > positionX-thickness/2 && curentX-radius < positionX+thickness/2){
+            return true;
+            }
         }
-      }
-      return false;
+        return false;
     }
-
 }
+
 /**
- *{@summary Timer task to make wall go down.}
+ *{@summary Timer task to make wall goes down.}
  */
 class TimerTaskWall extends TimerTask{
     private Wall wall;
     private static Controllable controller;
+
     /**
      * {@summary Main constructor.}
      * @param controller the controller used to get wall speed.
@@ -153,8 +165,9 @@ class TimerTaskWall extends TimerTask{
         this.wall = wall;
         this.controller = controller;
     }
+
     /**
-     * {@summary Make wall go down from wallSpeed every time we call it.}<br>
+     * {@summary Makes wall go down from wallSpeed every time we call it.}<br>
      * Task will auto destroy itself if it reach the limits of the Zone.<br>
      */
     @Override

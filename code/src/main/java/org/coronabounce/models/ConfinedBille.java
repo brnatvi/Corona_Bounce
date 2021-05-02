@@ -4,16 +4,29 @@ import org.coronabounce.mvcconnectors.Controllable;
 
 import java.util.Random;
 
+/**
+ * Class which represents moving capacities of individual participated in Lockdown.
+ */
 public class ConfinedBille extends CoquilleBille {
     private static Random random = new Random();
+    /** Current controller, contains all parameters of model. **/
     private Controllable controller;
-    private Position startingPosition;/**memorize the starting position of the Shell**/
+    /** Memorize the starting position of the Shell. **/
+    private Position startingPosition;
+
     //=================================Constructors==========================================//
+
+    /**
+     * {@summary Internal use constructor. Instantiates new ConfinedBille.}
+     */
     public ConfinedBille(double speedX, double speedY, Individual individual, Population pop) {
         super(speedX, speedY, individual, pop);
         this.controller = pop.getController();
-        
     }
+
+    /**
+     * {@summary External use constructor. Instantiates CoquilleBille by Individual and instantiates his starting position.}
+     */
     public ConfinedBille(Individual i, Population pop) {
         super(i, pop);
         this.controller = pop.getController();
@@ -21,7 +34,7 @@ public class ConfinedBille extends CoquilleBille {
     }
     //================================== Intermediate methods====================================//
     /**
-     * {@summary this method allows to calculate the distance between the current position of the Shell with its starting position .}
+     * {@summary This method allows to calculate the distance between the current position of the Shell with its starting position .}
      */
     private  double distancePos() {//cette methode calcule la distance entre la position courante de la Coquille et la position de départ
         return getCurrentPosition().distanceFrom(getStartingPosition());
@@ -38,8 +51,9 @@ public class ConfinedBille extends CoquilleBille {
         nb = borneInf + random.nextInt(borneSup - borneInf);
         return nb;
     }
+
     /**
-     * {@summary this method allows to reduce the speed of movement of the shells by a random percentage between 60% and 100%.}
+     * {@summary This method allows to reduce the speed of movement of the shells by a random percentage between 60% and 100%.}
      */
     private void reduceSpeed() {
         int percentage = genererInt(60, 100);/**generate an integer between 60 and 100**/
@@ -49,10 +63,10 @@ public class ConfinedBille extends CoquilleBille {
         } else {
             this.setMovingSpeed((this.getMovingSpeedX() * percentage / 100), (this.getMovingSpeedY() * percentage / 100));/**update current shell speed**/
         }
-        
     }
+
     /**
-     * {@summary this method allows to calculate the distance between the current position of the Shell with its starting position if it exceeds a certain mileage then it must be brought back to its starting area .}
+     * {@summary This method allows to calculate the distance between the current position of the Shell with its starting position if it exceeds a certain mileage then it must be brought back to its starting area .}
      */
     public void stayNextToHome(){
         double b = genererDouble();
@@ -79,21 +93,13 @@ public class ConfinedBille extends CoquilleBille {
                 c=genererDouble()*a;
                 this.setMovingSpeed((this.getMovingSpeedX()-c), (this.getMovingSpeedY() + a));/**move forward in Y to reach the starting position**/
             }
-            
         }
-        
     }
 
     @Override
     public void move() {
-
         reduceSpeed();/**reduce the speed of the CoquilleBille**/
         stayNextToHome();/**each time you check is in your starting area otherwise you have to return it to your area**/
         super.move();/**update the CoquilleBille position**/
-
-
     }
-  
-
-
 }
