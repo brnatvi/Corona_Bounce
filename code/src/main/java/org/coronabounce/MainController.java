@@ -439,11 +439,11 @@ public class MainController
      */
     private int choosePeriod()
     {
-        if (currentController.getPersonsCount() <= 100)
+        if (currentController.getPersonsCount() <= 500)
         {
             return 100;
         }
-        return 500;
+        return 200;
     }
 
     /**
