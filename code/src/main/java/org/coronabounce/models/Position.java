@@ -102,9 +102,22 @@ public class Position implements Cloneable{
     public int getListTakenPositionsSize(){return listTakenPositions.size();}
 
     // FUNCTIONS ---------------------------------------------------------------
-
+    @Override
     public String toString(){
       return "("+posX+";"+posY+")";
+    }
+    @Override
+    public boolean equals(Object o){
+      if(o instanceof Position){
+        if(getX()==((Position)(o)).getX() && getY()==((Position)(o)).getY()){
+          return true;
+        }
+      }
+      return false;
+    }
+    @Override
+    public final int hashCode(){
+      return (int)((posX*posY)*10000);
     }
 
     /**
