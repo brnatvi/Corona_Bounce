@@ -197,14 +197,14 @@ public class MainController
         {
             if (zone1 != null)
             {
-                zone1.stopTimerTask(true);
                 zone1.getPopulation().stopTimer(true);
+                zone1.stopTimerTask(true);
             }
             if (zone2 != null)
             {
-                zone2.stopTimerTask(true);
                 zone2.getPopulation().stopTimer(true);
-            }
+                zone2.stopTimerTask(true);
+            }    
         } catch (Exception e)
         {
             System.out.println("An error occurred when trying to stop old Populations Timers");
