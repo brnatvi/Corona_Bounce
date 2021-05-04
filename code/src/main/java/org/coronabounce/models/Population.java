@@ -253,7 +253,7 @@ public class Population implements Displayable {
         double maxX = controller.getSpaceSize()[0];
         for (int i = 1; i <= numberOfWall; i++) {
             double posX = (maxX * i)/(numberOfWall + 1);
-            listWall.add(new Wall(this.controller, posX));
+            listWall.add(new Wall(this.controller, posX, listCoquille));
         }
         if(numberOfWall>0){
             return true;

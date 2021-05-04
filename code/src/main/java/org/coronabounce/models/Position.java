@@ -96,6 +96,16 @@ public class Position implements Cloneable{
       this.posX = x;
       this.posY = y;
     }
+    public void setX(double x){
+      if (x < minLimit) {x = minLimit;}
+      else if (x > maxLimitX) {x = maxLimitX;}
+      this.posX = x;
+    }
+    public void setY(double y){
+      if (y < minLimit) {y = minLimit;}
+      else if (y > maxLimitY) {y = maxLimitY;}
+      this.posY = y;
+    }
 
     /**
      * {@summary Getter of all taken positions.}
