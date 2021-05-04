@@ -52,6 +52,7 @@ public class Position implements Cloneable{
           this.posX = Math.abs(r.nextInt((int) (maxLimitX - minLimit))) + minLimit;
           this.posY = Math.abs(r.nextInt((int) (maxLimitY - minLimit))) + minLimit;
         }
+        // posX/=6;
         listTakenPositions.add(this);
     }
 

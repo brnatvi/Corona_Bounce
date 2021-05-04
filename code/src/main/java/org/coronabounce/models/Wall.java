@@ -3,6 +3,7 @@ package org.coronabounce.models;
 import org.coronabounce.mvcconnectors.Controllable;
 
 import java.util.*;
+import java.awt.Rectangle;
 
 /**
  * Boundary / wall which separate Zone by sections and so it limit individual's moving.
@@ -36,6 +37,7 @@ public class Wall  {
     public double getPositionY() { return positionY; }
     public void setPositionY(double positionY) { this.positionY = positionY; }
     public double getThickness() { return this.thickness; }
+    public Rectangle getRectangle(){ return new Rectangle((int)(getPositionX()-getThickness()-1),0,(int)(getThickness()*2+1),(int)(getPositionY()));}
 
     // FUNCTIONS ---------------------------------------------------------------
     public String toString(){return id+" x="+positionX+" y="+positionY+" th="+ thickness;}
@@ -57,10 +59,12 @@ public class Wall  {
     public byte needToBounceBecauseOfWall(CoquilleBille coc){
       if(willGoIntoTheWall(coc)){
         if(isIntoTheWall(coc)){
-          // System.out.println("A bille was in a wall: "+coc);
+          // System.out.println("A bille was in a wall: "+coc);//@a
           return -1;
         }
-        if (willCrossWallInX(coc)){
+        if (willCrossWallInXY(coc)){
+          return 2;
+        }else if (willCrossWallInX(coc)){
           // if(willCrossWallInY(coc)){
           //   System.out.println("BOUUNCE 2222222222222222");//@a
           //   return 2;
@@ -92,24 +96,31 @@ public class Wall  {
         // if(futurX-radius < wallBorder2){ return true;}
         return false;
     }
+    public boolean willCrossWallInXY(CoquilleBille coc){
+      if(willCrossWallInX(coc) && willCrossWallInY(coc)){
+        return true;
+      }
+      return false;
+    }
 
     /**
     *{@summary Return true if it will cross the wall in y.}<br>
     *@param coc The CoquilleBille that we may make bounce.
     */
     //public only for test.
-    // public boolean willCrossWallInY(CoquilleBille coc){
-    //     double curentY = coc.getCurrentPosition().getY();
-    //     double futurY = curentY+coc.getMovingSpeedY();
-    //     double radius = coc.getPopulation().getRadiusDot();
-    //     // if(positionY > curentY && positionY < futurY){return true;}
-    //     // System.out.println("curent "+(curentY-radius));
-    //     // System.out.println("futur "+(futurY-radius));
-    //     //positionY < curentY-radius &&
-    //     //si est plus bas que le bord haut du point.
-    //     if(positionY > futurY-radius){return true;}
-    //     return false;
-    // }
+    public boolean willCrossWallInY(CoquilleBille coc){
+        double curentY = coc.getCurrentPosition().getY();
+        double futurY = curentY+coc.getMovingSpeedY();
+        double radius = coc.getPopulation().getRadiusDot();
+        if(positionY > curentY && positionY < futurY){return true;}
+        if(positionY < curentY && positionY > futurY){return true;}
+        // System.out.println("curent "+(curentY-radius));
+        // System.out.println("futur "+(futurY-radius));
+        //positionY < curentY-radius &&
+        //si est plus bas que le bord haut du point.
+        // if(positionY > futurY-radius){return true;}
+        return false;
+    }
 
     /**
     *{@summary Return true if it will go into the wall. Used by tests. }<br>
@@ -128,6 +139,11 @@ public class Wall  {
           return true;
         }
       }
+      // Rectangle r2 = new Rectangle((int)(futurX-radius),(int)(futurY-radius),(int)(radius*2+1),(int)(radius*2+1));
+      // Rectangle r = getRectangle();
+      // if(r.intersects(r2)){
+      //   return true;
+      // }
       return false;
     }
 
