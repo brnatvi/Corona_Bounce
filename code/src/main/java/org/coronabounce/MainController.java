@@ -197,14 +197,14 @@ public class MainController
         {
             if (zone1 != null)
             {
-                zone1.stopTimerTask(true);
                 zone1.getPopulation().stopTimer(true);
+                zone1.stopTimerTask(true);
             }
             if (zone2 != null)
             {
-                zone2.stopTimerTask(true);
                 zone2.getPopulation().stopTimer(true);
-            }
+                zone2.stopTimerTask(true);
+            }    
         } catch (Exception e)
         {
             System.out.println("An error occurred when trying to stop old Populations Timers");
@@ -439,11 +439,11 @@ public class MainController
      */
     private int choosePeriod()
     {
-        if (currentController.getPersonsCount() <= 100)
+        if (currentController.getPersonsCount() <= 500)
         {
             return 100;
         }
-        return 500;
+        return 200;
     }
 
     /**
@@ -468,7 +468,7 @@ public class MainController
 
         tlGraph = new Timeline(new KeyFrame(Duration.millis(choosePeriod()), ev ->
         {
-            //long startTime = System.currentTimeMillis();                           // code for debug
+            long startTime = System.currentTimeMillis();                           // code for debug
 
             graph1.clearData();
             graph2.clearData();
@@ -497,9 +497,9 @@ public class MainController
             model1.getData().unLock();
             model2.getData().unLock();
 
-            //long stopTime = System.currentTimeMillis();                                // code for debug
-            //long diff = stopTime - startTime;
-            //System.out.println("Difference: " + diff);
+            long stopTime = System.currentTimeMillis();                                // code for debug
+            long diff = stopTime - startTime;
+            // System.out.println("Difference graph: " + diff);
             //System.out.println("Graph Thread: " + Thread.currentThread().getId());
         }));
         tlGraph.setCycleCount(Animation.INDEFINITE);
@@ -515,6 +515,7 @@ public class MainController
 
         tlPoints = new Timeline(new KeyFrame(Duration.millis(33), ev ->
         {
+            long startTime = System.currentTimeMillis();
             // clean the panels
             retainPopulationsAndWalls();
 
@@ -526,6 +527,10 @@ public class MainController
 
             // update statistic
             updateStatistics();
+
+            long stopTime = System.currentTimeMillis();                                // code for debug
+            long diff = stopTime - startTime;
+            // System.out.println("Difference point: " + diff);
         }));
         tlPoints.setCycleCount(Animation.INDEFINITE);
         tlPoints.play();

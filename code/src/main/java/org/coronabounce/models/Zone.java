@@ -6,21 +6,27 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- *{@summary Zone where CoquilleBille can move.}
- *It have a timer to make CoquilleBille move in it.
+ * Field where CoquilleBilles move.
+ * It has an independent timer to manage movements.
  */
 public class Zone  {
-
+    /** Current controller contains all parameters **/
     private Controllable controller;
-    private Population p;                   // Population that is in the Zone
-    private double width;                   // Width of all Zones
-    private double height;                  // Height of all Zones
+    /** Population that is in the Zone **/
+    private Population p;
+    /** Width of Zone **/
+    private double width;
+    /** Height of Zone **/
+    private double height;
+    /** Timer of Zone **/
     private Timer timer;
+    /** TimerTask of Zone **/
     private TimerTask timerTask;
 
 
     // CONSTRUCTORS ------------------------------------------------------------
     public Zone (Controllable controller,boolean isLockDown, boolean isWall, boolean isRestrictionMovement){
+        if (this.timer != null) { this.stopTimerTask(true);}
         timer=new Timer();
         this.controller = controller;
         this.width = controller.getSpaceSize()[0];
@@ -44,8 +50,8 @@ public class Zone  {
 
     // FUNCTIONS ---------------------------------------------------------------
     /**
-     *Stop timer task
-     *@param stopTimerTo If true also stop the timer itself.
+     * Stop timer task.
+     * @param stopTimerTo If true also stop the timer itself.
      */
     public void stopTimerTask(boolean stopTimerTo){
       if (null != this.timerTask){
@@ -60,8 +66,9 @@ public class Zone  {
         this.timer = null;
       }
     }
+
     /**
-     *Make Coquille move every 33 ms.
+     * {@summary Make CoquilleBille move every 33 ms. }
      */
     public void moving(){
         // stopTimerTask(false); //Stop last timer task.

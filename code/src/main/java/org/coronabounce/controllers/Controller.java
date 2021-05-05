@@ -5,7 +5,7 @@ import org.coronabounce.mvcconnectors.Controllable;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Class Controller is a auxiliary to MainController and SettingsController.
+ * Class Controller is a auxiliary one to MainController and SettingsController.
  * It provide initial values of constants and methods to change them in the course of using the program.
  */
 public class Controller implements Controllable
@@ -152,8 +152,7 @@ public class Controller implements Controllable
     public double getRadiusDot() { return RADIUS_DOT; }
 
     /**
-     * {@summary Sets radius dot.}
-     * Used in tests.
+     * {@summary Sets radius dot. Used in tests. }
      * @param x the radius of dot.
      */
     public void setRadiusDot(double x) { RADIUS_DOT = x; }
@@ -246,6 +245,10 @@ public class Controller implements Controllable
      */
     @Override
     public double getThickness() { return THICKNESS; }
+
+    /**
+     * {@summary Setter of thickness of walls. Used in tests. }
+     */
     public void setThickness(double d) { THICKNESS=d; }
 
 }

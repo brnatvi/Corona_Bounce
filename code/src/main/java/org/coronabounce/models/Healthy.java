@@ -1,6 +1,8 @@
 package org.coronabounce.models;
 
-
+/**
+ * Class which represents a healthy person.
+ */
 public class Healthy extends Individual {
 
     public Healthy(CoquilleBille coc, Population p){

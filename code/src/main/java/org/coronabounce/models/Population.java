@@ -6,31 +6,37 @@ import org.coronabounce.mvcconnectors.Displayable;
 
 import java.util.*;
 
+/**
+ * Population consists of individuals which move (CoquilleBilles) and participate in epidemy.
+ */
 public class Population implements Displayable {
 
-    /** Current controller contains all parameters **/
+    /** Current controller, contains all parameters. **/
     private Controllable controller;
-    /** Contains the population "CoquilleBille"  list **/
+    /** List which contains CoquilleBilles - moving capacities of all persons of this population. **/
     private List<CoquilleBille> listCoquille = new ArrayList<CoquilleBille>();
-    /** Collect the counts of healthy, sick, incubating, recovered in form of FIFO **/
+    /** Collect the counts of healthy, sick, incubating, recovered in form of FIFO. **/
     private Data data;
-    /** Sick people count **/
+    /** Sick people count. **/
     public int nbSick;
-    /** Healthy people count **/
+    /** Healthy people count. **/
     public int nbHealthy;
-    /** Recovered people count **/
+    /** Recovered people count. **/
     public int nbRecovered;
-    /** Incubating people count ( got the virus but not sick ) **/
+    /** Incubating people count ( got the virus but not sick ). **/
     public int nbIncubating;
-    /** Boundaries (walls) list **/
+    /** Boundaries (walls) list. **/
     private List<Wall> listWall = new ArrayList<Wall>();
-    private Timer timer;
+    /** Timer to manage virus spreading and healing. **/
+    private Timer timer = null;
+    /** Task to manage virus spreading and healing. **/
     private TimerTask timerTask = null;
     private static Random random = new Random();
 
     //============================= Constructors ======================================================================/
 
     public Population(Controllable controller, int nbH, int nbS, int nbR,boolean isLockDown, boolean isWall, boolean isRestrictionMovement) {
+        if (this.timer != null) { this.stopTimer(true); }
         this.controller = controller;
         data = new Data();
         timer = new Timer();
@@ -120,7 +126,10 @@ public class Population implements Displayable {
      * {@summary Get list of walls.}
      */
     public List<Wall> getListWall() { return listWall; }
-    //Use only by test.
+
+    /**
+     * {@summary List of walls setter. Used only by tests.}
+     */
     public void setListWall(List<Wall> l){listWall=l;}
 
     //========================= Virus Getters/Setters =================================================================/
@@ -148,56 +157,73 @@ public class Population implements Displayable {
 
     //========================= Points Interactions ===================================================================/
 
-    public void addIndividual(Individual i) { /** Create a "CoquilleBille" , put in the Individual "i" and add it the the CoquilleBille ' list **/
+    /**
+     * {@summary Creates a "CoquilleBille", puts in it the Individual "i" and adds it the list of CoquilleBille.}
+     */
+    public void addIndividual(Individual i) {
         CoquilleBille coc = new CoquilleBille(i, this);
         listCoquille.add(coc);
     }
 
+    /**
+     * {@summary Provides functionality appropriate to each individual:. }
+     *<ul>
+     *<li> incubating make contaminate
+     *<li> nbSick = nbSick + NbIncubating + nbRecovered (middle layer)
+     *<li> NbRecovered = NbRecovered (top layer)
+     *</ul>
+     */
     public void Contacts(){
         for(CoquilleBille coc:listCoquille){
             coc.getIndividual().agitSur();
         }
-
     }
 
-    private double dist(Wall w,CoquilleBille coc){/** Calculate distance between a "CoquilleBille" and a "Wall" **/
-        double x1 = coc.getCurrentPosition().getX();/** The X  position of the CoquilleBille **/
-        double x2 = w.getPositionX();/** The X position of the Wall **/
-        double y1 = coc.getCurrentPosition().getY();/** The Y position of the CoquilleBille **/
-        double y2 = w.getPositionY();/** The Y position of the Wall **/
+    /**
+     * {@summary Calculate distance between a "CoquilleBille" and a "Wall" }
+     */
+    private double dist(Wall w,CoquilleBille coc){
+        /** The X  position of the CoquilleBille **/
+        double x1 = coc.getCurrentPosition().getX();
+        /** The X position of the Wall **/
+        double x2 = w.getPositionX();
+        /** The Y position of the CoquilleBille **/
+        double y1 = coc.getCurrentPosition().getY();
+        /** The Y position of the Wall **/
+        double y2 = w.getPositionY();
         return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }
 
-
-    public double distance(CoquilleBille i1, CoquilleBille i2) { /** Calculate distance between two  "CoquilleBille" (s)  **/
+    /**
+     * {@summary Calculates distance between two "CoquilleBille" (s) }
+     */
+    public double distance(CoquilleBille i1, CoquilleBille i2) {
         return i1.getCurrentPosition().distanceFrom(i2.getCurrentPosition());
     }
 
     //*****************************************************Strict lockdown*************************************************/
-    /**
-     *
-     * RestrictMovement() prevent a big part of the population from moving
-     olny(doctors, cops ..) go to work and people go out rarely and just out of necessity **/
 
-    public void  RestrictMovement()
+    /**
+     * {@summary Prevents a big part of the population from moving (70-80%). Only doctors, cops etc. went to work.}
+     **/
+    public void RestrictMovement()
     {
         int prctg=random.nextInt(10)+70;
         int cpt = (prctg * this.getNbIndividus()) / 100;
 
         while (cpt > 0) {
             int index = random.nextInt(this.getNbIndividus());
-            /** make sure to get a new coquille(check if the coquille has already been chosen or not) **/
+            /** make sure to get a new coquille (check if the coquille has already been chosen or not) **/
             while (this.listCoquille.get(index).getMovingSpeed() == 0) index = random.nextInt(this.getNbIndividus());
             this.listCoquille.get(index).setMovingSpeed(0, 0);
             cpt--;
         }
     }
 
-
     //========================= Prints ================================================================================/
 
     /**
-     * {@summary Print for debug, internal using function}
+     * {@summary Print for debug, internal using function. }
      */
     private void printPop() {
 
@@ -219,15 +245,15 @@ public class Population implements Displayable {
     //================================ Functions for Walls ============================================================/
 
     /**
-     *{@summary Create the walls.}<br>
-     *All the wall will be create at equals distance from eatch other.<br>
+     *{@summary Creates the walls.}<br>
+     *All the wall will be create at equals distance from each other.<br>
      *@param numberOfWall the number of wall that will be add.
      */
     private boolean createWalls(int numberOfWall){
         double maxX = controller.getSpaceSize()[0];
         for (int i = 1; i <= numberOfWall; i++) {
             double posX = (maxX * i)/(numberOfWall + 1);
-            listWall.add(new Wall(this.controller, posX));
+            listWall.add(new Wall(this.controller, posX, listCoquille));
         }
         if(numberOfWall>0){
             return true;
@@ -294,7 +320,7 @@ public class Population implements Displayable {
     public int getNbIndividus() { return getAllPoints().size(); }
 
     /**
-     * {@summary Get number of healthy}
+     * {@summary Get number of healthy. }
      */
     public int getNbHealthy() { return nbHealthy; }
 
@@ -335,7 +361,7 @@ public class Population implements Displayable {
     }
 
     /**
-     * {@summary Get saved statistics (history) }
+     * {@summary Get saved statistics (history). }
      * @return Data - history
      */
     @Override
@@ -345,6 +371,8 @@ public class Population implements Displayable {
 
     /**
      * {@summary Close timer to stop using this population.}
+     * @param b_StopTimer is false means need only close TimerTask but keep Timer.
+     *                    If b_StopTimer if true means need to close Timer too.
      */
     public void stopTimer(boolean b_StopTimer)
     {
