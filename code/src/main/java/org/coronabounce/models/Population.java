@@ -28,7 +28,7 @@ public class Population implements Displayable {
     /** Boundaries (walls) list. **/
     private List<Wall> listWall = new ArrayList<Wall>();
     /** Timer to manage virus spreading and healing. **/
-    private Timer timer;
+    private Timer timer = null;
     /** Task to manage virus spreading and healing. **/
     private TimerTask timerTask = null;
     private static Random random = new Random();
@@ -36,6 +36,7 @@ public class Population implements Displayable {
     //============================= Constructors ======================================================================/
 
     public Population(Controllable controller, int nbH, int nbS, int nbR,boolean isLockDown, boolean isWall, boolean isRestrictionMovement) {
+        if (this.timer != null) { this.stopTimer(true); }
         this.controller = controller;
         data = new Data();
         timer = new Timer();
@@ -252,7 +253,7 @@ public class Population implements Displayable {
         double maxX = controller.getSpaceSize()[0];
         for (int i = 1; i <= numberOfWall; i++) {
             double posX = (maxX * i)/(numberOfWall + 1);
-            listWall.add(new Wall(this.controller, posX));
+            listWall.add(new Wall(this.controller, posX, listCoquille));
         }
         if(numberOfWall>0){
             return true;

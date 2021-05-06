@@ -26,6 +26,7 @@ public class Zone  {
 
     // CONSTRUCTORS ------------------------------------------------------------
     public Zone (Controllable controller,boolean isLockDown, boolean isWall, boolean isRestrictionMovement){
+        if (this.timer != null) { this.stopTimerTask(true);}
         timer=new Timer();
         this.controller = controller;
         this.width = controller.getSpaceSize()[0];

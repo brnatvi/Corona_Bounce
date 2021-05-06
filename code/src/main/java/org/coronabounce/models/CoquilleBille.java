@@ -25,7 +25,7 @@ public class CoquilleBille {
     private final int id;
     /** The number of Shell already created. **/
     private static int idCpt=0;
-    private boolean canBounceMore;
+    // private boolean canBounceMore;
     /** Random number to set speed points. **/
     private Random r = new Random();
     private double minReboundSpeed=3;
@@ -142,15 +142,17 @@ public class CoquilleBille {
      */
     public void move(){
         //bounceIfHitOtherCoquilleBille();
-        if(bounceIfOutOfZone() | bounceIfHitWall()){
-          // System.out.println("Can not bounce: "+id);//@a
-          canBounceMore=false;
-        }else{
-          // System.out.println("Bounce: "+id);//@a
-          canBounceMore=true;
-        }
-        this.currentPosition.setPos(this.currentPosition.getX()+this.movingSpeedX,this.currentPosition.getY()+this.movingSpeedY);
         ricochetAll();
+        bounceIfOutOfZone();
+        bounceIfHitWall();
+        // if(false){
+        //   // System.out.println("Can not bounce: "+id);//@a
+        //   canBounceMore=false;
+        // }else{
+          // System.out.println("Bounce: "+id);//@a
+          // canBounceMore=true;
+        // }
+        this.currentPosition.setPos(this.currentPosition.getX()+this.movingSpeedX,this.currentPosition.getY()+this.movingSpeedY);
     }
 
     //=================================== Bounce off walls ===========================================================//
@@ -253,13 +255,15 @@ public class CoquilleBille {
         boolean isDone = false;
         if (!isRicochet && isNear(coc))
         {
-          if (coc.canBounceMore && canBounceMore) {
+          // if (coc.canBounceMore && canBounceMore) {
             double tmpX = coc.getMovingSpeedX();
             double tmpY = coc.getMovingSpeedY();
             coc.setMovingSpeed(this.movingSpeedX, this.movingSpeedY);
             this.setMovingSpeed(tmpX, tmpY);
             isDone = true;
-          }
+            // coc.canBounceMore=false;
+            // canBounceMore=false;
+          // }
         }
         return isDone;
     }
