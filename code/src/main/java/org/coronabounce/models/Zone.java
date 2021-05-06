@@ -74,11 +74,16 @@ public class Zone  {
         this.timer.schedule(this.timerTask=new TimerTask() {
             @Override
             public void run(){
+                long startTime = System.currentTimeMillis();
                 if (controller.getState() == Controllable.eState.Working){
                     p.Contacts();
                     p.makeBilleMove();
                 }
+                long stopTime = System.currentTimeMillis();                                // code for debug
+                long diff = stopTime - startTime;
+                System.out.println("Difference MOve: " + diff);
             }
         },0,33);
+
     }
 }
