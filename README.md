@@ -9,6 +9,7 @@
 Corona Bounce is an emidemic simulation tool with a GUI interface.
 
 **How to use**
+
 #RUN (jar file may change version)
 java -jar code/cb1.0.8.jar
 
@@ -24,7 +25,11 @@ Launch code/docs/javadoc/apidocs/index.html on the web.
 **Maintainers:**
 
 Emilien Raveneau Grisard
+
 Zahra Alliche
+
 Anna Golikova
+
 Kenza Sahi
+
 Natalia Bragina
