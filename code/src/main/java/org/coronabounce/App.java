@@ -24,15 +24,15 @@ public class App extends Application {
     private static MainController controllerMain;
     /** Controller of settings fxml file. **/
     private static SettingsController controllerSettings;
-    /** Parent of main's / setting's nodes. **/
+    /** Parent of main / settings nodes. **/
     private static Parent parentMain, parentSettings;
 
     /**
      * {@summary Redefinition of the main entry point for application.}
      * <ul>
-     * <li> loads main window parent and settings window parent
+     * <li> first loads main window parent and settings window parent (at the same tme)
      * <li> loads scene basing main parent
-     * <li> defines optimal size of windows in consideration of screen size, min/max dimensions and resizability
+     * <li> defines optimal size of windows based on the screen size, min/max dimensions and resizability
      * <li> sets onCloseRequest
      * <li> shows
      * </ul>
