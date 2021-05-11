@@ -14,16 +14,30 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 
 /**
- * JavaFX App
+ * JavaFX Application class
  */
 public class App extends Application {
 
+    /** Scene of the application. **/
     private static Scene scene;
+    /** Controller of main fxml file. **/
     private static MainController controllerMain;
+    /** Controller of settings fxml file. **/
     private static SettingsController controllerSettings;
+    /** Parent of main's / setting's nodes. **/
     private static Parent parentMain, parentSettings;
 
-
+    /**
+     * {@summary Redefinition of the main entry point for application.}
+     * <ul>
+     * <li> loads main window parent and settings window parent
+     * <li> loads scene basing main parent
+     * <li> defines optimal size of windows in consideration of screen size, min/max dimensions and resizability
+     * <li> sets onCloseRequest
+     * <li> shows
+     * </ul>
+     * @param stage of application.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         parentMain = loadMain();
@@ -65,6 +79,10 @@ public class App extends Application {
        // musique.start();
     }
 
+    /**
+     * {@summary Setter of scene's root.}
+     * @param fxml name of fxml file.
+     */
     static void setRoot(String fxml) {
         if(fxml == "corona bounce") {
             scene.setRoot(parentMain);
@@ -73,6 +91,9 @@ public class App extends Application {
         }
     }
 
+    /**
+     * {@summary Loader of main window.}
+     */
     private static Parent loadMain() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("corona bounce.fxml"));
         Parent p = fxmlLoader.load();
@@ -80,6 +101,9 @@ public class App extends Application {
         return p;
     }
 
+    /**
+     * {@summary Loader of settings window.}
+     */
     private static Parent loadSettings() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("settings.fxml"));
         Parent p = fxmlLoader.load();
@@ -87,6 +111,9 @@ public class App extends Application {
         return p;
     }
 
+    /**
+     * {@summary Launcher of application.}
+     */
     public static void main(String[] args) {
         launch();
     }

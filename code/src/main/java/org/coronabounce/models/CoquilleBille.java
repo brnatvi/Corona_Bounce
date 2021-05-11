@@ -28,9 +28,10 @@ public class CoquilleBille {
     // private boolean canBounceMore;
     /** Random number to set speed points. **/
     private Random r = new Random();
-    private double minReboundSpeed=3;
     /** Upper bound to set speed points. **/
     private static int MAX_SPEED = 4;
+    /** Variable indicated if point is movable then ricochet (false only for immovable points during Strict Lockdown). **/
+    private boolean canRebound;
 
     /**
      * {@summary Internal use constructor. Instantiates a new Coquille bille.}
@@ -52,8 +53,9 @@ public class CoquilleBille {
         }
 
         id=idCpt++;                     /**increment the number of Shells that exist**/
-        this.movingSpeedX=speedX;       /**update movingSpeedX**/
-        this.movingSpeedY=speedY;       /** update movingSpeedY**/
+        this.movingSpeedX = speedX;       /**update movingSpeedX**/
+        this.movingSpeedY = speedY;       /** update movingSpeedY**/
+        this.canRebound = true;
     }
 
     /**
@@ -130,9 +132,19 @@ public class CoquilleBille {
     }
 
     /**
-     * {@summary Setter of position. Used in tests}<br>
+     * {@summary Setter of position. Used in tests.}<br>
      */
     public void setPos(double x, double y){getCurrentPosition().setPos(x,y);}
+
+    /**
+     * {@summary Getter of capability to rebound. }
+     */
+    public boolean getCanRebound(){return this.canRebound;}
+
+    /**
+     * {@summary Setter of capability to rebound. }
+     */
+    public void setCanRebound(boolean canRebound){this.canRebound = canRebound;}
 
     //===================================== Moving ===================================================================//
 
@@ -141,17 +153,9 @@ public class CoquilleBille {
      * Speed will be modified if this hurt a limit of the zone.
      */
     public void move(){
-        //bounceIfHitOtherCoquilleBille();
         ricochetAll();
         bounceIfOutOfZone();
         bounceIfHitWall();
-        // if(false){
-        //   // System.out.println("Can not bounce: "+id);//@a
-        //   canBounceMore=false;
-        // }else{
-          // System.out.println("Bounce: "+id);//@a
-          // canBounceMore=true;
-        // }
         this.currentPosition.setPos(this.currentPosition.getX()+this.movingSpeedX,this.currentPosition.getY()+this.movingSpeedY);
     }
 
@@ -192,24 +196,6 @@ public class CoquilleBille {
         }
         return false;
     }
-//    /**
-//     *{@summary bounce if this will hit an other CoquilleBille.}<br>
-//     *All CoquilleBille that this can hit are in population.
-//     */
-//   public void bounceIfHitOtherCoquilleBille(){
-//     for(CoquilleBille coc : population.getAllPoints()){
-//       if(!coc.equals(this) && getCurrentPosition().distanceFrom(coc.getCurrentPosition()) <= (2* controller.getRadiusDot())){
-//         if(coc.InX(this)){
-//         coc.bounce(true);
-//         this.bounce(true);
-//         }
-//         if(coc.InY(this)){
-//           coc.bounce(false);
-//           this.bounce(false);
-//         }
-//       }
-//     }
-//   }
 
     /**
      * {@summary Bounce.}<br>
@@ -255,15 +241,19 @@ public class CoquilleBille {
         boolean isDone = false;
         if (!isRicochet && isNear(coc))
         {
-          // if (coc.canBounceMore && canBounceMore) {
-            double tmpX = coc.getMovingSpeedX();
-            double tmpY = coc.getMovingSpeedY();
-            coc.setMovingSpeed(this.movingSpeedX, this.movingSpeedY);
-            this.setMovingSpeed(tmpX, tmpY);
+            if (this.canRebound && coc.getCanRebound())
+            {
+                double tmpX = coc.getMovingSpeedX();
+                double tmpY = coc.getMovingSpeedY();
+                coc.setMovingSpeed(this.movingSpeedX, this.movingSpeedY);
+                this.setMovingSpeed(tmpX, tmpY);
+            }
+            else if (!coc.getCanRebound())
+            {
+                this.bounce(true);
+                this.bounce(false);
+            }
             isDone = true;
-            // coc.canBounceMore=false;
-            // canBounceMore=false;
-          // }
         }
         return isDone;
     }
@@ -305,27 +295,51 @@ public class CoquilleBille {
         return false;
     }
 
-    // private boolean isBetween(double c, double a, double b){
-    //     if( c<=b && c>=a ) return true;
-    //     return false;
-    // }
+    /**
+     *{@summary Return true if there is obstacle (boundary) to contaminate another CoquilleBille.}
+     *@param coc some coquillebille.
+     *@return the boolean.
+     */
+    public boolean isWallBetween(CoquilleBille coc)
+    {
+        // is scenario with boundaries
+        if (population.getIsWall())
+        {
+            // istance is enough to contaminate
+            if (this.isAtContaminationDistance(coc))
+            {
+                //wall length is enough
+                if (this.getCurrentPosition().getY() <= this.population.getHeigthsOfWalls().get(0))
+                {
+                    //if some wall is between two points
+                    for (int i = 0; i < controller.getWallsCount(); i++)
+                    {
+                        double wallX = this.population.getPositionsOfWalls().get(i);
+                        if (this.getCurrentPosition().getX() <= wallX && wallX <= coc.getCurrentPosition().getX()
+                        || coc.getCurrentPosition().getX() <= wallX && wallX <= this.getCurrentPosition().getX())
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-    //  public boolean InY(CoquilleBille coc){
-    //       if((this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()<10)&& (this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()>=0)||(this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()<10)&& (coc.getCurrentPosition().getY()-coc.getCurrentPosition().getY()>=0) ){
-    //            return true;
-    //       }else{
-    //            return false;
-    //       }
-    //  }
-    //  public boolean InX(CoquilleBille coc){
-    //        if((this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()<10)&& (this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()>=0)||(this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()<10)&& (coc.getCurrentPosition().getX()-coc.getCurrentPosition().getX()>=0) ){
-    //             return true;
-    //        }else{
-    //             return false;
-    //        }
-    //  }
-
-    //******************************************************************************************************************************//
+    /**
+     *{@summary Check if two coquillebille(s) are on a distance enough to contamination.}
+     *@param coc some coquillebille.
+     *@return the boolean.
+     */
+    private boolean isAtContaminationDistance(CoquilleBille coc)
+    {
+        if (getCurrentPosition().distanceFrom(coc.getCurrentPosition()) <= controller.getContaminationRadius())
+        {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * {@summary Set a random moving speed to SpeedX between -maxSpeed &#38; maxSpeed.}<br>

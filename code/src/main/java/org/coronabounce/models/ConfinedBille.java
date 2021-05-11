@@ -32,17 +32,22 @@ public class ConfinedBille extends CoquilleBille {
         this.controller = pop.getController();
         this.startingPosition = this.getCurrentPosition().clone();
     }
+
     //================================== Intermediate methods====================================//
+
     /**
      * {@summary This method allows to calculate the distance between the current position of the Shell with its starting position .}
      */
     private  double distancePos() {//cette methode calcule la distance entre la position courante de la Coquille et la position de départ
         return getCurrentPosition().distanceFrom(getStartingPosition());
     }
+
     public Position getStartingPosition() {return this.startingPosition;}
+
     private double genererDouble() {//cette methode permet de generer un reel entre 0 et 1
         return random.nextDouble();
     }
+
     /**
      * {@summary This method is used to generate an integer between terminalInf and terminalSup.}
      */
