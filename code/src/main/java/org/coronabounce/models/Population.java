@@ -245,7 +245,7 @@ public class Population implements Displayable {
         }
     }
 
-    /**********************************************Moving of Billes*************************************************/
+    //********************************************** Moving of Billes *************************************************/
 
     public void makeBilleMove() {
         for (CoquilleBille coc : listCoquille) {

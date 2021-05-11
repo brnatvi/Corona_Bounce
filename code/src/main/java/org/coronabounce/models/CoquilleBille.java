@@ -28,9 +28,9 @@ public class CoquilleBille {
     // private boolean canBounceMore;
     /** Random number to set speed points. **/
     private Random r = new Random();
-    private double minReboundSpeed=3;
     /** Upper bound to set speed points. **/
     private static int MAX_SPEED = 4;
+    /** Variable indicated if point is movable then ricochet (false only for immovable points during Strict Lockdown). **/
     private boolean canRebound;
 
     /**
@@ -132,17 +132,17 @@ public class CoquilleBille {
     }
 
     /**
-     * {@summary Setter of position. Used in tests}<br>
+     * {@summary Setter of position. Used in tests.}<br>
      */
     public void setPos(double x, double y){getCurrentPosition().setPos(x,y);}
 
     /**
-     * {@summary Capability to rebound getter. }
+     * {@summary Getter of capability to rebound. }
      */
     public boolean getCanRebound(){return this.canRebound;}
 
     /**
-     * {@summary Capability to rebound setter. }
+     * {@summary Setter of capability to rebound. }
      */
     public void setCanRebound(boolean canRebound){this.canRebound = canRebound;}
 
@@ -153,17 +153,9 @@ public class CoquilleBille {
      * Speed will be modified if this hurt a limit of the zone.
      */
     public void move(){
-        //bounceIfHitOtherCoquilleBille();
         ricochetAll();
         bounceIfOutOfZone();
         bounceIfHitWall();
-        // if(false){
-        //   // System.out.println("Can not bounce: "+id);//@a
-        //   canBounceMore=false;
-        // }else{
-          // System.out.println("Bounce: "+id);//@a
-          // canBounceMore=true;
-        // }
         this.currentPosition.setPos(this.currentPosition.getX()+this.movingSpeedX,this.currentPosition.getY()+this.movingSpeedY);
     }
 
@@ -204,24 +196,6 @@ public class CoquilleBille {
         }
         return false;
     }
-//    /**
-//     *{@summary bounce if this will hit an other CoquilleBille.}<br>
-//     *All CoquilleBille that this can hit are in population.
-//     */
-//   public void bounceIfHitOtherCoquilleBille(){
-//     for(CoquilleBille coc : population.getAllPoints()){
-//       if(!coc.equals(this) && getCurrentPosition().distanceFrom(coc.getCurrentPosition()) <= (2* controller.getRadiusDot())){
-//         if(coc.InX(this)){
-//         coc.bounce(true);
-//         this.bounce(true);
-//         }
-//         if(coc.InY(this)){
-//           coc.bounce(false);
-//           this.bounce(false);
-//         }
-//       }
-//     }
-//   }
 
     /**
      * {@summary Bounce.}<br>
@@ -332,7 +306,7 @@ public class CoquilleBille {
         if (population.getIsWall())
         {
             // istance is enough to contaminate
-            if (this.isOnContaminationRadius(coc))
+            if (this.isAtContaminationDistance(coc))
             {
                 //wall length is enough
                 if (this.getCurrentPosition().getY() <= this.population.getHeigthsOfWalls().get(0))
@@ -358,7 +332,7 @@ public class CoquilleBille {
      *@param coc some coquillebille.
      *@return the boolean.
      */
-    private boolean isOnContaminationRadius(CoquilleBille coc)
+    private boolean isAtContaminationDistance(CoquilleBille coc)
     {
         if (getCurrentPosition().distanceFrom(coc.getCurrentPosition()) <= controller.getContaminationRadius())
         {
@@ -366,7 +340,6 @@ public class CoquilleBille {
         }
         return false;
     }
-    //******************************************************************************************************************************//
 
     /**
      * {@summary Set a random moving speed to SpeedX between -maxSpeed &#38; maxSpeed.}<br>
