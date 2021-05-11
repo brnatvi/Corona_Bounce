@@ -31,6 +31,7 @@ public class CoquilleBille {
     private double minReboundSpeed=3;
     /** Upper bound to set speed points. **/
     private static int MAX_SPEED = 4;
+    private boolean canRebound;
 
     /**
      * {@summary Internal use constructor. Instantiates a new Coquille bille.}
@@ -52,8 +53,9 @@ public class CoquilleBille {
         }
 
         id=idCpt++;                     /**increment the number of Shells that exist**/
-        this.movingSpeedX=speedX;       /**update movingSpeedX**/
-        this.movingSpeedY=speedY;       /** update movingSpeedY**/
+        this.movingSpeedX = speedX;       /**update movingSpeedX**/
+        this.movingSpeedY = speedY;       /** update movingSpeedY**/
+        this.canRebound = true;
     }
 
     /**
@@ -133,6 +135,16 @@ public class CoquilleBille {
      * {@summary Setter of position. Used in tests}<br>
      */
     public void setPos(double x, double y){getCurrentPosition().setPos(x,y);}
+
+    /**
+     * {@summary Capability to rebound getter. }
+     */
+    public boolean getCanRebound(){return this.canRebound;}
+
+    /**
+     * {@summary Capability to rebound setter. }
+     */
+    public void setCanRebound(boolean canRebound){this.canRebound = canRebound;}
 
     //===================================== Moving ===================================================================//
 
@@ -255,15 +267,19 @@ public class CoquilleBille {
         boolean isDone = false;
         if (!isRicochet && isNear(coc))
         {
-          // if (coc.canBounceMore && canBounceMore) {
-            double tmpX = coc.getMovingSpeedX();
-            double tmpY = coc.getMovingSpeedY();
-            coc.setMovingSpeed(this.movingSpeedX, this.movingSpeedY);
-            this.setMovingSpeed(tmpX, tmpY);
+            if (this.canRebound && coc.getCanRebound())
+            {
+                double tmpX = coc.getMovingSpeedX();
+                double tmpY = coc.getMovingSpeedY();
+                coc.setMovingSpeed(this.movingSpeedX, this.movingSpeedY);
+                this.setMovingSpeed(tmpX, tmpY);
+            }
+            else if (!coc.getCanRebound())
+            {
+                this.bounce(true);
+                this.bounce(false);
+            }
             isDone = true;
-            // coc.canBounceMore=false;
-            // canBounceMore=false;
-          // }
         }
         return isDone;
     }
@@ -315,10 +331,10 @@ public class CoquilleBille {
         // is scenario with boundaries
         if (population.getIsWall())
         {
-            // can contaminate
+            // istance is enough to contaminate
             if (this.isOnContaminationRadius(coc))
             {
-                //if wall length is enough
+                //wall length is enough
                 if (this.getCurrentPosition().getY() <= this.population.getHeigthsOfWalls().get(0))
                 {
                     //if some wall is between two points
@@ -337,6 +353,11 @@ public class CoquilleBille {
         return false;
     }
 
+    /**
+     *{@summary Check if two coquillebille(s) are on a distance enough to contamination.}
+     *@param coc some coquillebille.
+     *@return the boolean.
+     */
     private boolean isOnContaminationRadius(CoquilleBille coc)
     {
         if (getCurrentPosition().distanceFrom(coc.getCurrentPosition()) <= controller.getContaminationRadius())
@@ -345,27 +366,6 @@ public class CoquilleBille {
         }
         return false;
     }
-
-    // private boolean isBetween(double c, double a, double b){
-    //     if( c<=b && c>=a ) return true;
-    //     return false;
-    // }
-
-    //  public boolean InY(CoquilleBille coc){
-    //       if((this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()<10)&& (this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()>=0)||(this.getCurrentPosition().getY()-coc.getCurrentPosition().getY()<10)&& (coc.getCurrentPosition().getY()-coc.getCurrentPosition().getY()>=0) ){
-    //            return true;
-    //       }else{
-    //            return false;
-    //       }
-    //  }
-    //  public boolean InX(CoquilleBille coc){
-    //        if((this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()<10)&& (this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()>=0)||(this.getCurrentPosition().getX()-coc.getCurrentPosition().getX()<10)&& (coc.getCurrentPosition().getX()-coc.getCurrentPosition().getX()>=0) ){
-    //             return true;
-    //        }else{
-    //             return false;
-    //        }
-    //  }
-
     //******************************************************************************************************************************//
 
     /**
