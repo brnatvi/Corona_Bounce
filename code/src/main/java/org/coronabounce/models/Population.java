@@ -32,6 +32,7 @@ public class Population implements Displayable {
     /** Task to manage virus spreading and healing. **/
     private TimerTask timerTask = null;
     private static Random random = new Random();
+    /** Boolean indicating if scenarios with boundaries is applied. **/
     private boolean isWall;
 
     //============================= Constructors ======================================================================/
