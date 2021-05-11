@@ -40,6 +40,7 @@ public class Incubating extends Individual{
      *<li> It is a different Individual.
      *<li> It is close to this.
      *<li> It is a Healthy Individual.
+     *<li> Isn't wall between them.
      *</ul>
      */
     private void contaminate(){
