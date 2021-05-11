@@ -305,6 +305,47 @@ public class CoquilleBille {
         return false;
     }
 
+    /**
+     *{@summary Return true if there is obstacle (boundary) to contaminate another CoquilleBille.}
+     *@param coc some coquillebille.
+     *@return the boolean.
+     */
+    public boolean isWallBetween(CoquilleBille coc)
+    {
+        // is scenario with boundaries
+        if (population.getIsWall())
+        {
+            // can contaminate
+            if (this.isOnContaminationRadius(coc))
+            {
+                //if wall length is enough
+                if (this.getCurrentPosition().getY() <= this.population.getHeigthsOfWalls().get(0))
+                {
+                    //if some wall is between two points
+                    for (int i = 0; i < controller.getWallsCount(); i++)
+                    {
+                        double wallX = this.population.getPositionsOfWalls().get(i);
+                        if (this.getCurrentPosition().getX() <= wallX && wallX <= coc.getCurrentPosition().getX()
+                        || coc.getCurrentPosition().getX() <= wallX && wallX <= this.getCurrentPosition().getX())
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isOnContaminationRadius(CoquilleBille coc)
+    {
+        if (getCurrentPosition().distanceFrom(coc.getCurrentPosition()) <= controller.getContaminationRadius())
+        {
+            return true;
+        }
+        return false;
+    }
+
     // private boolean isBetween(double c, double a, double b){
     //     if( c<=b && c>=a ) return true;
     //     return false;

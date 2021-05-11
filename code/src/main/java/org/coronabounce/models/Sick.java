@@ -43,7 +43,8 @@ public class Sick extends Individual {
     */
     private void contaminate(){
         for(CoquilleBille c : population.getAllPoints()){/**browse the list of Shells**/
-            if(!coc.equals(c) && population.distance(coc,c)<= population.getContaminationRadius() && c.getIndividual() instanceof Healthy){
+            if(!coc.equals(c) && population.distance(coc,c)<= population.getContaminationRadius()
+                    && c.getIndividual() instanceof Healthy && !coc.isWallBetween(c)){
                 c.setIndividual(new Incubating(c, population));
             }
         }

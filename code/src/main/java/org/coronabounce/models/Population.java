@@ -32,6 +32,7 @@ public class Population implements Displayable {
     /** Task to manage virus spreading and healing. **/
     private TimerTask timerTask = null;
     private static Random random = new Random();
+    private boolean isWall;
 
     //============================= Constructors ======================================================================/
 
@@ -40,6 +41,7 @@ public class Population implements Displayable {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
+        this.isWall = isWall;
         Position.cleanListTakenPositions();
 
         if(isLockDown){  /** In case we apply "LockDown" scenario, we need to create "ConfinedBille(S)" **/
@@ -92,7 +94,6 @@ public class Population implements Displayable {
             wall.makeWallGoDown(this);/** Make the wall go down little by little **/
           }
         }
-
     }
 
     public Population(Controllable controller, int nbIndividus,boolean isLockDown, boolean isWall, boolean isRestrictionMovement) {
@@ -131,6 +132,11 @@ public class Population implements Displayable {
      * {@summary List of walls setter. Used only by tests.}
      */
     public void setListWall(List<Wall> l){listWall=l;}
+
+    /**
+     * {@summary Getter of boolean isWall, indicating if scenario with boundaries is applied.}
+     */
+    public boolean getIsWall() {return this.isWall;}
 
     //========================= Virus Getters/Setters =================================================================/
 
