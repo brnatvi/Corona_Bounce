@@ -14,10 +14,11 @@ import java.util.Random;
 public class Position implements Cloneable{
     /** To know if there is already an Individual at this location. */
     private static List<Position> listTakenPositions = new ArrayList<Position>();
-    // the 2 important value.
+    /** x coordinate of point. */
     private double posX;
+    /** y coordinate of point. */
     private double posY;
-    //static values for lest space use.
+    //static values for test space use.
     private static double minLimit;
     private static double maxLimitX;
     private static double maxLimitY;
@@ -88,7 +89,6 @@ public class Position implements Cloneable{
      * Dot radius is used to avoid GUI glitch.<br>
      */
     public void setPos(double x, double y) {
-      //TODO add condition do not set in positions of walls
       if (x < minLimit) {x = minLimit;}
       else if (x > maxLimitX) {x = maxLimitX;}
       if (y < minLimit) {y = minLimit;}
@@ -96,11 +96,19 @@ public class Position implements Cloneable{
       this.posX = x;
       this.posY = y;
     }
+
+    /**
+     * {@summary Setter of x coordinate.}
+     */
     public void setX(double x){
       if (x < minLimit) {x = minLimit;}
       else if (x > maxLimitX) {x = maxLimitX;}
       this.posX = x;
     }
+
+    /**
+     * {@summary Setter of y coordinate.}
+     */
     public void setY(double y){
       if (y < minLimit) {y = minLimit;}
       else if (y > maxLimitY) {y = maxLimitY;}
@@ -117,6 +125,7 @@ public class Position implements Cloneable{
     public String toString(){
       return "("+posX+";"+posY+")";
     }
+
     @Override
     public boolean equals(Object o){
       if(o instanceof Position){
@@ -126,10 +135,9 @@ public class Position implements Cloneable{
       }
       return false;
     }
-    @Override
-    public final int hashCode(){
-      return (int)((posX*posY)*10000);
-    }
+
+  //  @Override
+  //  public final int hashCode(){ return (int)((posX*posY)*10000); }
 
     /**
      * Check if position of instance is distinguished from all other point's one
@@ -156,9 +164,7 @@ public class Position implements Cloneable{
      * Standard clone function.
      */
     @Override
-    public Position clone(){
-      return new Position(posX,posY);
-    }
+    public Position clone(){ return new Position(posX,posY); }
 
     /**
      * {@summary Get distance from an other position.}

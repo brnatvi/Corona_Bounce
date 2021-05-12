@@ -214,7 +214,7 @@ public class Population implements Displayable {
     /**
      * {@summary Prevents a big part of the population from moving (70-80%). Only doctors, cops etc. went to work.}
      **/
-    public void RestrictMovement()
+    private void RestrictMovement()
     {
         int prctg=random.nextInt(10)+70;
         int cpt = (prctg * this.getNbIndividus()) / 100;
@@ -247,6 +247,9 @@ public class Population implements Displayable {
 
     //********************************************** Moving of Billes *************************************************/
 
+    /**
+     * {@summary Apply move() function to each point of population. }
+     */
     public void makeBilleMove() {
         for (CoquilleBille coc : listCoquille) {
           coc.move();

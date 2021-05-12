@@ -219,7 +219,7 @@ public class CoquilleBille {
     /**
      * {@summary Makes ricochet if necessary with all other points.}
      */
-    public void ricochetAll()
+    private void ricochetAll()
     {
         for (CoquilleBille coc : population.getAllPoints())
         {
@@ -236,7 +236,7 @@ public class CoquilleBille {
      * @param isRicochet the is ricochet
      * @return true if ricochet was made.
      */
-    public boolean ricochet(CoquilleBille coc, boolean isRicochet)
+    private boolean ricochet(CoquilleBille coc, boolean isRicochet)
     {
         boolean isDone = false;
         if (!isRicochet && isNear(coc))
@@ -263,7 +263,7 @@ public class CoquilleBille {
      * @param coc coquilleBille to measure distance with.
      * @return true if distance less than or equal to two radius of points (so they are contiguous).
      */
-    public boolean isNear(CoquilleBille coc)
+    private boolean isNear(CoquilleBille coc)
     {
         if (getCurrentPosition().distanceFrom(coc.getCurrentPosition()) <= 2*controller.getRadiusDot())
         {
@@ -345,7 +345,7 @@ public class CoquilleBille {
      * {@summary Set a random moving speed to SpeedX between -maxSpeed &#38; maxSpeed.}<br>
      * @param maxSpeed the max speed to add.
      */
-    public void addSpeedX(int maxSpeed){
+    private void addSpeedX(int maxSpeed){
         if(maxSpeed<1){maxSpeed=1;}
         if(r.nextBoolean()){maxSpeed=maxSpeed*(-1);}
         this.movingSpeedX = r.nextDouble()*maxSpeed;
@@ -355,7 +355,7 @@ public class CoquilleBille {
      * {@summary Set a random moving speed to SpeedY between -maxSpeed &#38; maxSpeed.}<br>
      * @param maxSpeed the max speed to add.
      */
-    public void addSpeedY(int maxSpeed){
+    private void addSpeedY(int maxSpeed){
         if(maxSpeed<1){maxSpeed=1;}
         if(r.nextBoolean()){maxSpeed=maxSpeed*(-1);}
         this.movingSpeedY = r.nextDouble()*maxSpeed;

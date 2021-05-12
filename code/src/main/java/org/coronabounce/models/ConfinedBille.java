@@ -42,7 +42,7 @@ public class ConfinedBille extends CoquilleBille {
         return getCurrentPosition().distanceFrom(getStartingPosition());
     }
 
-    public Position getStartingPosition() {return this.startingPosition;}
+    private Position getStartingPosition() {return this.startingPosition;}
 
     private double genererDouble() {//cette methode permet de generer un reel entre 0 et 1
         return random.nextDouble();
@@ -73,7 +73,7 @@ public class ConfinedBille extends CoquilleBille {
     /**
      * {@summary This method allows to calculate the distance between the current position of the Shell with its starting position if it exceeds a certain mileage then it must be brought back to its starting area .}
      */
-    public void stayNextToHome(){
+    private void stayNextToHome(){
         double b = genererDouble();
         double a = genererDouble() * b;
         double c;

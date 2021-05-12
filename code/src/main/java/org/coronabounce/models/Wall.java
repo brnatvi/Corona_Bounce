@@ -9,17 +9,17 @@ import java.util.*;
  * It has a fix X position and grows up progressively.
  */
 public class Wall  {
-    /** Unique id */
+    /** Unique id of the wall. */
     private final int id;
     /** Id counter */
     private static int cpt=0;
-    /** Thickness of the wall */
+    /** Thickness of the wall. */
     private final double thickness;
-    /** X coordinate of the wall */
+    /** X coordinate of the wall. */
     private final double positionX;
-    /** Height of the wall */
+    /** Height of the wall. */
     private double positionY;
-    /** Current controller */
+    /** Current controller contains all parameters. */
     private Controllable controller;
 
     private List<CoquilleBille> listCoquille;
@@ -79,7 +79,7 @@ public class Wall  {
     *@param coc The CoquilleBille that we may make bounce.
     */
     //public only for test.
-    public boolean willCrossWallInX(CoquilleBille coc){
+    private boolean willCrossWallInX(CoquilleBille coc){
         double curentX = coc.getCurrentPosition().getX();
         double futurX = curentX+coc.getMovingSpeedX();
         double radius = coc.getPopulation().getRadiusDot();
@@ -97,7 +97,7 @@ public class Wall  {
     *@param coc The CoquilleBille that we may make bounce.
     */
     //public only for test.
-    public boolean willCrossWallInY(CoquilleBille coc){
+    private boolean willCrossWallInY(CoquilleBille coc){
         double curentY = coc.getCurrentPosition().getY();
         double futurY = curentY+coc.getMovingSpeedY();
         double radius = coc.getPopulation().getRadiusDot();
@@ -164,6 +164,11 @@ public class Wall  {
         }
         return false;
     }
+
+    /**
+     * Push coquillebille outside of wall if it sticks there.
+     * @param coc moving point
+     */
     public void pushOutOfTheWallIfNeed(CoquilleBille coc){
       if(isIntoTheWall(coc)){
         System.out.println("A bille was in a wall: "+coc);//@a
@@ -180,8 +185,11 @@ public class Wall  {
  *{@summary Timer task to make wall goes down.}
  */
 class TimerTaskWall extends TimerTask{
+    /** Wall which will be animated by this timer task. */
     private Wall wall;
-    private static Controllable controller;
+    /** Current controller containing all parameters. */
+    private Controllable controller;
+    /** List of exising moving points. */
     private List<CoquilleBille> listCoquille;
 
     /**
@@ -196,7 +204,7 @@ class TimerTaskWall extends TimerTask{
     }
 
     /**
-     * {@summary Makes wall go down from wallSpeed every time we call it.}<br>
+     * {@summary Makes wall go down from wallSpeed with WALL_SPEED from controller.}<br>
      * Task will auto destroy itself if it reach the limits of the Zone.<br>
      * If a CoquilleBille will be crush into the wall, the wall push it out.<br>
      */
@@ -213,8 +221,9 @@ class TimerTaskWall extends TimerTask{
             }
         }
     }
+
     /**
-     * {@summary push down coquilleBille that will be crush into the wall if they stay here.}<br>
+     * {@summary Push down coquilleBille that will be crush into the wall if they stay here.}<br>
      */
     private void pushCoquilleBilleInYIfNeed(){
       for (CoquilleBille coc : listCoquille ) {
@@ -223,9 +232,10 @@ class TimerTaskWall extends TimerTask{
         }
       }
     }
+
     /**
-     * {@summary push left or rigth coquilleBille that will be crush into the wall if they stay here.}<br>
-     * Left or rigth side is choose by searching the smaler path to go out.<br>
+     * {@summary Push left or right coquilleBille that will be crush into the wall if they stay here.}<br>
+     * Left or right side is choose by searching the smaller path to go out.<br>
      */
     private void pushCoquilleBilleInXIfNeed(){
       for (CoquilleBille coc : listCoquille ) {
