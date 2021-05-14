@@ -13,24 +13,24 @@ public class CoquilleBille {
     private double movingSpeedX;
     /** A moving speed in y to move faster or slower. */
     private double movingSpeedY;
-    /** Current controller contains all parameters. **/
+    /** Current controller contains all parameters. */
     private Controllable controller;
-    /** Current population where Shell reside. **/
+    /** Current population where Shell reside. */
     private Population population;
-    /** Individual that the Shell will contain. **/
+    /** Individual that the Shell will contain. */
     private Individual individual;
-    /** Current position of the Shell. **/
+    /** Current position of the Shell. */
     private Position currentPosition;
-    /** Shell identifier (in order to redefine equals). **/
+    /** Shell identifier (in order to redefine equals). */
     private final int id;
-    /** The number of Shell already created. **/
+    /** The number of Shell already created. */
     private static int idCpt=0;
     // private boolean canBounceMore;
-    /** Random number to set speed points. **/
+    /** Random number to set speed points. */
     private Random r = new Random();
-    /** Upper bound to set speed points. **/
+    /** Upper bound to set speed points. */
     private static int MAX_SPEED = 4;
-    /** Variable indicated if point is movable then ricochet (false only for immovable points during Strict Lockdown). **/
+    /** Variable indicated if point is movable then ricochet (false only for immovable points during Strict Lockdown). */
     private boolean canRebound;
 
     /**
@@ -52,9 +52,9 @@ public class CoquilleBille {
           System.out.println("Position of the point have been set, but it fail to fined a free space.");
         }
 
-        id=idCpt++;                     /**increment the number of Shells that exist**/
-        this.movingSpeedX = speedX;       /**update movingSpeedX**/
-        this.movingSpeedY = speedY;       /** update movingSpeedY**/
+        id=idCpt++;                     /*increment the number of Shells that exist*/
+        this.movingSpeedX = speedX;       /*update movingSpeedX*/
+        this.movingSpeedY = speedY;       /*update movingSpeedY*/
         this.canRebound = true;
     }
 
