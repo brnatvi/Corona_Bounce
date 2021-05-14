@@ -39,7 +39,7 @@ It's possible to modify follows parameters:
 * Boundaries closing speed 
 
 
-![](/home/nata/Documents/!!_Corona_project/corona-bounce/code/target/project_1.gif)
+![](code/target/project_1.gif)
 
 Five scenarios are available to imitate government strategies:
 
@@ -49,7 +49,7 @@ Five scenarios are available to imitate government strategies:
 * «Soft Lockdown + Boundaries»
 * «No scenario»
 
-![](/home/nata/Documents/!!_Corona_project/corona-bounce/code/target/project_2.gif)
+![](code/target/project_2.gif)
 
 
 
