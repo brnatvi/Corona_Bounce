@@ -39,7 +39,7 @@ It's possible to modify follows parameters:
 * Boundaries closing speed 
 
 
-![](https://gaufre.informatique.univ-paris-diderot.fr/raveneau/corona-bounce/tree/master/code/target/project_1.gif)
+![](https://gaufre.informatique.univ-paris-diderot.fr/raveneau/corona-bounce/blob/master/code/target/project_1_resize.gif)
 
 Five scenarios are available to imitate government strategies:
 
@@ -49,7 +49,7 @@ Five scenarios are available to imitate government strategies:
 * «Soft Lockdown + Boundaries»
 * «No scenario»
 
-![](https://gaufre.informatique.univ-paris-diderot.fr/raveneau/corona-bounce/tree/master/code/target/project_2.gif)
+![](https://gaufre.informatique.univ-paris-diderot.fr/raveneau/corona-bounce/blob/master/code/target/project_2_resize.gif)
 
 
 
