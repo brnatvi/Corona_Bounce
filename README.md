@@ -4,21 +4,36 @@
 [ ![coverage-shield][] ][main]
 [ ![comment-shield][] ][main]
 
-**Global Informations**
+Corona Bounce is an epidemic simulation tool with a GUI interface.
 
-Corona Bounce is an emidemic simulation tool with a GUI interface.
+It provides possibility to compare two populations during un epidemic. It is also possible to variate population’s and disease’s parameters and apply four government strategies.
 
 **How to use**
-//TODO
+
+#compile (to do in code/)
+mvn compile
+
+#run (jar file may change version)
+java -jar code/cb1.0.8.jar
+
+#re-run with Maven (to do in code/)
+./run.sh
+
+#open JavaDoc
+Launch code/docs/javadoc/apidocs/index.html on the web browser.
+
+
+**Features**
+
 
 **Maintainers:**
 
-Emilien Raveneau Grisard
-
 Zahra Alliche
+
+Natalia Bragina
 
 Anna Golikova
 
 Kenza Sahi
 
-Natalia Bragina
+Emilien Raveneau Grisard

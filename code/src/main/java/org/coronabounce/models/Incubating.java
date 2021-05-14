@@ -40,12 +40,14 @@ public class Incubating extends Individual{
      *<li> It is a different Individual.
      *<li> It is close to this.
      *<li> It is a Healthy Individual.
+     *<li> Isn't wall between them.
      *</ul>
      */
     private void contaminate(){
         for(CoquilleBille c : population.getAllPoints()){
              /**if the distance between two shells is less than the contamination radius then the diseased shell transmits the virus to the healthy shell**/
-            if(!coc.equals(c) && population.distance(coc,c)<= population.getContaminationRadius() && c.getIndividual() instanceof Healthy){
+            if(!coc.equals(c) && population.distance(coc,c)<= population.getContaminationRadius()
+                    && c.getIndividual() instanceof Healthy && !coc.isWallBetween(c)){
                  /**overwrite the healthy individual that exists in the shell and replace it with incubating individual**/
                 c.setIndividual(new Incubating(c, population));
             }

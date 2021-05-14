@@ -20,7 +20,7 @@ public class WallTest extends Assertions{
     Individual i = new Sick(coc,p);
     coc.setIndividual(i);
     coc.setPos(10,10);
-    w = new Wall(c,15);
+    w = new Wall(c,15, p.getAllPoints());
     w.setPositionY(5);
   }
   @Test

@@ -32,6 +32,8 @@ public class Population implements Displayable {
     /** Task to manage virus spreading and healing. **/
     private TimerTask timerTask = null;
     private static Random random = new Random();
+    /** Boolean indicating if scenarios with boundaries is applied. **/
+    private boolean isWall;
 
     //============================= Constructors ======================================================================/
 
@@ -40,10 +42,11 @@ public class Population implements Displayable {
         this.controller = controller;
         data = new Data();
         timer = new Timer();
+        this.isWall = isWall;
         Position.cleanListTakenPositions();
 
-        if(isLockDown){  /** In case we apply "LockDown" scenario, we need to create "ConfinedBille(S)" **/
-
+        // If "LockDown" scenarios are applied population consists of ConfinedBille(s)
+        if(isLockDown){ 
             for (int i = 0; i < nbH; i++) {
                 CoquilleBille coc = new ConfinedBille(null, this);
                 Individual in = new Healthy(coc, this);
@@ -52,7 +55,6 @@ public class Population implements Displayable {
             }
             for (int i = 0; i < nbS; i++) {
                 CoquilleBille coc = new ConfinedBille(null, this);
-
                 Individual in = new Sick(coc, this);
                 coc.setIndividual(in);
                 listCoquille.add(coc);
@@ -66,33 +68,37 @@ public class Population implements Displayable {
         }
         else {
             for (int i = 0; i < nbH; i++) {
-                CoquilleBille coc = new CoquilleBille(null, this);/**First, create an empty "CoquilleBille" **/
-                Individual in = new Healthy(coc, this);/** create a Healthy individual **/
-                coc.setIndividual(in);/** Put a Healthy individual in the "CoquilleBille" **/
-                listCoquille.add(coc);/** Add this "Coquille" to the list **/
+                CoquilleBille coc = new CoquilleBille(null, this);    //create an empty CoquilleBille
+                Individual in = new Healthy(coc, this);                         //create a Healthy individual
+                coc.setIndividual(in);                                      //Put a Healthy individual in the CoquilleBille
+                listCoquille.add(coc);                                             //Add this Coquille to the list
             }
             for (int i = 0; i < nbS; i++) {
-                CoquilleBille coc = new CoquilleBille(null, this);/**First, create an empty "CoquilleBille" **/
-                Individual in = new Sick(coc, this);/** create a Sick individual **/
-                coc.setIndividual(in);/** Put a Sick individual in the "CoquilleBille" **/
-                listCoquille.add(coc);/** Add this "Coquille" to the list **/
+                CoquilleBille coc = new CoquilleBille(null, this);
+                Individual in = new Sick(coc, this);                            // create a Sick individual
+                coc.setIndividual(in);
+                listCoquille.add(coc);
             }
             for (int i = 0; i < nbR; i++) {
-                CoquilleBille coc = new CoquilleBille(null, this);/**First, create an empty "CoquilleBille" **/
-                Individual in = new Recovered(coc, this);/** create a Recovered individual **/
-                coc.setIndividual(in); /** Put a Recovered individual in the "CoquilleBille" **/
-                listCoquille.add(coc); /** Add this "Coquille" to the list **/
+                CoquilleBille coc = new CoquilleBille(null, this);
+                Individual in = new Recovered(coc, this);                       //create a Recovered individual
+                coc.setIndividual(in);
+                listCoquille.add(coc);
             }
 
         }
-        if(isRestrictionMovement) {this.RestrictMovement();}/**In case , "RectrictedMouvement" scenario is applied, method RestrictMouvement() is called **/
-        if(isWall){ /** In "Boundaries" scanario , we create Walls **/
-          createWalls(controller.getWallsCount());/** Get the walls' number via the Controller, and create that many (add them the the walls' list ) **/
+
+        // In "Strict Lockdown" scenario method RestrictMouvement() is called
+        if(isRestrictionMovement) { this.RestrictMovement(); }
+
+        // In "Boundaries" scenario, Walls are created
+        if(isWall){
+          createWalls(controller.getWallsCount());
           for (Wall wall : listWall ) {
-            wall.makeWallGoDown(this);/** Make the wall go down little by little **/
+              //Make the wall go down little by little
+              wall.makeWallGoDown(this);
           }
         }
-
     }
 
     public Population(Controllable controller, int nbIndividus,boolean isLockDown, boolean isWall, boolean isRestrictionMovement) {
@@ -131,6 +137,11 @@ public class Population implements Displayable {
      * {@summary List of walls setter. Used only by tests.}
      */
     public void setListWall(List<Wall> l){listWall=l;}
+
+    /**
+     * {@summary Getter of boolean isWall, indicating if scenario with boundaries is applied.}
+     */
+    public boolean getIsWall() {return this.isWall;}
 
     //========================= Virus Getters/Setters =================================================================/
 
@@ -182,16 +193,13 @@ public class Population implements Displayable {
     /**
      * {@summary Calculate distance between a "CoquilleBille" and a "Wall" }
      */
-    private double dist(Wall w,CoquilleBille coc){
-        /** The X  position of the CoquilleBille **/
-        double x1 = coc.getCurrentPosition().getX();
-        /** The X position of the Wall **/
-        double x2 = w.getPositionX();
-        /** The Y position of the CoquilleBille **/
-        double y1 = coc.getCurrentPosition().getY();
-        /** The Y position of the Wall **/
-        double y2 = w.getPositionY();
-        return  Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+    private double dist(Wall w,CoquilleBille coc) {
+
+        double cocX = coc.getCurrentPosition().getX();
+        double wallX = w.getPositionX();
+        double cocY = coc.getCurrentPosition().getY();
+        double wallY = w.getPositionY();
+        return Math.sqrt((cocX - wallX) * (cocX - wallX) + (cocY - wallY) * (cocY - wallY));
     }
 
     /**
@@ -206,16 +214,19 @@ public class Population implements Displayable {
     /**
      * {@summary Prevents a big part of the population from moving (70-80%). Only doctors, cops etc. went to work.}
      **/
-    public void RestrictMovement()
+    private void RestrictMovement()
     {
         int prctg=random.nextInt(10)+70;
         int cpt = (prctg * this.getNbIndividus()) / 100;
 
         while (cpt > 0) {
             int index = random.nextInt(this.getNbIndividus());
-            /** make sure to get a new coquille (check if the coquille has already been chosen or not) **/
+            // make sure to get a new coquille (check if the coquille has already been chosen or not)
             while (this.listCoquille.get(index).getMovingSpeed() == 0) index = random.nextInt(this.getNbIndividus());
+            // make coquillebille immovable
             this.listCoquille.get(index).setMovingSpeed(0, 0);
+            // make coquillebille unable to rebound
+            this.listCoquille.get(index).setCanRebound(false);
             cpt--;
         }
     }
@@ -234,8 +245,11 @@ public class Population implements Displayable {
         }
     }
 
-    /**********************************************Moving of Billes*************************************************/
+    //********************************************** Moving of Billes *************************************************/
 
+    /**
+     * {@summary Apply move() function to each point of population. }
+     */
     public void makeBilleMove() {
         for (CoquilleBille coc : listCoquille) {
           coc.move();
