@@ -1,33 +1,47 @@
 [main]: https://gaufre.informatique.univ-paris-diderot.fr/raveneau/corona-bounce
-[coverage-shield]: https://img.shields.io/badge/Coverage-31%25-yellow
+[coverage-shield]: https://img.shields.io/badge/Coverage-35%25-yellow
 [comment-shield]: https://img.shields.io/badge/Javadoc-100%25-brightgreen
 [ ![coverage-shield][] ][main]
 [ ![comment-shield][] ][main]
 
 
-**Overview**
+# **Overview**
 
 Corona Bounce is an epidemic simulation tool with a GUI interface.
 
 It provides possibility to compare two populations during un epidemic.
 It is also possible to variate population’s and disease’s parameters and apply four government strategies.
 
-**How to use**
+# **How to use**
 
-#Compile (to do in code/)
+## Compile (to do in code/)
+```
 mvn compile
+```
 
-#Run (jar file may change version)
+## Run (jar file may change version)
+```
 java -jar code/cb1.0.8.jar
+```
 
-#Re-Run with Maven (to do in code/)
+## Re-Run with Maven (to do in code/)
+```
 ./run.sh
+```
 
-#open JavaDoc
+## Open JavaDoc
 Launch code/docs/javadoc/apidocs/index.html on the web browser.
 
+# **Maintainers:**
 
-**Features**
+* Zahra Alliche
+* Natalia Bragina
+* Anna Golikova
+* Kenza Sahi
+* Emilien Raveneau Grisard
+
+
+# **Features**
 
 It's possible to modify follows parameters:
 * Size of population
@@ -39,7 +53,7 @@ It's possible to modify follows parameters:
 * Boundaries closing speed 
 
 
-![](https://gaufre.informatique.univ-paris-diderot.fr/raveneau/corona-bounce/blob/master/code/target/project_1_resize.gif)
+![](code/target/Project_1_resize.mp4)
 
 Five scenarios are available to imitate government strategies:
 
@@ -49,18 +63,4 @@ Five scenarios are available to imitate government strategies:
 * «Soft Lockdown + Boundaries»
 * «No scenario»
 
-![](https://gaufre.informatique.univ-paris-diderot.fr/raveneau/corona-bounce/blob/master/code/target/project_2_resize.gif)
-
-
-
-**Maintainers:**
-
-Zahra Alliche
-
-Natalia Bragina
-
-Anna Golikova
-
-Kenza Sahi
-
-Emilien Raveneau Grisard
+![](code/target/Project_2_resize.mp4)
