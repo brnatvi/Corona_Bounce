@@ -53,7 +53,7 @@ It's possible to modify follows parameters:
 * Boundaries closing speed 
 
 
-![](code/target/Project_1_resize.mp4)
+![](code/target/project_1_resized.mp4)
 
 Five scenarios are available to imitate government strategies:
 
