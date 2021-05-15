@@ -5,29 +5,35 @@
 [ ![comment-shield][] ][main]
 
 
-**Overview**
+# **Overview**
 
 Corona Bounce is an epidemic simulation tool with a GUI interface.
 
 It provides possibility to compare two populations during un epidemic.
 It is also possible to variate population’s and disease’s parameters and apply four government strategies.
 
-**How to use**
+# **How to use**
 
-#Compile (to do in code/)
+## Compile (to do in code/)
+```
 mvn compile
+```
 
-#Run (jar file may change version)
+## Run (jar file may change version)
+```
 java -jar code/cb1.0.8.jar
+```
 
-#Re-Run with Maven (to do in code/)
+## Re-Run with Maven (to do in code/)
+```
 ./run.sh
+```
 
-#open JavaDoc
+## Open JavaDoc
 Launch code/docs/javadoc/apidocs/index.html on the web browser.
 
 
-**Features**
+# **Features**
 
 It's possible to modify follows parameters:
 * Size of population
@@ -53,7 +59,7 @@ Five scenarios are available to imitate government strategies:
 
 
 
-**Maintainers:**
+# **Maintainers:**
 
 Zahra Alliche
 
