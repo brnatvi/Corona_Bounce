@@ -55,7 +55,7 @@ It's possible to modify follows parameters:
 
 ![](code/target/project_1_resized.mp4)
 
-Five scenarios are available to imitate government strategies:
+Following scenarios are available to imitate government strategies:
 
 * «Soft Lockdown» - all people can move but in limited area
 * «Boundaries» - closure of borders for travel 
@@ -64,3 +64,11 @@ Five scenarios are available to imitate government strategies:
 * «No scenario»
 
 ![](code/target/Project_2_resize.mp4)
+
+
+
+![](code/target/project_3_resized.mp4)
+
+
+Help in shape of tooltips is available. 
+To use it please press "?" button, then move the mouse cursor to a UI element, hold mouse cursor above the element for a while (1-2 seconds) and help tooltip will popup.  
