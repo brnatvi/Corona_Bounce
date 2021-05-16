@@ -19,9 +19,9 @@ It is also possible to variate population’s and disease’s parameters and app
 mvn compile
 ```
 
-## Run (jar file may change version)
+## Run
 ```
-java -jar code/cb1.0.8.jar
+java -jar code/cb1.0.9.jar
 ```
 
 ## Re-Run with Maven (to do in code/)
