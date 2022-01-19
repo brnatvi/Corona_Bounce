@@ -54,7 +54,7 @@ It's possible to modify follows parameters:
 
 
 
-![](https://a.radikal.ru/a34/2201/07/238fa32f6f12.gif)
+![](https://github.com/brnatvi/Corona_Bounce/blob/master/project_1_resized.gif)
 
 Following scenarios are available to imitate government strategies:
 
@@ -65,10 +65,10 @@ Following scenarios are available to imitate government strategies:
 * «No scenario»
 
 
-![](https://c.radikal.ru/c37/2201/fc/ba5cc52125cc.gif)
+![](https://github.com/brnatvi/Corona_Bounce/blob/master/Project_2_resize(1).gif)
 
 
-![](https://d.radikal.ru/d10/2201/79/574790179406.gif)
+![](https://github.com/brnatvi/Corona_Bounce/blob/master/project_3_resized.gif)
 
 
 Help in shape of tooltips is available. 
