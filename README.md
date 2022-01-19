@@ -53,7 +53,8 @@ It's possible to modify follows parameters:
 * Boundaries closing speed 
 
 
-![](code/target/project_1_resized.mp4)
+
+![](https://a.radikal.ru/a34/2201/07/238fa32f6f12.gif)
 
 Following scenarios are available to imitate government strategies:
 
@@ -63,11 +64,11 @@ Following scenarios are available to imitate government strategies:
 * «Soft Lockdown + Boundaries»
 * «No scenario»
 
-![](code/target/Project_2_resize.mp4)
+
+![](https://c.radikal.ru/c37/2201/fc/ba5cc52125cc.gif)
 
 
-
-![](code/target/project_3_resized.mp4)
+![](https://d.radikal.ru/d10/2201/79/574790179406.gif)
 
 
 Help in shape of tooltips is available. 
